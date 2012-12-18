@@ -100,6 +100,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="App_Start\WebServiceExamples.cs" />
+    <Compile Include="Models\Organization.cs" />
+    <Compile Include="Models\OrganizationCategory.cs" />
+    <Compile Include="Models\StateProvince.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
