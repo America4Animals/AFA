@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using AFA.Service.Models;
+using AFA.ServiceModel;
 using ServiceStack.OrmLite;
 using ServiceStack.ServiceHost;
 
-namespace AFA.Service.Services
+namespace AFA.ServiceInterface
 {
     [Route("/reset-db", "GET,POST")]
-    public class ResetMovies { }
+    public class ResetDb { }
 
     public class ResetDbResponse
     {
@@ -17,7 +17,7 @@ namespace AFA.Service.Services
 
     public class ResetDbService : ServiceStack.ServiceInterface.Service
     {
-        public object Any(ResetMovies request)
+        public object Any(ResetDb request)
         {
             Db.DropAndCreateTable<OrganizationCategory>();
             return new ResetDbResponse();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace AFA.Service.Models
+namespace AFA.ServiceModel
 {
     public class StateProvince
     {

@@ -6,7 +6,7 @@ using ServiceStack.ServiceHost;
 using ServiceStack.DataAnnotations;
 using ServiceStack.ServiceInterface.ServiceModel;
 
-namespace AFA.Service.Models
+namespace AFA.ServiceModel
 {
     [Route("/organization-categories/", "POST,PUT,DELETE")]
     [Route("/organization-categories/{Id}", "GET")]

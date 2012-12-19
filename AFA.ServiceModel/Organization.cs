@@ -5,7 +5,7 @@ using System.Web;
 using ServiceStack.DataAnnotations;
 using ServiceStack.ServiceHost;
 
-namespace AFA.Service.Models
+namespace AFA.ServiceModel
 {
     [Route("/organizations")]
     [Route("/organizations/{Id}")]

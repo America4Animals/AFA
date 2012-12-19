@@ -11,7 +11,7 @@ using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.Auth;
 using ServiceStack.ServiceInterface.ServiceModel;
 using ServiceStack.WebHost.Endpoints;
-using AFA.Service.Services;
+using AFA.ServiceInterface;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(AFA.Service.App_Start.AppHost), "Start")]
 
@@ -29,7 +29,7 @@ namespace AFA.Service.App_Start
 		: AppHostBase
 	{		
 		public AppHost() //Tell ServiceStack the name and where to find your web services
-			: base("AFA Services", typeof(HelloService).Assembly) { }
+			: base("AFA Services", typeof(OrganizationService).Assembly) { }
 
 		public override void Configure(Funq.Container container)
 		{

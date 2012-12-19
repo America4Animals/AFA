@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
-using AFA.Service.Models;
+using AFA.ServiceModel;
 using ServiceStack.OrmLite;
 using ServiceStack.Common.Web;
 
-namespace AFA.Service.Services
+namespace AFA.ServiceInterface
 {
     public class OrganizationCategoryService : ServiceStack.ServiceInterface.Service
     {
