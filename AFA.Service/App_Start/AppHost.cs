@@ -2,13 +2,16 @@ using System;
 using System.Linq;
 using System.Configuration;
 using System.Collections.Generic;
+using ServiceStack.Common.Utils;
 using ServiceStack.Configuration;
 using ServiceStack.OrmLite;
 using ServiceStack.OrmLite.SqlServer;
+using ServiceStack.OrmLite.Sqlite;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.Auth;
 using ServiceStack.ServiceInterface.ServiceModel;
 using ServiceStack.WebHost.Endpoints;
+using AFA.Service.Services;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(AFA.Service.App_Start.AppHost), "Start")]
 
@@ -26,7 +29,7 @@ namespace AFA.Service.App_Start
 		: AppHostBase
 	{		
 		public AppHost() //Tell ServiceStack the name and where to find your web services
-			: base("StarterTemplate ASP.NET Host", typeof(HelloService).Assembly) { }
+			: base("AFA Services", typeof(HelloService).Assembly) { }
 
 		public override void Configure(Funq.Container container)
 		{
@@ -34,9 +37,9 @@ namespace AFA.Service.App_Start
 			ServiceStack.Text.JsConfig.EmitCamelCaseNames = true;
 		
 			//Configure User Defined REST Paths
-			Routes
-			  .Add<Hello>("/hello")
-			  .Add<Hello>("/hello/{Name*}");
+            //Routes
+            //  .Add<Hello>("/hello")
+            //  .Add<Hello>("/hello/{Name*}");
 
 			//Uncomment to change the default ServiceStack configuration
 			//SetConfig(new EndpointHostConfig {
@@ -46,7 +49,18 @@ namespace AFA.Service.App_Start
 			//ConfigureAuth(container);
 
 			//Register all your dependencies
-			container.Register(new TodoRepository());			
+			//container.Register(new TodoRepository());	
+
+            container.Register<IDbConnectionFactory>(c =>
+                                                     new OrmLiteConnectionFactory(
+                                                         "~/App_Data/db.sqlite".MapHostAbsolutePath(),
+                                                         SqliteOrmLiteDialectProvider.Instance));
+
+		    using (var resetDb = container.Resolve<ResetDbService>())
+		    {
+		        resetDb.Any(null);
+		    }
+
 		}
 
 		/* Uncomment to enable ServiceStack Authentication and CustomUserSession
