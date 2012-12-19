@@ -1,12 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
+using AFA.ServiceModel;
+using ServiceStack.Common.Web;
+using ServiceStack.OrmLite;
+using ServiceStack.Text;
 
 namespace AFA.ServiceInterface
 {
     public class OrganizationService : ServiceStack.ServiceInterface.Service
     {
+        /// <summary>
+        /// GET /organizations/{Id}
+        /// </summary>
+        public object Get(Organization organization)
+        {
+            return new OrganizationCategoryResponse
+            {
+                OrganizationCategory = Db.Id<OrganizationCategory>(organization.Id)
+            };
+        }
 
+        public object Post(Organization organization)
+        {
+            Db.Insert(organization);
+            return new HttpResult(Db.GetLastInsertId(), HttpStatusCode.Created);
+        }
+
+        public object Put(Organization organization)
+        {
+            Db.Update(organization);
+            return new HttpResult { StatusCode = HttpStatusCode.NoContent };
+        }
+
+        public object Delete(Organization organization)
+        {
+            Db.DeleteById<Organization>(organization.Id);
+            return new HttpResult { StatusCode = HttpStatusCode.NoContent };
+        }
+    }
+
+    /// <summary>
+    /// GET /organizations
+    /// GET /organizations/category/{CategoryId}
+    /// Returns a list of organizations
+    /// </summary>
+    public class OrganizationsService : ServiceStack.ServiceInterface.Service
+    {
+        public object Get(Organizations request)
+        {
+            return new OrganizationsResponse
+            {
+                Organizations = request.CategoryId.HasValue ? 
+                    Db.Select<Organization>().Where(o => o.Categories.Any(c => c.Id == request.CategoryId.Value)).ToList() : Db.Select<Organization>()
+            };
+        }
     }
 }

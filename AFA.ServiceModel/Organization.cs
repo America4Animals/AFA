@@ -4,11 +4,12 @@ using System.Linq;
 using System.Web;
 using ServiceStack.DataAnnotations;
 using ServiceStack.ServiceHost;
+using ServiceStack.ServiceInterface.ServiceModel;
 
 namespace AFA.ServiceModel
 {
-    [Route("/organizations")]
-    [Route("/organizations/{Id}")]
+    [Route("/organizations/", "POST,PUT,DELETE")]
+    [Route("/organizations/{Id}", "GET")]
     public class Organization
     {
         public Organization()
@@ -31,10 +32,25 @@ namespace AFA.ServiceModel
         public string WebpageUrl { get; set; }
 
         // ToDo: Add Photo
+        // ToDo: Add Latitide/Longitude
     }
 
-    public class OrganizationResponse
+    public class OrganizationResponse : IHasResponseStatus
     {
         public Organization Organization { get; set; }
+        public ResponseStatus ResponseStatus { get; set; }
+    }
+
+    // ToDo: Add route to get orgs near specified location
+    [Route("/organizations", "GET")]
+    [Route("/organizations/category/{CategoryId}", "GET")]
+    public class Organizations
+    {
+        public int? CategoryId { get; set; }
+    }
+
+    public class OrganizationsResponse
+    {
+        public List<Organization> Organizations { get; set; }
     }
 }
