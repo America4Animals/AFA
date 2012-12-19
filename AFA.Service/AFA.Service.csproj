@@ -99,7 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\js\ss-validation.js" />
-    <Content Include="default.htm" />
+    <Content Include="default_OLD.htm" />
     <Content Include="Global.asax" />
     <Content Include="jqunback-1.51.min.js" />
     <Content Include="README.txt" />

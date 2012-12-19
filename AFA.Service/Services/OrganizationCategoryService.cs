@@ -25,28 +25,29 @@ namespace AFA.Service.Services
         public object Post(OrganizationCategory organizationCategory)
         {
             Db.Insert(organizationCategory);
-            return Db.GetLastInsertId();
+            return new HttpResult(Db.GetLastInsertId(), HttpStatusCode.Created);
         }
 
         public object Put(OrganizationCategory organizationCategory)
         {
             Db.Update(organizationCategory);
-            return Db.GetLastInsertId();
+            return new HttpResult {StatusCode = HttpStatusCode.NoContent};
         }
 
         public object Delete(OrganizationCategory organizationCategory)
         {
             Db.DeleteById<OrganizationCategory>(organizationCategory.Id);
-            return new HttpResult
-                       {
-                           StatusCode = HttpStatusCode.NoContent
-                       };
+            return new HttpResult { StatusCode = HttpStatusCode.NoContent };
         }
     }
 
+    /// <summary>
+    /// GET /organization-categories
+    /// Returns a list of organization categories
+    /// </summary>
     public class OrganizationCategoriesService : ServiceStack.ServiceInterface.Service
     {
-        public object Get()
+        public object Get(OrganizationCategories request)
         {
             return new OrganizationCategoriesResponse
                        {

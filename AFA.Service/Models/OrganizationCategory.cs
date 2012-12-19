@@ -8,8 +8,8 @@ using ServiceStack.ServiceInterface.ServiceModel;
 
 namespace AFA.Service.Models
 {
-    [Route("/organization-categories/", "POST,PUT,PATCH,DELETE")]
-    [Route("/organization-categories/{Id}")]
+    [Route("/organization-categories/", "POST,PUT,DELETE")]
+    [Route("/organization-categories/{Id}", "GET")]
     public class OrganizationCategory
     {
         [AutoIncrement]
@@ -23,7 +23,7 @@ namespace AFA.Service.Models
         public ResponseStatus ResponseStatus { get; set; }
     }
 
-    [Route("/organization-categories", "GET,OPTIONS")]
+    [Route("/organization-categories", "GET")]
     public class OrganizationCategories
     {
     }
