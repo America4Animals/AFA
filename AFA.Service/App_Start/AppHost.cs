@@ -7,6 +7,7 @@ using ServiceStack.Configuration;
 using ServiceStack.OrmLite;
 using ServiceStack.OrmLite.SqlServer;
 using ServiceStack.OrmLite.Sqlite;
+using ServiceStack.Razor;
 using ServiceStack.ServiceInterface;
 using ServiceStack.ServiceInterface.Auth;
 using ServiceStack.ServiceInterface.ServiceModel;
@@ -35,6 +36,9 @@ namespace AFA.Service.App_Start
 		{
 			//Set JSON web services to return idiomatic JSON camelCase properties
 			ServiceStack.Text.JsConfig.EmitCamelCaseNames = true;
+
+            // Razor plugin
+            Plugins.Add(new RazorFormat());
 		
 			//Configure User Defined REST Paths
             //Routes
@@ -51,15 +55,19 @@ namespace AFA.Service.App_Start
 			//Register all your dependencies
 			//container.Register(new TodoRepository());	
 
+            // Register DB
             container.Register<IDbConnectionFactory>(c =>
                                                      new OrmLiteConnectionFactory(
                                                          "~/App_Data/db.sqlite".MapHostAbsolutePath(),
                                                          SqliteOrmLiteDialectProvider.Instance));
 
+            // Reset DB
 		    using (var resetDb = container.Resolve<ResetDbService>())
 		    {
 		        resetDb.Any(null);
 		    }
+
+            
 
 		}
 
