@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Optimization;
+using AFA.Web.Helpers;
 
 namespace AFA.Web
 {
@@ -38,6 +39,11 @@ namespace AFA.Web
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+            var bootstrapCss = new StyleBundle("~/bundles/bootstrap").Include(
+                "~/Content/bootstrap/bootstrap.less");
+            bootstrapCss.Transforms.Add(new LessMinify());
+            bundles.Add(bootstrapCss);
         }
     }
 }
