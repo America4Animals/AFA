@@ -1,0 +1,7 @@
+﻿@inherits ServiceStack.Razor.ViewPage<AFA.ServiceModel.OrganizationsResponse>
+
+<h2>Organizations</h2>
+@foreach (var organization in Model.Organizations)
+{
+    <div>@organization.Name</div>
+}

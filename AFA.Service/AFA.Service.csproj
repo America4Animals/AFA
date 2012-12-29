@@ -271,6 +271,7 @@
     <Content Include="bundler\coffee.cmd" />
     <Content Include="bundler\bundler.cmd" />
     <Content Include="Content\app.css.bundle" />
+    <Content Include="Views\organizations.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
