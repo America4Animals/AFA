@@ -19,8 +19,12 @@ namespace AFA.ServiceInterface
     {
         public object Any(ResetDb request)
         {
-            Db.DropAndCreateTable<OrganizationCategory>();
-            Db.DropAndCreateTable<Organization>();
+            //Db.DropAndCreateTable<OrganizationCategory>();
+            //Db.DropAndCreateTable<Organization>();
+            //return new ResetDbResponse();
+
+            Db.CreateTableIfNotExists<OrganizationCategory>();
+            Db.CreateTableIfNotExists<Organization>();
             return new ResetDbResponse();
         }
     }
