@@ -1,0 +1,23 @@
+﻿@model AFA.ServiceModel.OrganizationsResponse
+
+@{
+    ViewBag.Title = "Organizations";
+} 
+
+<h2 class="page-header">@ViewBag.Title</h2>
+
+<ul>
+    @foreach (var org in Model.Organizations)
+    {
+        <li class="margin-bottom">
+            @Html.ActionLink(org.Name, "Edit", "Organizations", new {id = org.Id}, null)
+            @using (Html.BeginForm("Delete", "Organizations", new {id = org.Id}, FormMethod.Post, new {@class="inline"}))
+            {
+                <input type="submit" value="Delete" class="margin-left btn btn-danger" />
+            }
+            
+        </li>
+    }
+</ul>
+
+<div>@Html.ActionLink("Add New", "Add", "Organizations", null, new {@class="btn btn-primary"})</div>

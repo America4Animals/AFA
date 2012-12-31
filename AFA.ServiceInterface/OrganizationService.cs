@@ -6,6 +6,7 @@ using System.Web;
 using AFA.ServiceModel;
 using ServiceStack.Common.Web;
 using ServiceStack.OrmLite;
+using ServiceStack.ServiceInterface.ServiceModel;
 using ServiceStack.Text;
 
 namespace AFA.ServiceInterface
@@ -17,28 +18,32 @@ namespace AFA.ServiceInterface
         /// </summary>
         public object Get(Organization organization)
         {
-            return new OrganizationCategoryResponse
-            {
-                OrganizationCategory = Db.Id<OrganizationCategory>(organization.Id)
-            };
+            return new OrganizationResponse
+                       {
+                           Organization = Db.Id<Organization>(organization.Id)
+                       };
         }
 
         public object Post(Organization organization)
         {
             Db.Insert(organization);
-            return new HttpResult(Db.GetLastInsertId(), HttpStatusCode.Created);
+            //return new HttpResult(Db.GetLastInsertId(), HttpStatusCode.Created);
+            //return new HttpResult(new {id = Db.GetLastInsertId()}, HttpStatusCode.Created);
+            return new OrganizationResponse {Organization = new Organization()};
         }
 
         public object Put(Organization organization)
         {
             Db.Update(organization);
-            return new HttpResult { StatusCode = HttpStatusCode.NoContent };
+            //return new HttpResult { StatusCode = HttpStatusCode.NoContent };
+            return new OrganizationResponse { Organization = new Organization() };
         }
 
         public object Delete(Organization organization)
         {
             Db.DeleteById<Organization>(organization.Id);
-            return new HttpResult { StatusCode = HttpStatusCode.NoContent };
+            //return new HttpResult { StatusCode = HttpStatusCode.NoContent };
+            return new OrganizationResponse { Organization = new Organization() };
         }
     }
 

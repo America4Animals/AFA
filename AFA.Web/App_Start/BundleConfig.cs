@@ -44,6 +44,10 @@ namespace AFA.Web
                 "~/Content/bootstrap/bootstrap.less");
             bootstrapCss.Transforms.Add(new LessMinify());
             bundles.Add(bootstrapCss);
+
+            var afaCss = new StyleBundle("~/bundles/css").Include("~/Content/css/afa.less");
+            afaCss.Transforms.Add(new LessMinify());
+            bundles.Add(afaCss);
         }
     }
 }

@@ -1,23 +1,35 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - America For Animals</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/modernizr")
-    </head>
-    <body>
-        <header>
-            <h1>America 4 Animals</h1>
-        </header>
-        @RenderBody()
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - America For Animals</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/bundles/bootstrap", "~/bundles/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div id="wrap">
+        <div class="container">
+            <header>
+                <h1>America 4 Animals</h1>
+            </header>
 
-        <footer>
-            <p>&copy; @DateTime.Now.Year - America For Animals</p>
-        </footer>
 
-        @Scripts.Render("~/bundles/jquery")
-    </body>
+            <section class="row-fluid">
+                @RenderBody()
+            </section>    
+            
+        </div>
+        <div id="push"></div>
+        </div>
+    <footer>
+        <div class="container">
+        <p>&copy; @DateTime.Now.Year - America For Animals</p>
+        </div>
+    </footer>
+        
+    
+    @Scripts.Render("~/bundles/jquery")
+</body>
 </html>

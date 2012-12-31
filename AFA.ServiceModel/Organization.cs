@@ -10,7 +10,7 @@ namespace AFA.ServiceModel
 {
     [Route("/organizations/", "POST,PUT,DELETE")]
     [Route("/organizations/{Id}", "GET")]
-    public class Organization
+    public class Organization : IReturn<OrganizationResponse>
     {
         public Organization()
         {
@@ -44,7 +44,7 @@ namespace AFA.ServiceModel
     // ToDo: Add route to get orgs near specified location
     [Route("/organizations", "GET")]
     [Route("/organizations/category/{CategoryId}", "GET")]
-    public class Organizations
+    public class Organizations : IReturn<OrganizationsResponse>
     {
         public int? CategoryId { get; set; }
     }
