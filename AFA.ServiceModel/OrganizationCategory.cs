@@ -10,7 +10,7 @@ namespace AFA.ServiceModel
 {
     [Route("/organization-categories/", "POST,PUT,DELETE")]
     [Route("/organization-categories/{Id}", "GET")]
-    public class OrganizationCategory
+    public class OrganizationCategory : IReturn<OrganizationCategoryResponse>
     {
         [AutoIncrement]
         public int Id { get; set; }
@@ -24,7 +24,7 @@ namespace AFA.ServiceModel
     }
 
     [Route("/organization-categories", "GET")]
-    public class OrganizationCategories
+    public class OrganizationCategories : IReturn<OrganizationCategoriesResponse>
     {
     }
 

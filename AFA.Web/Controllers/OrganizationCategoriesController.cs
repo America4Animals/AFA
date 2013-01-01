@@ -1,40 +1,37 @@
-﻿using System.Configuration;
-using AFA.ServiceInterface;
-using AFA.ServiceModel;
-using ServiceStack.ServiceClient.Web;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AFA.ServiceModel;
 using AFA.Web.Helpers;
+using ServiceStack.ServiceClient.Web;
 
 namespace AFA.Web.Controllers
 {
-    public class OrganizationsController : Controller
+    public class OrganizationCategoriesController : Controller
     {
         private readonly JsonServiceClient _client = new JsonServiceClient(GlobalHelper.GetServiceUrl());
 
         public ActionResult Index()
         {
-            var response = _client.Get(new Organizations());
+            var response = _client.Get(new OrganizationCategories());
             return View(response);
         }
 
         public ActionResult Add()
         {
-            var org = new Organization();
-            return View(org);
+            var orgCategory = new OrganizationCategory();
+            return View(orgCategory);
         }
 
         [HttpPost]
-        public ActionResult Add(Organization org)
+        public ActionResult Add(OrganizationCategory orgCategory)
         {
             try
             {
-                //var result = _client.Post<HttpResult>("/organizations", org);
-                _client.Post(org);
-                return RedirectToAction("Index", "Organizations");
+                _client.Post(orgCategory);
+                return RedirectToAction("Index", "OrganizationCategories");
             }
             catch (WebServiceException exception)
             {
@@ -44,17 +41,17 @@ namespace AFA.Web.Controllers
 
         public ActionResult Edit(int id)
         {
-            var org = _client.Get(new Organization { Id = id });
-            return View(org.Organization);
+            var orgCategory = _client.Get(new OrganizationCategory { Id = id });
+            return View(orgCategory.OrganizationCategory);
         }
 
         [HttpPost]
-        public ActionResult Edit(Organization org)
+        public ActionResult Edit(OrganizationCategory orgCategory)
         {
             try
             {
-                _client.Put(org);
-                return RedirectToAction("Index", "Organizations");
+                _client.Put(orgCategory);
+                return RedirectToAction("Index", "OrganizationCategories");
             }
             catch (WebServiceException)
             {
@@ -67,13 +64,14 @@ namespace AFA.Web.Controllers
         {
             try
             {
-                _client.Delete(new Organization { Id = id });
-                return RedirectToAction("Index", "Organizations");
+                _client.Delete(new OrganizationCategory { Id = id });
+                return RedirectToAction("Index", "OrganizationCategories");
             }
             catch (WebServiceException)
             {
                 throw;
             }
         }
+
     }
 }

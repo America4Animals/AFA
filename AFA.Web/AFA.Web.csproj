@@ -180,10 +180,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrganizationCategoriesController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\GlobalHelper.cs" />
     <Compile Include="Helpers\ImportedFilePathResolver.cs" />
     <Compile Include="Helpers\LessMinify.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -323,6 +325,9 @@
     <Content Include="Views\Organizations\Index.cshtml" />
     <Content Include="Views\Organizations\Add.cshtml" />
     <Content Include="Views\Organizations\Edit.cshtml" />
+    <Content Include="Views\OrganizationCategories\Index.cshtml" />
+    <Content Include="Views\OrganizationCategories\Add.cshtml" />
+    <Content Include="Views\OrganizationCategories\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

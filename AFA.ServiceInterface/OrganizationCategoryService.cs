@@ -25,19 +25,22 @@ namespace AFA.ServiceInterface
         public object Post(OrganizationCategory organizationCategory)
         {
             Db.Insert(organizationCategory);
-            return new HttpResult(Db.GetLastInsertId(), HttpStatusCode.Created);
+            //return new HttpResult(Db.GetLastInsertId(), HttpStatusCode.Created);
+            return new OrganizationCategoryResponse { OrganizationCategory = new OrganizationCategory() };
         }
 
         public object Put(OrganizationCategory organizationCategory)
         {
             Db.Update(organizationCategory);
-            return new HttpResult {StatusCode = HttpStatusCode.NoContent};
+            //return new HttpResult {StatusCode = HttpStatusCode.NoContent};
+            return new OrganizationCategoryResponse { OrganizationCategory = new OrganizationCategory() };
         }
 
         public object Delete(OrganizationCategory organizationCategory)
         {
             Db.DeleteById<OrganizationCategory>(organizationCategory.Id);
-            return new HttpResult { StatusCode = HttpStatusCode.NoContent };
+            //return new HttpResult { StatusCode = HttpStatusCode.NoContent };
+            return new OrganizationCategoryResponse { OrganizationCategory = new OrganizationCategory() };
         }
     }
 
