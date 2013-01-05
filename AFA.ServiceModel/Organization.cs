@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using ServiceStack.DataAnnotations;
 using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface.ServiceModel;
@@ -33,6 +30,30 @@ namespace AFA.ServiceModel
 
         // ToDo: Add Photo
         // ToDo: Add Latitide/Longitude
+
+        public string CityAndState()
+        {
+            if (State != null)
+            {
+                // State specified
+                if (string.IsNullOrWhiteSpace(City))
+                {
+                    return State.Name;
+                }
+                else
+                {
+                    // City and State specified
+                    return City + ", " + State.Abbreviation;
+                }
+            }
+            else if (!string.IsNullOrWhiteSpace(City))
+            {
+                // City specified
+                return City;
+            }
+
+            return "";
+        }
     }
 
     public class OrganizationResponse : IHasResponseStatus

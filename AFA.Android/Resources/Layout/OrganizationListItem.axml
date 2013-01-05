@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:paddingTop="10dip"
+    android:paddingBottom="10dip"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <ImageView
+        android:src="@drawable/sharkFin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip"
+        android:id="@+id/OrgImage" />
+    <TextView
+        android:id="@+id/OrgName"
+        android:text="Organization Name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/pink"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingTop="0dip"
+        android:paddingBottom="5dip"
+        android:paddingLeft="10dip"
+        android:layout_toRightOf="@id/OrgImage" />
+    <TextView
+        android:id="@+id/CityState"
+        android:text="New York, NY"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dip"
+        android:paddingLeft="10dip"
+        android:layout_below="@+id/OrgName"
+        android:layout_toRightOf="@id/OrgImage" />
+    <TextView
+        android:id="@+id/Allies"
+        android:text="22 Allies"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dip"
+        android:gravity="right"
+        android:layout_below="@+id/CityState" />
+</RelativeLayout>

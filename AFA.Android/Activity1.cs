@@ -9,7 +9,7 @@ using Android.OS;
 
 namespace AFA.Android
 {
-    [Activity(Label = "AFA.Android", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "AFA.Android", Icon = "@drawable/icon")]
     public class Activity1 : Activity
     {
         int count = 1;

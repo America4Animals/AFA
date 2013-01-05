@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AFA.ServiceInterface", "AFA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AFA.Android", "AFA.Android\AFA.Android.csproj", "{D65680BC-439C-40B9-9BC7-DA5470C4FA88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AFA.Android.Library", "AFA.Android.Library\AFA.Android.Library.csproj", "{B4F2B335-5E88-4E81-9F4F-83DC08417AD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D65680BC-439C-40B9-9BC7-DA5470C4FA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D65680BC-439C-40B9-9BC7-DA5470C4FA88}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D65680BC-439C-40B9-9BC7-DA5470C4FA88}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B4F2B335-5E88-4E81-9F4F-83DC08417AD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4F2B335-5E88-4E81-9F4F-83DC08417AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4F2B335-5E88-4E81-9F4F-83DC08417AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4F2B335-5E88-4E81-9F4F-83DC08417AD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

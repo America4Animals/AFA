@@ -2,4 +2,9 @@
 <resources>
     <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">AFA.Android</string>
+
+    <color name="white">#FFFFFF</color>
+    <color name="pink">#FAA3DA</color>
+    <color name="green">#BBE66C</color>
+    <color name="lightGreen">#D0ED99</color>
 </resources>
