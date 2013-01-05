@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/green">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip">
+        <ImageView
+            android:src="@drawable/sharkFin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:layout_marginLeft="10dip"
+            android:id="@+id/OrgImage" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lightgreen"
+            android:layout_marginRight="10dip"
+            android:layout_toRightOf="@id/OrgImage">
+            <TextView
+                android:text="Organization Name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/OrgName"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginBottom="10dip" />
+            <TextView
+                android:text="Needs Volunteers!"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/NeedVolunteersLabel"
+                android:textColor="@color/red"
+                android:layout_below="@id/OrgName"
+                android:gravity="center" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <Button
+        android:text="Unite!"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/UniteButton"
+        android:layout_marginTop="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginBottom="10dip"
+        android:layout_marginLeft="10dip" />
+</LinearLayout>

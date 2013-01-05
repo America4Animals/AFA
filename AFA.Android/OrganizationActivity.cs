@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using AFA.ServiceModel;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -12,14 +12,21 @@ using Android.Widget;
 
 namespace AFA.Android
 {
-    [Activity(Label = "My Activity")]
+    [Activity(Label = "Organization")]
     public class OrganizationActivity : Activity
     {
+        private int _organizationId;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            // Create your application here
+            SetContentView(Resource.Layout.Organization);
+
+            _organizationId = Intent.GetIntExtra("organizationId", -1);
+            var organization = AfaApplication.ServiceClient.Get(new Organization { Id = _organizationId }).Organization;
+
+            FindViewById<TextView>(Resource.Id.OrgName).Text = organization.Name;
         }
     }
 }

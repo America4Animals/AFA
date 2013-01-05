@@ -11,7 +11,7 @@
         android:src="@drawable/sharkFin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dip"
+        android:layout_marginLeft="10dip"
         android:id="@+id/OrgImage" />
     <TextView
         android:id="@+id/OrgName"
@@ -28,9 +28,8 @@
     <TextView
         android:id="@+id/CityState"
         android:text="New York, NY"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dip"
         android:paddingLeft="10dip"
         android:layout_below="@+id/OrgName"
         android:layout_toRightOf="@id/OrgImage" />
@@ -39,7 +38,8 @@
         android:text="22 Allies"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="10dip"
+        android:paddingBottom="5dip"
+        android:layout_marginRight="10dip"
         android:gravity="right"
         android:layout_below="@+id/CityState" />
 </RelativeLayout>

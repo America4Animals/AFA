@@ -34,14 +34,20 @@ namespace AFA.Android
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f050002
-			public const int green = 2131034114;
+			// aapt resource value: 0x7f050001
+			public const int black = 2131034113;
 			
 			// aapt resource value: 0x7f050003
-			public const int lightGreen = 2131034115;
+			public const int green = 2131034115;
 			
-			// aapt resource value: 0x7f050001
-			public const int pink = 2131034113;
+			// aapt resource value: 0x7f050004
+			public const int lightgreen = 2131034116;
+			
+			// aapt resource value: 0x7f050002
+			public const int pink = 2131034114;
+			
+			// aapt resource value: 0x7f050005
+			public const int red = 2131034117;
 			
 			// aapt resource value: 0x7f050000
 			public const int white = 2131034112;
@@ -68,14 +74,17 @@ namespace AFA.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060004
-			public const int Allies = 2131099652;
+			// aapt resource value: 0x7f060006
+			public const int Allies = 2131099654;
 			
-			// aapt resource value: 0x7f060003
-			public const int CityState = 2131099651;
+			// aapt resource value: 0x7f060005
+			public const int CityState = 2131099653;
 			
 			// aapt resource value: 0x7f060000
 			public const int MyButton = 2131099648;
+			
+			// aapt resource value: 0x7f060003
+			public const int NeedVolunteersLabel = 2131099651;
 			
 			// aapt resource value: 0x7f060001
 			public const int OrgImage = 2131099649;
@@ -83,8 +92,11 @@ namespace AFA.Android
 			// aapt resource value: 0x7f060002
 			public const int OrgName = 2131099650;
 			
-			// aapt resource value: 0x7f060005
-			public const int Organizations = 2131099653;
+			// aapt resource value: 0x7f060007
+			public const int Organizations = 2131099655;
+			
+			// aapt resource value: 0x7f060004
+			public const int UniteButton = 2131099652;
 			
 			private Id()
 			{
@@ -98,10 +110,13 @@ namespace AFA.Android
 			public const int Main = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int OrganizationListItem = 2130903041;
+			public const int Organization = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int Organizations = 2130903042;
+			public const int OrganizationListItem = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int Organizations = 2130903043;
 			
 			private Layout()
 			{

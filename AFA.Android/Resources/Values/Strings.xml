@@ -4,7 +4,10 @@
     <string name="ApplicationName">AFA.Android</string>
 
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
     <color name="pink">#FAA3DA</color>
     <color name="green">#BBE66C</color>
-    <color name="lightGreen">#D0ED99</color>
+    <color name="lightgreen">#D0ED99</color>
+    <color name="red">#EE2C2C</color>
+  
 </resources>
