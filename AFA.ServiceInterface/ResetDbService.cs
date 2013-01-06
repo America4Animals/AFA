@@ -25,6 +25,7 @@ namespace AFA.ServiceInterface
 
             Db.CreateTableIfNotExists<OrganizationCategory>();
             Db.CreateTableIfNotExists<Organization>();
+            Db.CreateTableIfNotExists<User>();
             return new ResetDbResponse();
         }
     }

@@ -13,6 +13,7 @@ namespace AFA.ServiceModel
     {
         [AutoIncrement]
         public int Id { get; set; }
+        [Index(Unique = true)]
         public string Name { get; set; }
     }
 

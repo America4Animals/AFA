@@ -64,6 +64,9 @@
     <Compile Include="..\AFA.ServiceModel\StateProvince.cs">
       <Link>ServiceModel\StateProvince.cs</Link>
     </Compile>
+    <Compile Include="..\AFA.ServiceModel\User.cs">
+      <Link>ServiceModel\User.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

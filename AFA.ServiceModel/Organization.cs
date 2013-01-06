@@ -16,6 +16,7 @@ namespace AFA.ServiceModel
 
         [AutoIncrement]
         public int Id { get; set; }
+        [Index(Unique = true)]
         public string Name { get; set; }
         public string Description { get; set; }
         public List<OrganizationCategory> Categories { get; set; }
@@ -54,6 +55,8 @@ namespace AFA.ServiceModel
 
             return "";
         }
+
+        //public virtual ICollection<User> Allies { get; private set; } 
     }
 
     public class OrganizationResponse : IHasResponseStatus
