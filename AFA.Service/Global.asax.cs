@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
+using AFA.ServiceInterface.Mappers;
+using AutoMapper;
 
 namespace AFA.Service
 {
@@ -12,6 +14,7 @@ namespace AFA.Service
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            Mapper.Initialize(x => x.AddProfile<MappingProfile>());
         }
 
         protected void Session_Start(object sender, EventArgs e)

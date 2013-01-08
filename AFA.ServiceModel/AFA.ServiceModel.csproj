@@ -51,9 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\OrganizationDto.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="OrganizationAlly.cs" />
     <Compile Include="OrganizationCategory.cs" />
+    <Compile Include="OrganizationOrganizationCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateProvince.cs" />
     <Compile Include="User.cs" />

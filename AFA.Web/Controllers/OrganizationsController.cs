@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using AFA.ServiceInterface;
 using AFA.ServiceModel;
+using AFA.ServiceModel.DTOs;
 using AFA.Web.Mappers;
 using AFA.Web.Models;
 using ServiceStack.ServiceClient.Web;
@@ -19,15 +20,13 @@ namespace AFA.Web.Controllers
 
         public ActionResult Index()
         {
-            var response = _client.Get(new Organizations());
-            return View(response);
+            var orgs = _client.Get(new OrganizationsDto()).Organizations;
+            var model = orgs.Select(o => o.ToModel()).ToList();
+            return View(model);
         }
 
         public ActionResult Add()
         {
-            //var org = new Organization();
-            //return View(org);
-
             var model = new OrganizationModel();
             var allStateProvinces = _client.Get(new StateProvinces()).StateProvinces;
             model.AllStateProvinces = new SelectList(allStateProvinces, "Id", "Name");
@@ -38,11 +37,7 @@ namespace AFA.Web.Controllers
         public ActionResult Add(OrganizationModel model)
         {
             try
-            {
-                //var result = _client.Post<HttpResult>("/organizations", org);
-                //_client.Post(org);
-                //return RedirectToAction("Index", "Organizations");
-                
+            {               
                 var org = model.ToEntity();
                 _client.Post(org);
                 return RedirectToAction("Index", "Organizations");
@@ -55,10 +50,7 @@ namespace AFA.Web.Controllers
 
         public ActionResult Edit(int id)
         {
-            //var org = _client.Get(new Organization { Id = id });
-            //return View(org.Organization);
-
-            var org = _client.Get(new Organization { Id = id }).Organization;
+            var org = _client.Get(new OrganizationDto { Id = id }).Organization;
             var model = org.ToModel();
             var allStateProvinces = _client.Get(new StateProvinces()).StateProvinces;
             model.AllStateProvinces = new SelectList(allStateProvinces, "Id", "Name", model.StateProvinceId);
@@ -70,9 +62,6 @@ namespace AFA.Web.Controllers
         {
             try
             {
-                //_client.Put(org);
-                //return RedirectToAction("Index", "Organizations");
-
                 var org = model.ToEntity();
                 _client.Put(org);
                 return RedirectToAction("Index", "Organizations");
@@ -88,7 +77,7 @@ namespace AFA.Web.Controllers
         {
             try
             {
-                _client.Delete(new Organization { Id = id });
+                _client.Delete(new OrganizationDto { Id = id });
                 return RedirectToAction("Index", "Organizations");
             }
             catch (WebServiceException)

@@ -22,6 +22,7 @@ namespace AFA.ServiceInterface
             Db.CreateTableIfNotExists<StateProvince>();
             Db.CreateTableIfNotExists<OrganizationCategory>();
             Db.CreateTableIfNotExists<Organization>();
+            Db.CreateTableIfNotExists<OrganizationOrganizationCategory>();
             Db.CreateTableIfNotExists<User>();
 
             if (Db.Select<StateProvince>().Count == 0)

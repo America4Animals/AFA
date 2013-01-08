@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using AFA.ServiceInterface.Mappers;
 using AFA.ServiceModel;
+using AFA.ServiceModel.DTOs;
 using ServiceStack.OrmLite;
 
 namespace AFA.ServiceInterface
@@ -9,34 +11,42 @@ namespace AFA.ServiceInterface
         /// <summary>
         /// GET /organizations/{Id}
         /// </summary>
-        public object Get(Organization organization)
+        public object Get(OrganizationDto organizationDto)
         {
+            var query = string.Format("select o.*, oc.Name, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation " +
+                                      "from Organization o " +
+                                      "left join OrganizationOrganizationCategory ooc " +
+                                      "on o.Id = ooc.OrganizationId " +
+                                      "left join OrganizationCategory oc " +
+                                      "on ooc.OrganizationCategoryId = oc.Id " +
+                                      "left join StateProvince sp " +
+                                      "on o.StateProvinceId = sp.Id " +
+                                      "where o.Id = {0}", organizationDto.Id);
+
             return new OrganizationResponse
                        {
-                           Organization = Db.Id<Organization>(organization.Id)
+                           Organization = Db.Select<OrganizationDto>(query).FirstOrDefault()
                        };
         }
 
-        public object Post(Organization organization)
+        public object Post(OrganizationDto organizationDto)
         {
+            var organization = organizationDto.ToEntity();
             Db.Insert(organization);
-            //return new HttpResult(Db.GetLastInsertId(), HttpStatusCode.Created);
-            //return new HttpResult(new {id = Db.GetLastInsertId()}, HttpStatusCode.Created);
-            return new OrganizationResponse {Organization = new Organization()};
+            return new OrganizationResponse { Organization = new OrganizationDto() };
         }
 
-        public object Put(Organization organization)
+        public object Put(OrganizationDto organizationDto)
         {
+            var organization = organizationDto.ToEntity();
             Db.Update(organization);
-            //return new HttpResult { StatusCode = HttpStatusCode.NoContent };
-            return new OrganizationResponse { Organization = new Organization() };
+            return new OrganizationResponse { Organization = new OrganizationDto() };
         }
 
-        public object Delete(Organization organization)
+        public object Delete(OrganizationDto organizationDto)
         {
-            Db.DeleteById<Organization>(organization.Id);
-            //return new HttpResult { StatusCode = HttpStatusCode.NoContent };
-            return new OrganizationResponse { Organization = new Organization() };
+            Db.DeleteById<Organization>(organizationDto.Id);
+            return new OrganizationResponse { Organization = new OrganizationDto() };
         }
     }
 
@@ -47,15 +57,18 @@ namespace AFA.ServiceInterface
     /// </summary>
     public class OrganizationsService : ServiceStack.ServiceInterface.Service
     {
-        public object Get(Organizations request)
+        public object Get(OrganizationsDto request)
         {
-            return new OrganizationsResponse
-            {
-                //Organizations = request.CategoryId.HasValue ? 
-                //    Db.Select<Organization>().Where(o => o.Categories.Any(c => c.Id == request.CategoryId.Value)).ToList() : Db.Select<Organization>()
+            var orgs = request.CategoryId.HasValue
+                           ? Db.Select<OrganizationDto>()
+                               .Where(o => o.Categories.Any(c => c.Id == request.CategoryId.Value))
+                               .ToList()
+                           : Db.Select<OrganizationDto>("select * from Organization");
 
-                Organizations = Db.Select<Organization>()
-            };
+            return new OrganizationsResponse
+                       {
+                           Organizations = orgs
+                       };
         }
     }
 }

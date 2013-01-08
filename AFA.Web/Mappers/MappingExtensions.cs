@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using AFA.ServiceModel;
+using AFA.ServiceModel.DTOs;
 using AFA.Web.Models;
 using AutoMapper;
 
@@ -12,17 +13,17 @@ namespace AFA.Web.Mappers
     {
         #region Organizations
 
-        public static OrganizationModel ToModel(this Organization entity)
+        public static OrganizationModel ToModel(this OrganizationDto entity)
         {
-            return Mapper.Map<Organization, OrganizationModel>(entity);
+            return Mapper.Map<OrganizationDto, OrganizationModel>(entity);
         }
 
-        public static Organization ToEntity(this OrganizationModel model)
+        public static OrganizationDto ToEntity(this OrganizationModel model)
         {
-            return Mapper.Map<OrganizationModel, Organization>(model);
+            return Mapper.Map<OrganizationModel, OrganizationDto>(model);
         }
 
-        public static Organization ToEntity(this OrganizationModel model, Organization destination)
+        public static OrganizationDto ToEntity(this OrganizationModel model, OrganizationDto destination)
         {
             return Mapper.Map(model, destination);
         }

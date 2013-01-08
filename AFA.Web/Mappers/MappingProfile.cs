@@ -1,4 +1,5 @@
 ﻿using AFA.ServiceModel;
+using AFA.ServiceModel.DTOs;
 using AFA.Web.Models;
 using AutoMapper;
 using System;
@@ -17,8 +18,8 @@ namespace AFA.Web.Mappers
 
         protected override void Configure()
         {
-            Mapper.CreateMap<Organization, OrganizationModel>();
-            Mapper.CreateMap<OrganizationModel, Organization>();
+            Mapper.CreateMap<OrganizationDto, OrganizationModel>();
+            Mapper.CreateMap<OrganizationModel, OrganizationDto>();
         }
     }
 }

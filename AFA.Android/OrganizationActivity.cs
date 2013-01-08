@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AFA.ServiceModel;
+using AFA.ServiceModel.DTOs;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -24,7 +25,8 @@ namespace AFA.Android
             SetContentView(Resource.Layout.Organization);
 
             _organizationId = Intent.GetIntExtra("organizationId", -1);
-            var organization = AfaApplication.ServiceClient.Get(new Organization { Id = _organizationId }).Organization;
+            //var organization = AfaApplication.ServiceClient.Get(new Organization { Id = _organizationId }).Organization;
+            var organization = AfaApplication.ServiceClient.Get(new OrganizationDto { Id = _organizationId }).Organization;
 
             FindViewById<TextView>(Resource.Id.OrgName).Text = organization.Name;
         }

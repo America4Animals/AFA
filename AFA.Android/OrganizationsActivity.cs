@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AFA.ServiceModel;
+using AFA.ServiceModel.DTOs;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -17,7 +18,7 @@ namespace AFA.Android
     public class OrganizationsActivity : Activity
     {
         private ListView _organizationsList;
-        private IList<Organization> _organizations;
+        private IList<OrganizationDto> _organizations;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -35,7 +36,7 @@ namespace AFA.Android
                                                     StartActivity(intent);
                                                 };
 
-            _organizations = AfaApplication.ServiceClient.Get(new Organizations()).Organizations;
+            _organizations = AfaApplication.ServiceClient.Get(new OrganizationsDto()).Organizations;
             _organizationsList.Adapter = new OrganizationListAdapter(this, _organizations);
         }
 

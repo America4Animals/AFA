@@ -38,7 +38,7 @@ namespace AFA.Service.App_Start
 			ServiceStack.Text.JsConfig.EmitCamelCaseNames = true;
 
             // Razor plugin
-            Plugins.Add(new RazorFormat());
+            //Plugins.Add(new RazorFormat());
 		
 			//Configure User Defined REST Paths
             //Routes

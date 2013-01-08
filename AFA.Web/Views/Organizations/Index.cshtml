@@ -1,4 +1,4 @@
-﻿@model AFA.ServiceModel.OrganizationsResponse
+﻿@model IEnumerable<AFA.Web.Models.OrganizationModel>
 
 @{
     ViewBag.Title = "Organizations";
@@ -7,7 +7,7 @@
 <h2 class="page-header">@ViewBag.Title</h2>
 
 <ul>
-    @foreach (var org in Model.Organizations)
+    @foreach (var org in Model)
     {
         <li class="margin-bottom">
             @Html.ActionLink(org.Name, "Edit", "Organizations", new {id = org.Id}, null)

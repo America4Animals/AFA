@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AFA.ServiceModel;
+using AFA.ServiceModel.DTOs;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -12,18 +13,18 @@ using Android.Widget;
 
 namespace AFA.Android
 {
-    public class OrganizationListAdapter : BaseAdapter<Organization>
+    public class OrganizationListAdapter : BaseAdapter<OrganizationDto>
     {
         private readonly Activity _context;
-        private readonly IList<Organization> _organizations;
+        private readonly IList<OrganizationDto> _organizations;
 
-        public OrganizationListAdapter(Activity context, IList<Organization> organizations)
+        public OrganizationListAdapter(Activity context, IList<OrganizationDto> organizations)
         {
             _context = context;
             _organizations = organizations;
         }
 
-        public override Organization this[int position]
+        public override OrganizationDto this[int position]
         {
             get { return _organizations[position]; }
         }
