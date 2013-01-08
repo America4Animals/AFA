@@ -51,8 +51,10 @@ namespace AFA.ServiceInterface
         {
             return new OrganizationsResponse
             {
-                Organizations = request.CategoryId.HasValue ? 
-                    Db.Select<Organization>().Where(o => o.Categories.Any(c => c.Id == request.CategoryId.Value)).ToList() : Db.Select<Organization>()
+                //Organizations = request.CategoryId.HasValue ? 
+                //    Db.Select<Organization>().Where(o => o.Categories.Any(c => c.Id == request.CategoryId.Value)).ToList() : Db.Select<Organization>()
+
+                Organizations = Db.Select<Organization>()
             };
         }
     }

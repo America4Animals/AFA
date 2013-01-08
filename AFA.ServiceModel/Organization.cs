@@ -11,7 +11,7 @@ namespace AFA.ServiceModel
     {
         public Organization()
         {
-            Categories = new List<OrganizationCategory>();
+            //Categories = new List<OrganizationCategory>();
         }
 
         [AutoIncrement]
@@ -19,11 +19,13 @@ namespace AFA.ServiceModel
         [Index(Unique = true)]
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<OrganizationCategory> Categories { get; set; }
+        //public List<OrganizationCategory> Categories { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string City { get; set; }
-        public StateProvince State { get; set; }
+        //public StateProvince State { get; set; }
+        [References(typeof(StateProvince))]
+        public int StateProvinceId { get; set; }
         public string Zipcode { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
@@ -32,29 +34,29 @@ namespace AFA.ServiceModel
         // ToDo: Add Photo
         // ToDo: Add Latitide/Longitude
 
-        public string CityAndState()
-        {
-            if (State != null)
-            {
-                // State specified
-                if (string.IsNullOrWhiteSpace(City))
-                {
-                    return State.Name;
-                }
-                else
-                {
-                    // City and State specified
-                    return City + ", " + State.Abbreviation;
-                }
-            }
-            else if (!string.IsNullOrWhiteSpace(City))
-            {
-                // City specified
-                return City;
-            }
+        //public string CityAndState()
+        //{
+        //    if (State != null)
+        //    {
+        //        // State specified
+        //        if (string.IsNullOrWhiteSpace(City))
+        //        {
+        //            return State.Name;
+        //        }
+        //        else
+        //        {
+        //            // City and State specified
+        //            return City + ", " + State.Abbreviation;
+        //        }
+        //    }
+        //    else if (!string.IsNullOrWhiteSpace(City))
+        //    {
+        //        // City specified
+        //        return City;
+        //    }
 
-            return "";
-        }
+        //    return "";
+        //}
 
         //public virtual ICollection<User> Allies { get; private set; } 
     }

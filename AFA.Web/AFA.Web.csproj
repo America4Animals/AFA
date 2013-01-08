@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.2.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="dotless.Core">
       <HintPath>..\packages\dotless.1.3.1.0\lib\dotless.Core.dll</HintPath>
     </Reference>
@@ -175,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -188,6 +192,9 @@
     <Compile Include="Helpers\GlobalHelper.cs" />
     <Compile Include="Helpers\ImportedFilePathResolver.cs" />
     <Compile Include="Helpers\LessMinify.cs" />
+    <Compile Include="Mappers\MappingExtensions.cs" />
+    <Compile Include="Mappers\MappingProfile.cs" />
+    <Compile Include="Models\OrganizationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -333,7 +340,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Filters\" />
     <Folder Include="Images\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

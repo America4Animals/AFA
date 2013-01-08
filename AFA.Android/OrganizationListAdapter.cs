@@ -42,7 +42,7 @@ namespace AFA.Android
         {
             var view = convertView ?? _context.LayoutInflater.Inflate(Resource.Layout.OrganizationListItem, null);
             view.FindViewById<TextView>(Resource.Id.OrgName).Text = _organizations[position].Name;
-            view.FindViewById<TextView>(Resource.Id.CityState).Text = _organizations[position].CityAndState();
+            //view.FindViewById<TextView>(Resource.Id.CityState).Text = _organizations[position].CityAndState();
             return view;
         }
     }
