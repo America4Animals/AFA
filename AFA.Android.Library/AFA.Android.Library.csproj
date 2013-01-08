@@ -58,9 +58,6 @@
     <Compile Include="..\AFA.ServiceModel\DTOs\OrganizationDto.cs">
       <Link>ServiceModel\DTOs\OrganizationDto.cs</Link>
     </Compile>
-    <Compile Include="..\AFA.ServiceModel\Organization.cs">
-      <Link>ServiceModel\Organization.cs</Link>
-    </Compile>
     <Compile Include="..\AFA.ServiceModel\OrganizationCategory.cs">
       <Link>ServiceModel\OrganizationCategory.cs</Link>
     </Compile>
