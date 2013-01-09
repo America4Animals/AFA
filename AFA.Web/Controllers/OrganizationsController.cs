@@ -30,6 +30,12 @@ namespace AFA.Web.Controllers
             var model = new OrganizationModel();
             var allStateProvinces = _client.Get(new StateProvinces()).StateProvinces;
             model.AllStateProvinces = new SelectList(allStateProvinces, "Id", "Name");
+            var allCategories = _client.Get(new OrganizationCategories()).OrganizationCategories;
+            model.AllCategories = allCategories.Select(c => new CheckboxItem
+                                                                {
+                                                                    Id = c.Id.ToString(),
+                                                                    Name = c.Name
+                                                                });
             return View(model);
         }
 
@@ -37,8 +43,17 @@ namespace AFA.Web.Controllers
         public ActionResult Add(OrganizationModel model)
         {
             try
-            {               
+            {
                 var org = model.ToEntity();
+                org.Categories = model.AllCategories
+                    .Where(c => c.Checked)
+                    .Select(c => new OrganizationCategory
+                        {
+                            Id =
+                                Convert.ToInt32(c.Id),
+                            Name = c.Name
+                        }).ToList();
+
                 _client.Post(org);
                 return RedirectToAction("Index", "Organizations");
             }
@@ -54,6 +69,14 @@ namespace AFA.Web.Controllers
             var model = org.ToModel();
             var allStateProvinces = _client.Get(new StateProvinces()).StateProvinces;
             model.AllStateProvinces = new SelectList(allStateProvinces, "Id", "Name", model.StateProvinceId);
+            var allCategories = _client.Get(new OrganizationCategories()).OrganizationCategories;
+            model.AllCategories = allCategories.Select(c => new CheckboxItem
+            {
+                Id = c.Id.ToString(),
+                Name = c.Name,
+                Checked = org.Categories.Any(oc => oc.Id == c.Id)
+            });
+
             return View(model);
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AFA.ServiceInterface.Mappers;
 using AFA.ServiceModel;
 using AFA.ServiceModel.DTOs;
@@ -13,7 +14,7 @@ namespace AFA.ServiceInterface
         /// </summary>
         public object Get(OrganizationDto organizationDto)
         {
-            var query = string.Format("select o.*, oc.Name, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation " +
+            var query = string.Format("select o.*, oc.Id as OrganizationCategoryId, oc.Name as OrganizationCategoryName, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation " +
                                       "from Organization o " +
                                       "left join OrganizationOrganizationCategory ooc " +
                                       "on o.Id = ooc.OrganizationId " +
@@ -22,6 +23,9 @@ namespace AFA.ServiceInterface
                                       "left join StateProvince sp " +
                                       "on o.StateProvinceId = sp.Id " +
                                       "where o.Id = {0}", organizationDto.Id);
+
+            // ToDo: Get Categories
+
 
             return new OrganizationResponse
                        {
@@ -33,6 +37,19 @@ namespace AFA.ServiceInterface
         {
             var organization = organizationDto.ToEntity();
             Db.Insert(organization);
+            var newOrgId = (int)Db.GetLastInsertId();
+
+            Db.Delete<OrganizationOrganizationCategory>(ooc => ooc.OrganizationId == newOrgId);
+
+            if (organizationDto.Categories != null && organizationDto.Categories.Any())
+            {
+                Db.InsertAll(organizationDto.Categories.Select(c => new OrganizationOrganizationCategory
+                                                                        {
+                                                                            OrganizationCategoryId = c.Id,
+                                                                            OrganizationId = newOrgId
+                                                                        }));
+            }
+
             return new OrganizationResponse { Organization = new OrganizationDto() };
         }
 

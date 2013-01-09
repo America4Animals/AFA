@@ -12,6 +12,11 @@ namespace AFA.ServiceModel.DTOs
     [Route("/organizations/{Id}", "GET")]
     public class OrganizationDto : IReturn<OrganizationResponse>
     {
+        public OrganizationDto()
+        {
+            Categories = new List<OrganizationCategory>();    
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

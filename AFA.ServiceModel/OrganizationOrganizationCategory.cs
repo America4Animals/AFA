@@ -12,7 +12,7 @@ namespace AFA.ServiceModel
         [AutoIncrement]
         public int Id { get; set; }
         [References(typeof(OrganizationCategory))]
-        public string OrganizationCategoryId { get; set; }
+        public int OrganizationCategoryId { get; set; }
         [References(typeof(Organization))]
         public int OrganizationId { get; set; }
     }

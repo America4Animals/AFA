@@ -1,0 +1,10 @@
+﻿@model AFA.Web.Helpers.CheckboxItem
+
+@Html.HiddenFor(x => x.Id)
+@Html.HiddenFor(x => x.Name)
+<div>
+    <label class="checkbox">
+        @Html.CheckBoxFor(x => x.Checked)
+        @Model.Name
+    </label>   
+</div>

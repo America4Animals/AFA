@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AFA.Web.Helpers;
 
 namespace AFA.Web.Models
 {
@@ -14,5 +15,6 @@ namespace AFA.Web.Models
         public string City { get; set; }
         public int StateProvinceId { get; set; }
         public SelectList AllStateProvinces { get; set; }
+        public IEnumerable<CheckboxItem> AllCategories { get; set; }
     }
 }

@@ -189,6 +189,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CheckboxItem.cs" />
+    <Compile Include="Helpers\CheckboxList.cs" />
     <Compile Include="Helpers\GlobalHelper.cs" />
     <Compile Include="Helpers\ImportedFilePathResolver.cs" />
     <Compile Include="Helpers\LessMinify.cs" />
@@ -335,6 +337,7 @@
     <Content Include="Views\OrganizationCategories\Index.cshtml" />
     <Content Include="Views\OrganizationCategories\Add.cshtml" />
     <Content Include="Views\OrganizationCategories\Edit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CheckboxItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
