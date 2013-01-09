@@ -45,15 +45,7 @@ namespace AFA.Web.Controllers
             try
             {
                 var org = model.ToEntity();
-                org.Categories = model.AllCategories
-                    .Where(c => c.Checked)
-                    .Select(c => new OrganizationCategory
-                        {
-                            Id =
-                                Convert.ToInt32(c.Id),
-                            Name = c.Name
-                        }).ToList();
-
+                org.Categories = ExtractSelectedOrgCategories(model);
                 _client.Post(org);
                 return RedirectToAction("Index", "Organizations");
             }
@@ -86,6 +78,7 @@ namespace AFA.Web.Controllers
             try
             {
                 var org = model.ToEntity();
+                org.Categories = ExtractSelectedOrgCategories(model);
                 _client.Put(org);
                 return RedirectToAction("Index", "Organizations");
             }
@@ -107,6 +100,18 @@ namespace AFA.Web.Controllers
             {
                 throw;
             }
+        }
+
+        private List<OrganizationCategory> ExtractSelectedOrgCategories(OrganizationModel model)
+        {
+            return model.AllCategories
+                    .Where(c => c.Checked)
+                    .Select(c => new OrganizationCategory
+                    {
+                        Id =
+                            Convert.ToInt32(c.Id),
+                        Name = c.Name
+                    }).ToList();
         }
     }
 }
