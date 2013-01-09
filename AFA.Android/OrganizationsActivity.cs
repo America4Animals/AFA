@@ -36,7 +36,7 @@ namespace AFA.Android
                                                     StartActivity(intent);
                                                 };
 
-            _organizations = AfaApplication.ServiceClient.Get(new OrganizationsDto()).Organizations;
+            _organizations = AfaApplication.ServiceClient.Get(new OrganizationsDto()).Organizations.OrderByDescending(o => o.OrganizationAlliesCount).ToList();
             _organizationsList.Adapter = new OrganizationListAdapter(this, _organizations);
         }
 

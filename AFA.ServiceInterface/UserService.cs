@@ -53,7 +53,6 @@ namespace AFA.ServiceInterface
         {
             const string FollowActionValue = "follow";
             var action = request.Action ?? FollowActionValue;
-
             var userId = request.UserId;
             var orgId = request.OrganizationId;
 

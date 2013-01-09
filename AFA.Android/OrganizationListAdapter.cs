@@ -42,8 +42,12 @@ namespace AFA.Android
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             var view = convertView ?? _context.LayoutInflater.Inflate(Resource.Layout.OrganizationListItem, null);
-            view.FindViewById<TextView>(Resource.Id.OrgName).Text = _organizations[position].Name;
-            //view.FindViewById<TextView>(Resource.Id.CityState).Text = _organizations[position].CityAndState();
+
+            var org = _organizations[position];
+            view.FindViewById<TextView>(Resource.Id.OrgName).Text = org.Name;
+            view.FindViewById<TextView>(Resource.Id.CityState).Text = org.CityAndState;
+            var alliesText = string.Format("{0} Allies", org.OrganizationAlliesCount);
+            view.FindViewById<TextView>(Resource.Id.Allies).Text = alliesText;
             return view;
         }
     }

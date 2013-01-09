@@ -37,7 +37,7 @@ namespace AFA.ServiceModel.DTOs
     }
 
     [Route("/users/{UserId}/organizationaction/{OrganizationId}", "POST")]
-    public class UserOrganizationAction
+    public class UserOrganizationAction : IReturn<UserOrganizationActionResponse>
     {
         public int UserId { get; set; }
         public int OrganizationId { get; set; }

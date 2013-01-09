@@ -124,7 +124,8 @@ namespace AFA.ServiceInterface
 
             foreach (var org in orgs)
             {
-
+                var query = string.Format("select count(*) from OrganizationAlly where OrganizationId = {0}", org.Id);
+                org.OrganizationAlliesCount = Db.Scalar<int>(query);
             }
 
             return new OrganizationsResponse

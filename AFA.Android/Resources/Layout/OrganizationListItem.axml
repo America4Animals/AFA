@@ -35,7 +35,6 @@
         android:layout_toRightOf="@id/OrgImage" />
     <TextView
         android:id="@+id/Allies"
-        android:text="22 Allies"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="5dip"
