@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AFA.ServiceInterface.Mappers;
 using AFA.ServiceModel;
@@ -114,11 +115,17 @@ namespace AFA.ServiceInterface
     {
         public object Get(OrganizationsDto request)
         {
-            var orgs = request.CategoryId.HasValue
-                           ? Db.Select<OrganizationDto>()
-                               .Where(o => o.Categories.Any(c => c.Id == request.CategoryId.Value))
-                               .ToList()
-                           : Db.Select<OrganizationDto>("select * from Organization");
+            if (request.CategoryId.HasValue)
+            {
+                throw new NotImplementedException();
+            }
+            
+            var orgs = Db.Select<OrganizationDto>("select * from Organization");
+
+            foreach (var org in orgs)
+            {
+
+            }
 
             return new OrganizationsResponse
                        {

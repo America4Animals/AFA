@@ -20,6 +20,9 @@ namespace AFA.ServiceInterface.Mappers
         {
             Mapper.CreateMap<OrganizationDto, Organization>();
             Mapper.CreateMap<Organization, OrganizationDto>();
+
+            Mapper.CreateMap<UserDto, User>();
+            Mapper.CreateMap<User, UserDto>();
         }
     }
 }

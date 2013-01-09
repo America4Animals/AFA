@@ -9,9 +9,8 @@ using ServiceStack.ServiceInterface.ServiceModel;
 
 namespace AFA.ServiceModel
 {
-    [Route("/users/", "POST,PUT,DELETE")]
-    [Route("/users/{Id}", "GET")]
-    public class User : IReturn<UserResponse>
+   
+    public class User
     {
         [AutoIncrement]
         public int Id { get; set; }
@@ -24,9 +23,5 @@ namespace AFA.ServiceModel
         public DateTime CreatedAt { get; set; }
     }
 
-    public class UserResponse : IHasResponseStatus
-    {
-        public User User { get; set; }
-        public ResponseStatus ResponseStatus { get; set; }
-    }
+    
 }

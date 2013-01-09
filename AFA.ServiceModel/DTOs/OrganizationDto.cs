@@ -32,6 +32,7 @@ namespace AFA.ServiceModel.DTOs
         public string WebpageUrl { get; set; }
 
         public List<OrganizationCategory> Categories { get; set; }
+        public int OrganizationAlliesCount { get; set; }
 
         public string CityAndState
         {

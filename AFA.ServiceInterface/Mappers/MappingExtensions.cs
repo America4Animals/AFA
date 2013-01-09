@@ -24,5 +24,19 @@ namespace AFA.ServiceInterface.Mappers
         }
 
         #endregion
+
+        #region Users
+
+        public static User ToEntity(this UserDto dto)
+        {
+            return Mapper.Map<UserDto, User>(dto);
+        }
+
+        public static UserDto ToDto(this User entity)
+        {
+            return Mapper.Map<User, UserDto>(entity);
+        }
+
+        #endregion
     }
 }
