@@ -27,6 +27,10 @@ namespace AFA.Android
             // Create your application here
             SetContentView(Resource.Layout.Organizations);
 
+            var loadingDialog = new ProgressDialog(this);
+            loadingDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
+            loadingDialog.Show();
+
             _organizationsList = FindViewById<ListView>(Resource.Id.Organizations);
             _organizationsList.ItemClick += (sender, e) =>
                                                 {
@@ -36,15 +40,24 @@ namespace AFA.Android
                                                     StartActivity(intent);
                                                 };
 
-            _organizations = AfaApplication.ServiceClient.Get(new OrganizationsDto()).Organizations.OrderByDescending(o => o.OrganizationAlliesCount).ToList();
-            _organizationsList.Adapter = new OrganizationListAdapter(this, _organizations);
+            AfaApplication.ServiceClient.GetAsync(new OrganizationsDto(), 
+                r => RunOnUiThread(() => 
+                { 
+                    _organizations = r.Organizations.OrderByDescending(o => o.OrganizationAlliesCount).ToList();
+                    _organizationsList.Adapter = new OrganizationListAdapter(this, _organizations);
+                    loadingDialog.Hide();
+                }),
+                (r, ex) => RunOnUiThread(() =>
+                {
+                    throw ex;
+                }));
         }
 
         protected override void OnResume()
         {
             base.OnResume();
 
-            
+
         }
     }
 }

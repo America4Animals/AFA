@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/white"
+    android:background="@drawable/list_selector"
     android:paddingTop="10dip"
     android:paddingBottom="10dip"
     android:minWidth="25px"

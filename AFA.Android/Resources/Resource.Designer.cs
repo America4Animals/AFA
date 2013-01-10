@@ -37,6 +37,9 @@ namespace AFA.Android
 			// aapt resource value: 0x7f050001
 			public const int black = 2131034113;
 			
+			// aapt resource value: 0x7f050006
+			public const int gray = 2131034118;
+			
 			// aapt resource value: 0x7f050003
 			public const int green = 2131034115;
 			
@@ -64,7 +67,10 @@ namespace AFA.Android
 			public const int Icon = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int sharkFin = 2130837505;
+			public const int list_selector = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int sharkFin = 2130837506;
 			
 			private Drawable()
 			{
