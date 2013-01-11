@@ -30,9 +30,12 @@ namespace AFA.ServiceModel.DTOs
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string WebpageUrl { get; set; }
+        public bool NeedsVolunteers { get; set; }
 
         public List<OrganizationCategory> Categories { get; set; }
         public int OrganizationAlliesCount { get; set; }
+        public int OrganizationNewsCount { get; set; }
+        public int OrganizationCommentsCount { get; set; }
 
         public string CityAndState
         {

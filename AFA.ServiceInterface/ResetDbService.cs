@@ -25,6 +25,8 @@ namespace AFA.ServiceInterface
             Db.CreateTableIfNotExists<OrganizationOrganizationCategory>();
             Db.CreateTableIfNotExists<User>();
             Db.CreateTableIfNotExists<OrganizationAlly>();
+            Db.CreateTableIfNotExists<OrganizationNews>();
+            Db.CreateTableIfNotExists<OrganizationComment>();
 
             if (Db.Select<StateProvince>().Count == 0)
             {

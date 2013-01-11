@@ -21,6 +21,7 @@ namespace AFA.ServiceModel
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string WebpageUrl { get; set; }
+        public bool NeedsVolunteers { get; set; }
 
         // ToDo: Add Photo
         // ToDo: Add Latitide/Longitude

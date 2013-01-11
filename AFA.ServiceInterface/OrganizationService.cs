@@ -15,21 +15,6 @@ namespace AFA.ServiceInterface
         /// </summary>
         public object Get(OrganizationDto organizationDto)
         {
-            //var query = string.Format("select o.*, oc.Id as OrganizationCategoryId, oc.Name as OrganizationCategoryName, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation " +
-            //                          "from Organization o " +
-            //                          "left join OrganizationOrganizationCategory ooc " +
-            //                          "on o.Id = ooc.OrganizationId " +
-            //                          "left join OrganizationCategory oc " +
-            //                          "on ooc.OrganizationCategoryId = oc.Id " +
-            //                          "left join StateProvince sp " +
-            //                          "on o.StateProvinceId = sp.Id " +
-            //                          "where o.Id = {0}", organizationDto.Id);
-
-            //return new OrganizationResponse
-            //{
-            //    Organization = Db.Select<OrganizationDto>(query).FirstOrDefault()
-            //};
-
             var query = string.Format("select o.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation " +
                                      "from Organization o " +
                                      "left join StateProvince sp " +
@@ -40,6 +25,7 @@ namespace AFA.ServiceInterface
 
             if (orgDto != null)
             {
+                // Categories
                 var orgCategoryQuery = string.Format(
                     "select oc.* " +
                     "from OrganizationCategory oc " +
@@ -53,6 +39,18 @@ namespace AFA.ServiceInterface
                 {
                     orgDto.Categories = orgCategories;
                 }
+
+                // Allies
+                var alliesCountQuery = string.Format("select count(*) from OrganizationAlly where OrganizationId = {0}", orgDto.Id);
+                orgDto.OrganizationAlliesCount = Db.Scalar<int>(alliesCountQuery);
+
+                // News
+                var newsCountQuery = string.Format("select count(*) from OrganizationNews where OrganizationId = {0}", orgDto.Id);
+                orgDto.OrganizationNewsCount = Db.Scalar<int>(newsCountQuery);
+
+                // Comments
+                var commentsCountQuery = string.Format("select count(*) from OrganizationComment where OrganizationId = {0}", orgDto.Id);
+                orgDto.OrganizationNewsCount = Db.Scalar<int>(commentsCountQuery);
             }
 
             return new OrganizationResponse {Organization = orgDto};
