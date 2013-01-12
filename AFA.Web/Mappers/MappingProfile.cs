@@ -20,6 +20,9 @@ namespace AFA.Web.Mappers
         {
             Mapper.CreateMap<OrganizationDto, OrganizationModel>();
             Mapper.CreateMap<OrganizationModel, OrganizationDto>();
+
+            Mapper.CreateMap<OrganizationDto, OrganizationDetailModel>();
+            Mapper.CreateMap<OrganizationDetailModel, OrganizationDto>();
         }
     }
 }

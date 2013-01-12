@@ -27,7 +27,7 @@ namespace AFA.Web.Controllers
 
         public ActionResult Add()
         {
-            var model = new OrganizationModel();
+            var model = new OrganizationDetailModel();
             var allStateProvinces = _client.Get(new StateProvinces()).StateProvinces;
             model.AllStateProvinces = new SelectList(allStateProvinces, "Id", "Name");
             var allCategories = _client.Get(new OrganizationCategories()).OrganizationCategories;
@@ -40,14 +40,15 @@ namespace AFA.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(OrganizationModel model)
+        public ActionResult Add(OrganizationDetailModel model)
         {
             try
-            {
+            {              
                 var org = model.ToEntity();
                 org.Categories = ExtractSelectedOrgCategories(model);
                 _client.Post(org);
                 return RedirectToAction("Index", "Organizations");
+
             }
             catch (WebServiceException exception)
             {
@@ -58,7 +59,7 @@ namespace AFA.Web.Controllers
         public ActionResult Edit(int id)
         {
             var org = _client.Get(new OrganizationDto { Id = id }).Organization;
-            var model = org.ToModel();
+            var model = org.ToDetailModel();
             var allStateProvinces = _client.Get(new StateProvinces()).StateProvinces;
             model.AllStateProvinces = new SelectList(allStateProvinces, "Id", "Name", model.StateProvinceId);
             var allCategories = _client.Get(new OrganizationCategories()).OrganizationCategories;
@@ -73,7 +74,7 @@ namespace AFA.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(OrganizationModel model)
+        public ActionResult Edit(OrganizationDetailModel model)
         {
             try
             {
@@ -102,7 +103,7 @@ namespace AFA.Web.Controllers
             }
         }
 
-        private List<OrganizationCategory> ExtractSelectedOrgCategories(OrganizationModel model)
+        private List<OrganizationCategory> ExtractSelectedOrgCategories(OrganizationDetailModel model)
         {
             return model.AllCategories
                     .Where(c => c.Checked)
@@ -113,5 +114,6 @@ namespace AFA.Web.Controllers
                         Name = c.Name
                     }).ToList();
         }
+
     }
 }

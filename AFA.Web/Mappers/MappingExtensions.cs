@@ -23,9 +23,14 @@ namespace AFA.Web.Mappers
             return Mapper.Map<OrganizationModel, OrganizationDto>(model);
         }
 
-        public static OrganizationDto ToEntity(this OrganizationModel model, OrganizationDto destination)
+        public static OrganizationDetailModel ToDetailModel(this OrganizationDto entity)
         {
-            return Mapper.Map(model, destination);
+            return Mapper.Map<OrganizationDto, OrganizationDetailModel>(entity);
+        }
+
+        public static OrganizationDto ToEntity(this OrganizationDetailModel model)
+        {
+            return Mapper.Map<OrganizationDetailModel, OrganizationDto>(model);
         }
 
         #endregion

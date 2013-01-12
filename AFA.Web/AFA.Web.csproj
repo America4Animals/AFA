@@ -196,6 +196,7 @@
     <Compile Include="Helpers\LessMinify.cs" />
     <Compile Include="Mappers\MappingExtensions.cs" />
     <Compile Include="Mappers\MappingProfile.cs" />
+    <Compile Include="Models\OrganizationDetailModel.cs" />
     <Compile Include="Models\OrganizationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -338,6 +339,7 @@
     <Content Include="Views\OrganizationCategories\Add.cshtml" />
     <Content Include="Views\OrganizationCategories\Edit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CheckboxItem.cshtml" />
+    <Content Include="Views\Organizations\AddOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

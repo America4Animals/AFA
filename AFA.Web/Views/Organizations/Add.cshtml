@@ -1,4 +1,4 @@
-﻿@model AFA.Web.Models.OrganizationModel
+﻿@model AFA.Web.Models.OrganizationDetailModel
 
 @{
     ViewBag.Title = "Add Organization";
@@ -8,48 +8,5 @@
 
 @using (Html.BeginForm("Add", "Organizations", FormMethod.Post, new { @class = "form-horizontal" }))
 {
-    <fieldset>
-        <div class="control-group">
-            @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-            <div class="controls">
-                @Html.TextBoxFor(m => m.Name)
-            </div>
-        </div>
-        
-        <div class="control-group">
-            @Html.LabelFor(m => m.Description, new { @class = "control-label" })
-            <div class="controls">
-                @Html.TextAreaFor(m => m.Description)
-            </div>
-        </div>
-        
-        <div class="control-group">
-            @Html.LabelFor(m => m.City, new { @class = "control-label" })
-            <div class="controls">
-                @Html.TextBoxFor(m => m.City)
-            </div>
-        </div>
-        
-        <div class="control-group">
-            @Html.Label("State", new { @class = "control-label" })
-            <div class="controls">
-                @Html.DropDownListFor(m => m.StateProvinceId, Model.AllStateProvinces)
-            </div>
-        </div>
-        
-        <div class="control-group">
-            <label class="control-label">Categories</label>
-            <div class="controls">
-                @Html.EditorFor(m => m.AllCategories)
-            </div>
-        </div>
-        
-    </fieldset>
-    
-    <div class="control-group">
-        <div class="controls">
-            @Html.ActionLink("Cancel", "Index", "Organizations", null, new { @class = "btn" })
-            <input type="submit" value="Save" class="btn btn-primary" />
-        </div>
-    </div>
+    @Html.Partial("AddOrEdit", Model)
 }
