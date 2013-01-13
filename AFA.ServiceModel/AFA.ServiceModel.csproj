@@ -53,6 +53,8 @@
   <ItemGroup>
     <Compile Include="DTOs\OrganizationDto.cs" />
     <Compile Include="DTOs\UserDto.cs" />
+    <Compile Include="Enums\OrganizerType.cs" />
+    <Compile Include="Event.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="OrganizationAlly.cs" />
     <Compile Include="OrganizationCategory.cs" />

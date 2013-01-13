@@ -39,6 +39,7 @@ namespace AFA.ServiceModel.DTOs
         public int OrganizationAlliesCount { get; set; }
         public int OrganizationNewsCount { get; set; }
         public int OrganizationCommentsCount { get; set; }
+        public int OrganizationEventsCount { get; set; }
 
         public string CityAndState
         {

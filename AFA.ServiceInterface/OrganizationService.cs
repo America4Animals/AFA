@@ -53,6 +53,10 @@ namespace AFA.ServiceInterface
                 // Comments
                 var commentsCountQuery = string.Format("select count(*) from OrganizationComment where OrganizationId = {0}", orgDto.Id);
                 orgDto.OrganizationNewsCount = Db.Scalar<int>(commentsCountQuery);
+
+                // Events
+                var eventsCountQuery = string.Format("select count(*) from Event where OrganizationId = {0} and StartTime >= '{1}'", orgDto.Id, DateTime.Now.ToString());
+                orgDto.OrganizationEventsCount = Db.Scalar<int>(eventsCountQuery);
             }
 
             return new OrganizationResponse {Organization = orgDto};
