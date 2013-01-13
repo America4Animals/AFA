@@ -120,6 +120,7 @@ namespace AFA.ServiceInterface
         public object Get(OrganizationsDto request)
         {
             var orgs = new List<OrganizationDto>();
+            string query;
 
             if (request.CategoryId.HasValue)
             {
@@ -133,13 +134,20 @@ namespace AFA.ServiceInterface
             }
             else
             {
-                orgs = Db.Select<OrganizationDto>("select * from Organization");    
+                query = string.Format("select o.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation, oc.Id as OrganizationCategoryId, oc.Name as OrganizationCategoryName " +
+                                     "from Organization o " +
+                                     "left join StateProvince sp " +
+                                     "on o.StateProvinceId = sp.Id " +
+                                     "left join OrganizationCategory oc " +
+                                     "on o.OrganizationCategoryId = oc.Id");
+
+                orgs = Db.Select<OrganizationDto>(query);    
             }
 
             foreach (var org in orgs)
             {
-                var query = string.Format("select count(*) from OrganizationAlly where OrganizationId = {0}", org.Id);
-                org.OrganizationAlliesCount = Db.Scalar<int>(query);
+                var alliesCountQuery = string.Format("select count(*) from OrganizationAlly where OrganizationId = {0}", org.Id);
+                org.OrganizationAlliesCount = Db.Scalar<int>(alliesCountQuery);
             }
 
             return new OrganizationsResponse

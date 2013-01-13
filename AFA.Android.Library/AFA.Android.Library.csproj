@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
     <Reference Include="ServiceStack.Common">
       <HintPath>..\packages\ServiceStack.Common.MonoDroid\ServiceStack.Common.dll</HintPath>
@@ -67,6 +68,7 @@
     <Compile Include="..\AFA.ServiceModel\User.cs">
       <Link>ServiceModel\User.cs</Link>
     </Compile>
+    <Compile Include="Helpers\GlobalHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

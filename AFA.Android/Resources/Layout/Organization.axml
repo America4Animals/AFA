@@ -1,51 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/green">
-    <RelativeLayout
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dip">
-        <ImageView
-            android:src="@drawable/sharkFin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dip"
-            android:layout_marginLeft="10dip"
-            android:id="@+id/OrgImage" />
+        android:layout_height="fill_parent"
+        android:background="@color/green">
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/lightgreen"
-            android:layout_marginRight="10dip"
-            android:layout_toRightOf="@id/OrgImage">
-            <TextView
-                android:text="Organization Name"
+            android:layout_marginTop="10dip">
+            <ImageView
+                android:src="@drawable/sharkFin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dip"
+                android:layout_marginLeft="10dip"
+                android:id="@+id/OrgImage" />
+            <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/OrgName"
-                android:textColor="@color/black"
-                android:gravity="center"
-                android:layout_marginBottom="10dip" />
-            <TextView
-                android:text="Needs Volunteers!"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/NeedVolunteersLabel"
-                android:textColor="@color/red"
-                android:layout_below="@id/OrgName"
-                android:gravity="center" />
+                android:background="@color/lightgreen"
+                android:layout_marginRight="10dip"
+                android:layout_toRightOf="@id/OrgImage">
+                <TextView
+                    android:text="Organization Name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/OrgName"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:layout_marginBottom="10dip" />
+                <TextView
+                    android:text="Needs Volunteers!"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/NeedVolunteersLabel"
+                    android:textColor="@color/red"
+                    android:layout_below="@id/OrgName"
+                    android:gravity="center"
+                    android:visibility="invisible" />
+            </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
-    <Button
-        android:text="Unite!"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/UniteButton"
-        android:layout_marginTop="10dip"
-        android:layout_marginRight="10dip"
-        android:layout_marginBottom="10dip"
-        android:layout_marginLeft="10dip" />
-</LinearLayout>
+        <Button
+            android:text="Unite!"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/UniteButton"
+            android:layout_marginTop="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginBottom="10dip"
+            android:layout_marginLeft="10dip" />
+        <TextView
+            android:text="[DESCRIPTION]"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:layout_marginLeft="10dip"
+            android:id="@+id/DescriptionText" />
+        <Button
+            android:text="Who&apos;s Folllowing (0)"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/FollowingButton"
+            android:gravity="left|center_vertical"
+            android:layout_marginTop="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dip" />
+        <Button
+            android:text="News (0)"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/NewsButton"
+            android:gravity="left|center_vertical"
+            android:layout_marginRight="10dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dip" />
+        <Button
+            android:text="Events (0)"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/EventsButton"
+            android:gravity="left|center_vertical"
+            android:layout_marginRight="10dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dip" />
+        <Button
+            android:text="Comments (0)"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/CommentsButton"
+            android:gravity="left|center_vertical"
+            android:layout_marginRight="10dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dip" />
+        <TextView
+            android:text="Contact"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ContactLabel"
+            android:textColor="@color/pink"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:layout_marginLeft="10dip" />
+        <Button
+            android:text="email@email.com"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/EmailButton"
+            android:gravity="left|center_vertical"
+            android:layout_marginRight="10dip"
+            android:layout_marginLeft="10dip" />
+        <Button
+            android:text="(123) 456-7890"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/PhoneButton"
+            android:gravity="left|center_vertical"
+            android:layout_marginRight="10dip"
+            android:layout_marginLeft="10dip" />
+        <Button
+            android:text="1234 Broadway\nNew York, NY"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AddressButton"
+            android:gravity="left|center_vertical"
+            android:layout_marginRight="10dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dip" />
+        <Button
+            android:text="www.americaforanimals.org"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/WebsiteButton"
+            android:gravity="left|center_vertical"
+            android:layout_marginTop="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dip" />
+        <Button
+            android:text="Edit Organization Info"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/EditOrgButton"
+            android:gravity="left|center_vertical"
+            android:layout_marginRight="10dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dip" />
+    </LinearLayout>
+</ScrollView>

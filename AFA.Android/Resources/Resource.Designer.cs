@@ -80,11 +80,35 @@ namespace AFA.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060006
-			public const int Allies = 2131099654;
+			// aapt resource value: 0x7f06000d
+			public const int AddressButton = 2131099661;
+			
+			// aapt resource value: 0x7f060011
+			public const int Allies = 2131099665;
+			
+			// aapt resource value: 0x7f060010
+			public const int CityState = 2131099664;
+			
+			// aapt resource value: 0x7f060009
+			public const int CommentsButton = 2131099657;
+			
+			// aapt resource value: 0x7f06000a
+			public const int ContactLabel = 2131099658;
 			
 			// aapt resource value: 0x7f060005
-			public const int CityState = 2131099653;
+			public const int DescriptionText = 2131099653;
+			
+			// aapt resource value: 0x7f06000f
+			public const int EditOrgButton = 2131099663;
+			
+			// aapt resource value: 0x7f06000b
+			public const int EmailButton = 2131099659;
+			
+			// aapt resource value: 0x7f060008
+			public const int EventsButton = 2131099656;
+			
+			// aapt resource value: 0x7f060006
+			public const int FollowingButton = 2131099654;
 			
 			// aapt resource value: 0x7f060000
 			public const int MyButton = 2131099648;
@@ -92,17 +116,26 @@ namespace AFA.Android
 			// aapt resource value: 0x7f060003
 			public const int NeedVolunteersLabel = 2131099651;
 			
+			// aapt resource value: 0x7f060007
+			public const int NewsButton = 2131099655;
+			
 			// aapt resource value: 0x7f060001
 			public const int OrgImage = 2131099649;
 			
 			// aapt resource value: 0x7f060002
 			public const int OrgName = 2131099650;
 			
-			// aapt resource value: 0x7f060007
-			public const int Organizations = 2131099655;
+			// aapt resource value: 0x7f060012
+			public const int Organizations = 2131099666;
+			
+			// aapt resource value: 0x7f06000c
+			public const int PhoneButton = 2131099660;
 			
 			// aapt resource value: 0x7f060004
 			public const int UniteButton = 2131099652;
+			
+			// aapt resource value: 0x7f06000e
+			public const int WebsiteButton = 2131099662;
 			
 			private Id()
 			{
