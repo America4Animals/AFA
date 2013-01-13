@@ -31,11 +31,12 @@ namespace AFA.Web.Controllers
             var allStateProvinces = _client.Get(new StateProvinces()).StateProvinces;
             model.AllStateProvinces = new SelectList(allStateProvinces, "Id", "Name");
             var allCategories = _client.Get(new OrganizationCategories()).OrganizationCategories;
-            model.AllCategories = allCategories.Select(c => new CheckboxItem
-                                                                {
-                                                                    Id = c.Id.ToString(),
-                                                                    Name = c.Name
-                                                                });
+            //model.AllCategories = allCategories.Select(c => new CheckboxItem
+            //                                                    {
+            //                                                        Id = c.Id.ToString(),
+            //                                                        Name = c.Name
+            //                                                    });
+            model.AllOrganizationCategories = new SelectList(allCategories, "Id", "Name");
             return View(model);
         }
 
@@ -45,7 +46,7 @@ namespace AFA.Web.Controllers
             try
             {              
                 var org = model.ToEntity();
-                org.Categories = ExtractSelectedOrgCategories(model);
+                //org.Categories = ExtractSelectedOrgCategories(model);
                 _client.Post(org);
                 return RedirectToAction("Index", "Organizations");
 
@@ -63,12 +64,14 @@ namespace AFA.Web.Controllers
             var allStateProvinces = _client.Get(new StateProvinces()).StateProvinces;
             model.AllStateProvinces = new SelectList(allStateProvinces, "Id", "Name", model.StateProvinceId);
             var allCategories = _client.Get(new OrganizationCategories()).OrganizationCategories;
-            model.AllCategories = allCategories.Select(c => new CheckboxItem
-            {
-                Id = c.Id.ToString(),
-                Name = c.Name,
-                Checked = org.Categories.Any(oc => oc.Id == c.Id)
-            });
+            //model.AllCategories = allCategories.Select(c => new CheckboxItem
+            //{
+            //    Id = c.Id.ToString(),
+            //    Name = c.Name,
+            //    Checked = org.Categories.Any(oc => oc.Id == c.Id)
+            //});
+            model.AllOrganizationCategories = new SelectList(allCategories, "Id", "Name", model.OrganizationCategoryId);
+
 
             return View(model);
         }
@@ -79,7 +82,7 @@ namespace AFA.Web.Controllers
             try
             {
                 var org = model.ToEntity();
-                org.Categories = ExtractSelectedOrgCategories(model);
+                //org.Categories = ExtractSelectedOrgCategories(model);
                 _client.Put(org);
                 return RedirectToAction("Index", "Organizations");
             }
@@ -103,17 +106,17 @@ namespace AFA.Web.Controllers
             }
         }
 
-        private List<OrganizationCategory> ExtractSelectedOrgCategories(OrganizationDetailModel model)
-        {
-            return model.AllCategories
-                    .Where(c => c.Checked)
-                    .Select(c => new OrganizationCategory
-                    {
-                        Id =
-                            Convert.ToInt32(c.Id),
-                        Name = c.Name
-                    }).ToList();
-        }
+        //private List<OrganizationCategory> ExtractSelectedOrgCategories(OrganizationDetailModel model)
+        //{
+        //    return model.AllCategories
+        //            .Where(c => c.Checked)
+        //            .Select(c => new OrganizationCategory
+        //            {
+        //                Id =
+        //                    Convert.ToInt32(c.Id),
+        //                Name = c.Name
+        //            }).ToList();
+        //}
 
     }
 }

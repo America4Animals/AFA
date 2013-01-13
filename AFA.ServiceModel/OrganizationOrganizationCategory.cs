@@ -7,13 +7,14 @@ using ServiceStack.DataAnnotations;
 
 namespace AFA.ServiceModel
 {
-    public class OrganizationOrganizationCategory
-    {
-        [AutoIncrement]
-        public int Id { get; set; }
-        [References(typeof(OrganizationCategory))]
-        public int OrganizationCategoryId { get; set; }
-        [References(typeof(Organization))]
-        public int OrganizationId { get; set; }
-    }
+    // REMOVED for now as organizations will only belong to 1 category
+    //public class OrganizationOrganizationCategory
+    //{
+    //    [AutoIncrement]
+    //    public int Id { get; set; }
+    //    [References(typeof(OrganizationCategory))]
+    //    public int OrganizationCategoryId { get; set; }
+    //    [References(typeof(Organization))]
+    //    public int OrganizationId { get; set; }
+    //}
 }

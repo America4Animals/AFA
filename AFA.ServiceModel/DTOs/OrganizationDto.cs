@@ -12,10 +12,10 @@ namespace AFA.ServiceModel.DTOs
     [Route("/organizations/{Id}", "GET")]
     public class OrganizationDto : IReturn<OrganizationResponse>
     {
-        public OrganizationDto()
-        {
-            Categories = new List<OrganizationCategory>();    
-        }
+        //public OrganizationDto()
+        //{
+        //    Categories = new List<OrganizationCategory>();    
+        //}
 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -32,7 +32,10 @@ namespace AFA.ServiceModel.DTOs
         public string WebpageUrl { get; set; }
         public bool NeedsVolunteers { get; set; }
 
-        public List<OrganizationCategory> Categories { get; set; }
+        //public List<OrganizationCategory> Categories { get; set; }
+        public int OrganizationCategoryId { get; set; }
+        public string OrganizationCategoryName { get; set; }
+
         public int OrganizationAlliesCount { get; set; }
         public int OrganizationNewsCount { get; set; }
         public int OrganizationCommentsCount { get; set; }

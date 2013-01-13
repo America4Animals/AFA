@@ -12,6 +12,7 @@ namespace AFA.Web.Models
     public class OrganizationDetailModel
     {
         public int Id { get; set; }
+        public int OrganizationCategoryId { get; set; }
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
@@ -28,6 +29,7 @@ namespace AFA.Web.Models
         public bool NeedsVolunteers { get; set; }
 
         public SelectList AllStateProvinces { get; set; }
-        public IEnumerable<CheckboxItem> AllCategories { get; set; }
+        //public IEnumerable<CheckboxItem> AllCategories { get; set; }
+        public SelectList AllOrganizationCategories { get; set; }
     }
 }

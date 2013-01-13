@@ -3,6 +3,13 @@
 
 <fieldset>
     <div class="control-group">
+        @Html.Label("Organization Category", new { @class = "control-label" })
+        <div class="controls">
+            @Html.DropDownListFor(m => m.OrganizationCategoryId, Model.AllOrganizationCategories)
+        </div>
+    </div>
+
+    <div class="control-group">
         @Html.LabelFor(m => m.Name, new { @class = "control-label" })
         <div class="controls">
             @Html.TextBoxFor(m => m.Name)
@@ -80,12 +87,12 @@
         </div>
     </div>
 
-    <div class="control-group">
-        <label class="control-label">Categories</label>
-        <div class="controls">
-            @Html.EditorFor(m => m.AllCategories)
-        </div>
-    </div>
+    @*<div class="control-group">
+            <label class="control-label">Categories</label>
+            <div class="controls">
+                @Html.EditorFor(m => m.AllCategories)
+            </div>
+        </div>*@
     
 </fieldset>
 

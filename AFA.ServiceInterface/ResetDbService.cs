@@ -22,7 +22,7 @@ namespace AFA.ServiceInterface
             Db.CreateTableIfNotExists<StateProvince>();
             Db.CreateTableIfNotExists<OrganizationCategory>();
             Db.CreateTableIfNotExists<Organization>();
-            Db.CreateTableIfNotExists<OrganizationOrganizationCategory>();
+            //Db.CreateTableIfNotExists<OrganizationOrganizationCategory>();
             Db.CreateTableIfNotExists<User>();
             Db.CreateTableIfNotExists<OrganizationAlly>();
             Db.CreateTableIfNotExists<OrganizationNews>();
