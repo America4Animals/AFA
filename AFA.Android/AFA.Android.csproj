@@ -98,6 +98,9 @@
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Drawable\list_selector.xml" />
+    <AndroidResource Include="Resources\Drawable\newsIcon.png" />
+    <AndroidResource Include="Resources\Drawable\calendarIcon.png" />
+    <AndroidResource Include="Resources\Drawable\speechIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
