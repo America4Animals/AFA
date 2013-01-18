@@ -41,6 +41,9 @@ namespace AFA.ServiceModel.DTOs
         public int OrganizationCommentsCount { get; set; }
         public int OrganizationEventsCount { get; set; }
 
+        public int? CallerUserId { get; set; }
+        public bool CallerIsFollowingOrg { get; set; }
+
         public string CityAndState
         {
             get

@@ -13,7 +13,7 @@ namespace AFA.ServiceInterface
         /// <summary>
         /// GET /organizations/{Id}
         /// </summary>
-        public object Get(OrganizationDto organizationDto)
+        public object Get(OrganizationDto request)
         {
             var query = string.Format("select o.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation, oc.Id as OrganizationCategoryId, oc.Name as OrganizationCategoryName " +
                                      "from Organization o " +
@@ -21,7 +21,7 @@ namespace AFA.ServiceInterface
                                      "on o.StateProvinceId = sp.Id " +
                                      "left join OrganizationCategory oc " +
                                      "on o.OrganizationCategoryId = oc.Id " +
-                                     "where o.Id = {0}", organizationDto.Id);
+                                     "where o.Id = {0}", request.Id);
 
             var orgDto = Db.Select<OrganizationDto>(query).FirstOrDefault();
 
@@ -57,6 +57,13 @@ namespace AFA.ServiceInterface
                 // Events
                 var eventsCountQuery = string.Format("select count(*) from Event where OrganizationId = {0} and StartTime >= '{1}'", orgDto.Id, DateTime.Now.ToString());
                 orgDto.OrganizationEventsCount = Db.Scalar<int>(eventsCountQuery);
+
+                if (request.CallerUserId.HasValue)
+                {
+                    var userFollowingOrgQuery = string.Format("select count(*) from OrganizationAlly where OrganizationId = {0} and UserId = {1}", orgDto.Id, request.CallerUserId);
+                    var userFollowingCount = Db.Scalar<int>(userFollowingOrgQuery);
+                    orgDto.CallerIsFollowingOrg = userFollowingCount > 0;
+                }
             }
 
             return new OrganizationResponse {Organization = orgDto};
