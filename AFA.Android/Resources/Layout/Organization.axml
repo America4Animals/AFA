@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/green"
-        android:id="@+id/linearLayout3">
+        android:id="@+id/linearLayout1">
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -72,6 +72,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/FollowingButton"
             android:gravity="left|center_vertical"
+            android:drawableLeft="@drawable/peopleIcon"
+            android:drawableRight="@drawable/rightArrow"
+            android:drawablePadding="10dip"
             android:layout_marginTop="10dip"
             android:layout_marginRight="10dip"
             android:layout_marginBottom="5dip"
@@ -82,10 +85,11 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
-            android:id="@+id/linearLayout1">
+            android:id="@+id/linearLayout2">
             <Button
                 android:text="+"
                 android:layout_height="fill_parent"
+                android:layout_width="0px"
                 android:id="@+id/NewsIconButton"
                 android:drawableRight="@drawable/newsIcon"
                 android:gravity="left|center_vertical"
@@ -100,36 +104,9 @@
             <Button
                 android:text="News (0)"
                 android:layout_height="fill_parent"
+                android:layout_width="0px"
                 android:id="@+id/NewsButton"
-                android:gravity="left|center_vertical"
-                android:layout_marginRight="10dip"
-                android:layout_marginBottom="5dip"
-                android:layout_weight="3" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
-            android:id="@+id/linearLayout2">
-            <Button
-                android:text="+"
-                android:layout_height="fill_parent"
-                android:id="@+id/CalendarIconButton"
-                android:drawableRight="@drawable/calendarIcon"
-                android:gravity="left|center_vertical"
-                android:textColor="@color/pink"
-                android:textStyle="bold"
-                android:layout_marginRight="10dip"
-                android:layout_marginBottom="5dip"
-                android:layout_marginLeft="10dip"
-                android:paddingLeft="15dip"
-                android:paddingRight="15dip"
-                android:layout_weight="1" />
-            <Button
-                android:text="Events (0)"
-                android:layout_height="fill_parent"
-                android:id="@+id/EventsButton"
+                android:drawableRight="@drawable/rightArrow"
                 android:gravity="left|center_vertical"
                 android:layout_marginRight="10dip"
                 android:layout_marginBottom="5dip"
@@ -144,6 +121,39 @@
             <Button
                 android:text="+"
                 android:layout_height="fill_parent"
+                android:layout_width="0px"
+                android:id="@+id/CalendarIconButton"
+                android:drawableRight="@drawable/calendarIcon"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/pink"
+                android:textStyle="bold"
+                android:layout_marginRight="10dip"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="10dip"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip"
+                android:layout_weight="1" />
+            <Button
+                android:text="Events (0)"
+                android:layout_height="fill_parent"
+                android:layout_width="0px"
+                android:id="@+id/EventsButton"
+                android:gravity="left|center_vertical"
+                android:drawableRight="@drawable/rightArrow"
+                android:layout_marginRight="10dip"
+                android:layout_marginBottom="5dip"
+                android:layout_weight="3" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:id="@+id/linearLayout4">
+            <Button
+                android:text="+"
+                android:layout_height="fill_parent"
+                android:layout_width="0px"
                 android:id="@+id/speechIconButton"
                 android:drawableRight="@drawable/speechIcon"
                 android:gravity="left|center_vertical"
@@ -158,8 +168,10 @@
             <Button
                 android:text="Comments (0)"
                 android:layout_height="fill_parent"
+                android:layout_width="0px"
                 android:id="@+id/CommentsButton"
                 android:gravity="left|center_vertical"
+                android:drawableRight="@drawable/rightArrow"
                 android:layout_marginRight="10dip"
                 android:layout_marginBottom="5dip"
                 android:layout_weight="3" />
@@ -181,6 +193,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/EmailButton"
             android:gravity="left|center_vertical"
+            android:drawableLeft="@drawable/downloadIcon"
+            android:drawableRight="@drawable/rightArrow"
+            android:drawablePadding="10dip"
             android:layout_marginRight="10dip"
             android:layout_marginLeft="10dip" />
         <Button
@@ -189,6 +204,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/PhoneButton"
             android:gravity="left|center_vertical"
+            android:drawableLeft="@drawable/phoneIcon"
+            android:drawableRight="@drawable/rightArrow"
+            android:drawablePadding="10dip"
             android:layout_marginRight="10dip"
             android:layout_marginLeft="10dip" />
         <Button
@@ -197,6 +215,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/AddressButton"
             android:gravity="left|center_vertical"
+            android:drawableLeft="@drawable/mapIcon"
+            android:drawableRight="@drawable/rightArrow"
+            android:drawablePadding="10dip"
             android:layout_marginRight="10dip"
             android:layout_marginBottom="5dip"
             android:layout_marginLeft="10dip" />
@@ -206,16 +227,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/WebsiteButton"
             android:gravity="left|center_vertical"
+            android:drawableLeft="@drawable/monitorIcon"
+            android:drawableRight="@drawable/rightArrow"
+            android:drawablePadding="10dip"
             android:layout_marginTop="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginBottom="5dip"
-            android:layout_marginLeft="10dip" />
-        <Button
-            android:text="Edit Organization Info"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/EditOrgButton"
-            android:gravity="left|center_vertical"
             android:layout_marginRight="10dip"
             android:layout_marginBottom="5dip"
             android:layout_marginLeft="10dip" />

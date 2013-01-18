@@ -67,19 +67,37 @@ namespace AFA.Android
 			public const int calendarIcon = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int Icon = 2130837505;
+			public const int downloadIcon = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int list_selector = 2130837506;
+			public const int Icon = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int newsIcon = 2130837507;
+			public const int list_selector = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int sharkFin = 2130837508;
+			public const int mapIcon = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int speechIcon = 2130837509;
+			public const int monitorIcon = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int newsIcon = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int peopleIcon = 2130837511;
+			
+			// aapt resource value: 0x7f020008
+			public const int phoneIcon = 2130837512;
+			
+			// aapt resource value: 0x7f020009
+			public const int rightArrow = 2130837513;
+			
+			// aapt resource value: 0x7f02000a
+			public const int sharkFin = 2130837514;
+			
+			// aapt resource value: 0x7f02000b
+			public const int speechIcon = 2130837515;
 			
 			private Drawable()
 			{
@@ -89,8 +107,8 @@ namespace AFA.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060015
-			public const int AddressButton = 2131099669;
+			// aapt resource value: 0x7f060016
+			public const int AddressButton = 2131099670;
 			
 			// aapt resource value: 0x7f060019
 			public const int Allies = 2131099673;
@@ -101,20 +119,17 @@ namespace AFA.Android
 			// aapt resource value: 0x7f060018
 			public const int CityState = 2131099672;
 			
-			// aapt resource value: 0x7f060011
-			public const int CommentsButton = 2131099665;
-			
 			// aapt resource value: 0x7f060012
-			public const int ContactLabel = 2131099666;
+			public const int CommentsButton = 2131099666;
+			
+			// aapt resource value: 0x7f060013
+			public const int ContactLabel = 2131099667;
 			
 			// aapt resource value: 0x7f060008
 			public const int DescriptionText = 2131099656;
 			
-			// aapt resource value: 0x7f060017
-			public const int EditOrgButton = 2131099671;
-			
-			// aapt resource value: 0x7f060013
-			public const int EmailButton = 2131099667;
+			// aapt resource value: 0x7f060014
+			public const int EmailButton = 2131099668;
 			
 			// aapt resource value: 0x7f06000f
 			public const int EventsButton = 2131099663;
@@ -143,23 +158,26 @@ namespace AFA.Android
 			// aapt resource value: 0x7f06001a
 			public const int Organizations = 2131099674;
 			
-			// aapt resource value: 0x7f060014
-			public const int PhoneButton = 2131099668;
+			// aapt resource value: 0x7f060015
+			public const int PhoneButton = 2131099669;
 			
 			// aapt resource value: 0x7f060007
 			public const int UniteButton = 2131099655;
 			
-			// aapt resource value: 0x7f060016
-			public const int WebsiteButton = 2131099670;
-			
-			// aapt resource value: 0x7f06000a
-			public const int linearLayout1 = 2131099658;
-			
-			// aapt resource value: 0x7f06000d
-			public const int linearLayout2 = 2131099661;
+			// aapt resource value: 0x7f060017
+			public const int WebsiteButton = 2131099671;
 			
 			// aapt resource value: 0x7f060001
-			public const int linearLayout3 = 2131099649;
+			public const int linearLayout1 = 2131099649;
+			
+			// aapt resource value: 0x7f06000a
+			public const int linearLayout2 = 2131099658;
+			
+			// aapt resource value: 0x7f06000d
+			public const int linearLayout3 = 2131099661;
+			
+			// aapt resource value: 0x7f060010
+			public const int linearLayout4 = 2131099664;
 			
 			// aapt resource value: 0x7f060002
 			public const int relativeLayout1 = 2131099650;
@@ -167,8 +185,8 @@ namespace AFA.Android
 			// aapt resource value: 0x7f060004
 			public const int relativeLayout2 = 2131099652;
 			
-			// aapt resource value: 0x7f060010
-			public const int speechIconButton = 2131099664;
+			// aapt resource value: 0x7f060011
+			public const int speechIconButton = 2131099665;
 			
 			private Id()
 			{

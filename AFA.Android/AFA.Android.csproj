@@ -101,6 +101,12 @@
     <AndroidResource Include="Resources\Drawable\newsIcon.png" />
     <AndroidResource Include="Resources\Drawable\calendarIcon.png" />
     <AndroidResource Include="Resources\Drawable\speechIcon.png" />
+    <AndroidResource Include="Resources\Drawable\downloadIcon.png" />
+    <AndroidResource Include="Resources\Drawable\mapIcon.png" />
+    <AndroidResource Include="Resources\Drawable\monitorIcon.png" />
+    <AndroidResource Include="Resources\Drawable\peopleIcon.png" />
+    <AndroidResource Include="Resources\Drawable\phoneIcon.png" />
+    <AndroidResource Include="Resources\Drawable\rightArrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

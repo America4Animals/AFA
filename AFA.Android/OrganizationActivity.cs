@@ -14,7 +14,7 @@ using AFA.Android.Library.Helpers;
 
 namespace AFA.Android
 {
-    [Activity(Label = "Organization")]
+   [Activity(Label = "Organization")]
     public class OrganizationActivity : Activity
     {
         private const string FollowingButtonLabelText = "Who's Following ({0})";
