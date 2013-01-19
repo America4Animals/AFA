@@ -1,0 +1,23 @@
+﻿@model AFA.Web.Models.OrganizationAlliesModel
+
+@{
+    ViewBag.Title = "Organization Allies";
+}
+
+<h2 class="page-header">@ViewBag.Title</h2>
+
+<h3>
+    @Html.ActionLink(Model.OrganizationName, "Details", "Organizations", new {id = Model.OrganizationId}, null)
+</h3>
+
+<ul>
+    @foreach (var user in Model.Users)
+    {
+        <li>
+            <div>
+                <strong>@user.DisplayName</strong>
+            </div>
+            <div>@user.CityAndState</div>
+        </li>
+    }
+</ul>

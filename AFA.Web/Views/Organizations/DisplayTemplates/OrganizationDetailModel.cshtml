@@ -1,0 +1,87 @@
+﻿@model AFA.Web.Models.OrganizationDetailModel
+
+<div class="form-horizontal">
+    <div class="control-group">
+        @Html.Label("Organization Category", new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.OrganizationCategoryName)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.Name)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.Description)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.AddressLine1, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.AddressLine1)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.AddressLine2, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.AddressLine2)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.City, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.City)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.Label("State", new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.StateProvinceAbbreviation)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.Zipcode, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.Zipcode)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.PhoneNumber)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.Email)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.WebpageUrl, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.WebpageUrl)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.NeedsVolunteers, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.NeedsVolunteers)
+        </div>
+    </div>
+</div>

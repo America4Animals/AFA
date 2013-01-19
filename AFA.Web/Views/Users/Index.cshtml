@@ -10,7 +10,10 @@
     @foreach (var user in Model)
     {
         <li class="margin-bottom">
-            @Html.ActionLink(user.FullName, "Edit", "Users", new {id = user.Id}, null)
+            @Html.ActionLink(user.FullName, "Details", "Users", new {id = user.Id}, null)
+            
+            @Html.ActionLink("Edit", "Edit", "Users", new {id = user.Id}, new {@class = "margin-left btn btn-info"})
+
             @using (Html.BeginForm("Delete", "Users", new { id = user.Id }, FormMethod.Post, new { @class = "inline" }))
             {
                 <input type="submit" value="Delete" class="margin-left btn btn-danger" />

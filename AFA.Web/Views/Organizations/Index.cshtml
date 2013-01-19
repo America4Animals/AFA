@@ -10,8 +10,13 @@
     @foreach (var org in Model)
     {
         <li class="margin-bottom">
-            @Html.ActionLink(org.Name, "Edit", "Organizations", new {id = org.Id}, null)
-            <span>(@org.OrganizationAlliesCount allies)</span>
+            @Html.ActionLink(org.Name, "Details", "Organizations", new {id = org.Id}, null)
+            <span>
+                (@Html.ActionLink(org.OrganizationAlliesCount + " allies", "Organization", "Users", new {id = org.Id}, null))
+            </span>
+
+            @Html.ActionLink("Edit", "Edit", "Organizations", new {id = org.Id}, new {@class = "margin-left btn btn-info"})
+
             @using (Html.BeginForm("Delete", "Organizations", new {id = org.Id}, FormMethod.Post, new {@class="inline"}))
             {
                 <input type="submit" value="Delete" class="margin-left btn btn-danger" />

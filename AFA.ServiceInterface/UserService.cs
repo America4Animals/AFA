@@ -17,7 +17,11 @@ namespace AFA.ServiceInterface
         /// </summary>
         public object Get(UserDto request)
         {
-            var query = string.Format("select * from User where Id = {0}", request.Id);
+            var query = string.Format("select u.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation " +
+                "from User u " +
+                "left join StateProvince sp " +
+                "on u.StateProvinceId = sp.Id " +
+                "where u.Id = {0}", request.Id);
             var user = Db.Select<UserDto>(query).FirstOrDefault();
 
             return new UserResponse
@@ -83,10 +87,11 @@ namespace AFA.ServiceInterface
         public object Get(UsersDto request)
         {
             List<UserDto> users;
+            string query;
 
             if (request.OrganizationId.HasValue)
             {
-                var query = String.Format("select u.* " +
+                query = String.Format("select u.* " +
                                           "from User u " +
                                           "inner join OrganizationAlly oa " +
                                           "where oa.OrganizationId = {0}", request.OrganizationId);
@@ -95,7 +100,12 @@ namespace AFA.ServiceInterface
             }
             else
             {
-                users = Db.Select<UserDto>("select * from User");    
+                query = "select u.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation " +
+                        "from User u " +
+                        "left join StateProvince sp " +
+                        "on u.StateProvinceId = sp.Id";
+
+                users = Db.Select<UserDto>(query);    
             }
 
             return new UsersResponse

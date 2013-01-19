@@ -19,10 +19,17 @@ namespace AFA.Web.Controllers
     {
         public OrganizationsController(IRestClient client) : base(client) {}
 
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
             var orgs = _client.Get(new OrganizationsDto()).Organizations;
             var model = orgs.Select(o => o.ToModel()).ToList();
+            return View(model);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var org = _client.Get(new OrganizationDto { Id = id }).Organization;
+            var model = org.ToDetailModel();
             return View(model);
         }
 
@@ -106,6 +113,11 @@ namespace AFA.Web.Controllers
                 throw;
             }
         }
+
+        //public ActionResult Allies(int id)
+        //{
+
+        //}
 
         //private List<OrganizationCategory> ExtractSelectedOrgCategories(OrganizationDetailModel model)
         //{

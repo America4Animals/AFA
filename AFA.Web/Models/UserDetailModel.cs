@@ -17,10 +17,15 @@ namespace AFA.Web.Models
         [Required]
         [DisplayName("Last Name")]
         public string LastName { get; set; }
+        public string FullName { get; set; }
         [Required]
         public string Email { get; set; }
         public string City { get; set; }
         public int StateProvinceId { get; set; }
+        public string StateProvinceAbbreviation { get; set; }
+
+        public string DisplayName { get; set; }
+        public string CityAndState { get; set; }
 
         public SelectList AllStateProvinces { get; set; }
 

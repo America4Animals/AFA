@@ -13,6 +13,7 @@ namespace AFA.Web.Models
     {
         public int Id { get; set; }
         public int OrganizationCategoryId { get; set; }
+        public string OrganizationCategoryName { get; set; }
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
@@ -22,6 +23,7 @@ namespace AFA.Web.Models
         public string AddressLine2 { get; set; }
         public string City { get; set; }
         public int StateProvinceId { get; set; }
+        public string StateProvinceAbbreviation { get; set; }
         public string Zipcode { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }

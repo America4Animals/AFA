@@ -208,6 +208,7 @@
     <Compile Include="Helpers\LessMinify.cs" />
     <Compile Include="Mappers\MappingExtensions.cs" />
     <Compile Include="Mappers\MappingProfile.cs" />
+    <Compile Include="Models\OrganizationAlliesModel.cs" />
     <Compile Include="Models\OrganizationDetailModel.cs" />
     <Compile Include="Models\OrganizationModel.cs" />
     <Compile Include="Models\UserDetailModel.cs" />
@@ -358,6 +359,11 @@
     <Content Include="Views\Users\Add.cshtml" />
     <Content Include="Views\Users\AddOrEdit.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Organization.cshtml" />
+    <Content Include="Views\Organizations\Details.cshtml" />
+    <Content Include="Views\Organizations\DisplayTemplates\OrganizationDetailModel.cshtml" />
+    <Content Include="Views\Users\DisplayTemplates\UserDetailModel.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -23,6 +23,13 @@ namespace AFA.Web.Controllers
             return View(model);
         }
 
+        public ActionResult Details(int id)
+        {
+            var user = _client.Get(new UserDto { Id = id }).User;
+            var model = user.ToDetailModel();
+            return View("Details", model);
+        }
+
         public ActionResult Add()
         {
             var model = new UserDetailModel();
@@ -82,6 +89,19 @@ namespace AFA.Web.Controllers
             {
                 throw;
             }
+        }
+
+        public ActionResult Organization(int id)
+        {
+            var users = _client.Get(new UsersDto { OrganizationId = id }).Users;
+            var organization = _client.Get(new OrganizationDto {Id = id}).Organization;
+
+            var model = new OrganizationAlliesModel();
+            model.OrganizationId = id;
+            model.OrganizationName = organization.Name;
+            model.Users = users.Select(o => o.ToDetailModel()).ToList();
+            
+            return View(model);
         }
 
     }
