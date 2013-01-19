@@ -59,14 +59,14 @@
     <Compile Include="..\AFA.ServiceModel\DTOs\OrganizationDto.cs">
       <Link>ServiceModel\DTOs\OrganizationDto.cs</Link>
     </Compile>
+    <Compile Include="..\AFA.ServiceModel\DTOs\UserDto.cs">
+      <Link>ServiceModel\DTOs\UserDto.cs</Link>
+    </Compile>
     <Compile Include="..\AFA.ServiceModel\OrganizationCategory.cs">
       <Link>ServiceModel\OrganizationCategory.cs</Link>
     </Compile>
     <Compile Include="..\AFA.ServiceModel\StateProvince.cs">
       <Link>ServiceModel\StateProvince.cs</Link>
-    </Compile>
-    <Compile Include="..\AFA.ServiceModel\User.cs">
-      <Link>ServiceModel\User.cs</Link>
     </Compile>
     <Compile Include="Helpers\GlobalHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

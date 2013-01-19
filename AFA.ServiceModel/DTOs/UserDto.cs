@@ -16,6 +16,43 @@ namespace AFA.ServiceModel.DTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public string City { get; set; }
+        public int StateProvinceId { get; set; }
+        public string StateProvinceName { get; set; }
+        public string StateProvinceAbbreviation { get; set; }
+
+        // ToDo: Add Photo
+
+        public string CityAndState
+        {
+            get
+            {
+                if (StateProvinceAbbreviation != null)
+                {
+                    // State specified
+                    if (string.IsNullOrWhiteSpace(City))
+                    {
+                        return StateProvinceAbbreviation;
+                    }
+                    else
+                    {
+                        // City and State specified
+                        return City + ", " + StateProvinceAbbreviation;
+                    }
+                }
+                else if (!string.IsNullOrWhiteSpace(City))
+                {
+                    // City specified
+                    return City;
+                }
+
+                return "";
+            }
+        }
+
+        public string DisplayName {
+            get { return FirstName + " " + LastName.Substring(0, 1).ToUpper() + "."; }
+        }
     }
 
     public class UserResponse : IHasResponseStatus
