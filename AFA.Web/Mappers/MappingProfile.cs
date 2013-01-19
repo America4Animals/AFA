@@ -23,6 +23,12 @@ namespace AFA.Web.Mappers
 
             Mapper.CreateMap<OrganizationDto, OrganizationDetailModel>();
             Mapper.CreateMap<OrganizationDetailModel, OrganizationDto>();
+
+            Mapper.CreateMap<UserDto, UserModel>();
+            Mapper.CreateMap<UserModel, UserDto>();
+
+            Mapper.CreateMap<UserDto, UserDetailModel>();
+            Mapper.CreateMap<UserDetailModel, UserDto>();
         }
     }
 }

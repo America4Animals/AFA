@@ -354,6 +354,10 @@
     <Content Include="Views\OrganizationCategories\Edit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CheckboxItem.cshtml" />
     <Content Include="Views\Organizations\AddOrEdit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Add.cshtml" />
+    <Content Include="Views\Users\AddOrEdit.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,7 +17,7 @@ namespace AFA.ServiceInterface
         /// </summary>
         public object Get(UserDto request)
         {
-            var query = string.Format("select * from Users where Id = {0}", request.Id);
+            var query = string.Format("select * from User where Id = {0}", request.Id);
             var user = Db.Select<UserDto>(query).FirstOrDefault();
 
             return new UserResponse
@@ -82,12 +82,21 @@ namespace AFA.ServiceInterface
     {
         public object Get(UsersDto request)
         {
+            List<UserDto> users;
+
             if (request.OrganizationId.HasValue)
             {
-                throw new NotImplementedException();
-            }
+                var query = String.Format("select u.* " +
+                                          "from User u " +
+                                          "inner join OrganizationAlly oa " +
+                                          "where oa.OrganizationId = {0}", request.OrganizationId);
 
-            var users = Db.Select<UserDto>("select * from User");
+                users = Db.Select<UserDto>(query);
+            }
+            else
+            {
+                users = Db.Select<UserDto>("select * from User");    
+            }
 
             return new UsersResponse
             {

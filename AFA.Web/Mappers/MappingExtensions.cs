@@ -34,5 +34,29 @@ namespace AFA.Web.Mappers
         }
 
         #endregion
+
+        #region Users
+
+        public static UserModel ToModel(this UserDto entity)
+        {
+            return Mapper.Map<UserDto, UserModel>(entity);
+        }
+
+        public static UserDto ToEntity(this UserModel model)
+        {
+            return Mapper.Map<UserModel, UserDto>(model);
+        }
+
+        public static UserDetailModel ToDetailModel(this UserDto entity)
+        {
+            return Mapper.Map<UserDto, UserDetailModel>(entity);
+        }
+
+        public static UserDto ToEntity(this UserDetailModel model)
+        {
+            return Mapper.Map<UserDetailModel, UserDto>(model);
+        }
+
+        #endregion
     }
 }

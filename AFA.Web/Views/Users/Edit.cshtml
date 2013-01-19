@@ -1,0 +1,14 @@
+﻿@model AFA.Web.Models.UserDetailModel
+
+@{
+    ViewBag.Title = "Edit User";
+}
+
+<h2 class="page-header">@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("AddOrEdit", Model)
+
+    @Html.HiddenFor(m => m.Id)
+}

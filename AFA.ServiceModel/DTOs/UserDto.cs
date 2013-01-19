@@ -50,8 +50,39 @@ namespace AFA.ServiceModel.DTOs
             }
         }
 
+        public string FullName
+        {
+            get
+            {
+                if (! string.IsNullOrWhiteSpace(FirstName))
+                {
+                    if (!string.IsNullOrWhiteSpace(LastName))
+                    {
+                        return FirstName + " " + LastName;
+                    }
+
+                    return FirstName;
+                }
+
+                return "";
+            }
+        }
+
         public string DisplayName {
-            get { return FirstName + " " + LastName.Substring(0, 1).ToUpper() + "."; }
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(FirstName))
+                {
+                    if (!string.IsNullOrWhiteSpace(LastName))
+                    {
+                        return FirstName + " " + LastName.Substring(0, 1).ToUpper() + ".";
+                    }
+
+                    return FirstName;
+                }
+
+                return "";
+            }
         }
     }
 
@@ -63,7 +94,7 @@ namespace AFA.ServiceModel.DTOs
 
     [Route("/users", "GET")]
     [Route("/users/organization/{OrganizationId}", "GET")]
-    public class UsersDto : IReturn<OrganizationsResponse>
+    public class UsersDto : IReturn<UsersResponse>
     {
         public int? OrganizationId { get; set; }
     }
