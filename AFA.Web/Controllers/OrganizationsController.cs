@@ -11,12 +11,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AFA.Web.Helpers;
+using ServiceStack.Service;
 
 namespace AFA.Web.Controllers
 {
-    public class OrganizationsController : Controller
+    public class OrganizationsController : RestController
     {
-        private readonly JsonServiceClient _client = new JsonServiceClient(GlobalHelper.GetServiceUrl());
+        public OrganizationsController(IRestClient client) : base(client) {}
 
         public ActionResult Index()
         {

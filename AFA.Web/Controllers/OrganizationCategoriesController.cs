@@ -5,13 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using AFA.ServiceModel;
 using AFA.Web.Helpers;
+using ServiceStack.Service;
 using ServiceStack.ServiceClient.Web;
 
 namespace AFA.Web.Controllers
 {
-    public class OrganizationCategoriesController : Controller
+    public class OrganizationCategoriesController : RestController
     {
-        private readonly JsonServiceClient _client = new JsonServiceClient(GlobalHelper.GetServiceUrl());
+        public OrganizationCategoriesController(IRestClient client) : base(client) { }
 
         public ActionResult Index()
         {

@@ -24,7 +24,7 @@ namespace AFA.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-
+            AutofacConfig.RegisterAutofac();
             AutoMapperConfig.Configure();
         }
     }
