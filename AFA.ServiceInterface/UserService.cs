@@ -30,6 +30,22 @@ namespace AFA.ServiceInterface
             };
         }
 
+        public object Get(UserOrganizations request)
+        {
+            var query = string.Format("select o.* " +
+                                      "from Organization o " +
+                                      "inner join OrganizationAlly oa " +
+                                      "on o.Id = oa.OrganizationId " +
+                                      "where oa.UserId = {0}", request.UserId);
+
+            var organizations = Db.Select<OrganizationDto>(query);
+
+            return new UserOrganizationsResponse
+                       {
+                           Organizations = organizations
+                       };
+        }
+
         public object Post(UserDto request)
         {
             var user = request.ToEntity();

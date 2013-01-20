@@ -27,6 +27,23 @@ namespace AFA.Web.Controllers
         {
             var user = _client.Get(new UserDto { Id = id }).User;
             var model = user.ToDetailModel();
+
+            // have this here for testing
+            var allOrgs = _client.Get(new OrganizationsDto()).Organizations;
+            var myOrgs = _client.Get(new UserOrganizations {UserId = id}).Organizations;
+            var myOrgIds = myOrgs.Select(mo => mo.Id).ToList();
+
+            var organizations = new List<Tuple<int, string, bool, string>>();
+
+            foreach (var org in allOrgs)
+            {
+                bool following = myOrgIds.Contains(org.Id);
+                string actionText = following ? "unfollow" : "follow";
+                organizations.Add(Tuple.Create(org.Id, org.Name, following, actionText));
+            }
+
+            model.Organizations = organizations;
+
             return View("Details", model);
         }
 
@@ -102,6 +119,21 @@ namespace AFA.Web.Controllers
             model.Users = users.Select(o => o.ToDetailModel()).ToList();
             
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult OrganizationAction(int userId, int organizationId, string actionText)
+        {
+            var userOrganizationAction = new UserOrganizationAction
+                                             {
+                                                 UserId = userId,
+                                                 OrganizationId = organizationId,
+                                                 Action = actionText
+                                             };
+
+            _client.Post(userOrganizationAction);
+
+            return RedirectToAction("Details", "Users", new {id = userId});
         }
 
     }

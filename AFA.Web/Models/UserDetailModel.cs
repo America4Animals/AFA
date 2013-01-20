@@ -29,5 +29,8 @@ namespace AFA.Web.Models
 
         public SelectList AllStateProvinces { get; set; }
 
+        // orgId, orgName, following, actionText
+        public List<Tuple<int, string, bool, string>> Organizations { get; set; }
+
     }
 }

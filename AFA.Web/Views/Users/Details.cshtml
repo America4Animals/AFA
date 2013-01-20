@@ -7,3 +7,20 @@
 <h2 class="page-header">@Model.FullName</h2>
 
 @Html.DisplayForModel()
+
+<section>
+    <h3>Organizations</h3>
+    
+    <ul>
+    @foreach (var org in Model.Organizations)
+    {
+        <li>
+            <span>@org.Item2</span>
+            @using (Html.BeginForm("OrganizationAction", "Users", new { userId = Model.Id, organizationId = org.Item1, actionText = org.Item4 }, FormMethod.Post, new { @class = "inline" }))
+            {
+                <input type="submit" value="@org.Item4" class="margin-left btn btn-info" />
+            }
+        </li>
+    }
+    </ul>
+</section>

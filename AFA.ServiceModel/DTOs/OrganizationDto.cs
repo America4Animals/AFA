@@ -90,4 +90,5 @@ namespace AFA.ServiceModel.DTOs
     {
         public List<OrganizationDto> Organizations { get; set; }
     }
+
 }
