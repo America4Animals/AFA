@@ -69,6 +69,27 @@ namespace AFA.ServiceInterface
             return new OrganizationResponse {Organization = orgDto};
         }
 
+        /// <summary>
+        /// GET /organizations/{OrganizationId}/users
+        /// </summary>
+        public object Get(OrganizationUsers request)
+        {
+            var query = string.Format("select u.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation " +
+               "from User u " +
+               "inner join OrganizationAlly oa " +
+               "on u.Id = oa.UserId " +
+               "left join StateProvince sp " +
+               "on u.StateProvinceId = sp.Id " +
+               "where oa.OrganizationId = {0}", request.OrganizationId);
+
+            var users = Db.Select<UserDto>(query);
+
+            return new OrganizationUsersResponse
+            {
+                Users = users
+            };
+        }
+
         public object Post(OrganizationDto organizationDto)
         {
             var organization = organizationDto.ToEntity();

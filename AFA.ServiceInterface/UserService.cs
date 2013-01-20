@@ -30,6 +30,9 @@ namespace AFA.ServiceInterface
             };
         }
 
+        /// <summary>
+        /// GET "/users/{UserId}/organizations"
+        /// </summary>
         public object Get(UserOrganizations request)
         {
             var query = string.Format("select o.* " +
@@ -95,7 +98,6 @@ namespace AFA.ServiceInterface
 
     /// <summary>
     /// GET /users
-    /// GET /users/organization/{OrganizationId}
     /// Returns a list of organizations
     /// </summary>
     public class UsersService : ServiceStack.ServiceInterface.Service
@@ -105,24 +107,24 @@ namespace AFA.ServiceInterface
             List<UserDto> users;
             string query;
 
-            if (request.OrganizationId.HasValue)
-            {
-                query = String.Format("select u.* " +
-                                          "from User u " +
-                                          "inner join OrganizationAlly oa " +
-                                          "where oa.OrganizationId = {0}", request.OrganizationId);
+            //if (request.OrganizationId.HasValue)
+            //{
+            //    query = String.Format("select u.* " +
+            //                              "from User u " +
+            //                              "inner join OrganizationAlly oa " +
+            //                              "where oa.OrganizationId = {0}", request.OrganizationId);
 
-                users = Db.Select<UserDto>(query);
-            }
-            else
-            {
+            //    users = Db.Select<UserDto>(query);
+            //}
+            //else
+            //{
                 query = "select u.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation " +
                         "from User u " +
                         "left join StateProvince sp " +
                         "on u.StateProvinceId = sp.Id";
 
                 users = Db.Select<UserDto>(query);    
-            }
+            //}
 
             return new UsersResponse
             {

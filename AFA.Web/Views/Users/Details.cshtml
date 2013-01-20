@@ -14,8 +14,9 @@
     <ul>
     @foreach (var org in Model.Organizations)
     {
-        <li>
-            <span>@org.Item2</span>
+        <li class="margin-bottom">
+            @Html.ActionLink(org.Item2, "Details", "Organizations", new {id = org.Item1}, null)
+            
             @using (Html.BeginForm("OrganizationAction", "Users", new { userId = Model.Id, organizationId = org.Item1, actionText = org.Item4 }, FormMethod.Post, new { @class = "inline" }))
             {
                 <input type="submit" value="@org.Item4" class="margin-left btn btn-info" />

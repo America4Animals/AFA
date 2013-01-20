@@ -93,10 +93,10 @@ namespace AFA.ServiceModel.DTOs
     }
 
     [Route("/users", "GET")]
-    [Route("/users/organization/{OrganizationId}", "GET")]
+    //[Route("/users/organization/{OrganizationId}", "GET")]
     public class UsersDto : IReturn<UsersResponse>
     {
-        public int? OrganizationId { get; set; }
+        //public int? OrganizationId { get; set; }
     }
 
     public class UsersResponse
@@ -114,7 +114,7 @@ namespace AFA.ServiceModel.DTOs
 
     public class UserOrganizationActionResponse { }
 
-    [Route("/users/{userId}/organizations", "GET")]
+    [Route("/users/{UserId}/organizations", "GET")]
     public class UserOrganizations : IReturn<UserOrganizationsResponse>
     {
         public int UserId { get; set; }

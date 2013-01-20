@@ -12,7 +12,7 @@
         <li class="margin-bottom">
             @Html.ActionLink(org.Name, "Details", "Organizations", new {id = org.Id}, null)
             <span>
-                (@Html.ActionLink(org.OrganizationAlliesCount + " allies", "Organization", "Users", new {id = org.Id}, null))
+                (@Html.ActionLink(org.OrganizationAlliesCount + " allies", "Users", "Organizations", new {organizationId = org.Id}, null))
             </span>
 
             @Html.ActionLink("Edit", "Edit", "Organizations", new {id = org.Id}, new {@class = "margin-left btn btn-info"})

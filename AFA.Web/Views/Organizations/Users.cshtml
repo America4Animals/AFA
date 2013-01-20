@@ -15,9 +15,10 @@
     {
         <li>
             <div>
-                <strong>@user.DisplayName</strong>
+                @Html.ActionLink(user.DisplayName, "Details", "Users", new {id = user.Id}, null)
             </div>
             <div>@user.CityAndState</div>
         </li>
     }
 </ul>
+

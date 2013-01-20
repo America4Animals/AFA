@@ -114,10 +114,18 @@ namespace AFA.Web.Controllers
             }
         }
 
-        //public ActionResult Allies(int id)
-        //{
+        public ActionResult Users(int organizationId)
+        {
+            var organizationUsers = _client.Get(new OrganizationUsers {OrganizationId = organizationId}).Users;
+            var organization = _client.Get(new OrganizationDto { Id = organizationId }).Organization;
 
-        //}
+            var model = new OrganizationAlliesModel();
+            model.OrganizationId = organizationId;
+            model.OrganizationName = organization.Name;
+            model.Users = organizationUsers.Select(o => o.ToDetailModel()).ToList();
+
+            return View(model);
+        }
 
         //private List<OrganizationCategory> ExtractSelectedOrgCategories(OrganizationDetailModel model)
         //{

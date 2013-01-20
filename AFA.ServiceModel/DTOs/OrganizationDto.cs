@@ -91,4 +91,15 @@ namespace AFA.ServiceModel.DTOs
         public List<OrganizationDto> Organizations { get; set; }
     }
 
+    [Route("/organizations/{OrganizationId}/users", "GET")]
+    public class OrganizationUsers : IReturn<OrganizationUsersResponse>
+    {
+        public int OrganizationId { get; set; }
+    }
+
+    public class OrganizationUsersResponse
+    {
+        public List<UserDto> Users { get; set; }
+    }
+
 }
