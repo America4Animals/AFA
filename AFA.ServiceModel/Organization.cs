@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using ServiceStack.DataAnnotations;
 using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface.ServiceModel;
@@ -9,6 +10,7 @@ namespace AFA.ServiceModel
     {
         [AutoIncrement]
         public int Id { get; set; }
+        [Required]
         [Index(Unique = true)]
         public string Name { get; set; }
         public string Description { get; set; }
@@ -19,6 +21,8 @@ namespace AFA.ServiceModel
         public int StateProvinceId { get; set; }
         public string Zipcode { get; set; }
         public string PhoneNumber { get; set; }
+        [Required]
+        [Index(Unique = true)]
         public string Email { get; set; }
         public string WebpageUrl { get; set; }
         [References(typeof(OrganizationCategory))]

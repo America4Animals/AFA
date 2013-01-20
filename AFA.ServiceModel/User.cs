@@ -22,7 +22,7 @@ namespace AFA.ServiceModel
         public string City { get; set; }
         [References(typeof(StateProvince))]
         public int StateProvinceId { get; set; }
-
+        [Required]
         [Index(Unique = true)]
         public string Email { get; set; }
 

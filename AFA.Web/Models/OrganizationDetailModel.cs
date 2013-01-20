@@ -26,6 +26,7 @@ namespace AFA.Web.Models
         public string StateProvinceAbbreviation { get; set; }
         public string Zipcode { get; set; }
         public string PhoneNumber { get; set; }
+        [Required]
         public string Email { get; set; }
         public string WebpageUrl { get; set; }
         public bool NeedsVolunteers { get; set; }
