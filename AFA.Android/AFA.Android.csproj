@@ -56,11 +56,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activity1.cs" />
     <Compile Include="AfaApplication.cs" />
+    <Compile Include="EventsActivity.cs" />
+    <Compile Include="Helpers\CompassionHelper.cs" />
     <Compile Include="OrganizationActivity.cs" />
     <Compile Include="OrganizationListAdapter.cs" />
     <Compile Include="OrganizationsActivity.cs" />
+    <Compile Include="OrganizationUsersActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -76,9 +78,15 @@
     <AndroidResource Include="Resources\Layout\Organization.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\Layout\Main.axml" />
+    <AndroidResource Include="Resources\Layout\OrganizationUsers.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\OrganizationUserListItem.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\Events.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml" />
@@ -107,6 +115,7 @@
     <AndroidResource Include="Resources\Drawable\peopleIcon.png" />
     <AndroidResource Include="Resources\Drawable\phoneIcon.png" />
     <AndroidResource Include="Resources\Drawable\rightArrow.png" />
+    <AndroidResource Include="Resources\Layout\compassionMenu.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

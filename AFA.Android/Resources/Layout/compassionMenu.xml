@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/compassionLayout" 
+          android:orientation="horizontal"
+          android:layout_width="fill_parent" 
+          android:layout_height="wrap_content">
+  
+      <Button
+          android:text="Calendar"
+          android:layout_height="fill_parent"
+          android:layout_width="0px"
+          android:id="@+id/CalendarMenuButton"
+          android:drawableLeft="@drawable/calendarIcon"
+          android:gravity="left|center_vertical"
+          android:drawablePadding="10dip"
+          android:layout_weight="1" />
+      <Button
+          android:text="Local Orgs"
+          android:layout_height="fill_parent"
+          android:layout_width="0px"
+          android:id="@+id/OrgsMenuButton"
+          android:drawableLeft="@drawable/peopleIcon"
+          android:gravity="left|center_vertical"
+          android:drawablePadding="10dip"
+          android:layout_weight="1" />
+
+</LinearLayout>

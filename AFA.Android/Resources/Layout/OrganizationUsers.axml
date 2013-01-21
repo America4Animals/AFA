@@ -3,16 +3,24 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
     android:background="@color/white">
-    <include
-        android:id="@+id/compassionMenu"
-        layout="@layout/compassionMenu" />
+    <TextView
+        android:text="n people are following them"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/followingLabel"
+        android:gravity="center"
+        android:background="@color/gray"
+        android:textColor="@color/pink" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Organizations"
+        android:id="@+id/OrganizationUsers"
         android:divider="@color/gray"
         android:dividerHeight="1dp"
         android:listSelector="@drawable/list_selector" />

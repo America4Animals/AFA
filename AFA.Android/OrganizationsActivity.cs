@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AFA.Android.Helpers;
 using AFA.ServiceModel;
 using AFA.ServiceModel.DTOs;
 using Android.App;
@@ -14,7 +15,7 @@ using ServiceStack.ServiceClient.Web;
 
 namespace AFA.Android
 {
-    [Activity(Label = "Organizations", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Organizations")]
     public class OrganizationsActivity : Activity
     {
         private ListView _organizationsList;
@@ -26,6 +27,8 @@ namespace AFA.Android
 
             // Create your application here
             SetContentView(Resource.Layout.Organizations);
+
+            CompassionHelper.InitCompassionMenu(this, false);
 
             var loadingDialog = new ProgressDialog(this);
             loadingDialog.SetProgressStyle(ProgressDialogStyle.Spinner);

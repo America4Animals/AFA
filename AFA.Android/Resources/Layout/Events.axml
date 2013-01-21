@@ -3,17 +3,15 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/white">
+    android:minWidth="25px"
+    android:minHeight="25px">
     <include
         android:id="@+id/compassionMenu"
         layout="@layout/compassionMenu" />
-    <ListView
-        android:minWidth="25px"
-        android:minHeight="25px"
+    <TextView
+        android:text="Events list"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Organizations"
-        android:divider="@color/gray"
-        android:dividerHeight="1dp"
-        android:listSelector="@drawable/list_selector" />
+        android:id="@+id/textView1" />
 </LinearLayout>
