@@ -56,6 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AFA.ServiceModel\DTOs\EventDto.cs">
+      <Link>ServiceModel\DTOs\EventDto.cs</Link>
+    </Compile>
     <Compile Include="..\AFA.ServiceModel\DTOs\OrganizationDto.cs">
       <Link>ServiceModel\DTOs\OrganizationDto.cs</Link>
     </Compile>

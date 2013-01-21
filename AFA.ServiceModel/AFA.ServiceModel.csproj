@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\EventDto.cs" />
     <Compile Include="DTOs\OrganizationDto.cs" />
     <Compile Include="DTOs\UserDto.cs" />
     <Compile Include="Enums\OrganizerType.cs" />

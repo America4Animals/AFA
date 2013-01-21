@@ -38,5 +38,19 @@ namespace AFA.ServiceInterface.Mappers
         }
 
         #endregion
+
+        #region Events
+
+        public static Event ToEntity(this EventDto dto)
+        {
+            return Mapper.Map<EventDto, Event>(dto);
+        }
+
+        public static EventDto ToDto(this Event entity)
+        {
+            return Mapper.Map<Event, EventDto>(entity);
+        }
+
+        #endregion
     }
 }

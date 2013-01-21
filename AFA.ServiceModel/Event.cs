@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace AFA.ServiceModel
     {
         [AutoIncrement]
         public int Id { get; set; }
+        [Required]
         [Index(Unique = true)]
         public string Name { get; set; }
         public DateTime StartTime { get; set; }
@@ -20,5 +22,8 @@ namespace AFA.ServiceModel
         public int UserId { get; set; }
         [References(typeof(Organization))]
         public int OrganizationId { get; set; }
+
+        [Required]
+        public DateTime CreatedAt { get; set; }
     }
 }

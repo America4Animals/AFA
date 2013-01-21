@@ -23,6 +23,9 @@ namespace AFA.ServiceInterface.Mappers
 
             Mapper.CreateMap<UserDto, User>();
             Mapper.CreateMap<User, UserDto>();
+
+            Mapper.CreateMap<EventDto, Event>();
+            Mapper.CreateMap<Event, EventDto>();
         }
     }
 }
