@@ -58,5 +58,32 @@ namespace AFA.Web.Mappers
         }
 
         #endregion
+
+        #region Events
+
+        public static EventModel ToModel(this EventDto entity)
+        {
+            return Mapper.Map<EventDto, EventModel>(entity);
+        }
+
+        public static EventDto ToEntity(this EventModel model)
+        {
+            return Mapper.Map<EventModel, EventDto>(model);
+        }
+
+        public static EventDetailModel ToDetailModel(this EventDto entity)
+        {
+            var model = Mapper.Map<EventDto, EventDetailModel>(entity);
+            model.StartHour = model.StartDateTime.Hour;
+            model.StartMinute = model.StartDateTime.Minute;
+            return model;
+        }
+
+        public static EventDto ToEntity(this EventDetailModel model)
+        {
+            return Mapper.Map<EventDetailModel, EventDto>(model);
+        }
+
+        #endregion
     }
 }

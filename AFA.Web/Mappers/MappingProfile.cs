@@ -29,6 +29,12 @@ namespace AFA.Web.Mappers
 
             Mapper.CreateMap<UserDto, UserDetailModel>();
             Mapper.CreateMap<UserDetailModel, UserDto>();
+
+            Mapper.CreateMap<EventDto, EventModel>();
+            Mapper.CreateMap<EventModel, EventDto>();
+
+            Mapper.CreateMap<EventDto, EventDetailModel>();
+            Mapper.CreateMap<EventDetailModel, EventDto>();
         }
     }
 }

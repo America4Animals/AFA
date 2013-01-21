@@ -5,8 +5,9 @@
     <title>@ViewBag.Title - America For Animals</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
-    @Styles.Render("~/bundles/bootstrap", "~/bundles/css")
+    @Styles.Render("~/bundles/bootstrap", "~/bundles/css", "~/Content/themes/base/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
     <div id="wrap">
@@ -30,6 +31,6 @@
     </footer>
         
     
-    @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval", "~/bundles/jqueryui")
 </body>
 </html>

@@ -193,6 +193,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrganizationCategoriesController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
@@ -208,6 +209,8 @@
     <Compile Include="Helpers\LessMinify.cs" />
     <Compile Include="Mappers\MappingExtensions.cs" />
     <Compile Include="Mappers\MappingProfile.cs" />
+    <Compile Include="Models\EventDetailModel.cs" />
+    <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\OrganizationAlliesModel.cs" />
     <Compile Include="Models\OrganizationDetailModel.cs" />
     <Compile Include="Models\OrganizationModel.cs" />
@@ -364,6 +367,13 @@
     <Content Include="Views\Users\DisplayTemplates\UserDetailModel.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Organizations\Users.cshtml" />
+    <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\Events\Details.cshtml" />
+    <Content Include="Views\Events\Add.cshtml" />
+    <Content Include="Views\Events\AddOrEdit.cshtml" />
+    <Content Include="Views\Events\Edit.cshtml" />
+    <Content Include="Views\Events\DisplayTemplates\EventDetailModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

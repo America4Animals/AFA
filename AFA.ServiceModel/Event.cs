@@ -15,7 +15,7 @@ namespace AFA.ServiceModel
         [Required]
         [Index(Unique = true)]
         public string Name { get; set; }
-        public DateTime StartTime { get; set; }
+        public DateTime StartDateTime { get; set; }
 
         public string OrganizerType { get; set; }
         [References(typeof(User))]

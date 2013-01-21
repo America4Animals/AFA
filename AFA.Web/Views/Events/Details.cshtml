@@ -1,0 +1,13 @@
+﻿@model AFA.Web.Models.EventDetailModel
+
+@{
+    ViewBag.Title = "Event Details";
+}
+
+<h2 class="page-header">@Model.Name</h2>
+
+@Html.DisplayForModel()
+
+<div class="margin-bottom">
+    @Html.ActionLink("All Events", "Index", "Events", null, new { @class = "btn btn-info"})
+</div>

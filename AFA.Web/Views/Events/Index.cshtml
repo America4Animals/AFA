@@ -1,0 +1,26 @@
+﻿@model IEnumerable<AFA.Web.Models.EventModel>
+
+@{
+    ViewBag.Title = "Events";
+}
+
+<h2 class="page-header">@ViewBag.Title</h2>
+
+<ul>
+    @foreach (var eventModel in Model)
+    {
+        <li class="margin-bottom">
+            @Html.ActionLink(eventModel.Name, "Details", "Events", new {id = eventModel.Id}, null)
+            
+            @Html.ActionLink("Edit", "Edit", "Events", new {id = eventModel.Id}, new {@class = "margin-left btn btn-info"})
+
+            @using (Html.BeginForm("Delete", "Events", new { id = eventModel.Id }, FormMethod.Post, new { @class = "inline" }))
+            {
+                <input type="submit" value="Delete" class="margin-left btn btn-danger" />
+            }
+            
+        </li>
+    }
+</ul>
+
+<div>@Html.ActionLink("Add New", "Add", "Events", null, new {@class="btn btn-primary"})</div>
