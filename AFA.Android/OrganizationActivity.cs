@@ -47,20 +47,23 @@ namespace AFA.Android
                 FindViewById<TextView>(Resource.Id.NeedVolunteersLabel).Visibility = ViewStates.Visible;
             }
 
-            FindViewById<TextView>(Resource.Id.DescriptionText).Text = _organization.Description;
-
+            FindViewById<TextView>(Resource.Id.DescriptionText).Text = GlobalHelper.GetFieldText(_organization.Description);
+            
             FindViewById<Button>(Resource.Id.FollowingButton).Text = string.Format(FollowingButtonLabelText, _organization.OrganizationAlliesCount);
+
+
+            
             FindViewById<Button>(Resource.Id.NewsButton).Text = string.Format(NewsButtonLabelText, _organization.OrganizationNewsCount);
             FindViewById<Button>(Resource.Id.EventsButton).Text = string.Format(EventsButtonLabelText, _organization.OrganizationEventsCount);
             FindViewById<Button>(Resource.Id.CommentsButton).Text = string.Format(CommentsButtonLabelText, _organization.OrganizationCommentsCount);
 
-            FindViewById<Button>(Resource.Id.EmailButton).Text = _organization.Email;
-            FindViewById<Button>(Resource.Id.PhoneButton).Text = _organization.PhoneNumber;
+            FindViewById<Button>(Resource.Id.EmailButton).Text = GlobalHelper.GetFieldText(_organization.Email);
+            FindViewById<Button>(Resource.Id.PhoneButton).Text = GlobalHelper.GetFieldText(_organization.PhoneNumber);
             FindViewById<Button>(Resource.Id.AddressButton).Text =
                 GlobalHelper.GetFormattedAddress(_organization.AddressLine1, _organization.AddressLine2,
                                                  _organization.CityAndState, _organization.Zipcode);
 
-            FindViewById<Button>(Resource.Id.WebsiteButton).Text = _organization.WebpageUrl;
+            FindViewById<Button>(Resource.Id.WebsiteButton).Text = GlobalHelper.GetFieldText(_organization.WebpageUrl);
 
             _uniteButton = FindViewById<Button>(Resource.Id.UniteButton);
             _uniteButton.Text = _organization.CallerIsFollowingOrg

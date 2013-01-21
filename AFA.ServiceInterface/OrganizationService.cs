@@ -55,7 +55,7 @@ namespace AFA.ServiceInterface
                 orgDto.OrganizationNewsCount = Db.Scalar<int>(commentsCountQuery);
 
                 // Events
-                var eventsCountQuery = string.Format("select count(*) from Event where OrganizationId = {0} and StartTime >= '{1}'", orgDto.Id, DateTime.Now.ToString());
+                var eventsCountQuery = string.Format("select count(*) from Event where OrganizationId = {0} and StartDateTime >= '{1}'", orgDto.Id, DateTime.Now.ToString());
                 orgDto.OrganizationEventsCount = Db.Scalar<int>(eventsCountQuery);
 
                 if (request.CallerUserId.HasValue)

@@ -14,6 +14,8 @@ namespace AFA.Android.Library.Helpers
 {
     public static class GlobalHelper
     {
+        public static string DefaultTextForMissingFields = "not provided";
+
         public static string GetFormattedAddress(string addressLine1, string addressLine2, string cityAndState,
                                                  string zipcode)
         {
@@ -49,7 +51,17 @@ namespace AFA.Android.Library.Helpers
                 }
             }
 
+            if (ret.Length == 0)
+            {
+                ret.Append(DefaultTextForMissingFields);
+            }
+
             return ret.ToString();
+        }
+
+        public static string GetFieldText(string fieldVal)
+        {
+            return String.IsNullOrWhiteSpace(fieldVal) ? DefaultTextForMissingFields : fieldVal;
         }
     }
 }

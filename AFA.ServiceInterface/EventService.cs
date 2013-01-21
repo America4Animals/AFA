@@ -77,7 +77,7 @@ namespace AFA.ServiceInterface
         {
             var query = String.Format("select e.* " +
                         "from Event e " +
-                        "where StartTime >= '{0}'", DateTime.Now);
+                        "where StartDateTime >= '{0}'", DateTime.Now);
 
             List<EventDto> events = Db.Select<EventDto>(query);
 
