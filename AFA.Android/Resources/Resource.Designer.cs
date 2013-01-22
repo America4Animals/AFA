@@ -140,6 +140,9 @@ namespace AFA.Android
 			// aapt resource value: 0x7f06000d
 			public const int FollowingButton = 2131099661;
 			
+			// aapt resource value: 0x7f06001f
+			public const int FollowingLabel = 2131099679;
+			
 			// aapt resource value: 0x7f06000a
 			public const int NeedVolunteersLabel = 2131099658;
 			
@@ -170,6 +173,12 @@ namespace AFA.Android
 			// aapt resource value: 0x7f06000b
 			public const int UniteButton = 2131099659;
 			
+			// aapt resource value: 0x7f060021
+			public const int UserImage = 2131099681;
+			
+			// aapt resource value: 0x7f060022
+			public const int UserName = 2131099682;
+			
 			// aapt resource value: 0x7f06001b
 			public const int WebsiteButton = 2131099675;
 			
@@ -178,9 +187,6 @@ namespace AFA.Android
 			
 			// aapt resource value: 0x7f060003
 			public const int compassionMenu = 2131099651;
-			
-			// aapt resource value: 0x7f06001f
-			public const int followingLabel = 2131099679;
 			
 			// aapt resource value: 0x7f060005
 			public const int linearLayout1 = 2131099653;
@@ -193,6 +199,9 @@ namespace AFA.Android
 			
 			// aapt resource value: 0x7f060014
 			public const int linearLayout4 = 2131099668;
+			
+			// aapt resource value: 0x7f060023
+			public const int navArrow = 2131099683;
 			
 			// aapt resource value: 0x7f060006
 			public const int relativeLayout1 = 2131099654;
@@ -230,10 +239,10 @@ namespace AFA.Android
 			public const int Organizations = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int OrganizationUserListItem = 2130903045;
+			public const int OrganizationUsers = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int OrganizationUsers = 2130903046;
+			public const int UserListItem = 2130903046;
 			
 			private Layout()
 			{

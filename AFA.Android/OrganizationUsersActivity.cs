@@ -18,36 +18,41 @@ namespace AFA.Android
         private ListView _usersList;
         private IList<UserDto> _users;
 
+        private const string FollowingLabelText = "{0} people are following them";
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.Organizations);
+            SetContentView(Resource.Layout.OrganizationUsers);
 
             var loadingDialog = new ProgressDialog(this);
             loadingDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
             loadingDialog.Show();
 
+            var numFollowers = Intent.GetIntExtra("numFollowers", 0);
+            FindViewById<TextView>(Resource.Id.FollowingLabel).Text = String.Format(FollowingLabelText, numFollowers);
+
             _usersList = FindViewById<ListView>(Resource.Id.OrganizationUsers);
             _usersList.ItemClick += (sender, e) =>
             {
-                //var organization = _users[e.Position];
-                //var intent = new Intent(this, typeof(OrganizationActivity));
-                //intent.PutExtra("organizationId", organization.Id);
-                //StartActivity(intent);
+                var user = _users[e.Position];
+                var intent = new Intent(this, typeof(UserActivity));
+                intent.PutExtra("userId", user.Id);
+                StartActivity(intent);
             };
 
-            //AfaApplication.ServiceClient.GetAsync(new OrganizationUsers {OrganizationId = Convert.ToInt32(Intent.GetStringExtra("organizationId"))},
-            //    r => RunOnUiThread(() =>
-            //    {
-            //        _users = r.Users.ToList();
-            //        _usersList.Adapter = new OrganizationListAdapter(this, _users);
-            //        loadingDialog.Hide();
-            //    }),
-            //    (r, ex) => RunOnUiThread(() =>
-            //    {
-            //        throw ex;
-            //    }));
+            AfaApplication.ServiceClient.GetAsync(new OrganizationUsers { OrganizationId = Intent.GetIntExtra("organizationId", 0) },
+                r => RunOnUiThread(() =>
+                {
+                    _users = r.Users.ToList();
+                    _usersList.Adapter = new UserListAdapter(this, _users);
+                    loadingDialog.Hide();
+                }),
+                (r, ex) => RunOnUiThread(() =>
+                {
+                    throw ex;
+                }));
         }
     }
 }

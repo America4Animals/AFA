@@ -48,11 +48,18 @@ namespace AFA.Android
             }
 
             FindViewById<TextView>(Resource.Id.DescriptionText).Text = GlobalHelper.GetFieldText(_organization.Description);
-            
-            FindViewById<Button>(Resource.Id.FollowingButton).Text = string.Format(FollowingButtonLabelText, _organization.OrganizationAlliesCount);
 
+            var followersButton = FindViewById<Button>(Resource.Id.FollowingButton);
+            followersButton.Text = string.Format(FollowingButtonLabelText, _organization.OrganizationAlliesCount);
+            followersButton.Enabled = _organization.OrganizationAlliesCount > 0;
+            followersButton.Click += (sender, args) =>
+                                         {
+                                             var intent = new Intent(this, typeof (OrganizationUsersActivity));
+                                             intent.PutExtra("organizationId", _organization.Id);
+                                             intent.PutExtra("numFollowers", _organization.OrganizationAlliesCount);
+                                             StartActivity(intent);
+                                         };
 
-            
             FindViewById<Button>(Resource.Id.NewsButton).Text = string.Format(NewsButtonLabelText, _organization.OrganizationNewsCount);
             FindViewById<Button>(Resource.Id.EventsButton).Text = string.Format(EventsButtonLabelText, _organization.OrganizationEventsCount);
             FindViewById<Button>(Resource.Id.CommentsButton).Text = string.Format(CommentsButtonLabelText, _organization.OrganizationCommentsCount);

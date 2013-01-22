@@ -62,9 +62,11 @@
     <Compile Include="OrganizationActivity.cs" />
     <Compile Include="OrganizationListAdapter.cs" />
     <Compile Include="OrganizationsActivity.cs" />
+    <Compile Include="UserListAdapter.cs" />
     <Compile Include="OrganizationUsersActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -81,7 +83,7 @@
     <AndroidResource Include="Resources\Layout\OrganizationUsers.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\OrganizationUserListItem.axml">
+    <AndroidResource Include="Resources\Layout\UserListItem.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\Events.axml">

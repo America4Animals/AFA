@@ -34,7 +34,7 @@
         android:layout_below="@+id/UserName"
         android:layout_toRightOf="@id/UserImage" />
     <ImageView
-        android:id="@+id/ClickArrow"
+        android:id="@+id/navArrow"
         android:src="@drawable/rightArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
