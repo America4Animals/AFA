@@ -19,7 +19,7 @@ namespace AFA.Web.Controllers
     {
         public OrganizationsController(IRestClient client) : base(client) {}
 
-        public ActionResult Index(int? id)
+        public ActionResult Index()
         {
             var orgs = _client.Get(new OrganizationsDto()).Organizations;
             var model = orgs.Select(o => o.ToModel()).ToList();

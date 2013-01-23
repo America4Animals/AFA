@@ -3,6 +3,12 @@
 @Html.ValidationSummary()
 
 <fieldset>
+    <div class="control-group">
+        @Html.Label("Event Category", new { @class = "control-label" })
+        <div class="controls">
+            @Html.DropDownListFor(m => m.EventCategoryId, Model.AllEventCategories)
+        </div>
+    </div>
 
     <div class="control-group">
         @Html.LabelFor(m => m.Name, new { @class = "control-label" })

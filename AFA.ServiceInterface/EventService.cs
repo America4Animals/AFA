@@ -17,8 +17,10 @@ namespace AFA.ServiceInterface
         /// </summary>
         public object Get(EventDto request)
         {
-            var query = string.Format("select e.* " +
+            var query = string.Format("select e.*, ec.Id as EventCategoryId, ec.Name as EventCategoryName " +
                 "from Event e " +
+                "left join EventCategory ec " +
+                "on e.EventCategoryId = ec.Id " +
                 "where e.Id = {0}", request.Id);
 
             var eventDto = Db.Select<EventDto>(query).FirstOrDefault();
@@ -61,8 +63,10 @@ namespace AFA.ServiceInterface
         // GET /events
         public object Get(EventsDto request)
         {
-            var query = "select e.* " +
-                        "from Event e";
+            var query = "select e.*, ec.Id as EventCategoryId, ec.Name as EventCategoryName " +
+                        "from Event e " +
+                        "left join EventCategory ec " +
+                        "on e.EventCategoryId = ec.Id";
 
             List<EventDto> events = Db.Select<EventDto>(query);
 
@@ -75,8 +79,10 @@ namespace AFA.ServiceInterface
         // GET /events/upcoming
         public object Get(UpcomingEventsDto request)
         {
-            var query = String.Format("select e.* " +
+            var query = String.Format("select e.*, ec.Id as EventCategoryId, ec.Name as EventCategoryName " +
                         "from Event e " +
+                        "left join EventCategory ec " +
+                        "on e.EventCategoryId = ec.Id " +
                         "where StartDateTime >= '{0}'", DateTime.Now);
 
             List<EventDto> events = Db.Select<EventDto>(query);

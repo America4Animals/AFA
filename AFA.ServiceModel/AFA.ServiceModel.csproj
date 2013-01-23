@@ -57,6 +57,7 @@
     <Compile Include="DTOs\UserDto.cs" />
     <Compile Include="Enums\OrganizerType.cs" />
     <Compile Include="Event.cs" />
+    <Compile Include="EventCategory.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="OrganizationAlly.cs" />
     <Compile Include="OrganizationCategory.cs" />

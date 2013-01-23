@@ -16,6 +16,8 @@ namespace AFA.ServiceModel
         [Index(Unique = true)]
         public string Name { get; set; }
         public DateTime StartDateTime { get; set; }
+        [References(typeof(EventCategory))]
+        public int EventCategoryId { get; set; }
 
         public string OrganizerType { get; set; }
         [References(typeof(User))]

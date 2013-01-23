@@ -14,6 +14,8 @@ namespace AFA.ServiceModel.DTOs
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int EventCategoryId { get; set; }
+        public string EventCategoryName { get; set; }
         public DateTime StartDateTime { get; set; }
 
         public string TimeDescription {
@@ -52,7 +54,6 @@ namespace AFA.ServiceModel.DTOs
             }
 
         }
-
 
         public string OrganizerType { get; set; }
         public int UserId { get; set; }

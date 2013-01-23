@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AFA.ServiceModel;
 using AFA.ServiceModel.DTOs;
 using AFA.Web.Mappers;
 using AFA.Web.Models;
@@ -33,6 +34,8 @@ namespace AFA.Web.Controllers
         {
             var model = new EventDetailModel();
             model.StartDateTime = DateTime.Now;
+            var allCategories = _client.Get(new EventCategories()).EventCategories;
+            model.AllEventCategories = new SelectList(allCategories, "Id", "Name");
             return View(model);
         }
 
@@ -63,6 +66,8 @@ namespace AFA.Web.Controllers
         {
             var eventDto = _client.Get(new EventDto { Id = id }).Event;
             var model = eventDto.ToDetailModel();
+            var allCategories = _client.Get(new EventCategories()).EventCategories;
+            model.AllEventCategories = new SelectList(allCategories, "Id", "Name");
             return View(model);
         }
 

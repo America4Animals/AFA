@@ -27,6 +27,7 @@ namespace AFA.ServiceInterface
             Db.CreateTableIfNotExists<OrganizationAlly>();
             Db.CreateTableIfNotExists<OrganizationNews>();
             Db.CreateTableIfNotExists<OrganizationComment>();
+            Db.CreateTableIfNotExists<EventCategory>();
             Db.CreateTableIfNotExists<Event>();
 
             if (Db.Select<StateProvince>().Count == 0)
@@ -45,6 +46,26 @@ namespace AFA.ServiceInterface
 
                 Db.Insert(newYork);
                 Db.Insert(california);
+            }
+
+            if (Db.Select<EventCategory>().Count == 0)
+            {
+                var eventCategories = new List<EventCategory>
+                                          {
+                                              new EventCategory {Name = "Demo"},
+                                              new EventCategory {Name = "Dinner"},
+                                              new EventCategory {Name = "Film Screening"},
+                                              new EventCategory {Name = "Fundraiser"},
+                                              new EventCategory {Name = "Info Session"},
+                                              new EventCategory {Name = "Meeting"},
+                                              new EventCategory {Name = "Outreach"},
+                                              new EventCategory {Name = "Party"},
+                                              new EventCategory {Name = "Potluck"},
+                                              new EventCategory {Name = "Protest"},
+                                              new EventCategory {Name = "Social"}
+                                          };
+
+                Db.InsertAll(eventCategories);
             }
 
             return new ResetDbResponse();

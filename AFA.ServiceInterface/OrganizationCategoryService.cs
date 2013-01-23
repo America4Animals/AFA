@@ -12,7 +12,7 @@ namespace AFA.ServiceInterface
     public class OrganizationCategoryService : ServiceStack.ServiceInterface.Service
     {
         /// <summary>
-        /// GET /organization-categories/{Id} 
+        /// GET /organizationcategories/{Id} 
         /// </summary>
         public object Get(OrganizationCategory organizationCategory)
         {
@@ -45,7 +45,7 @@ namespace AFA.ServiceInterface
     }
 
     /// <summary>
-    /// GET /organization-categories
+    /// GET /organizationcategories
     /// Returns a list of organization categories
     /// </summary>
     public class OrganizationCategoriesService : ServiceStack.ServiceInterface.Service

@@ -10,6 +10,13 @@
     </div>
     
     <div class="control-group">
+        @Html.LabelFor(m => m.EventCategoryName, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.EventCategoryName)
+        </div>
+    </div>
+    
+    <div class="control-group">
         @Html.LabelFor(m => m.Name, new { @class = "control-label" })
         <div class="controls">
             @Html.DisplayFor(m => m.Name)
