@@ -16,7 +16,7 @@ namespace AFA.ServiceModel
         [References(typeof(User))]
         public int UserId { get; set; }
         public string CommentText { get; set; }
-        public string CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
     }
 }

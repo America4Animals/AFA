@@ -70,17 +70,18 @@ namespace AFA.ServiceInterface
         }
 
         /// <summary>
+        /// Get Organization Users/Followers
         /// GET /organizations/{OrganizationId}/users
         /// </summary>
         public object Get(OrganizationUsers request)
         {
             var query = string.Format("select u.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation " +
-               "from User u " +
-               "inner join OrganizationAlly oa " +
-               "on u.Id = oa.UserId " +
-               "left join StateProvince sp " +
-               "on u.StateProvinceId = sp.Id " +
-               "where oa.OrganizationId = {0}", request.OrganizationId);
+                "from User u " +
+                "inner join OrganizationAlly oa " +
+                "on u.Id = oa.UserId " +
+                "left join StateProvince sp " +
+                "on u.StateProvinceId = sp.Id " +
+                "where oa.OrganizationId = {0}", request.OrganizationId);
 
             var users = Db.Select<UserDto>(query);
 
@@ -90,9 +91,31 @@ namespace AFA.ServiceInterface
             };
         }
 
-        public object Post(OrganizationDto organizationDto)
+        /// <summary>
+        /// Get Organization Comments
+        /// GET /organizations/{OrganizationId}/comments
+        /// </summary>
+        public object Get(OrganizationCommentsDto request)
         {
-            var organization = organizationDto.ToEntity();
+            var query = string.Format("select u.Id, u.FirstName, u.LastName, oc.CommentText, oc.CreatedAt " +
+                                    "from OrganizationComment oc " +
+                                    "inner join Organization o " +
+                                    "on oc.OrganizationId = o.Id " +
+                                    "left join User u " +
+                                    "on o.UserID = u.Id " +
+                                    "where o.Id = {0}", request.OrganizationId);
+
+            var comments = Db.Select<OrganizationCommentDto>(query);
+
+            return new OrganizationCommentsResponse
+            {
+                OrganizationComments = comments
+            };
+        }
+
+        public object Post(OrganizationDto request)
+        {
+            var organization = request.ToEntity();
             Db.Insert(organization);
             var newOrgId = (int)Db.GetLastInsertId();
 
@@ -108,6 +131,37 @@ namespace AFA.ServiceInterface
             //}
 
             return new OrganizationResponse { Organization = new OrganizationDto() };
+        }
+
+        /// <summary>
+        /// Post Organization Comment
+        /// POST organizations/{OrganizationId}/comments
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public object Post(OrganizationCommentDto request)
+        {
+            if (request.User != null &&
+                request.User.Id > 0 && 
+                request.OrganizationId > 0 && 
+                !String.IsNullOrWhiteSpace(request.CommentText) && 
+                request.CommentText.Length > 1)
+            {
+                var comment = new OrganizationComment
+                                  {
+                                      UserId = request.User.Id,
+                                      OrganizationId = request.OrganizationId,
+                                      CommentText = request.CommentText,
+                                      CreatedAt = DateTime.Now
+                                  };
+
+                Db.Insert(comment);
+            }
+
+            return new OrganizationCommentResponse
+                       {
+                           OrganizationComment = new OrganizationCommentDto()
+                       };
         }
 
         public object Put(OrganizationDto organizationDto)

@@ -102,4 +102,29 @@ namespace AFA.ServiceModel.DTOs
         public List<UserDto> Users { get; set; }
     }
 
+    [Route("/organizations/{OrganizationId}/comments", "POST")]
+    public class OrganizationCommentDto : IReturn<OrganizationCommentResponse>
+    {
+        public int OrganizationId { get; set; }
+        public UserDto User { get; set; }
+        public string CommentText { get; set; }
+        public string CreatedAt { get; set; }
+    }
+
+    public class OrganizationCommentResponse
+    {
+        public OrganizationCommentDto OrganizationComment { get; set; }
+    }
+
+    [Route("/organizations/{OrganizationId}/comments", "GET")]
+    public class OrganizationCommentsDto : IReturn<OrganizationCommentsResponse>
+    {
+        public int OrganizationId { get; set; }
+    }
+
+    public class OrganizationCommentsResponse
+    {
+        public List<OrganizationCommentDto> OrganizationComments { get; set; }
+    }
+
 }
