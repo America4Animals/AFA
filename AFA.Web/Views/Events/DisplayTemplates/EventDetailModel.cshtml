@@ -31,9 +31,16 @@
     </div>
     
     <div class="control-group">
-        @Html.LabelFor(m => m.DayDescription, new { @class = "control-label" })
+        @Html.LabelFor(m => m.DateDescription, new { @class = "control-label" })
         <div class="controls">
-            @Html.DisplayFor(m => m.DayDescription)
+            @Html.DisplayFor(m => m.DateDescription)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.DateGroupDescription, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.DateGroupDescription)
         </div>
     </div>
     

@@ -18,11 +18,19 @@ namespace AFA.ServiceModel.DTOs
         public string EventCategoryName { get; set; }
         public DateTime StartDateTime { get; set; }
 
+        public string DateDescription
+        {
+            get
+            {
+                return StartDateTime.ToString("dddd, MMMM dd");
+            }
+        }
+
         public string TimeDescription {
             get { return StartDateTime.ToString("t"); }
         }
 
-        public string DayDescription {
+        public string DateGroupDescription {
             get
             {
 
@@ -50,7 +58,12 @@ namespace AFA.ServiceModel.DTOs
                     return StartDateTime.DayOfWeek.ToString();
                 }
 
-                return "Future";
+                if (numDaysDiffernce < 14)
+                {
+                    return "Next Week";
+                }
+
+                return "Down the Road";
             }
 
         }

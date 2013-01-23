@@ -17,7 +17,8 @@ namespace AFA.Web.Models
         [DataType(DataType.Date)]
         public DateTime StartDateTime { get; set; }
         public string TimeDescription { get; set; }
-        public string DayDescription { get; set; }
+        public string DateGroupDescription { get; set; }
+        public string DateDescription { get; set; }
         public int StartHour { get; set; }
         public int StartMinute { get; set; }
 
