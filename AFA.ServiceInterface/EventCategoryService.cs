@@ -12,9 +12,9 @@ namespace AFA.ServiceInterface
     /// GET /eventcategories
     /// Returns a list of event categories
     /// </summary>
-    public class EventCategoriesService : ServiceStack.ServiceInterface.Service
+    public class EventCategoriesService : ServiceStack.ServiceInterface.Service, IEventCategoriesService
     {
-        public object Get(EventCategories request)
+        public EventCategoriesResponse Get(EventCategories request)
         {
             return new EventCategoriesResponse
             {

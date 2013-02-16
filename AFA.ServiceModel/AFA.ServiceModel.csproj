@@ -39,6 +39,9 @@
     <Reference Include="ServiceStack.OrmLite">
       <HintPath>..\AFA.Service\bin\ServiceStack.OrmLite.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.ServiceInterface">
+      <HintPath>..\AFA.Web\bin\ServiceStack.ServiceInterface.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\packages\ServiceStack.Text.3.9.32\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
@@ -52,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomUserSession.cs" />
     <Compile Include="DTOs\EventDto.cs" />
     <Compile Include="DTOs\OrganizationDto.cs" />
     <Compile Include="DTOs\UserDto.cs" />

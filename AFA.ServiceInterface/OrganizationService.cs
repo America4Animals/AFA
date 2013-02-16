@@ -8,12 +8,12 @@ using ServiceStack.OrmLite;
 
 namespace AFA.ServiceInterface
 {
-    public class OrganizationService : ServiceStack.ServiceInterface.Service
+    public class OrganizationService : ServiceStack.ServiceInterface.Service, IOrganizationService
     {
         /// <summary>
         /// GET /organizations/{Id}
         /// </summary>
-        public object Get(OrganizationDto request)
+        public OrganizationResponse Get(OrganizationDto request)
         {
             var query = string.Format("select o.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation, oc.Id as OrganizationCategoryId, oc.Name as OrganizationCategoryName " +
                                      "from Organization o " +
@@ -73,7 +73,7 @@ namespace AFA.ServiceInterface
         /// Get Organization Users/Followers
         /// GET /organizations/{OrganizationId}/users
         /// </summary>
-        public object Get(OrganizationUsers request)
+        public OrganizationUsersResponse Get(OrganizationUsers request)
         {
             var query = string.Format("select u.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation " +
                 "from User u " +
@@ -95,7 +95,7 @@ namespace AFA.ServiceInterface
         /// Get Organization Comments
         /// GET /organizations/{OrganizationId}/comments
         /// </summary>
-        public object Get(OrganizationCommentsDto request)
+        public OrganizationCommentsResponse Get(OrganizationCommentsDto request)
         {
             var query = string.Format("select u.Id, u.FirstName, u.LastName, oc.CommentText, oc.CreatedAt " +
                                     "from OrganizationComment oc " +
@@ -197,9 +197,9 @@ namespace AFA.ServiceInterface
     /// GET /organizations/category/{CategoryId}
     /// Returns a list of organizations
     /// </summary>
-    public class OrganizationsService : ServiceStack.ServiceInterface.Service
+    public class OrganizationsService : ServiceStack.ServiceInterface.Service, IOrganizationsService
     {
-        public object Get(OrganizationsDto request)
+        public OrganizationsResponse Get(OrganizationsDto request)
         {
             var orgs = new List<OrganizationDto>();
             string query;

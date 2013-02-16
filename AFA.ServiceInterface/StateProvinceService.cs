@@ -12,9 +12,9 @@ namespace AFA.ServiceInterface
     /// GET /state-provinces
     /// Returns a list of state provinces
     /// </summary>
-    public class StateProvincesService : ServiceStack.ServiceInterface.Service
+    public class StateProvincesService : ServiceStack.ServiceInterface.Service, IStateProvincesService
     {
-        public object Get(StateProvinces request)
+        public StateProvincesResponse Get(StateProvinces request)
         {
             return new StateProvincesResponse
             {

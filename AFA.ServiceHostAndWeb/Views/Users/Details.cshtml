@@ -1,0 +1,27 @@
+﻿@model AFA.ServiceHostAndWeb.Models.UserDetailModel
+
+@{
+    ViewBag.Title = "User Details";
+}
+
+<h2 class="page-header">@Model.FullName</h2>
+
+@Html.DisplayForModel()
+
+<section>
+    <h3>Organizations</h3>
+    
+    <ul>
+    @foreach (var org in Model.Organizations)
+    {
+        <li class="margin-bottom">
+            @Html.ActionLink(org.Item2, "Details", "Organizations", new {id = org.Item1}, null)
+            
+            @using (Html.BeginForm("OrganizationAction", "Users", new { userId = Model.Id, organizationId = org.Item1, actionText = org.Item4 }, FormMethod.Post, new { @class = "inline" }))
+            {
+                <input type="submit" value="@org.Item4" class="margin-left btn btn-info" />
+            }
+        </li>
+    }
+    </ul>
+</section>

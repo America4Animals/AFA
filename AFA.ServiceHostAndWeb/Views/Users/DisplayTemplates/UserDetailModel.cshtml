@@ -1,0 +1,38 @@
+﻿@model AFA.ServiceHostAndWeb.Models.UserDetailModel
+
+<div class="form-horizontal">
+    <div class="control-group">
+        @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.FirstName)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.LastName)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.City, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.City)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.Label("State", new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.StateProvinceAbbreviation)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.Email)
+        </div>
+    </div>
+</div>

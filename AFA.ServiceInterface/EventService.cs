@@ -10,12 +10,12 @@ using ServiceStack.OrmLite;
 
 namespace AFA.ServiceInterface
 {
-    public class EventService : ServiceStack.ServiceInterface.Service
+    public class EventService : ServiceStack.ServiceInterface.Service, IEventService
     {
         /// <summary>
         /// GET /events/{Id}
         /// </summary>
-        public object Get(EventDto request)
+        public EventResponse Get(EventDto request)
         {
             var query = string.Format("select e.*, ec.Id as EventCategoryId, ec.Name as EventCategoryName " +
                 "from Event e " +
@@ -58,10 +58,10 @@ namespace AFA.ServiceInterface
     /// <summary>
     /// Returns a list of events
     /// </summary>
-    public class EventsService : ServiceStack.ServiceInterface.Service
+    public class EventsService : ServiceStack.ServiceInterface.Service, IEventsService
     {
         // GET /events
-        public object Get(EventsDto request)
+        public EventsResponse Get(EventsDto request)
         {
             var query = "select e.*, ec.Id as EventCategoryId, ec.Name as EventCategoryName " +
                         "from Event e " +

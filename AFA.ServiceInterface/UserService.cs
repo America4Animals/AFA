@@ -10,12 +10,12 @@ using ServiceStack.OrmLite;
 
 namespace AFA.ServiceInterface
 {
-    public class UserService : ServiceStack.ServiceInterface.Service
+    public class UserService : ServiceStack.ServiceInterface.Service, IUserService
     {
         /// <summary>
         /// GET /users/{Id}
         /// </summary>
-        public object Get(UserDto request)
+        public UserResponse Get(UserDto request)
         {
             var query = string.Format("select u.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation " +
                 "from User u " +
@@ -33,7 +33,7 @@ namespace AFA.ServiceInterface
         /// <summary>
         /// GET "/users/{UserId}/organizations"
         /// </summary>
-        public object Get(UserOrganizations request)
+        public UserOrganizationsResponse Get(UserOrganizations request)
         {
             var query = string.Format("select o.* " +
                                       "from Organization o " +
@@ -100,9 +100,9 @@ namespace AFA.ServiceInterface
     /// GET /users
     /// Returns a list of organizations
     /// </summary>
-    public class UsersService : ServiceStack.ServiceInterface.Service
+    public class UsersService : ServiceStack.ServiceInterface.Service, IUsersService
     {
-        public object Get(UsersDto request)
+        public UsersResponse Get(UsersDto request)
         {
             List<UserDto> users;
             string query;

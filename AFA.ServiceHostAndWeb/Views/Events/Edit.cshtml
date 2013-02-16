@@ -1,0 +1,14 @@
+﻿@model AFA.ServiceHostAndWeb.Models.EventDetailModel
+
+@{
+    ViewBag.Title = "Edit Event";
+}
+
+<h2 class="page-header">@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Edit", "Events", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("AddOrEdit", Model)
+
+    @Html.HiddenFor(m => m.Id)
+}

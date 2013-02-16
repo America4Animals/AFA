@@ -9,6 +9,7 @@ using AutoMapper;
 
 namespace AFA.ServiceInterface.Mappers
 {
+    [Obsolete("Refactored out to ServiceHostAndWeb assembly")]
     public static class MappingExtensions
     {
         #region Organizations

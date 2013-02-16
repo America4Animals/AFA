@@ -1,0 +1,13 @@
+﻿@model AFA.ServiceHostAndWeb.Models.OrganizationDetailModel
+
+@{
+    ViewBag.Title = "Organization Details";
+}
+
+<h2 class="page-header">@Model.Name</h2>
+
+@Html.DisplayForModel()
+
+<div class="margin-bottom">
+    @Html.ActionLink("All Organizations", "Index", "Organizations", null, new { @class = "btn btn-info"})
+</div>

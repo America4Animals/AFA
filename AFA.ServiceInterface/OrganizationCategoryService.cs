@@ -6,15 +6,16 @@ using System.Web;
 using AFA.ServiceModel;
 using ServiceStack.OrmLite;
 using ServiceStack.Common.Web;
+using ServiceStack.ServiceHost;
 
 namespace AFA.ServiceInterface
 {
-    public class OrganizationCategoryService : ServiceStack.ServiceInterface.Service
+    public class OrganizationCategoryService : ServiceStack.ServiceInterface.Service, IOrganizationCategoryService
     {
         /// <summary>
         /// GET /organizationcategories/{Id} 
         /// </summary>
-        public object Get(OrganizationCategory organizationCategory)
+        public OrganizationCategoryResponse Get(OrganizationCategory organizationCategory)
         {
             return new OrganizationCategoryResponse
                        {
@@ -48,9 +49,9 @@ namespace AFA.ServiceInterface
     /// GET /organizationcategories
     /// Returns a list of organization categories
     /// </summary>
-    public class OrganizationCategoriesService : ServiceStack.ServiceInterface.Service
+    public class OrganizationCategoriesService : ServiceStack.ServiceInterface.Service, IOrganizationCategoriesService
     {
-        public object Get(OrganizationCategories request)
+        public OrganizationCategoriesResponse Get(OrganizationCategories request)
         {
             return new OrganizationCategoriesResponse
                        {

@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AFA.ServiceHostAndWeb.App_Start.AppConfig" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIBAAAAAAAAAAAAAEAAACAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\AppHost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.App_Start.AppHost" Collapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAABAAAEAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\AppHost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.App_Start.AutoMapperConfig" Collapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\AutoMapperConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.BundleConfig" Collapsed="true">
+    <Position X="19" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\BundleConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.FilterConfig" Collapsed="true">
+    <Position X="13.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\FilterConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.RouteConfig" Collapsed="true">
+    <Position X="13.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\RouteConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.MvcApplication" Collapsed="true">
+    <Position X="15.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Controllers.ControllerBase" Collapsed="true">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\ControllerBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Controllers.EventsController" Collapsed="true">
+    <Position X="5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\EventsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Controllers.HomeController" Collapsed="true">
+    <Position X="7.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Controllers.OrganizationCategoriesController" Collapsed="true">
+    <Position X="9.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAEAAAACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\OrganizationCategoriesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Controllers.OrganizationsController" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\OrganizationsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Controllers.UsersController" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\UsersController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Helpers.AppExtensions" Collapsed="true">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Helpers\AppExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Helpers.CheckboxItem" Collapsed="true">
+    <Position X="13.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAACAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\CheckboxItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Helpers.CheckboxList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAIAAACBAAAAEAAQEAAAAAAAAEAAAABAAAIAA=</HashCode>
+      <FileName>Helpers\CheckboxList.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Helpers.CustomRegistrationValidator" Collapsed="true">
+    <Position X="17.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\CustomRegistrationValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Helpers.GlobalHelper" Collapsed="true">
+    <Position X="15.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Helpers\GlobalHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Helpers.ImportedFilePathResolver" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAgAAAAAAAAAAAIAABAAA=</HashCode>
+      <FileName>Helpers\ImportedFilePathResolver.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Helpers.LessMinify" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAQAAAAAgAAAAAAAAAAAAAAAgAAABAAAAA=</HashCode>
+      <FileName>Helpers\LessMinify.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Helpers.Bundler" Collapsed="true">
+    <Position X="12" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAACETAAAAAACIBQIAAAAAIAAOEgIAABAAQAAAAAA=</HashCode>
+      <FileName>Helpers\Mvc.Bundler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Mappers.MappingExtensions" Collapsed="true">
+    <Position X="12" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAEAAAAEAA=</HashCode>
+      <FileName>Mappers\MappingExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Mappers.MappingProfile" Collapsed="true">
+    <Position X="13.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mappers\MappingProfile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Models.EventDetailModel" Collapsed="true">
+    <Position X="19" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIACAAAAAAAAEIAgAAgAAAQAAABAAAAIAAAAAAAAAIA=</HashCode>
+      <FileName>Models\EventDetailModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Models.EventModel" Collapsed="true">
+    <Position X="12" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAABAAAAAAAgAAAQAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\EventModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Models.OrganizationAlliesModel" Collapsed="true">
+    <Position X="17.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAIAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\OrganizationAlliesModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Models.OrganizationDetailModel" Collapsed="true">
+    <Position X="19" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAgAAEIAAEAQAQAAEAAAAAAAAACBQARAwA=</HashCode>
+      <FileName>Models\OrganizationDetailModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Models.OrganizationModel" Collapsed="true">
+    <Position X="12" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\OrganizationModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Models.UserDetailModel" Collapsed="true">
+    <Position X="15.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABACEEAAACAAAIFIAAEAAAAAAAAAAAAAAAACAAAAAAg=</HashCode>
+      <FileName>Models\UserDetailModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AFA.ServiceHostAndWeb.Models.UserModel" Collapsed="true">
+    <Position X="17.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\UserModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="AFA.ServiceHostAndWeb.App_Start.Env" Collapsed="true">
+    <Position X="13.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAABAAAAAEAAACAAAAAA=</HashCode>
+      <FileName>App_Start\AppHost.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AFA.ServiceHostAndWeb.Helpers.BundleOptions" Collapsed="true">
+    <Position X="12" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAABAAAAAAAAAAAAAAIACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Mvc.Bundler.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

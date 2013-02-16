@@ -27,7 +27,19 @@ namespace AFA.ServiceModel
         public string Email { get; set; }
 
         [Required]
+        public string DisplayName { get; set; }
+
+        public string FacebookName { get; set; }
+        public string FacebookFirstName { get; set; }
+        public string FacebookLastName { get; set; }
+        public string FacebookUserId { get; set; }
+        public string FacebookUserName { get; set; }
+        public string FacebookEmail { get; set; }
+
+        [Required]
         public DateTime CreatedAt { get; set; }
+
+        public DateTime LastLoginDate { get; set; }
 
         // ToDo: Add Photo
     }

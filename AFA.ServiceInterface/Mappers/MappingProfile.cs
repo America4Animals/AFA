@@ -9,6 +9,7 @@ using AutoMapper;
 
 namespace AFA.ServiceInterface.Mappers
 {
+    [Obsolete("Refactored out to ServiceHostAndWeb assembly")]
     public class MappingProfile : Profile
     {
         public override string ProfileName

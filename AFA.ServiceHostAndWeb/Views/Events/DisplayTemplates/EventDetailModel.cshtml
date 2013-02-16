@@ -1,0 +1,53 @@
+﻿@model AFA.ServiceHostAndWeb.Models.EventDetailModel
+
+<div class="form-horizontal">
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.Id, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.Id)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.EventCategoryName, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.EventCategoryName)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.Name)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.StartDateTime, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.StartDateTime)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.DateDescription, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.DateDescription)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.DateGroupDescription, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.DateGroupDescription)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.TimeDescription, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.TimeDescription)
+        </div>
+    </div>
+</div>
