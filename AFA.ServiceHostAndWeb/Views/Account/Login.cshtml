@@ -1,0 +1,19 @@
+﻿@model AFA.ServiceHostAndWeb.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2 class="page-header">@ViewBag.Title</h2>
+
+<div class="margin-bottom">Don't have an account? @Html.ActionLink("Register here", "Register", "Account")</div>
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.EditorForModel()
+
+    <input type="submit" value="submit" class="margin-top" />
+}

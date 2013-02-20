@@ -1,0 +1,18 @@
+﻿@model AFA.ServiceHostAndWeb.Models.HeaderModel
+
+<h1>@Html.ActionLink("America 4 Animals", "Index", "Home")</h1>
+
+<section class="login">
+    @if (Model.IsLoggedIn)
+    {
+        <span>Hello, @Model.DisplayName</span>
+        <div><a href="@Url.Content("~/api/auth/logout")">Logout</a></div>
+    }
+    else
+    {
+        <div></div>
+        <div>@Html.ActionLink("Login", "Login", "Account") OR @Html.ActionLink("Register", "Register", "Account")</div>
+        <div><a href="@Url.Content("~/api/auth/facebook")">Login with Facebook</a></div>
+    }
+
+</section>

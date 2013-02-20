@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Configuration;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using AFA.ServiceHostAndWeb.Helpers;
 using AFA.ServiceInterface;
@@ -142,6 +143,8 @@ namespace AFA.ServiceHostAndWeb.App_Start
                 new OrmLiteAuthRepository(c.Resolve<IDbConnectionFactory>()));
 
             var authRepo = (OrmLiteAuthRepository)container.Resolve<IUserAuthRepository>();
+            // Override default regex to allow email addresses as usernames
+            authRepo.ValidUserNameRegEx = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
 			authRepo.CreateMissingTables();
 		}
 

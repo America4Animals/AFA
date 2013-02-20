@@ -158,6 +158,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -178,9 +180,12 @@
     <Compile Include="Mappers\MappingProfile.cs" />
     <Compile Include="Models\EventDetailModel.cs" />
     <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\HeaderModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\OrganizationAlliesModel.cs" />
     <Compile Include="Models\OrganizationDetailModel.cs" />
     <Compile Include="Models\OrganizationModel.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\UserDetailModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -348,6 +353,9 @@
     <Content Include="Views\Users\AddOrEdit.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Common\Header.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
