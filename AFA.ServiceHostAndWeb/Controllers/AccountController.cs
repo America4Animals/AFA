@@ -34,11 +34,11 @@ namespace AFA.ServiceHostAndWeb.Controllers
                     RememberMe = model.RememberMe
                 });
 
-                // If we got this far, something failed, redisplay form
-                ModelState.AddModelError("", "The user name or password provided is incorrect.");
                 return RedirectToLocal(returnUrl);
             }
 
+            // If we got this far, something failed, redisplay form
+            ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
         }
 
@@ -57,9 +57,9 @@ namespace AFA.ServiceHostAndWeb.Controllers
                 var registerService = AppHostBase.Resolve<RegistrationService>();
                 registerService.RequestContext = System.Web.HttpContext.Current.ToRequestContext();           
 
-                // Attempt to register the user
                 try
                 {
+                    // Attempt to register the user
                     registerService.Post(new Registration
                                              {
                                                  AutoLogin = true,
@@ -83,7 +83,6 @@ namespace AFA.ServiceHostAndWeb.Controllers
                     }
 
                     ModelState.AddModelError("", errorMsg);
-                    return View(model);
                 }
             }
 
