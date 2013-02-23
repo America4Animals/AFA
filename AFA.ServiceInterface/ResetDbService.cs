@@ -8,7 +8,7 @@ using ServiceStack.ServiceHost;
 
 namespace AFA.ServiceInterface
 {
-    [Route("/reset-db", "GET,POST")]
+    [Route("/resetdb", "GET,POST")]
     public class ResetDb { }
 
     public class ResetDbResponse
@@ -29,6 +29,8 @@ namespace AFA.ServiceInterface
             Db.CreateTableIfNotExists<OrganizationComment>();
             Db.CreateTableIfNotExists<EventCategory>();
             Db.CreateTableIfNotExists<Event>();
+            Db.CreateTableIfNotExists<CrueltySpot>();
+            Db.CreateTableIfNotExists<CrueltySpotCategory>();
 
             if (Db.Select<StateProvince>().Count == 0)
             {

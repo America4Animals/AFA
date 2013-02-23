@@ -1,0 +1,28 @@
+﻿@model AFA.ServiceModel.CrueltySpotCategory
+
+@{
+    ViewBag.Title = "Add Cruelty Spot Category";
+}
+
+<h2 class="page-header">@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Add", "CrueltySpotCategories", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <fieldset>
+        
+        <div class="control-group">
+            @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(m => m.Name)
+            </div>
+        </div>
+      
+    </fieldset>
+    
+    <div class="control-group">
+        <div class="controls">
+            @Html.ActionLink("Cancel", "Index", "CrueltySpotCategories", null, new { @class = "btn" })
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </div>
+}

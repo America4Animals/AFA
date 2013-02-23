@@ -1,0 +1,23 @@
+﻿@model AFA.ServiceModel.CrueltySpotCategoriesResponse
+
+@{
+    ViewBag.Title = "Cruelty Spot Categories";
+}
+
+<h2 class="page-header">@ViewBag.Title</h2>
+
+<ul>
+    @foreach (var crueltySpotCategory in Model.CrueltySpotCategories)
+    {
+        <li class="margin-bottom">
+            @Html.ActionLink(crueltySpotCategory.Name, "Edit", "CrueltySpotCategories", new {id = crueltySpotCategory.Id}, null)
+            @using (Html.BeginForm("Delete", "CrueltySpotCategories", new { id = crueltySpotCategory.Id }, FormMethod.Post, new { @class = "inline" }))
+            {
+                <input type="submit" value="Delete" class="margin-left btn btn-danger" />
+            }
+            
+        </li>
+    }
+</ul>
+
+<div>@Html.ActionLink("Add New", "Add", "CrueltySpotCategories", null, new {@class="btn btn-primary"})</div>

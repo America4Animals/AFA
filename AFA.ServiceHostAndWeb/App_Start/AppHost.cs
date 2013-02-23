@@ -165,6 +165,9 @@ namespace AFA.ServiceHostAndWeb.App_Start
 
             container.Register<IUserService>(new UserService());
             container.Register<IUsersService>(new UsersService());
+
+            container.Register<ICrueltySpotCategoriesService>(new CrueltySpotCategoriesService());
+            container.Register<ICrueltySpotCategoryService>(new CrueltySpotCategoryService());
 	    }
 
 	    public static void Start()
