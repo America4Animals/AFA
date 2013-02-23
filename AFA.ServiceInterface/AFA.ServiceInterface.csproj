@@ -66,8 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrueltySpotsCategoryService.cs" />
+    <Compile Include="CrueltySpotService.cs" />
     <Compile Include="EventCategoryService.cs" />
     <Compile Include="EventService.cs" />
+    <Compile Include="ICrueltySpotCategoryService.cs" />
+    <Compile Include="ICrueltySpotService.cs" />
     <Compile Include="IEventCategoriesService.cs" />
     <Compile Include="IEventService.cs" />
     <Compile Include="IOrganizationCategoryService.cs" />

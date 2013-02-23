@@ -178,6 +178,8 @@
     <Compile Include="Helpers\LessMinify.cs" />
     <Compile Include="Mappers\MappingExtensions.cs" />
     <Compile Include="Mappers\MappingProfile.cs" />
+    <Compile Include="Models\CrueltySpotDetailModel.cs" />
+    <Compile Include="Models\CrueltySpotModel.cs" />
     <Compile Include="Models\EventDetailModel.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\HeaderModel.cs" />

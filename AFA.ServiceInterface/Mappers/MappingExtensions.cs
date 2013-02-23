@@ -9,7 +9,6 @@ using AutoMapper;
 
 namespace AFA.ServiceInterface.Mappers
 {
-    [Obsolete("Refactored out to ServiceHostAndWeb assembly")]
     public static class MappingExtensions
     {
         #region Organizations
@@ -50,6 +49,20 @@ namespace AFA.ServiceInterface.Mappers
         public static EventDto ToDto(this Event entity)
         {
             return Mapper.Map<Event, EventDto>(entity);
+        }
+
+        #endregion
+
+        #region Cruelty Spots
+
+        public static CrueltySpot ToEntity(this CrueltySpotDto dto)
+        {
+            return Mapper.Map<CrueltySpotDto, CrueltySpot>(dto);
+        }
+
+        public static CrueltySpotDto ToDto(this CrueltySpot entity)
+        {
+            return Mapper.Map<CrueltySpot, CrueltySpotDto>(entity);
         }
 
         #endregion

@@ -33,16 +33,16 @@ namespace AFA.ServiceHostAndWeb.Mappers
             return Mapper.Map<OrganizationDetailModel, OrganizationDto>(model);
         }
 
-        // Domain
-        public static Organization ToEntity(this OrganizationDto dto)
-        {
-            return Mapper.Map<OrganizationDto, Organization>(dto);
-        }
+        //// Domain
+        //public static Organization ToEntity(this OrganizationDto dto)
+        //{
+        //    return Mapper.Map<OrganizationDto, Organization>(dto);
+        //}
 
-        public static OrganizationDto ToDto(this Organization entity)
-        {
-            return Mapper.Map<Organization, OrganizationDto>(entity);
-        }
+        //public static OrganizationDto ToDto(this Organization entity)
+        //{
+        //    return Mapper.Map<Organization, OrganizationDto>(entity);
+        //}
 
         #endregion
 
@@ -68,16 +68,16 @@ namespace AFA.ServiceHostAndWeb.Mappers
             return Mapper.Map<UserDetailModel, UserDto>(model);
         }
 
-        // Domain
-        public static User ToEntity(this UserDto dto)
-        {
-            return Mapper.Map<UserDto, User>(dto);
-        }
+        //// Domain
+        //public static User ToEntity(this UserDto dto)
+        //{
+        //    return Mapper.Map<UserDto, User>(dto);
+        //}
 
-        public static UserDto ToDto(this User entity)
-        {
-            return Mapper.Map<User, UserDto>(entity);
-        }
+        //public static UserDto ToDto(this User entity)
+        //{
+        //    return Mapper.Map<User, UserDto>(entity);
+        //}
 
         #endregion
 
@@ -106,16 +106,51 @@ namespace AFA.ServiceHostAndWeb.Mappers
             return Mapper.Map<EventDetailModel, EventDto>(model);
         }
 
-        // Domain
-        public static Event ToEntity(this EventDto dto)
+        //// Domain
+        //public static Event ToEntity(this EventDto dto)
+        //{
+        //    return Mapper.Map<EventDto, Event>(dto);
+        //}
+
+        //public static EventDto ToDto(this Event entity)
+        //{
+        //    return Mapper.Map<Event, EventDto>(entity);
+        //}
+
+        #endregion
+
+        #region Cruelty Spots
+
+        public static CrueltySpotModel ToModel(this CrueltySpotDto entity)
         {
-            return Mapper.Map<EventDto, Event>(dto);
+            return Mapper.Map<CrueltySpotDto, CrueltySpotModel>(entity);
         }
 
-        public static EventDto ToDto(this Event entity)
+        public static CrueltySpotDto ToEntity(this CrueltySpotModel model)
         {
-            return Mapper.Map<Event, EventDto>(entity);
+            return Mapper.Map<CrueltySpotModel, CrueltySpotDto>(model);
         }
+
+        public static CrueltySpotDetailModel ToDetailModel(this CrueltySpotDto entity)
+        {
+            return Mapper.Map<CrueltySpotDto, CrueltySpotDetailModel>(entity);
+        }
+
+        public static CrueltySpotDto ToEntity(this CrueltySpotDetailModel model)
+        {
+            return Mapper.Map<CrueltySpotDetailModel, CrueltySpotDto>(model);
+        }
+
+        //// Domain
+        //public static CrueltySpot ToEntity(this CrueltySpotDto dto)
+        //{
+        //    return Mapper.Map<CrueltySpotDto, CrueltySpot>(dto);
+        //}
+
+        //public static CrueltySpotDto ToDto(this CrueltySpot entity)
+        //{
+        //    return Mapper.Map<CrueltySpot, CrueltySpotDto>(entity);
+        //}
 
         #endregion
     }
