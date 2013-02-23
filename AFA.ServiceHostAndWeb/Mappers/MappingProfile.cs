@@ -48,7 +48,6 @@ namespace AFA.ServiceHostAndWeb.Mappers
 
             #endregion
 
-
             #region Events
 
             // View Model mapping
@@ -61,6 +60,21 @@ namespace AFA.ServiceHostAndWeb.Mappers
             // Domain mapping
             Mapper.CreateMap<EventDto, Event>();
             Mapper.CreateMap<Event, EventDto>();
+
+            #endregion
+
+            #region CrueltySpots
+
+            // View Model mapping
+            Mapper.CreateMap<CrueltySpotDto, CrueltySpotModel>();
+            Mapper.CreateMap<CrueltySpotModel, CrueltySpotDto>();
+
+            Mapper.CreateMap<CrueltySpotDto, CrueltySpotDetailModel>();
+            Mapper.CreateMap<CrueltySpotDetailModel, CrueltySpotDto>();
+
+            // Domain mapping
+            Mapper.CreateMap<CrueltySpotDto, CrueltySpot>();
+            Mapper.CreateMap<CrueltySpot, CrueltySpotDto>();
 
             #endregion
         }

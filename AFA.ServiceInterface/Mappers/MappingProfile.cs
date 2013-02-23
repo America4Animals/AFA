@@ -9,24 +9,26 @@ using AutoMapper;
 
 namespace AFA.ServiceInterface.Mappers
 {
-    [Obsolete("Refactored out to ServiceHostAndWeb assembly")]
-    public class MappingProfile : Profile
-    {
-        public override string ProfileName
-        {
-            get { return "MappingProfile"; }
-        }
+    //public class MappingProfile : Profile
+    //{
+    //    public override string ProfileName
+    //    {
+    //        get { return "MappingProfile"; }
+    //    }
 
-        protected override void Configure()
-        {
-            Mapper.CreateMap<OrganizationDto, Organization>();
-            Mapper.CreateMap<Organization, OrganizationDto>();
+    //    protected override void Configure()
+    //    {
+    //        Mapper.CreateMap<OrganizationDto, Organization>();
+    //        Mapper.CreateMap<Organization, OrganizationDto>();
 
-            Mapper.CreateMap<UserDto, User>();
-            Mapper.CreateMap<User, UserDto>();
+    //        Mapper.CreateMap<UserDto, User>();
+    //        Mapper.CreateMap<User, UserDto>();
 
-            Mapper.CreateMap<EventDto, Event>();
-            Mapper.CreateMap<Event, EventDto>();
-        }
-    }
+    //        Mapper.CreateMap<EventDto, Event>();
+    //        Mapper.CreateMap<Event, EventDto>();
+
+    //        Mapper.CreateMap<CrueltySpotDto, CrueltySpot>();
+    //        Mapper.CreateMap<CrueltySpot, CrueltySpotDto>();
+    //    }
+    //}
 }

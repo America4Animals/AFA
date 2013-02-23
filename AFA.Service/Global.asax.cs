@@ -14,7 +14,7 @@ namespace AFA.Service
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            Mapper.Initialize(x => x.AddProfile<MappingProfile>());
+            //Mapper.Initialize(x => x.AddProfile<MappingProfile>());
         }
 
         protected void Session_Start(object sender, EventArgs e)

@@ -1,0 +1,13 @@
+﻿@model AFA.ServiceHostAndWeb.Models.CrueltySpotDetailModel
+
+@{
+    ViewBag.Title = "Cruelty Spot Details";
+}
+
+<h2 class="page-header">@Model.Name</h2>
+
+@Html.DisplayForModel()
+
+<div class="margin-bottom">
+    @Html.ActionLink("All Cruelty Spots", "Index", "CrueltySpots", null, new { @class = "btn btn-info"})
+</div>

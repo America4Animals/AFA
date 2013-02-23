@@ -162,6 +162,7 @@
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\CrueltySpotCategoriesController.cs" />
+    <Compile Include="Controllers\CrueltySpotsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrganizationCategoriesController.cs" />
@@ -362,6 +363,12 @@
     <Content Include="Views\CrueltySpotCategories\Index.cshtml" />
     <Content Include="Views\CrueltySpotCategories\Add.cshtml" />
     <Content Include="Views\CrueltySpotCategories\Edit.cshtml" />
+    <Content Include="Views\CrueltySpots\Index.cshtml" />
+    <Content Include="Views\CrueltySpots\DisplayTemplates\CrueltySpotDetailModel.cshtml" />
+    <Content Include="Views\CrueltySpots\AddOrEdit.cshtml" />
+    <Content Include="Views\CrueltySpots\Details.cshtml" />
+    <Content Include="Views\CrueltySpots\Add.cshtml" />
+    <Content Include="Views\CrueltySpots\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

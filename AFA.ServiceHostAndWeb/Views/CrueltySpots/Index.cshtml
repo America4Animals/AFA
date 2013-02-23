@@ -1,0 +1,26 @@
+﻿@model IEnumerable<AFA.ServiceHostAndWeb.Models.CrueltySpotModel>
+
+@{
+    ViewBag.Title = "Cruelty Spots";
+} 
+
+<h2 class="page-header">@ViewBag.Title</h2>
+
+<ul>
+    @foreach (var org in Model)
+    {
+        <li class="margin-bottom">
+            @Html.ActionLink(org.Name, "Details", "CrueltySpots", new {id = org.Id}, null)
+
+            @Html.ActionLink("Edit", "Edit", "CrueltySpots", new {id = org.Id}, new {@class = "margin-left btn btn-info"})
+
+            @using (Html.BeginForm("Delete", "CrueltySpots", new { id = org.Id }, FormMethod.Post, new { @class = "inline" }))
+            {
+                <input type="submit" value="Delete" class="margin-left btn btn-danger" />
+            }
+            
+        </li>
+    }
+</ul>
+
+<div>@Html.ActionLink("Add New", "Add", "CrueltySpots", null, new {@class="btn btn-primary"})</div>

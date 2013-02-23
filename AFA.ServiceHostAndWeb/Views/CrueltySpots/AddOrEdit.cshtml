@@ -1,0 +1,91 @@
+﻿@model AFA.ServiceHostAndWeb.Models.CrueltySpotDetailModel
+
+@Html.ValidationSummary()
+
+<fieldset>
+    <div class="control-group">
+        @Html.Label("Cruelty Spot Category", new { @class = "control-label" })
+        <div class="controls">
+            @Html.DropDownListFor(m => m.CrueltySpotCategoryId, Model.AllCrueltySpotCategories)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+        <div class="controls">
+            @Html.TextBoxFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+        <div class="controls">
+            @Html.TextAreaFor(m => m.Description)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.AddressLine1, new { @class = "control-label" })
+        <div class="controls">
+            @Html.TextBoxFor(m => m.AddressLine1)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.AddressLine2, new { @class = "control-label" })
+        <div class="controls">
+            @Html.TextBoxFor(m => m.AddressLine2)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(m => m.City, new { @class = "control-label" })
+        <div class="controls">
+            @Html.TextBoxFor(m => m.City)
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.Label("State", new { @class = "control-label" })
+        <div class="controls">
+            @Html.DropDownListFor(m => m.StateProvinceId, Model.AllStateProvinces)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.Zipcode, new { @class = "control-label" })
+        <div class="controls">
+            @Html.TextBoxFor(m => m.Zipcode)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
+        <div class="controls">
+            @Html.TextBoxFor(m => m.PhoneNumber)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+        <div class="controls">
+            @Html.TextBoxFor(m => m.Email)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.WebpageUrl, new { @class = "control-label" })
+        <div class="controls">
+            @Html.TextBoxFor(m => m.WebpageUrl)
+        </div>
+    </div>
+    
+</fieldset>
+
+<div class="control-group">
+    <div class="controls">
+        @Html.ActionLink("Cancel", "Index", "CrueltySpots", null, new { @class = "btn" })
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</div>
