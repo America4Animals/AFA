@@ -16,8 +16,12 @@
                 @Html.Action("Header", "Common")
             </header>
 
-
             <section class="row-fluid">
+                
+                <ul id="topMenu" class="nav nav-pills">
+                    <li class="home">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="report-cruelty">@Html.ActionLink("Report Cruelty", "Report", "Cruelty")</li>
+                </ul>
                 @RenderBody()
             </section>    
             

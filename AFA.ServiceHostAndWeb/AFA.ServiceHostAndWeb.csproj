@@ -161,6 +161,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\CrueltyController.cs" />
     <Compile Include="Controllers\CrueltySpotCategoriesController.cs" />
     <Compile Include="Controllers\CrueltySpotsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
@@ -369,6 +370,7 @@
     <Content Include="Views\CrueltySpots\Details.cshtml" />
     <Content Include="Views\CrueltySpots\Add.cshtml" />
     <Content Include="Views\CrueltySpots\Edit.cshtml" />
+    <Content Include="Views\Cruelty\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
