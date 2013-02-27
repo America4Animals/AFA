@@ -16,6 +16,7 @@ namespace AFA.ServiceModel
         public int Id { get; set; }
         [Index(Unique = true)]
         public string Name { get; set; }
+        public string Description { get; set; }
     }
 
     public class CrueltySpotCategoryResponse
