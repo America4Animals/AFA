@@ -37,14 +37,6 @@ namespace AFA.ServiceHostAndWeb.App_Start
     //Hold App wide configuration you want to accessible by your services
     public class AppConfig
     {
-        public AppConfig(IResourceManager appSettings)
-        {
-            this.Env = appSettings.Get("Env", Env.Local);
-            this.EnableCdn = appSettings.Get("EnableCdn", false);
-            this.CdnPrefix = appSettings.Get("CdnPrefix", "");
-            this.AdminUserNames = appSettings.Get("AdminUserNames", new List<string>());
-        }
-
         public Env Env { get; set; }
         public bool EnableCdn { get; set; }
         public string CdnPrefix { get; set; }
@@ -52,6 +44,16 @@ namespace AFA.ServiceHostAndWeb.App_Start
         public BundleOptions BundleOptions
         {
             get { return Env.In(Env.Local, Env.Dev) ? BundleOptions.Normal : BundleOptions.MinifiedAndCombined; }
+        }
+        public string GoogleApiKey { get; set; }
+
+        public AppConfig(IResourceManager appSettings)
+        {
+            Env = appSettings.Get("Env", Env.Local);
+            EnableCdn = appSettings.Get("EnableCdn", false);
+            CdnPrefix = appSettings.Get("CdnPrefix", "");
+            AdminUserNames = appSettings.Get("AdminUserNames", new List<string>());
+            GoogleApiKey = appSettings.Get("GoogleApiKey", "");
         }
     }
 

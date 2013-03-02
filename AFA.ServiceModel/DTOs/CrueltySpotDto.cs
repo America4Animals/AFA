@@ -25,8 +25,8 @@ namespace AFA.ServiceModel.DTOs
         public string Email { get; set; }
         public string WebpageUrl { get; set; }
 
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
 
         public int CrueltySpotCategoryId { get; set; }
         public string CrueltySpotCategoryName { get; set; }

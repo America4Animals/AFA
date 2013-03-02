@@ -1,33 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ServiceStack.DataAnnotations;
+using System.Web;
+using System.Web.Mvc;
 
-namespace AFA.ServiceModel
+namespace AFA.ServiceHostAndWeb.Models
 {
-    public class CrueltySpot
+    public class ReportCrueltyModel
     {
-        [AutoIncrement]
-        public int Id { get; set; }
+        public int CrueltySpotCategoryId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        [DisplayName("Address Line 1")]
         public string AddressLine1 { get; set; }
+        [DisplayName("Address Line 2")]
         public string AddressLine2 { get; set; }
         public string City { get; set; }
-        [References(typeof(StateProvince))]
         public int StateProvinceId { get; set; }
+        public string StateProvinceAbbreviation { get; set; }
         public string Zipcode { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string WebpageUrl { get; set; }
-
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
 
-        [References(typeof(CrueltySpotCategory))]
-        public int CrueltySpotCategoryId { get; set; }
-
+        public SelectList AllCrueltySpotCategories { get; set; }
     }
 }
