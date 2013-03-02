@@ -105,18 +105,30 @@ header {
 	padding-left: 20px !important;
 }
 
-// Helpers
 .inline {
 	display: inline;
 }
 
-// Misc
 .field-validation-error, .validation-summary-errors {
 	color: @red;
 }
 
-ul.no-bullets {
+ul.plain {
+	margin-left: 0;
+
 	li {
 		list-style-type: none;
+	}
+}
+
+.click-to-select-container {
+    height: 250px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+	li:hover {
+		background-color: @grayLight;
+		cursor: pointer;
+
 	}
 }

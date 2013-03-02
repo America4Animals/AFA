@@ -6,20 +6,15 @@
 
 <h2 class="page-header">@ViewBag.Title</h2>
 
-<style>
-    #searchResults {
-        height: 250px;
-        overflow-y: scroll;
-        overflow-x: hidden;
-    }
-</style>
-
 @using (Html.BeginForm("Report", "Cruelty", FormMethod.Post, new { @class = "form-horizontal" }))
 {
 
     <h3>Location (select one)</h3>
     
-    <div id="searchResults"></div>
+    <ul id="nearbyPlaces" class="click-to-select-container plain">
+        
+    </ul>
+    <a href="#" class="btn btn-success">more</a>
     
     <h3>Type of Cruelty</h3>
     <div class="control-group">
@@ -39,15 +34,12 @@
 
 @Scripts.Render("~/bundles/jsrender")
 
-<script id="searchResultsTemplate" type="text/x-jsrender">
-    <ul class="no-bullets">
-        <li>
-            <h5>{{>name}}</h5>
-            <div>{{>vicinity}}</div>
-            <div>{{>~distance(geometry.location)}}</div>
-            
-        </li>
-    </ul>
+<script id="placesTemplate" type="text/x-jsrender">
+    <li>
+        <h5>{{>name}}</h5>
+        <div>{{>vicinity}}</div>
+        <div>{{>~distance(geometry.location)}}</div>
+    </li>
 </script>
 
 <script type="text/javascript">
@@ -90,7 +82,7 @@
     };
 
     var bindPlaces = function (results) {
-        $('#searchResults').html($("#searchResultsTemplate").render(results));
+        $('#nearbyPlaces').html($("#placesTemplate").render(results));
     };
 
     if (Modernizr.geolocation) {
