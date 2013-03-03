@@ -26,6 +26,7 @@ namespace AFA.ServiceHostAndWeb.Models
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
 
-        public SelectList AllCrueltySpotCategories { get; set; }
+        //public SelectList AllCrueltySpotCategories { get; set; }
+        public IList<KeyValuePair<int, string>> AllCrueltySpotCategories { get; set; }
     }
 }

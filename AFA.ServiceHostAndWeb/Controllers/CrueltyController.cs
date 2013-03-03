@@ -43,7 +43,10 @@ namespace AFA.ServiceHostAndWeb.Controllers
         {
             var model = new ReportCrueltyModel();
             var allCategories = CrueltySpotCategoriesService.Get(new CrueltySpotCategories()).CrueltySpotCategories;
-            model.AllCrueltySpotCategories = new SelectList(allCategories, "Id", "Name");
+            //model.AllCrueltySpotCategories = new SelectList(allCategories, "Id", "Name");
+            model.AllCrueltySpotCategories =
+                allCategories.Select(csc => new KeyValuePair<int, string>(csc.Id, csc.Name)).ToList();
+            model.AllCrueltySpotCategories.Insert(0, new KeyValuePair<int, string>(0, "-- Please Select --"));
             ViewBag.GoogleApiKey = AppHost.AppConfig.GoogleApiKey;
             return View(model);
         }

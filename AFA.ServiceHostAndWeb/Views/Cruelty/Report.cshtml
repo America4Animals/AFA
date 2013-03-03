@@ -11,8 +11,12 @@
 
     <h3>Location (select one)</h3>
     
-    <ul id="nearbyPlaces" class="click-to-select-container plain">
-        
+    <ul  class="click-to-select-container plain" data-bind="foreach: availablePlaces">
+        <li>
+            <h5 data-bind="text: name"></h5>
+            <div data-bind="text: vicinity"></div>
+            <div data-bind="text: $root.distanceInMiles(geometry.location)"></div>
+        </li>
     </ul>
     <a href="#" class="btn btn-success">more</a>
     
@@ -20,7 +24,7 @@
     <div class="control-group">
         @Html.Label("Cruelty Spot Category", new { @class = "control-label" })
         <div class="controls">
-            @Html.DropDownListFor(m => m.CrueltySpotCategoryId, Model.AllCrueltySpotCategories)
+            <select data-bind="options: availableCategories, optionsText: 'Value', optionsValue: 'Key', value: crueltySpot().crueltySpotCategoryId"></select>
         </div>
     </div>
 
@@ -32,76 +36,83 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleApiKey&sensor=false&libraries=geometry,places">
 </script>
 
-@Scripts.Render("~/bundles/jsrender")
-
-<script id="placesTemplate" type="text/x-jsrender">
-    <li>
-        <h5>{{>name}}</h5>
-        <div>{{>vicinity}}</div>
-        <div>{{>~distance(geometry.location)}}</div>
-    </li>
-</script>
 
 <script type="text/javascript">
-    
-    var map;
-    var service;
-    var myLatLng;
-
-    var getNearbyPlaces = function (position) {
-        var coordinates = position.coords;
-        var lat = coordinates.latitude;
-        var lon = coordinates.longitude;
-
-        myLatLng = new google.maps.LatLng(lat, lon);
-        map = new google.maps.Map(document.getElementById('map'), {
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            center: myLatLng,
-            zoom: 15
-        });
-
-        var request = {
-            location: myLatLng,
-            //radius: '500',
-            types: ['amusement_park', 'aquarium', 'veterinary_care', 'zoo'],
-            rankBy: google.maps.places.RankBy.DISTANCE
-        };
-
-        service = new google.maps.places.PlacesService(map);
-        service.nearbySearch(request, placesSearchCallback);
-    };
-
-    var placesSearchCallback = function (results, status) {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-            bindPlaces(results);
-        }
-    };
 
     var positionError = function () {
         alert("Problem acquiring position");
-    };
+    };   
 
-    var bindPlaces = function (results) {
-        $('#nearbyPlaces').html($("#placesTemplate").render(results));
-    };
-
-    if (Modernizr.geolocation) {
-        navigator.geolocation.getCurrentPosition(getNearbyPlaces, positionError);
-
-    } else {
-        // no native support, implement fallback
-        // To Do: Ask for zipcode or address, or allow option to not use geolocation
-    }
-
-    $.views.helpers({
-
-        distance: function (location) {
-
-            var distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(myLatLng, location);
-            var distanceInMiles = distanceInMeters *= 0.000621371192;
-            return distanceInMiles.toFixed(2) + ' miles';
+    $(function() {
+        $('#topMenu .report-cruelty').addClass('active');
+        
+        var initialData = @Html.Raw(Json.Encode(Model));
+        
+        function CrueltySpot(name) {
+            var self = this;
+            self.name = name;
+            self.crueltySpotCategoryId = ko.observable(0);
         }
-    });
+        
+        function ReportCrueltyViewModel(availableCategories) {
+            var self = this;
+            self.crueltySpot = ko.observable(new CrueltySpot());
+            self.availableCategories = availableCategories;
+            self.availablePlaces = ko.observableArray([]);
+            
+            self.myLat = ko.observable();
+            self.myLon = ko.observable();
 
-    $('#topMenu .report-cruelty').addClass('active');
+            self.myLatLng = ko.computed(function() {
+                return new google.maps.LatLng(self.myLat(), self.myLon());
+            });
+            
+            self.distanceInMiles = function(location) {
+                var distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(self.myLatLng(), location);
+                var ret = distanceInMeters *= 0.000621371192;
+                return ret.toFixed(2) + ' miles';
+            };
+            
+            if (Modernizr.geolocation) {
+                navigator.geolocation.getCurrentPosition(getNearbyPlaces, positionError);
+
+            } else {
+                // no native support, implement fallback
+                // To Do: Ask for zipcode or address, or allow option to not use geolocation
+            }
+            
+            function getNearbyPlaces(position) {
+                var coordinates = position.coords;
+        
+                self.myLat(coordinates.latitude);
+                self.myLon(coordinates.longitude);
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    center: self.myLatLng(),
+                    zoom: 15
+                });
+
+                var request = {
+                    location: self.myLatLng(),
+                    //radius: '500',
+                    types: ['amusement_park', 'aquarium', 'veterinary_care', 'zoo'],
+                    rankBy: google.maps.places.RankBy.DISTANCE
+                };
+
+                var service = new google.maps.places.PlacesService(map);
+                service.nearbySearch(request, placesSearchCallback);
+            };
+            
+            function placesSearchCallback(results, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    self.availablePlaces(results);
+                }
+            };       
+            
+        }
+        
+        ko.applyBindings(new ReportCrueltyViewModel(initialData.AllCrueltySpotCategories));
+
+    });
 </script>
