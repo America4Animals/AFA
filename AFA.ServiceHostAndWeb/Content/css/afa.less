@@ -125,10 +125,19 @@ ul.plain {
     height: 250px;
     overflow-y: scroll;
     overflow-x: hidden;
+	border: 1px solid @grayLight;
 
-	li:hover {
-		background-color: @grayLight;
-		cursor: pointer;
+	li {
+		padding-left: 10px;
 
+		&:hover {
+			background-color: @grayLight;
+			cursor: pointer;
+		}
+
+		&.selected {
+			color: @white;
+			background-color: @black;
+		}
 	}
 }

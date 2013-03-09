@@ -11,20 +11,20 @@
 
     <h3>Location (select one)</h3>
     
-    <ul  class="click-to-select-container plain" data-bind="foreach: availablePlaces">
-        <li>
+    <ul id="crueltySpotContainer" class="click-to-select-container plain" data-bind="foreach: availablePlaces">
+        <li data-bind="css: { selected: $root.isPlaceSelected($data) }">
             <h5 data-bind="text: name"></h5>
             <div data-bind="text: vicinity"></div>
             <div data-bind="text: $root.distanceInMiles(geometry.location)"></div>
         </li>
     </ul>
-    <a href="#" class="btn btn-success">more</a>
+    <a href="#" class="btn btn-success" data-bind="click: getMorePlaces">more</a>
     
     <h3>Type of Cruelty</h3>
     <div class="control-group">
         @Html.Label("Cruelty Spot Category", new { @class = "control-label" })
         <div class="controls">
-            <select data-bind="options: availableCategories, optionsText: 'Value', optionsValue: 'Key', value: crueltySpot().crueltySpotCategoryId"></select>
+            <select data-bind="options: availableCategories, optionsText: 'Value', optionsValue: 'Key', value: crueltySpotCategoryId"></select>
         </div>
     </div>
 
@@ -33,11 +33,16 @@
 
 <div id="map"></div>
 
+<!--<textarea data-bind="value: ko.toJSON($data)" rows="10" style="width:900px;"></textarea>-->
+
+
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleApiKey&sensor=false&libraries=geometry,places">
 </script>
 
 
 <script type="text/javascript">
+
+    var viewModel = {};
 
     var positionError = function () {
         alert("Problem acquiring position");
@@ -48,17 +53,25 @@
         
         var initialData = @Html.Raw(Json.Encode(Model));
         
-        function CrueltySpot(name) {
+        function CrueltySpot() {
             var self = this;
-            self.name = name;
-            self.crueltySpotCategoryId = ko.observable(0);
+            self.name = ko.observable();
+            self.vicinity = ko.observable();
+            self.lat = ko.observable();
+            self.lng = ko.observable();
+            self.reference = ko.observable();
+            self.address_components = ko.observableArray();
+            self.formatted_address = ko.observable();
+            self.formatted_phone_number = ko.observable();
+            self.website = ko.observable();
         }
         
         function ReportCrueltyViewModel(availableCategories) {
             var self = this;
             self.crueltySpot = ko.observable(new CrueltySpot());
             self.availableCategories = availableCategories;
-            self.availablePlaces = ko.observableArray([]);
+            self.availablePlaces = ko.observableArray();
+            self.crueltySpotCategoryId = ko.observable();
             
             self.myLat = ko.observable();
             self.myLon = ko.observable();
@@ -72,6 +85,11 @@
                 var ret = distanceInMeters *= 0.000621371192;
                 return ret.toFixed(2) + ' miles';
             };
+
+            self.getMorePlaces = function() {
+                alert('ToDo: Implement get more places')
+            };
+
             
             if (Modernizr.geolocation) {
                 navigator.geolocation.getCurrentPosition(getNearbyPlaces, positionError);
@@ -80,7 +98,11 @@
                 // no native support, implement fallback
                 // To Do: Ask for zipcode or address, or allow option to not use geolocation
             }
-            
+
+            self.isPlaceSelected = function(item) {
+                return item.name === viewModel.crueltySpot().name() && item.vicinity === viewModel.crueltySpot().vicinity();
+            };
+
             function getNearbyPlaces(position) {
                 var coordinates = position.coords;
         
@@ -111,8 +133,22 @@
             };       
             
         }
-        
-        ko.applyBindings(new ReportCrueltyViewModel(initialData.AllCrueltySpotCategories));
+
+        viewModel = (new ReportCrueltyViewModel(initialData.AllCrueltySpotCategories));
+        ko.applyBindings(viewModel);
+
+        // select cruelty spot handler
+        $('#crueltySpotContainer').on('click', 'li', function() {
+            var selectedPlace = ko.dataFor(this);
+            var currentCrueltySpot = viewModel.crueltySpot;
+            var currentName = currentCrueltySpot().name();
+            var currentVicinity = currentCrueltySpot().vicinity()
+
+            if (!currentName || currentName != selectedPlace.name || currentVicinity != selectedPlace.vicinity) {
+                currentCrueltySpot().name(selectedPlace.name);
+                currentCrueltySpot().vicinity(selectedPlace.vicinity);
+            }
+        });
 
     });
 </script>
