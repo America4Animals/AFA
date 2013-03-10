@@ -4,8 +4,6 @@
     ViewBag.Title = "Add Cruelty Spot";
 }
 
-<h2 class="page-header">@ViewBag.Title</h2>
-
 @using (Html.BeginForm("Add", "CrueltySpots", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.Partial("AddOrEdit", Model)

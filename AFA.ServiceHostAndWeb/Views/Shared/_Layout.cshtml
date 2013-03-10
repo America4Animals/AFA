@@ -22,7 +22,19 @@
                     <li class="home">@Html.ActionLink("Home", "Index", "Home")</li>
                     <li class="report-cruelty">@Html.ActionLink("Report Cruelty", "Report", "Cruelty")</li>
                 </ul>
+
+                <h2 class="page-header">@ViewBag.Title</h2>
+
+                <div class="span12 no-margin-left hide">
+                    <div id="errorMessage" class="alert alert-error"></div>
+                </div>
+
+                <div class="span12 no-margin-left hide">
+                    <div id="successMessage" class="alert alert-success"></div>
+                </div>
+
                 @RenderBody()
+                @Html.Partial("_Notifications")
             </section>    
             
         </div>

@@ -4,8 +4,6 @@
     ViewBag.Title = "Report Cruelty";
 }
 
-<h2 class="page-header">@ViewBag.Title</h2>
-
 @using (Html.BeginForm("Report", "Cruelty", FormMethod.Post, new { @class = "form-horizontal" }))
 {
 
@@ -28,13 +26,10 @@
         </div>
     </div>
 
-    <input type="submit" class="btn btn-primary" />
+    <input type="submit" class="btn btn-primary" data-bind="click: save, enable: isValidCrueltySpotSpecified" />
 }
 
 <div id="map"></div>
-
-<!--<textarea data-bind="value: ko.toJSON($data)" rows="10" style="width:900px;"></textarea>-->
-
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleApiKey&sensor=false&libraries=geometry,places">
 </script>
@@ -43,6 +38,8 @@
 <script type="text/javascript">
 
     var viewModel = {};
+    var googlePlacesService;
+    var placeDetailsHash = new Hashtable();
 
     var positionError = function () {
         alert("Problem acquiring position");
@@ -53,14 +50,14 @@
         
         var initialData = @Html.Raw(Json.Encode(Model));
         
-        function CrueltySpot() {
+        function CrueltySpotPlace() {
             var self = this;
             self.name = ko.observable();
             self.vicinity = ko.observable();
             self.lat = ko.observable();
             self.lng = ko.observable();
             self.reference = ko.observable();
-            self.address_components = ko.observableArray();
+            self.address_components = [];
             self.formatted_address = ko.observable();
             self.formatted_phone_number = ko.observable();
             self.website = ko.observable();
@@ -68,7 +65,7 @@
         
         function ReportCrueltyViewModel(availableCategories) {
             var self = this;
-            self.crueltySpot = ko.observable(new CrueltySpot());
+            self.crueltySpotPlace = ko.observable(new CrueltySpotPlace());
             self.availableCategories = availableCategories;
             self.availablePlaces = ko.observableArray();
             self.crueltySpotCategoryId = ko.observable();
@@ -85,11 +82,66 @@
                 var ret = distanceInMeters *= 0.000621371192;
                 return ret.toFixed(2) + ' miles';
             };
+            
+            self.isPlaceSelected = function(item) {
+                return item.name === self.crueltySpotPlace().name() && item.vicinity === self.crueltySpotPlace().vicinity();
+            };
 
+            self.isValidCrueltySpotSpecified = ko.computed(function() {
+                return self.crueltySpotPlace().name() && self.crueltySpotCategoryId() > 0;
+            });
+            
             self.getMorePlaces = function() {
                 alert('ToDo: Implement get more places')
             };
 
+            self.updateSelectedCrueltySpotPlaceDetails = function() {
+                var currentReference = self.crueltySpotPlace().reference();
+                if (currentReference) {
+                    if (placeDetailsHash.containsKey(currentReference)) {
+                        // Update from cache
+                        self.updateCrueltySpotPlaceDetails(placeDetailsHash.get(currentReference));
+                    } else {
+                        getAndUpdatePlaceDetails(currentReference);
+                    }
+                }
+            };
+
+            self.updateCrueltySpotPlaceDetails = function(placeDetails) {
+                self.crueltySpotPlace().address_components = placeDetails.address_components;
+                self.crueltySpotPlace().formatted_address(placeDetails.formatted_address);
+                self.crueltySpotPlace().formatted_phone_number(placeDetails.formatted_phone_number);
+                self.crueltySpotPlace().website(placeDetails.website);
+            };
+
+            self.save = function() {
+                var data = ko.toJSON(self);
+                $.ajax({
+                    type: "POST",
+                    url: "/Cruelty/Report",
+                    data: data,
+                    contentType: "application/json",
+                    success: function(data) {                     
+                        if (data.success) {
+                            var url = data.redirectUrl;
+                            url += '?statusCode=' + data.statusCode;
+                            location.href = url;
+                        } else {
+                            var errorMessages = '';
+                            $.each(data.errors, function() {
+                                if (errorMessages.length > 1) {
+                                    errorMessages += '<br />';
+                                }
+                                errorMessages += this.errorMessage;
+                            });
+                            AFA.showErrorMessage(errorMessages);
+                        }
+                    },
+                    error: function() {
+                        AFA.showErrorMessage('Server error');
+                    }
+                });
+            };
             
             if (Modernizr.geolocation) {
                 navigator.geolocation.getCurrentPosition(getNearbyPlaces, positionError);
@@ -98,10 +150,6 @@
                 // no native support, implement fallback
                 // To Do: Ask for zipcode or address, or allow option to not use geolocation
             }
-
-            self.isPlaceSelected = function(item) {
-                return item.name === viewModel.crueltySpot().name() && item.vicinity === viewModel.crueltySpot().vicinity();
-            };
 
             function getNearbyPlaces(position) {
                 var coordinates = position.coords;
@@ -122,31 +170,53 @@
                     rankBy: google.maps.places.RankBy.DISTANCE
                 };
 
-                var service = new google.maps.places.PlacesService(map);
-                service.nearbySearch(request, placesSearchCallback);
+                googlePlacesService = new google.maps.places.PlacesService(map);
+                googlePlacesService.nearbySearch(request, placesSearchCallback);
             };
             
             function placesSearchCallback(results, status) {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
                     self.availablePlaces(results);
                 }
-            };       
+            };
             
+            function getAndUpdatePlaceDetails(reference) {
+                var request = {
+                    reference: reference                      
+                };
+
+                googlePlacesService.getDetails(request, placesDetailsCallback);
+            }
+            
+            function placesDetailsCallback(place, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    viewModel.updateCrueltySpotPlaceDetails(place);
+                    placeDetailsHash.put(viewModel.crueltySpotPlace().reference(), place);
+                } else {
+                    // ToDo: Handle failures gracefully
+                    alert('Problem retrieving place details');
+                }
+            }
+
         }
 
         viewModel = (new ReportCrueltyViewModel(initialData.AllCrueltySpotCategories));
         ko.applyBindings(viewModel);
-
+        
         // select cruelty spot handler
         $('#crueltySpotContainer').on('click', 'li', function() {
             var selectedPlace = ko.dataFor(this);
-            var currentCrueltySpot = viewModel.crueltySpot;
-            var currentName = currentCrueltySpot().name();
-            var currentVicinity = currentCrueltySpot().vicinity()
+            var currentCrueltySpotPlace = viewModel.crueltySpotPlace;
+            var currentName = currentCrueltySpotPlace().name();
+            var currentVicinity = currentCrueltySpotPlace().vicinity();
 
             if (!currentName || currentName != selectedPlace.name || currentVicinity != selectedPlace.vicinity) {
-                currentCrueltySpot().name(selectedPlace.name);
-                currentCrueltySpot().vicinity(selectedPlace.vicinity);
+                currentCrueltySpotPlace().name(selectedPlace.name);
+                currentCrueltySpotPlace().vicinity(selectedPlace.vicinity);
+                currentCrueltySpotPlace().reference(selectedPlace.reference);
+                currentCrueltySpotPlace().lat(selectedPlace.geometry.location.lat());
+                currentCrueltySpotPlace().lng(selectedPlace.geometry.location.lng());
+                viewModel.updateSelectedCrueltySpotPlaceDetails();
             }
         });
 

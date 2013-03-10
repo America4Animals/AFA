@@ -179,15 +179,20 @@
     <Compile Include="Helpers\CheckboxItem.cs" />
     <Compile Include="Helpers\CheckboxList.cs" />
     <Compile Include="Helpers\CustomRegistrationValidator.cs" />
+    <Compile Include="Helpers\Enums\NotifyType.cs" />
+    <Compile Include="Helpers\Enums\StatusCode.cs" />
     <Compile Include="Helpers\GlobalHelper.cs" />
     <Compile Include="Helpers\ImportedFilePathResolver.cs" />
     <Compile Include="Helpers\LessMinify.cs" />
+    <Compile Include="Helpers\NotificationHelper.cs" />
+    <Compile Include="Helpers\SystemMessages.cs" />
     <Compile Include="Mappers\MappingExtensions.cs" />
     <Compile Include="Mappers\MappingProfile.cs" />
     <Compile Include="Models\CrueltySpotDetailModel.cs" />
     <Compile Include="Models\CrueltySpotModel.cs" />
     <Compile Include="Models\EventDetailModel.cs" />
     <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\AddCrueltySpotPlaceModel.cs" />
     <Compile Include="Models\HeaderModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\OrganizationAlliesModel.cs" />
@@ -305,6 +310,8 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\bootstrap\accordion.less" />
     <Compile Include="Helpers\Mvc.Bundler.cs" />
+    <Content Include="Scripts\afa.js" />
+    <Content Include="Scripts\jshashtable-2.1_src.js" />
     <Content Include="Scripts\jsrender.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
@@ -384,6 +391,7 @@
     <Content Include="Views\CrueltySpots\Add.cshtml" />
     <Content Include="Views\CrueltySpots\Edit.cshtml" />
     <Content Include="Views\Cruelty\Report.cshtml" />
+    <Content Include="Views\Shared\_Notifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

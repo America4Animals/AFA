@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AFA.ServiceHostAndWeb.Helpers;
+using AFA.ServiceHostAndWeb.Helpers.Enums;
 using AFA.ServiceHostAndWeb.Mappers;
 using AFA.ServiceHostAndWeb.Models;
 using AFA.ServiceInterface;
@@ -41,10 +43,14 @@ namespace AFA.ServiceHostAndWeb.Controllers
             CrueltySpotCategoriesService = crueltySpotCategoriesService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string statusCode = null)
         {
             var crueltySpots = CrueltySpotsService.Get(new CrueltySpotsDto()).CrueltySpots;
             var model = crueltySpots.Select(o => o.ToModel()).ToList();
+            if (statusCode == StatusCode.AddCrueltySpotSuccess.ToString())
+            {
+                this.SuccessNotification(SystemMessages.GetMessage(statusCode));
+            }
             return View(model);
         }
 

@@ -1,0 +1,38 @@
+﻿@using AFA.ServiceHostAndWeb.Helpers.Enums
+@{
+    //success messages
+    string successMessage = null;
+    if (TempData[string.Format("afa.notifications.{0}", NotifyType.Success)] != null)
+    {
+        successMessage = TempData[string.Format("afa.notifications.{0}", NotifyType.Success)].ToString();
+    }
+    if (ViewData[string.Format("afa.notifications.{0}", NotifyType.Success)] != null)
+    {
+        successMessage = ViewData[string.Format("afa.notifications.{0}", NotifyType.Success)].ToString();
+    }
+
+    //error messages
+    string errorMessage = null;
+    if (TempData[string.Format("afa.notifications.{0}", NotifyType.Error)] != null)
+    {
+        errorMessage = TempData[string.Format("afa.notifications.{0}", NotifyType.Error)].ToString();
+    }
+    if (ViewData[string.Format("afa.notifications.{0}", NotifyType.Error)] != null)
+    {
+        errorMessage = ViewData[string.Format("afa.notifications.{0}", NotifyType.Error)].ToString();
+    }
+}
+
+<script type="text/javascript">
+    
+    @if (!String.IsNullOrEmpty(successMessage))
+    {
+        @:AFA.showSuccessMessage('@successMessage');
+    }
+    
+    @if (!String.IsNullOrEmpty(errorMessage))
+    {
+        @:AFA.showErrorMessage('@errorMessage');
+    }
+    
+</script>
