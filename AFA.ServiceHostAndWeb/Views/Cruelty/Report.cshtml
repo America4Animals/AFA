@@ -9,14 +9,14 @@
 
     <h3>Location (select one)</h3>
     
-    <ul id="crueltySpotContainer" class="click-to-select-container plain" data-bind="foreach: availablePlaces">
+    <ul id="crueltySpotContainer" class="click-to-select-container plain" data-bind="foreach: availablePlaces, loadingWhen: isLoading">
         <li data-bind="css: { selected: $root.isPlaceSelected($data) }">
             <h5 data-bind="text: name"></h5>
             <div data-bind="text: vicinity"></div>
             <div data-bind="text: $root.distanceInMiles(geometry.location)"></div>
         </li>
     </ul>
-    <a href="#" class="btn btn-success" data-bind="click: getMorePlaces">more</a>
+    <a id="getMorePlacesButton" href="#" class="btn btn-success" data-bind="css: { disabled: !canRequestMoreNearbyPlaces() }">more</a>
     
     <h3>Type of Cruelty</h3>
     <div class="control-group">
@@ -67,11 +67,15 @@
             var self = this;
             self.crueltySpotPlace = ko.observable(new CrueltySpotPlace());
             self.availableCategories = availableCategories;
-            self.availablePlaces = ko.observableArray();
+            self.availablePlaces = ko.observableArray([]);
             self.crueltySpotCategoryId = ko.observable();
             
             self.myLat = ko.observable();
             self.myLon = ko.observable();
+
+            self.isLoading = ko.observable(true);
+
+            self.canRequestMoreNearbyPlaces = ko.observable(false);
 
             self.myLatLng = ko.computed(function() {
                 return new google.maps.LatLng(self.myLat(), self.myLon());
@@ -91,10 +95,6 @@
                 return self.crueltySpotPlace().name() && self.crueltySpotCategoryId() > 0;
             });
             
-            self.getMorePlaces = function() {
-                alert('ToDo: Implement get more places')
-            };
-
             self.updateSelectedCrueltySpotPlaceDetails = function() {
                 var currentReference = self.crueltySpotPlace().reference();
                 if (currentReference) {
@@ -174,9 +174,22 @@
                 googlePlacesService.nearbySearch(request, placesSearchCallback);
             };
             
-            function placesSearchCallback(results, status) {
+            function placesSearchCallback(results, status, pagination) {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
-                    self.availablePlaces(results);
+                    $.each(results, function() {
+                        self.availablePlaces.push(this);
+                    });
+                    
+                    self.isLoading(false);
+                    if (pagination.hasNextPage) {
+                        $('#getMorePlacesButton').click(function() {
+                            self.isLoading(true);
+                            pagination.nextPage();
+                        });
+                        self.canRequestMoreNearbyPlaces(true);
+                    } else {
+                        self.canRequestMoreNearbyPlaces(false);
+                    }
                 }
             };
             
@@ -197,7 +210,6 @@
                     alert('Problem retrieving place details');
                 }
             }
-
         }
 
         viewModel = (new ReportCrueltyViewModel(initialData.AllCrueltySpotCategories));
@@ -221,4 +233,58 @@
         });
 
     });
+
+    ko.bindingHandlers.loadingWhen = {
+        
+        init: function(element) {
+            var $element = $(element);
+            var currentPosition = $element.css('position');
+            var $loader = $("<div></div>").addClass("loader").hide();
+
+            //add the loader div to the original element
+            $element.append($loader);
+ 
+            //make sure that we can absolutely position the loader against the original element
+            if (currentPosition == "auto" || currentPosition == "static") {
+                $element.css("position", "relative");
+            }
+
+            //center the loader
+            $loader.css({
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                "margin-left": -($loader.width() / 2) + "px",
+                "margin-top": -($loader.height() / 2) + "px"
+            });
+        },
+        
+        update: function (element, valueAccessor) {
+            //unwrap the value of the flag using knockout utilities
+            var isLoading = ko.utils.unwrapObservable(valueAccessor());
+            //get a reference to the parent element
+            var $element = $(element);
+            //get a reference to the loader
+            var $loader = $element.find("div.loader");
+
+            //get a reference to every *other* element
+            var $childrenToHide = $element.children(":not(div.loader)");
+            
+            //if we are currently loading...
+            if (isLoading) {
+                //...hide and disable the children...
+                //$childrenToHide.css("visibility", "hidden").attr("disabled", "disabled");
+                $childrenToHide.css("opacity", .5).attr("disabled", "disabled");
+                //...and show the loader
+                $loader.show();
+            }
+            else {
+                //otherwise, fade out the loader
+                $loader.fadeOut("fast");
+                //and re-display and enable the children
+                //$childrenToHide.css("visibility", "visible").removeAttr("disabled");
+                $childrenToHide.css("opacity", 1).removeAttr("disabled");
+            }
+        }
+    };
 </script>
