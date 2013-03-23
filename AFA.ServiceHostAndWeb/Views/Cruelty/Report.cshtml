@@ -7,26 +7,67 @@
 @using (Html.BeginForm("Report", "Cruelty", FormMethod.Post, new { @class = "form-horizontal" }))
 {
 
-    <h3>Location (select one)</h3>
+    <section id="generalLocationSection">
+        <h3>Where is cruelty taking place?</h3>
+        <button class="btn btn-primary" data-bind="click: setGeneralLocationNearby">Nearby</button>
+        <span class="margin-right margin-left">Or</span>
+        <input type="text" placeholder="Zipcode or City & State" class="input-xlarge"/>
+        <button class="btn btn-primary">Next</button>
+    </section>
     
-    <ul id="crueltySpotContainer" class="click-to-select-container plain" data-bind="foreach: availablePlaces, loadingWhen: isLoading">
-        <li data-bind="css: { selected: $root.isPlaceSelected($data) }">
-            <h5 data-bind="text: name"></h5>
-            <div data-bind="text: vicinity"></div>
-            <div data-bind="text: $root.distanceInMiles(geometry.location)"></div>
-        </li>
-    </ul>
-    <a id="getMorePlacesButton" href="#" class="btn btn-success" data-bind="css: { disabled: !canRequestMoreNearbyPlaces() }">more</a>
-    
-    <h3>Type of Cruelty</h3>
-    <div class="control-group">
-        @Html.Label("Cruelty Spot Category", new { @class = "control-label" })
-        <div class="controls">
-            <select data-bind="options: availableCategories, optionsText: 'Value', optionsValue: 'Key', value: crueltySpotCategoryId"></select>
-        </div>
-    </div>
+    <section id="specificLocationSection" class="hide">
+        
+        <section class="summary margin-bottom">
+            <label class="inline margin-right bold">General Location:</label>    
+            <span data-bind="text: generalLocation"></span>
+            <button class="btn margin-left">Reset</button>
+        </section>
+        
+        <h3>What is the name of the location?</h3>
 
-    <input type="submit" class="btn btn-primary" data-bind="click: save, enable: isValidCrueltySpotSpecified" />
+        <section id="searchForPlaceSection" class="pull-left">
+            <h4>Search for business/place</h4>
+            <input type="text" id="searchPlaceInput" class="input-xxlarge" data-bind="value: searchPlace"/> 
+        </section>
+        
+        <section id="specificLocationDivider" class="section-divider pull-left">
+            <h4>Or</h4>
+
+        </section>
+
+        <section id="availablePlacesSection" class="pull-left">
+            <h4>Choose business/place</h4>
+            <ul id="crueltySpotContainer" class="click-to-select-container plain" data-bind="foreach: availablePlaces, loadingWhen: isLoading">
+                <li data-bind="css: { selected: $root.isPlaceSelected($data) }">
+                    <h5 data-bind="text: name"></h5>
+                    <div data-bind="text: vicinity"></div>
+                    <div data-bind="text: $root.distanceInMiles(geometry.location)"></div>
+                </li>
+            </ul>
+            <a id="getMorePlacesButton" href="#" class="btn btn-success" data-bind="css: { disabled: !canRequestMoreNearbyPlaces() }">more</a>
+        </section>
+        
+        <div class="clearfix"></div>
+
+        <div>
+            <a href="#" class="btn btn-primary">Next</a>
+        </div>
+    </section>
+    
+    
+    
+    
+    <section id="typeOfCrueltySection" class="hide">
+        <h3>Type of Cruelty</h3>
+        <div class="control-group">
+            @Html.Label("Cruelty Spot Category", new { @class = "control-label" })
+            <div class="controls">
+                <select data-bind="options: availableCategories, optionsText: 'Value', optionsValue: 'Key', value: crueltySpotCategoryId"></select>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary margin-bottom" data-bind="click: save, enable: isValidCrueltySpotSpecified" />
+    </section>
+    
 }
 
 <div id="map"></div>
@@ -40,6 +81,9 @@
     var viewModel = {};
     var googlePlacesService;
     var placeDetailsHash = new Hashtable();
+    var map;
+    var bounds;
+    var autocomplete;
 
     var positionError = function () {
         alert("Problem acquiring position");
@@ -69,7 +113,13 @@
             self.availableCategories = availableCategories;
             self.availablePlaces = ko.observableArray([]);
             self.crueltySpotCategoryId = ko.observable();
-            
+
+            self.generalLocation = ko.observable('');
+
+            self.searchPlace = ko.observable('');
+            self.searchLocation = ko.observable('');
+
+            self.myLatLonSet = ko.observable(false);
             self.myLat = ko.observable();
             self.myLon = ko.observable();
 
@@ -94,6 +144,18 @@
             self.isValidCrueltySpotSpecified = ko.computed(function() {
                 return self.crueltySpotPlace().name() && self.crueltySpotCategoryId() > 0;
             });
+
+            self.isSearchSpecified = ko.computed(function() {
+                return self.searchPlace().length > 0 || self.searchLocation().length > 0;
+            });
+
+            self.setGeneralLocationNearby = function() {
+                self.generalLocation('Nearby');
+                getNearbyPlaces();
+                $('#generalLocationSection').fadeOut('fast', function() {
+                    $('#specificLocationSection').fadeIn('fast');
+                });
+            };
             
             self.updateSelectedCrueltySpotPlaceDetails = function() {
                 var currentReference = self.crueltySpotPlace().reference();
@@ -114,6 +176,7 @@
                 self.crueltySpotPlace().website(placeDetails.website);
             };
 
+            
             self.save = function() {
                 var data = ko.toJSON(self);
                 $.ajax({
@@ -144,20 +207,49 @@
             };
             
             if (Modernizr.geolocation) {
-                navigator.geolocation.getCurrentPosition(getNearbyPlaces, positionError);
+                //navigator.geolocation.getCurrentPosition(getNearbyPlaces, positionError);
+                navigator.geolocation.getCurrentPosition(setMyLatLng, positionError);
 
             } else {
                 // no native support, implement fallback
                 // To Do: Ask for zipcode or address, or allow option to not use geolocation
             }
-
-            function getNearbyPlaces(position) {
+            
+            function setMyLatLng(position) {
                 var coordinates = position.coords;
         
                 self.myLat(coordinates.latitude);
                 self.myLon(coordinates.longitude);
+                self.myLatLonSet(true);
+            }
 
-                var map = new google.maps.Map(document.getElementById('map'), {
+            //function getNearbyPlaces(position) {
+            //    var coordinates = position.coords;
+        
+            //    self.myLat(coordinates.latitude);
+            //    self.myLon(coordinates.longitude);
+
+            //    map = new google.maps.Map(document.getElementById('map'), {
+            //        mapTypeId: google.maps.MapTypeId.ROADMAP,
+            //        center: self.myLatLng(),
+            //        zoom: 15
+            //    });
+
+            //    var request = {
+            //        location: self.myLatLng(),
+            //        //radius: '500',
+            //        types: ['amusement_park', 'aquarium', 'veterinary_care', 'zoo'],
+            //        rankBy: google.maps.places.RankBy.DISTANCE
+            //    };
+
+            //    googlePlacesService = new google.maps.places.PlacesService(map);
+            //    googlePlacesService.nearbySearch(request, placesSearchCallback);
+
+            //};
+            
+            function getNearbyPlaces() {
+                
+                map = new google.maps.Map(document.getElementById('map'), {
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     center: self.myLatLng(),
                     zoom: 15
@@ -172,6 +264,7 @@
 
                 googlePlacesService = new google.maps.places.PlacesService(map);
                 googlePlacesService.nearbySearch(request, placesSearchCallback);
+
             };
             
             function placesSearchCallback(results, status, pagination) {
@@ -190,6 +283,8 @@
                     } else {
                         self.canRequestMoreNearbyPlaces(false);
                     }
+                    
+                    initAutoComplete();
                 }
             };
             
@@ -209,6 +304,25 @@
                     // ToDo: Handle failures gracefully
                     alert('Problem retrieving place details');
                 }
+            }
+            
+            function initAutoComplete() {
+                var input = document.getElementById('searchPlaceInput');
+                var options = {
+                    bounds: map.getBounds(),
+                    types: ['establishment']
+                };
+
+                autocomplete = new google.maps.places.Autocomplete(input, options);
+                
+                google.maps.event.addListener(autocomplete, 'place_changed', function() {
+
+                    var place = autocomplete.getPlace();
+                    if (!place.geometry) {
+                        // Inform the user that a place was not found and return.
+                        return;
+                    }
+                });
             }
         }
 
