@@ -62,6 +62,7 @@
     <Compile Include="OrganizationActivity.cs" />
     <Compile Include="OrganizationListAdapter.cs" />
     <Compile Include="OrganizationsActivity.cs" />
+    <Compile Include="ReportCrueltyActivity.cs" />
     <Compile Include="UserListAdapter.cs" />
     <Compile Include="OrganizationUsersActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -89,9 +90,14 @@
     <AndroidResource Include="Resources\Layout\Events.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\Layout\ReportCruelty.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Values\Strings.xml" />
+    <AndroidResource Include="Resources\Values\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\Icon.png" />

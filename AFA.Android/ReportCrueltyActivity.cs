@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AFA.Android.Helpers;
+
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -12,17 +12,15 @@ using Android.Widget;
 
 namespace AFA.Android
 {
-    //[Activity(Label = "Events", MainLauncher = true, Icon = "@drawable/icon")]
-    [Activity(Label = "Events")]
-    public class EventsActivity : Activity
+    [Activity(Label = "Report Cruelty", MainLauncher = true, Icon = "@drawable/icon")]
+    public class ReportCrueltyActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.Events);
-
-            CompassionHelper.InitCompassionMenu(this, true);
+            // Create your application here
+            SetContentView(Resource.Layout.ReportCruelty);
         }
     }
 }

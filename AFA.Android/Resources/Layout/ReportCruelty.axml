@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:background="@color/green"
+    android:paddingLeft="5dip"
+    android:paddingRight="5dip">
+    <TextView
+        android:text="@string/ReportCrueltyHeader"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/headerText"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="10dip"
+        android:gravity="center" />
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LocationInput"
+        android:textColor="@color/pink"
+        android:textColorHint="@color/pink"
+        android:hint="Location"
+        android:layout_marginBottom="10dip" />
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TypeOfCrueltyInput"
+        android:textColor="@color/pink"
+        android:textColorHint="@color/pink"
+        android:hint="Type of Cruelty"
+        android:layout_marginBottom="10dip" />
+    <EditText
+        android:singleLine="false"
+        android:lines="5"
+        android:gravity="top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/DetailsInput"
+        android:textColor="@color/pink"
+        android:textColorHint="@color/pink"
+        android:hint="Add any details here..."
+        android:layout_marginBottom="10dip" />
+    <Button
+        android:text="Submit Report"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/SubmitButton" />
+</LinearLayout>

@@ -136,6 +136,9 @@ namespace AFA.Android
 			// aapt resource value: 0x7f06000c
 			public const int DescriptionText = 2131099660;
 			
+			// aapt resource value: 0x7f060024
+			public const int DetailsInput = 2131099684;
+			
 			// aapt resource value: 0x7f060018
 			public const int EmailButton = 2131099672;
 			
@@ -147,6 +150,9 @@ namespace AFA.Android
 			
 			// aapt resource value: 0x7f06001f
 			public const int FollowingLabel = 2131099679;
+			
+			// aapt resource value: 0x7f060022
+			public const int LocationInput = 2131099682;
 			
 			// aapt resource value: 0x7f06000a
 			public const int NeedVolunteersLabel = 2131099658;
@@ -175,14 +181,20 @@ namespace AFA.Android
 			// aapt resource value: 0x7f060019
 			public const int PhoneButton = 2131099673;
 			
+			// aapt resource value: 0x7f060025
+			public const int SubmitButton = 2131099685;
+			
+			// aapt resource value: 0x7f060023
+			public const int TypeOfCrueltyInput = 2131099683;
+			
 			// aapt resource value: 0x7f06000b
 			public const int UniteButton = 2131099659;
 			
-			// aapt resource value: 0x7f060021
-			public const int UserImage = 2131099681;
+			// aapt resource value: 0x7f060026
+			public const int UserImage = 2131099686;
 			
-			// aapt resource value: 0x7f060022
-			public const int UserName = 2131099682;
+			// aapt resource value: 0x7f060027
+			public const int UserName = 2131099687;
 			
 			// aapt resource value: 0x7f06001b
 			public const int WebsiteButton = 2131099675;
@@ -192,6 +204,9 @@ namespace AFA.Android
 			
 			// aapt resource value: 0x7f060003
 			public const int compassionMenu = 2131099651;
+			
+			// aapt resource value: 0x7f060021
+			public const int headerText = 2131099681;
 			
 			// aapt resource value: 0x7f060005
 			public const int linearLayout1 = 2131099653;
@@ -205,8 +220,8 @@ namespace AFA.Android
 			// aapt resource value: 0x7f060014
 			public const int linearLayout4 = 2131099668;
 			
-			// aapt resource value: 0x7f060023
-			public const int navArrow = 2131099683;
+			// aapt resource value: 0x7f060028
+			public const int navArrow = 2131099688;
 			
 			// aapt resource value: 0x7f060006
 			public const int relativeLayout1 = 2131099654;
@@ -247,7 +262,10 @@ namespace AFA.Android
 			public const int OrganizationUsers = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int UserListItem = 2130903046;
+			public const int ReportCruelty = 2130903046;
+			
+			// aapt resource value: 0x7f030007
+			public const int UserListItem = 2130903047;
 			
 			private Layout()
 			{
@@ -262,6 +280,9 @@ namespace AFA.Android
 			
 			// aapt resource value: 0x7f040000
 			public const int Hello = 2130968576;
+			
+			// aapt resource value: 0x7f040002
+			public const int ReportCrueltyHeader = 2130968578;
 			
 			private String()
 			{
