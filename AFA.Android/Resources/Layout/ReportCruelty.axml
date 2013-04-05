@@ -7,7 +7,9 @@
     android:minHeight="25px"
     android:background="@color/green"
     android:paddingLeft="5dip"
-    android:paddingRight="5dip">
+    android:paddingRight="5dip"
+    android:focusable="true" 
+    android:focusableInTouchMode="true">
     <TextView
         android:text="@string/ReportCrueltyHeader"
         android:layout_width="fill_parent"
