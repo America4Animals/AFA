@@ -27,20 +27,30 @@ namespace AFA.Android.GooglePlacesApi
         private double _longitude;
         private double _radius;
 
+        /// <summary>
+        /// Search for nearby places
+        /// </summary>
+        /// <param name="latitude"></param>
+        /// <param name="longitude"></param>
+        /// <param name="types"></param>
+        /// <param name="callback"></param>
         public void Search(double latitude, double longitude, List<string> types, Action<PlacesList> callback)
         {
-            var client = new WebClient();
-            var typesParam = new StringBuilder();
-            foreach (var type in types)
-            {
-                if (typesParam.Length > 0)
-                {
-                    typesParam.Append("|");
-                }
-                typesParam.Append(type);
-            }
+            Search(latitude, longitude, string.Join("|", types), callback);
+        }
 
-            string url = string.Format(PlacesSearchUrl, latitude, longitude, ApiKey, typesParam);
+        /// <summary>
+        /// Search for nearby places
+        /// </summary>
+        /// <param name="latitude"></param>
+        /// <param name="longitude"></param>
+        /// <param name="types">Pipe-delimited list of place types</param>
+        /// <param name="callback"></param>
+        public void Search(double latitude, double longitude, string types, Action<PlacesList> callback)
+        {
+            var client = new WebClient();
+
+            string url = string.Format(PlacesSearchUrl, latitude, longitude, ApiKey, types);
             Log.Info("PlacesUrl", url);
 
             client.DownloadStringCompleted += (sender, args) =>
@@ -51,16 +61,6 @@ namespace AFA.Android.GooglePlacesApi
 
             client.DownloadStringAsync(new Uri(url));
         }
-
-        //public List<Place> GetSortedListByDistance(List<Place> places, double lat, double lng)
-        //{
-        //    var geoHelper = new GeoHelper();
-        //    foreach (var place in places)
-        //    {
-        //        place.Distance = geoHelper.Distance(lat, lng, place.geometry.location.lat, place.geometry.location.lng, 'M');
-        //    }
-        //    return places.OrderBy(p => p.Distance).ToList();
-        //}
     }
 
     public class Place
