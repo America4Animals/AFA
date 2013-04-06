@@ -30,12 +30,29 @@ namespace AFA.Android.Activities
             Log.Debug("Position Lat:", gpsTracker.Latitude.ToString());
             Log.Debug("Position Lng:", gpsTracker.Longitude.ToString());
 
+            var placesListView = FindViewById<ListView>(Resource.Id.Places);
+
             googlePlaces.Search(gpsTracker.Latitude, gpsTracker.Longitude, PlaceTypes, placesList => RunOnUiThread(() =>
             {
-                var placesListView = FindViewById<ListView>(Resource.Id.Places);
-                placesListView.Adapter = new PlacesListAdapter(this, placesList.results);
+                // ToDo: Check Status and handle non-OK
+
+                var placeResults = placesList.results;
+                placesListView.Adapter = new PlacesListAdapter(this, placeResults);
+
+                placesListView.ItemClick += (sender, e) =>
+                {
+                    var place = placeResults[e.Position];
+                    var intent = new Intent(this, typeof(ReportCrueltyActivity));
+                    intent.PutExtra("placeName", place.name);
+                    intent.PutExtra("placeVicinity", place.vicinity);
+                    intent.PutExtra("placeReference", place.reference);
+                    StartActivity(intent);
+                };
+
                 loading.Hide();
             }));
+
+            
         }
     }
 }
