@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AFA.Android.Activities;
+using AFA.Android.Helpers;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -26,19 +27,13 @@ namespace AFA.Android
             SetContentView(Resource.Layout.ReportCruelty);
 
             var locationInput = FindViewById<EditText>(Resource.Id.LocationInput);
+            var crueltyTypeInput = FindViewById<EditText>(Resource.Id.TypeOfCrueltyInput);
 
-            var placeName = Intent.GetStringExtra("placeName");
+            var placeName = Intent.GetStringExtra(AppConstants.PlaceNameKey);
             if (!string.IsNullOrEmpty(placeName))
             {
-                var placeVicinity = Intent.GetStringExtra("placeVicinity");
+                var placeVicinity = Intent.GetStringExtra(AppConstants.PlaceVicinityKey);
                 var locationText = new StringBuilder();
-                //locationText.Append(placeName);
-                //locationText.Append("\n");
-                //locationText.Append(placeVicinity);
-                //locationInput.Text = locationText.ToString();
-
-                //var ssb = new SpannableStringBuilder(locationText.ToString());
-                //var pinkColorSpan = new ForegroundColorSpan()
 
                 locationText.Append("<font color='#FAA3DA'><b>");
                 locationText.Append(placeName);
@@ -49,7 +44,13 @@ namespace AFA.Android
                 locationText.Append("</small></font>");
                 locationInput.SetText(Html.FromHtml(locationText.ToString()), TextView.BufferType.Spannable);
             }
-            
+
+            var crueltyType = Intent.GetStringExtra(AppConstants.CrueltySpotCategoryNameKey);
+            if (!string.IsNullOrEmpty(crueltyType))
+            {
+                crueltyTypeInput.Text = crueltyType;
+            }
+
             locationInput.FocusChange += (sender, args) =>
                                              {
                                                  if (args.HasFocus)
@@ -58,6 +59,15 @@ namespace AFA.Android
                                                      StartActivity(intent);
                                                  }
                                              };
+
+            crueltyTypeInput.FocusChange += (sender, args) =>
+            {
+                if (args.HasFocus)
+                {
+                    var intent = new Intent(this, typeof(CrueltyTypesActivity));
+                    StartActivity(intent);
+                }
+            };
         }
     }
 }

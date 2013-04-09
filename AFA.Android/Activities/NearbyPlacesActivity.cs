@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AFA.Android.Helpers;
 using AFA_Android.Helpers;
 using Android.App;
 using Android.Content;
@@ -43,9 +44,9 @@ namespace AFA.Android.Activities
                 {
                     var place = placeResults[e.Position];
                     var intent = new Intent(this, typeof(ReportCrueltyActivity));
-                    intent.PutExtra("placeName", place.name);
-                    intent.PutExtra("placeVicinity", place.vicinity);
-                    intent.PutExtra("placeReference", place.reference);
+                    intent.PutExtra(AppConstants.PlaceNameKey, place.name);
+                    intent.PutExtra(AppConstants.PlaceVicinityKey, place.vicinity);
+                    intent.PutExtra(AppConstants.PlaceReferenceKey, place.reference);
                     StartActivity(intent);
                 };
 

@@ -3,7 +3,7 @@
     <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">AFA.Android</string>
 
-  <string name="ReportCrueltyHeader">We need your eyes and ears to find out where cruelty is occurring! Fill out this form to let your community know!</string>
+    <string name="ReportCrueltyHeader">We need your eyes and ears to find out where cruelty is occurring! Fill out this form to let your community know!</string>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
@@ -12,7 +12,5 @@
     <color name="lightgreen">#D0ED99</color>
     <color name="red">#EE2C2C</color>
     <color name="gray">#B5B5B5</color>
-  
-  
   
 </resources>

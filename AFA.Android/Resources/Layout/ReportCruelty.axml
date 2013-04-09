@@ -31,9 +31,6 @@
         android:hint="Location"
         android:layout_marginBottom="10dip" />
     <EditText
-        android:singleLine="false"
-        android:lines="2"
-        android:gravity="top"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/TypeOfCrueltyInput"

@@ -30,9 +30,7 @@ namespace AFA.Android
 
             CompassionHelper.InitCompassionMenu(this, false);
 
-            var loadingDialog = new ProgressDialog(this);
-            loadingDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
-            loadingDialog.Show();
+            var loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
 
             _organizationsList = FindViewById<ListView>(Resource.Id.Organizations);
             _organizationsList.ItemClick += (sender, e) =>

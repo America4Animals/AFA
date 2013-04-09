@@ -57,20 +57,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\CrueltyTypesActivity.cs" />
     <Compile Include="Activities\NearbyPlacesActivity.cs" />
     <Compile Include="AfaApplication.cs" />
     <Compile Include="Activities\EventsActivity.cs" />
+    <Compile Include="Adapters\CrueltyTypesAdapter.cs" />
     <Compile Include="GooglePlaces.cs" />
     <Compile Include="Helpers\AlertDialogManager.cs" />
+    <Compile Include="Helpers\AppConstants.cs" />
     <Compile Include="Helpers\CompassionHelper.cs" />
     <Compile Include="Helpers\GeoHelper.cs" />
     <Compile Include="Helpers\GPSTracker.cs" />
     <Compile Include="Activities\OrganizationActivity.cs" />
-    <Compile Include="OrganizationListAdapter.cs" />
+    <Compile Include="Helpers\LoadingDialogManager.cs" />
+    <Compile Include="Adapters\OrganizationListAdapter.cs" />
     <Compile Include="Activities\OrganizationsActivity.cs" />
     <Compile Include="Activities\ReportCrueltyActivity.cs" />
-    <Compile Include="PlacesListAdapter.cs" />
-    <Compile Include="UserListAdapter.cs" />
+    <Compile Include="Adapters\PlacesListAdapter.cs" />
+    <Compile Include="Adapters\UserListAdapter.cs" />
     <Compile Include="Activities\OrganizationUsersActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -104,6 +108,12 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\PlaceListItem.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\CrueltyTypes.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\CrueltyType.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
