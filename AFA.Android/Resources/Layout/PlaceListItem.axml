@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/list_selector"
     android:paddingTop="5dip"
-    android:paddingBottom="5dip"
-    >
+    android:paddingBottom="5dip">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,22 +14,19 @@
         android:textColor="@color/pink"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:paddingLeft="10dip" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Address"
+        android:textColor="@color/black"
         android:paddingLeft="10dip"
-        />
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:id="@+id/Address"
-      android:textColor="@color/black"
-      android:paddingLeft="10dip"
-      android:layout_below="@+id/Name"
-        />
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:id="@+id/Distance"
-      android:textColor="@color/gray"
-      android:paddingLeft="10dip"
-      android:layout_below="@+id/Address"
-        />
+        android:layout_below="@+id/Name" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Distance"
+        android:textColor="@color/gray"
+        android:paddingLeft="10dip"
+        android:layout_below="@+id/Address" />
 </RelativeLayout>

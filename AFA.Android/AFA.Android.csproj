@@ -143,6 +143,7 @@
     <AndroidResource Include="Resources\Layout\compassionMenu.xml" />
     <AndroidResource Include="Resources\Drawable\fail.png" />
     <AndroidResource Include="Resources\Drawable\success.png" />
+    <AndroidResource Include="Resources\Drawable\search.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
