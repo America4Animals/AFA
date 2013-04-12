@@ -10,6 +10,7 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Text;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Android.Text.Style;
@@ -20,13 +21,8 @@ namespace AFA.Android
     [Activity(Label = "Report Cruelty", MainLauncher = true, Icon = "@drawable/icon")]
     public class ReportCrueltyActivity : Activity
     {
-        private bool _locationSpecified;
-        private bool _crueltyTypeSpecified;
-
-        // From google, use to retrieve details about a place
-        private string _reference;
-        private int _crueltySpotCategoryId;
-
+        private EditText _locationInput;
+        private EditText _crueltyTypeInput;
         private Button _submitButton;
 
         protected override void OnCreate(Bundle bundle)
@@ -35,45 +31,52 @@ namespace AFA.Android
 
             SetContentView(Resource.Layout.ReportCruelty);
 
-            var locationInput = FindViewById<EditText>(Resource.Id.LocationInput);
-            var crueltyTypeInput = FindViewById<EditText>(Resource.Id.TypeOfCrueltyInput);
+            _locationInput = FindViewById<EditText>(Resource.Id.LocationInput);
+            _crueltyTypeInput = FindViewById<EditText>(Resource.Id.TypeOfCrueltyInput);
 
-            var placeName = Intent.GetStringExtra(AppConstants.PlaceNameKey);
-            _locationSpecified = !String.IsNullOrEmpty(placeName);
-            if (_locationSpecified)
+            if (!ReportCruelty.LocationSpecified)
             {
-                var placeVicinity = Intent.GetStringExtra(AppConstants.PlaceVicinityKey);
-                _reference = Intent.GetStringExtra(AppConstants.PlaceReferenceKey);
+                ReportCruelty.PlaceName = Intent.GetStringExtra(AppConstants.PlaceNameKey);
+                ReportCruelty.PlaceVicinity = Intent.GetStringExtra(AppConstants.PlaceVicinityKey);
+                ReportCruelty.Reference = Intent.GetStringExtra(AppConstants.PlaceReferenceKey);
 
-                var locationText = new StringBuilder();
-                locationText.Append("<font color='#FAA3DA'><b>");
-                locationText.Append(placeName);
-                locationText.Append("</b></font>");
-                locationText.Append("<br />");
-                locationText.Append("<font color='#B5B5B5'><small>");
-                locationText.Append(placeVicinity);
-                locationText.Append("</small></font>");
-                locationInput.SetText(Html.FromHtml(locationText.ToString()), TextView.BufferType.Spannable);
+                if (ReportCruelty.LocationSpecified)
+                {
+                    var locationText = new StringBuilder();
+                    locationText.Append("<font color='#FAA3DA'><b>");
+                    locationText.Append(ReportCruelty.PlaceName);
+                    locationText.Append("</b></font>");
+                    locationText.Append("<br />");
+                    locationText.Append("<font color='#B5B5B5'><small>");
+                    locationText.Append(ReportCruelty.PlaceVicinity);
+                    locationText.Append("</small></font>");
+                    ReportCruelty.PlaceText = locationText.ToString();
+                }
             }
 
-            var crueltyType = Intent.GetStringExtra(AppConstants.CrueltySpotCategoryNameKey);
-            _crueltyTypeSpecified = !String.IsNullOrEmpty(crueltyType);
-            if (_crueltyTypeSpecified)
+            if (!String.IsNullOrEmpty(ReportCruelty.PlaceText))
             {
-                crueltyTypeInput.Text = crueltyType;
-                _crueltySpotCategoryId = Intent.GetIntExtra(AppConstants.CrueltySpotCategoryIdKey, 0);
+                _locationInput.SetText(Html.FromHtml(ReportCruelty.PlaceText), TextView.BufferType.Spannable);     
             }
 
-            locationInput.FocusChange += (sender, args) =>
-                                             {
-                                                 if (args.HasFocus)
-                                                 {
-                                                     var intent = new Intent(this, typeof (NearbyPlacesActivity));
-                                                     StartActivity(intent);
-                                                 }
-                                             };
+            if (!ReportCruelty.CrueltyTypeSpecified)
+            {
+                ReportCruelty.CrueltyTypeName = Intent.GetStringExtra(AppConstants.CrueltySpotCategoryNameKey);
+                ReportCruelty.CrueltyTypeId = Intent.GetIntExtra(AppConstants.CrueltySpotCategoryIdKey, 0);
+            }
+                      
+            _crueltyTypeInput.Text = ReportCruelty.CrueltyTypeName;
 
-            crueltyTypeInput.FocusChange += (sender, args) =>
+            _locationInput.FocusChange += (sender, args) =>
+                                            {
+                                                if (args.HasFocus)
+                                                {
+                                                    var intent = new Intent(this, typeof (NearbyPlacesActivity));
+                                                    StartActivity(intent);
+                                                }
+                                            };
+
+            _crueltyTypeInput.FocusChange += (sender, args) =>
             {
                 if (args.HasFocus)
                 {
@@ -82,15 +85,18 @@ namespace AFA.Android
                 }
             };
 
+            //Log.Debug("LocationSpecified", _locationSpecified.ToString());
+            //Log.Debug("CrueltyTypeSpecified", _crueltyTypeSpecified.ToString());
+
             _submitButton = FindViewById<Button>(Resource.Id.SubmitButton);
-            _submitButton.Enabled = _locationSpecified && _crueltyTypeSpecified;
+            _submitButton.Enabled = ReportCruelty.LocationSpecified && ReportCruelty.CrueltyTypeSpecified;
 
             _submitButton.Click += (sender, args) =>
                                       {
                                           var loadingDialog = ProgressDialog.Show(this, "Submitting", "Please wait...", true);
                                           var descriptionInput = FindViewById<EditText>(Resource.Id.DetailsInput);
                                           var googlePlaces = new GooglePlacesApi.GooglePlaces();
-                                          googlePlaces.GetDetails(_reference, response =>
+                                          googlePlaces.GetDetails(ReportCruelty.Reference, response =>
                                                                                   {
                                                                                       // ToDo: Check Status and handle non-OK
                                                                                       var placeDetails = response.result;
@@ -106,14 +112,14 @@ namespace AFA.Android
                                                                                                                    WebpageUrl = placeDetails.website,
                                                                                                                    Latitude = placeDetails.geometry.location.lat,
                                                                                                                    Longitude = placeDetails.geometry.location.lng,
-                                                                                                                   CrueltySpotCategoryId = _crueltySpotCategoryId
+                                                                                                                   CrueltySpotCategoryId = ReportCruelty.CrueltyTypeId
                                                                                                                };
 
                                                                                       AfaApplication.ServiceClient.PostAsync(crueltySpotDto,
                                                                                            r => RunOnUiThread(() =>
                                                                                            {
-                                                                                               locationInput.Text = "";
-                                                                                               crueltyTypeInput.Text = "";
+                                                                                               _locationInput.Text = "";
+                                                                                               _crueltyTypeInput.Text = "";
                                                                                                descriptionInput.Text = "";
                                                                                                loadingDialog.Hide();
                                                                                                Toast.MakeText(this, "Cruelty Spot Added", ToastLength.Short).Show();
@@ -127,6 +133,4 @@ namespace AFA.Android
         }
 
     }
-
-    
 }
