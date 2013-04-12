@@ -20,6 +20,9 @@ namespace AFA.Android.GooglePlacesApi
         private const string PlacesSearchUrl =
             "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={0},{1}&sensor=false&key={2}&types={3}&rankby=distance";
 
+        private const string PlaceDetailsUrl =
+            "https://maps.googleapis.com/maps/api/place/details/json?sensor=false&key={0}&reference={1}";
+
         // Google API Key
         private const string ApiKey = "AIzaSyB8V0OaG2ojKBPATLwJVaH2EztPQtLhg5M"; // place your API key here
 
@@ -61,6 +64,26 @@ namespace AFA.Android.GooglePlacesApi
 
             client.DownloadStringAsync(new Uri(url));
         }
+
+        /// <summary>
+        /// Get details about a place
+        /// </summary>
+        /// <param name="reference"></param>
+        /// <param name="callback"></param>
+        public void GetDetails(string reference, Action<PlaceDetails> callback)
+        {
+            var client = new WebClient();
+            string url = string.Format(PlaceDetailsUrl, ApiKey, reference);
+            Log.Info("PlaceDetailsUrl", url);
+
+            client.DownloadStringCompleted += (sender, args) =>
+                                                  {
+                                                      var placeDetails = args.Result;
+                                                      callback(placeDetails.FromJson<PlaceDetails>());
+                                                  };
+
+            client.DownloadStringAsync(new Uri(url));
+        }
     }
 
     public class Place
@@ -74,7 +97,133 @@ namespace AFA.Android.GooglePlacesApi
         public string formatted_address { get; set; }
         public string formatted_phone_number { get; set; }
 
+        public List<Address_Component> address_components { get; set; }
+        public string website { get; set; }
+
         public double Distance { get; set; }
+
+        // accessors
+        public string Address
+        {
+            get
+            {
+                if (address_components == null)
+                {
+                    return null;
+                }
+
+                var address = new StringBuilder();
+
+                var streetNumber =
+                    address_components.FirstOrDefault(
+                        ac => ac.types.Contains(AddressType.street_number.ToString()));
+
+                var streetName =
+                    address_components.FirstOrDefault(ac => ac.types.Contains(AddressType.route.ToString()));
+
+                if (streetName != null)
+                {
+                    if (streetNumber != null)
+                    {
+                        address.Append(streetNumber.long_name);
+                        address.Append(" ");
+                    }
+
+                    address.Append(streetName.long_name);
+                }
+
+                if (address.Length == 0)
+                {
+                    return null;
+                }
+
+                return address.ToString();
+            }
+        }
+
+        public string City
+        {
+            get
+            {
+                if (address_components == null)
+                {
+                    return null;
+                }
+
+                var city =
+                    address_components.FirstOrDefault(ac => ac.types.Contains(AddressType.locality.ToString()));
+
+                if (city == null)
+                {
+                    return null;
+                }
+
+                return city.long_name;
+            }
+        }
+
+        public string StateOrProvince
+        {
+            get
+            {
+                if (address_components == null)
+                {
+                    return null;
+                }
+
+                var stateOrProvince =
+                    address_components.FirstOrDefault(ac => ac.types.Contains(AddressType.administrative_area_level_1.ToString()));
+
+                if (stateOrProvince == null)
+                {
+                    return null;
+                }
+
+                return stateOrProvince.short_name;
+            }
+        }
+
+        public string Country
+        {
+            get
+            {
+                if (address_components == null)
+                {
+                    return null;
+                }
+
+                var country =
+                    address_components.FirstOrDefault(ac => ac.types.Contains(AddressType.country.ToString()));
+
+                if (country == null)
+                {
+                    return null;
+                }
+
+                return country.long_name;
+            }
+        }
+
+        public string PostalCode
+        {
+            get
+            {
+                if (address_components == null)
+                {
+                    return null;
+                }
+
+                var postalCode =
+                    address_components.FirstOrDefault(ac => ac.types.Contains(AddressType.postal_code.ToString()));
+
+                if (postalCode == null)
+                {
+                    return null;
+                }
+
+                return postalCode.long_name;
+            }
+        }
     }
 
     public class PlacesList
@@ -96,7 +245,24 @@ namespace AFA.Android.GooglePlacesApi
 
     public class Location
     {
-        public double lat { get; set; }
-        public double lng { get; set; }
+        public decimal lat { get; set; }
+        public decimal lng { get; set; }
+    }
+
+    public class Address_Component
+    {
+        public string long_name { get; set; }
+        public string short_name { get; set; }
+        public List<string> types { get; set; }
+    }
+
+    public enum AddressType
+    {
+        street_number,
+        route,
+        locality,
+        administrative_area_level_1,
+        country,
+        postal_code
     }
 }

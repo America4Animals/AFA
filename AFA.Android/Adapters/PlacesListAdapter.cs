@@ -54,7 +54,7 @@ namespace AFA.Android
             var placeLng = place.geometry.location.lng;
 
             var geoHelper = new GeoHelper();
-            double distance = geoHelper.Distance(myLat, myLng, placeLat, placeLng, 'M');
+            double distance = geoHelper.Distance(myLat, myLng, Convert.ToDouble(placeLat), Convert.ToDouble(placeLng), 'M');
             distanceLabel.Text = distance.ToString("N2") + " miles";
             return view;
         }
