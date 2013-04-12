@@ -25,7 +25,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -129,16 +128,6 @@
     <AndroidResource Include="Resources\Drawable\sharkFin.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AFA.Android.Library\AFA.Android.Library.csproj">
-      <Project>{b4f2b335-5e88-4e81-9f4f-83dc08417ad7}</Project>
-      <Name>AFA.Android.Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GooglePlayServices\GooglePlayServices.csproj">
-      <Project>{c388951c-c427-4f44-a54b-5a64bae0da39}</Project>
-      <Name>GooglePlayServices</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Drawable\list_selector.xml" />
     <AndroidResource Include="Resources\Drawable\newsIcon.png" />
@@ -163,4 +152,14 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <ProjectReference Include="..\GooglePlayServices\GooglePlayServices.csproj">
+      <Project>{C388951C-C427-4F44-A54B-5A64BAE0DA39}</Project>
+      <Name>GooglePlayServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AFA.Android.Library\AFA.Android.Library.csproj">
+      <Project>{B4F2B335-5E88-4E81-9F4F-83DC08417AD7}</Project>
+      <Name>AFA.Android.Library</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

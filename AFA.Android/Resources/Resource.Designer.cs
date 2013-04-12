@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: Android.Runtime.ResourceDesignerAttribute("AFA.Android.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("AFA.Android.Resource", IsApplication=true)]
 
 namespace AFA.Android
 {
@@ -19,9 +19,9 @@ namespace AFA.Android
 	public partial class Resource
 	{
 		
-		Resource()
+		static Resource()
 		{
-			global::Android.Runtime.ResourceIdManager.UpdateIdValues ();
+			global::Android.Runtime.ResourceIdManager.UpdateIdValues();
 		}
 		
 		public static void UpdateIdValues()
@@ -73,6 +73,11 @@ namespace AFA.Android
 			// aapt resource value: 0x7f01000d
 			public const int zOrderOnTop = 2130771981;
 			
+			static Attribute()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
 			private Attribute()
 			{
 			}
@@ -101,6 +106,11 @@ namespace AFA.Android
 			
 			// aapt resource value: 0x7f060000
 			public const int white = 2131099648;
+			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Color()
 			{
@@ -151,6 +161,11 @@ namespace AFA.Android
 			
 			// aapt resource value: 0x7f02000d
 			public const int success = 2130837517;
+			
+			static Drawable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Drawable()
 			{
@@ -313,6 +328,11 @@ namespace AFA.Android
 			// aapt resource value: 0x7f04000b
 			public const int textView1 = 2130968587;
 			
+			static Id()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
 			private Id()
 			{
 			}
@@ -356,6 +376,11 @@ namespace AFA.Android
 			
 			// aapt resource value: 0x7f03000b
 			public const int UserListItem = 2130903051;
+			
+			static Layout()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Layout()
 			{
@@ -425,6 +450,11 @@ namespace AFA.Android
 			// aapt resource value: 0x7f05000d
 			public const int common_signin_button_text_long = 2131034125;
 			
+			static String()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
 			private String()
 			{
 			}
@@ -490,6 +520,11 @@ namespace AFA.Android
 			
 			// aapt resource value: 13
 			public const int MapAttrs_zOrderOnTop = 13;
+			
+			static Styleable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
 			
 			private Styleable()
 			{
