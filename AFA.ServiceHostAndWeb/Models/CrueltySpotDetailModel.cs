@@ -16,10 +16,11 @@ namespace AFA.ServiceHostAndWeb.Models
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
-        [DisplayName("Address Line 1")]
-        public string AddressLine1 { get; set; }
-        [DisplayName("Address Line 2")]
-        public string AddressLine2 { get; set; }
+        //[DisplayName("Address Line 1")]
+        //public string AddressLine1 { get; set; }
+        //[DisplayName("Address Line 2")]
+        //public string AddressLine2 { get; set; }
+        public string Address { get; set; }
         public string City { get; set; }
         public int StateProvinceId { get; set; }
         public string StateProvinceAbbreviation { get; set; }
