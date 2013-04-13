@@ -46,16 +46,25 @@ namespace AFA.Android.Activities
             searchButton.Click += (sender, args) =>
                                       {
                                           _loading.Show();
-                                          var name = FindViewById<EditText>(Resource.Id.placeNameSearch);
-                                          if (string.IsNullOrWhiteSpace(name.Text))
+                                          var placeNameInput = FindViewById<EditText>(Resource.Id.placeNameSearch);
+                                          var locationNameInput = FindViewById<EditText>(Resource.Id.locationSearch);
+
+                                          var placeNameSpecified = !String.IsNullOrWhiteSpace(placeNameInput.Text);
+                                          var locationNameSpecified = !String.IsNullOrWhiteSpace(locationNameInput.Text);
+
+                                          if (!placeNameSpecified && !locationNameSpecified)
                                           {
-                                              // No name specified
+                                              // Nothing specified, do default search
                                               DoPlacesSearch();
+                                          }
+                                          else if (locationNameSpecified)
+                                          {
+                                              _googlePlaces.Search(this, locationNameInput.Text, PlaceTypes, placeNameInput.Text, SearchCallback);
                                           }
                                           else
                                           {
                                               _googlePlaces.Search(_gpsTracker.Latitude, _gpsTracker.Longitude,
-                                                                   PlaceTypes, name.Text, SearchCallback);
+                                                                   PlaceTypes, placeNameInput.Text, SearchCallback);
                                           }
                                       };
         }

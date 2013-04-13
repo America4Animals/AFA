@@ -12,6 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using ServiceStack.Text;
+using Android.Locations;
 
 namespace AFA.Android.GooglePlacesApi
 {
@@ -78,19 +79,59 @@ namespace AFA.Android.GooglePlacesApi
         /// <param name="callback"></param>
         public void Search(double latitude, double longitude, string types, string name, Action<PlacesList> callback)
         {
-            var client = new WebClient();
-
-            string url = string.Format(PlacesSearchByNameUrl, latitude, longitude, ApiKey, types, name);
-
-            Log.Info("PlacesByNameUrl", url);
-
-            client.DownloadStringCompleted += (sender, args) =>
+            if (!string.IsNullOrWhiteSpace(name))
             {
-                var placeList = args.Result;
-                callback(placeList.FromJson<PlacesList>());
-            };
+                var client = new WebClient();
+                string url = string.Format(PlacesSearchByNameUrl, latitude, longitude, ApiKey, types, name);
 
-            client.DownloadStringAsync(new Uri(url));
+                Log.Info("PlacesByNameUrl", url);
+
+                client.DownloadStringCompleted += (sender, args) =>
+                                                      {
+                                                          var placeList = args.Result;
+                                                          callback(placeList.FromJson<PlacesList>());
+                                                      };
+
+                client.DownloadStringAsync(new Uri(url));
+            }
+            else
+            {
+                // Name not specified, do search without specifying a name
+                Search(latitude, longitude, types, callback);
+            }
+        }
+
+        /// <summary>
+        /// Search for a place with a specified name and location
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="locationName"></param>
+        /// <param name="types"></param>
+        /// <param name="name"></param>
+        /// <param name="callback"></param>
+        public void Search(Context context, string locationName, string types, string name, Action<PlacesList> callback)
+        {
+            var geocoder = new Geocoder(context);
+            Log.Debug("SearchByLocation", locationName);
+            var locations = geocoder.GetFromLocationName(locationName, 1);
+            if (locations.Any())
+            {
+                var location = locations.First();
+                var lat = location.Latitude;
+                var lng = location.Longitude;
+
+                Search(lat, lng, types, name, callback);
+            }
+            else
+            {
+                Log.Debug("SearchByLocation", "No results found");
+                // Couldn't find a location for the specified locationName, callback with empty collection
+                callback(new PlacesList
+                             {
+                                 status = "",
+                                 results = new List<Place>()
+                             });
+            }
         }
 
         /// <summary>
@@ -112,6 +153,7 @@ namespace AFA.Android.GooglePlacesApi
 
             client.DownloadStringAsync(new Uri(url));
         }
+
     }
 
     public class Place
