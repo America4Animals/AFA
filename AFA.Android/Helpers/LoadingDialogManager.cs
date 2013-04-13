@@ -20,6 +20,9 @@ namespace AFA.Android.Helpers
             loadingDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
             loadingDialog.Show();
             return loadingDialog;
+
+            // Alt
+            //ProgressDialog.Show(this, "Retrieving Nearby Places", "Please wait...", true);
         }
     }
 }

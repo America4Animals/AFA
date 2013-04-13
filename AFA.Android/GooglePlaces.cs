@@ -20,6 +20,9 @@ namespace AFA.Android.GooglePlacesApi
         private const string PlacesSearchUrl =
             "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={0},{1}&sensor=false&key={2}&types={3}&rankby=distance";
 
+        private const string PlacesSearchByNameUrl =
+            "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={0},{1}&sensor=false&key={2}&types={3}&rankby=distance&name={4}";
+
         private const string PlaceDetailsUrl =
             "https://maps.googleapis.com/maps/api/place/details/json?sensor=false&key={0}&reference={1}";
 
@@ -55,6 +58,31 @@ namespace AFA.Android.GooglePlacesApi
 
             string url = string.Format(PlacesSearchUrl, latitude, longitude, ApiKey, types);
             Log.Info("PlacesUrl", url);
+
+            client.DownloadStringCompleted += (sender, args) =>
+            {
+                var placeList = args.Result;
+                callback(placeList.FromJson<PlacesList>());
+            };
+
+            client.DownloadStringAsync(new Uri(url));
+        }
+
+        /// <summary>
+        /// Search for nearby place with specific name
+        /// </summary>
+        /// <param name="latitude"></param>
+        /// <param name="longitude"></param>
+        /// <param name="types"></param>
+        /// <param name="name"></param>
+        /// <param name="callback"></param>
+        public void Search(double latitude, double longitude, string types, string name, Action<PlacesList> callback)
+        {
+            var client = new WebClient();
+
+            string url = string.Format(PlacesSearchByNameUrl, latitude, longitude, ApiKey, types, name);
+
+            Log.Info("PlacesByNameUrl", url);
 
             client.DownloadStringCompleted += (sender, args) =>
             {
