@@ -3,6 +3,8 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:background="@color/white">
     <LinearLayout
         android:orientation="vertical"
@@ -37,7 +39,7 @@
                 android:textColor="@color/gray"
                 android:textColorHint="@color/gray"
                 android:hint="Current Location"
-                android:layout_weight="1" 
+                android:layout_weight="1"
                 android:layout_marginRight="5dip"
                 android:layout_marginBottom="10dip"
                 android:layout_marginLeft="10dip" />
@@ -47,8 +49,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/search"
                 android:layout_marginRight="10dip"
-                android:layout_marginBottom="10dip"
-            />
+                android:layout_marginBottom="10dip" />
         </LinearLayout>
     </LinearLayout>
     <ListView

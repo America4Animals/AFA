@@ -15,6 +15,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Text.Style;
 using System.Drawing;
+using Android.Views.InputMethods;
 
 namespace AFA.Android
 {
@@ -85,8 +86,11 @@ namespace AFA.Android
                 }
             };
 
-            //Log.Debug("LocationSpecified", _locationSpecified.ToString());
-            //Log.Debug("CrueltyTypeSpecified", _crueltyTypeSpecified.ToString());
+            
+            // ToDo: This line hides the soft keyboard, but doing so makes the EditText only have 1 line.
+            // Look into alternative
+            //_locationInput.InputType = InputTypes.Null;
+            _crueltyTypeInput.InputType = InputTypes.Null;
 
             _submitButton = FindViewById<Button>(Resource.Id.SubmitButton);
             _submitButton.Enabled = ReportCruelty.LocationSpecified && ReportCruelty.CrueltyTypeSpecified;
