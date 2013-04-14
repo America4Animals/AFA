@@ -15,7 +15,7 @@ namespace AFA.Android.Helpers
     public static class AlertDialogManager
     {
         public static void ShowAlertDialog(Context context, string title, string message,
-                                    Boolean isSuccessStatus)
+                                    bool isSuccessStatus)
         {
             var alertDialog = new AlertDialog.Builder(context).Create();
 

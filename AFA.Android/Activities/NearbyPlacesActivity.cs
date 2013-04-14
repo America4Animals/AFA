@@ -95,23 +95,7 @@ namespace AFA.Android.Activities
                                   _loadMoreButton.Visibility = String.IsNullOrEmpty(_nextPageToken) ? ViewStates.Gone : ViewStates.Visible;
 
                                   _placesListView.Adapter = new PlacesListAdapter(this, _placeResults);
-
-                                  _placesListView.ItemClick += (sender, e) =>
-                                                                   {
-                                                                       var place = _placeResults[e.Position];
-                                                                       var intent = new Intent(this,
-                                                                                               typeof (
-                                                                                                   ReportCrueltyActivity
-                                                                                                   ));
-                                                                       intent.PutExtra(AppConstants.PlaceNameKey,
-                                                                                       place.name);
-                                                                       intent.PutExtra(AppConstants.PlaceVicinityKey,
-                                                                                       place.vicinity);
-                                                                       intent.PutExtra(AppConstants.PlaceReferenceKey,
-                                                                                       place.reference);
-                                                                       StartActivity(intent);
-                                                                   };
-
+                                  _placesListView.ItemClick += PlacesListViewItemClick;
                                   _loading.Hide();
                               });
         }
@@ -130,27 +114,27 @@ namespace AFA.Android.Activities
                 int currentPosition = _placesListView.FirstVisiblePosition;
 
                 _placesListView.Adapter = new PlacesListAdapter(this, _placeResults);
-
-                _placesListView.ItemClick += (sender, e) =>
-                {
-                    var place = _placeResults[e.Position];
-                    var intent = new Intent(this,
-                                            typeof(
-                                                ReportCrueltyActivity
-                                                ));
-                    intent.PutExtra(AppConstants.PlaceNameKey,
-                                    place.name);
-                    intent.PutExtra(AppConstants.PlaceVicinityKey,
-                                    place.vicinity);
-                    intent.PutExtra(AppConstants.PlaceReferenceKey,
-                                    place.reference);
-                    StartActivity(intent);
-                };
-
+                _placesListView.ItemClick += PlacesListViewItemClick;
                 _placesListView.SetSelectionFromTop(currentPosition + 1, 0);
 
                 _loading.Hide();
             });
+        }
+
+        private void PlacesListViewItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            var place = _placeResults[e.Position];
+            var intent = new Intent(this,
+                                    typeof(
+                                        ReportCrueltyActivity
+                                        ));
+            intent.PutExtra(AppConstants.PlaceNameKey,
+                            place.name);
+            intent.PutExtra(AppConstants.PlaceVicinityKey,
+                            place.vicinity);
+            intent.PutExtra(AppConstants.PlaceReferenceKey,
+                            place.reference);
+            StartActivity(intent);
         }
 
         private void FetchMoreResults()
@@ -161,39 +145,5 @@ namespace AFA.Android.Activities
                 _googlePlaces.Search(_nextPageToken, _gpsTracker.Latitude, _gpsTracker.Longitude, FetchMoreCallback);
             }
         }
-
-        //private class LoadMorePlaces : AsyncTask
-        //{
-        //    private Context _context;
-        //    private GooglePlacesApi.GooglePlaces _googlePlaces;
-        //    private ProgressDialog _progressDialog;
-
-
-        //    public LoadMorePlaces(Context context, GooglePlacesApi.GooglePlaces googlePlaces)
-        //    {
-        //        _context = context;
-        //        _googlePlaces = googlePlaces;
-        //    }
-
-        //    protected override void OnPreExecute()
-        //    {
-        //        base.OnPreExecute();
-
-        //        _progressDialog = LoadingDialogManager.ShowLoadingDialog(_context);
-        //    }
-
-        //    protected override Java.Lang.Object DoInBackground(params Java.Lang.Object[] @params)
-        //    {
-        //        throw new NotImplementedException();
-        //    }
-
-        //    protected override void OnPostExecute(Java.Lang.Object result)
-        //    {
-        //        base.OnPostExecute(result);
-
-        //        _progressDialog.Dismiss();
-        //    }
-        //}
-
     }
 }

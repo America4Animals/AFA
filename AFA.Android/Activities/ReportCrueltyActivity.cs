@@ -116,7 +116,8 @@ namespace AFA.Android
                                                                                                                    WebpageUrl = placeDetails.website,
                                                                                                                    Latitude = placeDetails.geometry.location.lat,
                                                                                                                    Longitude = placeDetails.geometry.location.lng,
-                                                                                                                   CrueltySpotCategoryId = ReportCruelty.CrueltyTypeId
+                                                                                                                   CrueltySpotCategoryId = ReportCruelty.CrueltyTypeId,
+                                                                                                                   GooglePlaceId = placeDetails.id
                                                                                                                };
 
                                                                                       AfaApplication.ServiceClient.PostAsync(crueltySpotDto,

@@ -14,8 +14,6 @@ namespace AFA.ServiceModel.DTOs
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        //public string AddressLine1 { get; set; }
-        //public string AddressLine2 { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public int StateProvinceId { get; set; }
@@ -28,6 +26,9 @@ namespace AFA.ServiceModel.DTOs
 
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
+
+        public string GooglePlaceId { get; set; }
+        public string NonGooglePlaceAddressHash { get; set; }
 
         public int CrueltySpotCategoryId { get; set; }
         public string CrueltySpotCategoryName { get; set; }

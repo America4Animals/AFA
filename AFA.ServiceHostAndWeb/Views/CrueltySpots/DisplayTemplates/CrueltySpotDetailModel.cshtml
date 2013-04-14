@@ -7,6 +7,20 @@
             @Html.DisplayFor(m => m.CrueltySpotCategoryName)
         </div>
     </div>
+    
+    <div class="control-group">
+        @Html.Label("Google Place ID", new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.GooglePlaceId)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.Label("Address Hash", new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.NonGooglePlaceAddressHash)
+        </div>
+    </div>
 
     <div class="control-group">
         @Html.LabelFor(m => m.Name, new { @class = "control-label" })

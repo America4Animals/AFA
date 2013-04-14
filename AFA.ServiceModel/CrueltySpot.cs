@@ -13,8 +13,6 @@ namespace AFA.ServiceModel
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        //public string AddressLine1 { get; set; }
-        //public string AddressLine2 { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         [References(typeof(StateProvince))]
@@ -29,6 +27,9 @@ namespace AFA.ServiceModel
 
         [References(typeof(CrueltySpotCategory))]
         public int CrueltySpotCategoryId { get; set; }
+
+        public string GooglePlaceId { get; set; }
+        public string NonGooglePlaceAddressHash { get; set; }
 
     }
 }
