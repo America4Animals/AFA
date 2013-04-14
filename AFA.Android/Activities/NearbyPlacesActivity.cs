@@ -25,6 +25,10 @@ namespace AFA.Android.Activities
         private ProgressDialog _loading;
 
         private ListView _placesListView;
+        private List<GooglePlacesApi.Place> _placeResults;
+        private string _nextPageToken;
+
+        private Button _loadMoreButton;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -35,10 +39,16 @@ namespace AFA.Android.Activities
             _gpsTracker = ((AfaApplication)ApplicationContext).GetGpsTracker(this);
             _googlePlaces = new GooglePlacesApi.GooglePlaces();
             _loading = LoadingDialogManager.ShowLoadingDialog(this);
+
             Log.Debug("Position Lat:", _gpsTracker.Latitude.ToString());
             Log.Debug("Position Lng:", _gpsTracker.Longitude.ToString());
 
             _placesListView = FindViewById<ListView>(Resource.Id.Places);
+            _loadMoreButton = new Button(this);
+            _loadMoreButton.Text = "Load More Results";
+            _placesListView.AddFooterView(_loadMoreButton);
+            
+            _loadMoreButton.Click += (sender, args) => FetchMoreResults();
 
             DoPlacesSearch();
 
@@ -80,12 +90,15 @@ namespace AFA.Android.Activities
                               {
                                   // ToDo: Check Status and handle non-OK
 
-                                  var placeResults = placesList.results;
-                                  _placesListView.Adapter = new PlacesListAdapter(this, placeResults);
+                                  _placeResults = placesList.results;
+                                  _nextPageToken = placesList.next_page_token;
+                                  _loadMoreButton.Visibility = String.IsNullOrEmpty(_nextPageToken) ? ViewStates.Gone : ViewStates.Visible;
+
+                                  _placesListView.Adapter = new PlacesListAdapter(this, _placeResults);
 
                                   _placesListView.ItemClick += (sender, e) =>
                                                                    {
-                                                                       var place = placeResults[e.Position];
+                                                                       var place = _placeResults[e.Position];
                                                                        var intent = new Intent(this,
                                                                                                typeof (
                                                                                                    ReportCrueltyActivity
@@ -102,5 +115,85 @@ namespace AFA.Android.Activities
                                   _loading.Hide();
                               });
         }
+
+        private void FetchMoreCallback(GooglePlacesApi.PlacesList placesList)
+        {
+            RunOnUiThread(() =>
+            {
+                // ToDo: Check Status and handle non-OK
+
+                _placeResults.AddRange(placesList.results);
+                _nextPageToken = placesList.next_page_token;
+                _loadMoreButton.Visibility = String.IsNullOrEmpty(_nextPageToken) ? ViewStates.Invisible : ViewStates.Visible;
+
+                // Get ListView current position - used to maintain scroll position
+                int currentPosition = _placesListView.FirstVisiblePosition;
+
+                _placesListView.Adapter = new PlacesListAdapter(this, _placeResults);
+
+                _placesListView.ItemClick += (sender, e) =>
+                {
+                    var place = _placeResults[e.Position];
+                    var intent = new Intent(this,
+                                            typeof(
+                                                ReportCrueltyActivity
+                                                ));
+                    intent.PutExtra(AppConstants.PlaceNameKey,
+                                    place.name);
+                    intent.PutExtra(AppConstants.PlaceVicinityKey,
+                                    place.vicinity);
+                    intent.PutExtra(AppConstants.PlaceReferenceKey,
+                                    place.reference);
+                    StartActivity(intent);
+                };
+
+                _placesListView.SetSelectionFromTop(currentPosition + 1, 0);
+
+                _loading.Hide();
+            });
+        }
+
+        private void FetchMoreResults()
+        {
+            if (!String.IsNullOrEmpty(_nextPageToken))
+            {
+                _loading.Show();
+                _googlePlaces.Search(_nextPageToken, _gpsTracker.Latitude, _gpsTracker.Longitude, FetchMoreCallback);
+            }
+        }
+
+        //private class LoadMorePlaces : AsyncTask
+        //{
+        //    private Context _context;
+        //    private GooglePlacesApi.GooglePlaces _googlePlaces;
+        //    private ProgressDialog _progressDialog;
+
+
+        //    public LoadMorePlaces(Context context, GooglePlacesApi.GooglePlaces googlePlaces)
+        //    {
+        //        _context = context;
+        //        _googlePlaces = googlePlaces;
+        //    }
+
+        //    protected override void OnPreExecute()
+        //    {
+        //        base.OnPreExecute();
+
+        //        _progressDialog = LoadingDialogManager.ShowLoadingDialog(_context);
+        //    }
+
+        //    protected override Java.Lang.Object DoInBackground(params Java.Lang.Object[] @params)
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+
+        //    protected override void OnPostExecute(Java.Lang.Object result)
+        //    {
+        //        base.OnPostExecute(result);
+
+        //        _progressDialog.Dismiss();
+        //    }
+        //}
+
     }
 }

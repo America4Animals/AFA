@@ -21,6 +21,9 @@ namespace AFA.Android.GooglePlacesApi
         private const string PlacesSearchUrl =
             "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={0},{1}&sensor=false&key={2}&types={3}&rankby=distance";
 
+        private const string MorePlacesSearchUrl =
+            "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={0},{1}&sensor=false&key={2}&pagetoken={3}&rankby=distance";
+
         private const string PlacesSearchByNameUrl =
             "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={0},{1}&sensor=false&key={2}&types={3}&rankby=distance&name={4}";
 
@@ -30,9 +33,9 @@ namespace AFA.Android.GooglePlacesApi
         // Google API Key
         private const string ApiKey = "AIzaSyB8V0OaG2ojKBPATLwJVaH2EztPQtLhg5M"; // place your API key here
 
-        private double _latitude;
-        private double _longitude;
-        private double _radius;
+        //private double _latitude;
+        //private double _longitude;
+        //private double _radius;
 
         /// <summary>
         /// Search for nearby places
@@ -132,6 +135,29 @@ namespace AFA.Android.GooglePlacesApi
                                  results = new List<Place>()
                              });
             }
+        }
+
+        /// <summary>
+        /// Get more results supplying the a next page token
+        /// </summary>
+        /// <param name="nextPageToken"></param>
+        /// <param name="latitude"></param>
+        /// <param name="longitude"></param>
+        /// <param name="callback"></param>
+        public void Search(string nextPageToken, double latitude, double longitude, Action<PlacesList> callback)
+        {
+            var client = new WebClient();
+
+            string url = string.Format(MorePlacesSearchUrl, latitude, longitude, ApiKey, nextPageToken);
+            Log.Info("PlacesUrl", url);
+
+            client.DownloadStringCompleted += (sender, args) =>
+            {
+                var placeList = args.Result;
+                callback(placeList.FromJson<PlacesList>());
+            };
+
+            client.DownloadStringAsync(new Uri(url));
         }
 
         /// <summary>
@@ -299,6 +325,7 @@ namespace AFA.Android.GooglePlacesApi
     public class PlacesList
     {
         public string status { get; set; }
+        public string next_page_token { get; set; }
         public List<Place> results { get; set; }
     }
 
