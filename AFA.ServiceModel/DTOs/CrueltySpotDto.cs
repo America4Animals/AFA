@@ -80,4 +80,14 @@ namespace AFA.ServiceModel.DTOs
     {
         public List<CrueltySpotDto> CrueltySpots { get; set; }
     }
+
+    [Route("/crueltyspots/googleplaces", "GET")]
+    public class CrueltySpotsGooglePlaces : IReturn<CrueltySpotsGooglePlacesResponse>
+    {
+    }
+
+    public class CrueltySpotsGooglePlacesResponse
+    {
+        public List<CrueltySpotDto> CrueltySpots { get; set; }
+    }
 }

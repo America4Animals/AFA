@@ -19,6 +19,7 @@ namespace AFA.ServiceInterface
     public interface ICrueltySpotsService
     {
         CrueltySpotsResponse Get(CrueltySpotsDto request);
+        CrueltySpotsGooglePlacesResponse Get(CrueltySpotsGooglePlaces request);
         IRequestContext RequestContext { get; set; }
     }
 }

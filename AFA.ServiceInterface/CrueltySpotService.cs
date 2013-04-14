@@ -83,5 +83,26 @@ namespace AFA.ServiceInterface
                 CrueltySpots = crueltySpots
             };
         }
+
+        /// <summary>
+        /// GET /crueltyspots/googleplaces
+        /// Returns cruelty spots google place ids (only)
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public CrueltySpotsGooglePlacesResponse Get(CrueltySpotsGooglePlaces request)
+        {
+            var crueltySpots = new List<CrueltySpotDto>();
+            string query = string.Format("select GooglePlaceId " +
+                                     "from CrueltySpot cs " +
+                                     "where GooglePlaceId is not null");
+
+            crueltySpots = Db.Select<CrueltySpotDto>(query);
+
+            return new CrueltySpotsGooglePlacesResponse
+            {
+                CrueltySpots = crueltySpots
+            };
+        }
     }
 }
