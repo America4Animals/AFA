@@ -202,8 +202,8 @@ namespace AFA.Android
 			// aapt resource value: 0x7f04001e
 			public const int ContactLabel = 2130968606;
 			
-			// aapt resource value: 0x7f040009
-			public const int CrueltyTypes = 2130968585;
+			// aapt resource value: 0x7f04000a
+			public const int CrueltyTypes = 2130968586;
 			
 			// aapt resource value: 0x7f040013
 			public const int DescriptionText = 2130968595;
@@ -229,8 +229,8 @@ namespace AFA.Android
 			// aapt resource value: 0x7f04002f
 			public const int LocationInput = 2130968623;
 			
-			// aapt resource value: 0x7f040008
-			public const int Name = 2130968584;
+			// aapt resource value: 0x7f040009
+			public const int Name = 2130968585;
 			
 			// aapt resource value: 0x7f040011
 			public const int NeedVolunteersLabel = 2130968593;
@@ -283,8 +283,8 @@ namespace AFA.Android
 			// aapt resource value: 0x7f040005
 			public const int compassionLayout = 2130968581;
 			
-			// aapt resource value: 0x7f04000a
-			public const int compassionMenu = 2130968586;
+			// aapt resource value: 0x7f04000b
+			public const int compassionMenu = 2130968587;
 			
 			// aapt resource value: 0x7f04002e
 			public const int headerText = 2130968622;
@@ -337,8 +337,8 @@ namespace AFA.Android
 			// aapt resource value: 0x7f040003
 			public const int terrain = 2130968579;
 			
-			// aapt resource value: 0x7f04000b
-			public const int textView1 = 2130968587;
+			// aapt resource value: 0x7f040008
+			public const int textView1 = 2130968584;
 			
 			static Id()
 			{
@@ -357,37 +357,40 @@ namespace AFA.Android
 			public const int compassionMenu = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int CrueltyType = 2130903041;
+			public const int CrueltySpot = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int CrueltyTypes = 2130903042;
+			public const int CrueltyType = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int Events = 2130903043;
+			public const int CrueltyTypes = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int Organization = 2130903044;
+			public const int Events = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int OrganizationListItem = 2130903045;
+			public const int Organization = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int Organizations = 2130903046;
+			public const int OrganizationListItem = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int OrganizationUsers = 2130903047;
+			public const int Organizations = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int PlaceListItem = 2130903048;
+			public const int OrganizationUsers = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int Places = 2130903049;
+			public const int PlaceListItem = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int ReportCruelty = 2130903050;
+			public const int Places = 2130903050;
 			
 			// aapt resource value: 0x7f03000b
-			public const int UserListItem = 2130903051;
+			public const int ReportCruelty = 2130903051;
+			
+			// aapt resource value: 0x7f03000c
+			public const int UserListItem = 2130903052;
 			
 			static Layout()
 			{

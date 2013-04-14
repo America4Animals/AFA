@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\CrueltySpotActivity.cs" />
     <Compile Include="Activities\CrueltyTypesActivity.cs" />
     <Compile Include="Activities\NearbyPlacesActivity.cs" />
     <Compile Include="AfaApplication.cs" />
@@ -114,6 +115,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\CrueltyType.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\CrueltySpot.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -122,11 +122,16 @@ namespace AFA.Android
                                                                                       AfaApplication.ServiceClient.PostAsync(crueltySpotDto,
                                                                                            r => RunOnUiThread(() =>
                                                                                            {
-                                                                                               _locationInput.Text = "";
-                                                                                               _crueltyTypeInput.Text = "";
-                                                                                               descriptionInput.Text = "";
-                                                                                               loadingDialog.Hide();
-                                                                                               Toast.MakeText(this, "Cruelty Spot Added", ToastLength.Short).Show();
+                                                                                               var intent =
+                                                                                                   new Intent(this,
+                                                                                                              typeof (
+                                                                                                                  CrueltySpotActivity
+                                                                                                                  ));
+                                                                                               intent.PutExtra(
+                                                                                                   AppConstants
+                                                                                                       .ShowCrueltySpotAddedSuccessfullyKey,
+                                                                                                   true);
+                                                                                               StartActivity(intent);
                                                                                            }),
                                                                                            (r, ex) => RunOnUiThread(() =>
                                                                                            {
