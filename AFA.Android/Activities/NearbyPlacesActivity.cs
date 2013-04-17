@@ -124,17 +124,26 @@ namespace AFA.Android.Activities
         private void PlacesListViewItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             var place = _placeResults[e.Position];
-            var intent = new Intent(this,
+
+            if (place.HasBeenReported)
+            {
+                AlertDialogManager.ShowAlertDialog(this, "", "This place has already been reported", true);
+            }
+            else
+            {
+                var intent = new Intent(this,
                                     typeof(
                                         ReportCrueltyActivity
                                         ));
-            intent.PutExtra(AppConstants.PlaceNameKey,
-                            place.name);
-            intent.PutExtra(AppConstants.PlaceVicinityKey,
-                            place.vicinity);
-            intent.PutExtra(AppConstants.PlaceReferenceKey,
-                            place.reference);
-            StartActivity(intent);
+                intent.PutExtra(AppConstants.PlaceNameKey,
+                                place.name);
+                intent.PutExtra(AppConstants.PlaceVicinityKey,
+                                place.vicinity);
+                intent.PutExtra(AppConstants.PlaceReferenceKey,
+                                place.reference);
+                StartActivity(intent);
+            }
+            
         }
 
         private void FetchMoreResults()
