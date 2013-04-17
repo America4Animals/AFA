@@ -50,6 +50,25 @@ namespace AFA.ServiceInterface
                 Db.Insert(california);
             }
 
+            if (Db.Select<CrueltySpotCategory>().Count == 0)
+            {
+                var crueltySpotCategories = new List<CrueltySpotCategory>
+                                                {
+                                                    new CrueltySpotCategory {Name = "Foie Gras"},
+                                                    new CrueltySpotCategory {Name = "Shark Fin"},
+                                                    new CrueltySpotCategory {Name = "Circuses & Rodeos"},
+                                                    new CrueltySpotCategory {Name = "Races"},
+                                                    new CrueltySpotCategory {Name = "Captive Performances"},
+                                                    new CrueltySpotCategory {Name = "Puppy Mill Stores (formerly Pet Stores)"},
+                                                    new CrueltySpotCategory {Name = "Fur Stores"},
+                                                    new CrueltySpotCategory {Name = "Horse Carriages"},
+                                                    new CrueltySpotCategory {Name = "Labs"},
+                                                    new CrueltySpotCategory {Name = "Other"}
+                                                };
+
+                Db.InsertAll(crueltySpotCategories);
+            }
+
             if (Db.Select<EventCategory>().Count == 0)
             {
                 var eventCategories = new List<EventCategory>
