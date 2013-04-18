@@ -31,5 +31,15 @@ namespace AFA.Android.Helpers
         {
             get { return !String.IsNullOrEmpty(CrueltyTypeName); }
         }
+
+        public static void ClearAll()
+        {
+            PlaceName = null;
+            PlaceVicinity = null;
+            Reference = null;
+            PlaceText = null;
+            CrueltyTypeName = null;
+            CrueltyTypeId = 0;
+        }
     }
 }

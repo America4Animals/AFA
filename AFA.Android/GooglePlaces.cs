@@ -35,7 +35,9 @@ namespace AFA.Android.GooglePlacesApi
         private const string ApiKey = "AIzaSyB8V0OaG2ojKBPATLwJVaH2EztPQtLhg5M"; // place your API key here
 
         private PlacesList _placesList;
-        private List<string> _reportedGooglePlaceIds; 
+        private bool _reportedGooglePlacesRetrieved = false;
+        // GooglePlaceId, Id
+        private Dictionary<string,int> _reportedGooglePlaces; 
 
         /// <summary>
         /// Search for nearby places
@@ -82,8 +84,7 @@ namespace AFA.Android.GooglePlacesApi
         public void Search(double latitude, double longitude, string types, Action<PlacesList> callback)
         {
             var client = new WebClient();
-            _placesList = null;
-            _reportedGooglePlaceIds = null;
+            InitSearch();
 
             string url = string.Format(PlacesSearchUrl, latitude, longitude, ApiKey, types);
             Log.Info("PlacesUrl", url);
@@ -95,39 +96,10 @@ namespace AFA.Android.GooglePlacesApi
                 SearchCompleted(callback);
             };
 
-            AfaApplication.ServiceClient.GetAsync(new CrueltySpotsGooglePlaces(), r =>
-                                                                                      {
-                                                                                          _reportedGooglePlaceIds =
-                                                                                              r.CrueltySpots.Select(
-                                                                                                  cs => cs.GooglePlaceId)
-                                                                                               .ToList();
-
-                                                                                            SearchCompleted(callback);
-                                                                                      }, (r, ex) =>
-                                                                                               {
-                                                                                                   throw ex;
-                                                                                               });
+            GetReportedCrueltySpotsAsync(callback);
 
             client.DownloadStringAsync(new Uri(url));
         }
-
-        private void SearchCompleted(Action<PlacesList> callback)
-        {
-            if (_placesList != null && _reportedGooglePlaceIds != null)
-            {
-                foreach (var place in _placesList.results)
-                {
-                    if (_reportedGooglePlaceIds.Contains(place.id))
-                    {
-                        place.HasBeenReported = true;
-                    }
-                }
-
-                callback(_placesList);
-            }
-        }
-
-
 
         /// <summary>
         /// Search for nearby place with specific name
@@ -142,6 +114,7 @@ namespace AFA.Android.GooglePlacesApi
             if (!string.IsNullOrWhiteSpace(name))
             {
                 var client = new WebClient();
+                InitSearch();
                 string url = string.Format(PlacesSearchByNameUrl, latitude, longitude, ApiKey, types, name);
 
                 Log.Info("PlacesByNameUrl", url);
@@ -149,9 +122,12 @@ namespace AFA.Android.GooglePlacesApi
                 client.DownloadStringCompleted += (sender, args) =>
                                                       {
                                                           var placeList = args.Result;
-                                                          callback(placeList.FromJson<PlacesList>());
+                                                          //callback(placeList.FromJson<PlacesList>());
+                                                          _placesList = placeList.FromJson<PlacesList>();
+                                                           SearchCompleted(callback);
                                                       };
 
+                GetReportedCrueltySpotsAsync(callback);
                 client.DownloadStringAsync(new Uri(url));
             }
             else
@@ -204,7 +180,7 @@ namespace AFA.Android.GooglePlacesApi
         public void Search(string nextPageToken, double latitude, double longitude, Action<PlacesList> callback)
         {
             var client = new WebClient();
-
+            InitSearch();
             string url = string.Format(MorePlacesSearchUrl, latitude, longitude, ApiKey, nextPageToken);
             Log.Info("PlacesUrl", url);
 
@@ -213,6 +189,8 @@ namespace AFA.Android.GooglePlacesApi
                 var placeList = args.Result;
                 callback(placeList.FromJson<PlacesList>());
             };
+
+            GetReportedCrueltySpotsAsync(callback);
 
             client.DownloadStringAsync(new Uri(url));
         }
@@ -237,6 +215,60 @@ namespace AFA.Android.GooglePlacesApi
             client.DownloadStringAsync(new Uri(url));
         }
 
+        /// <summary>
+        /// Get Reported Cruelty Spots with Google Place Ids
+        /// ToDo: This method should accept a lat/lng so we don't retrieve more than we need
+        /// </summary>
+        /// <param name="callback"></param>
+        private void GetReportedCrueltySpotsAsync(Action<PlacesList> callback)
+        {
+            AfaApplication.ServiceClient.GetAsync(new CrueltySpotsGooglePlaces(), r =>
+            {
+                _reportedGooglePlaces = new Dictionary<string, int>();
+                foreach (
+                    var crueltySpot in
+                        r.CrueltySpots)
+                {
+                    _reportedGooglePlaces.Add(
+                        crueltySpot.GooglePlaceId,
+                        crueltySpot.Id);
+                }
+                _reportedGooglePlacesRetrieved = true;
+                SearchCompleted(callback);
+            }, (r, ex) => { throw ex; });
+        }
+
+        /// <summary>
+        /// Start with a clean slate
+        /// </summary>
+        private void InitSearch()
+        {
+            _placesList = null;
+            _reportedGooglePlacesRetrieved = false;
+            _reportedGooglePlaces = null;
+        }
+
+        /// <summary>
+        /// When placesList and reportedGooglePlaces have both been retrieved, update some fields in results and call callback
+        /// </summary>
+        /// <param name="callback"></param>
+        private void SearchCompleted(Action<PlacesList> callback)
+        {
+            if (_placesList != null && _reportedGooglePlacesRetrieved)
+            {
+                foreach (var place in _placesList.results)
+                {
+                    if (_reportedGooglePlaces.ContainsKey(place.id))
+                    {
+                        place.HasBeenReported = true;
+                        place.AfaId = _reportedGooglePlaces[place.id];
+                    }
+                }
+
+                callback(_placesList);
+            }
+        }
+
     }
 
     public class Place
@@ -255,6 +287,7 @@ namespace AFA.Android.GooglePlacesApi
 
         public double Distance { get; set; }
         public bool HasBeenReported { get; set; }
+        public int AfaId { get; set; }
 
         // accessors
         public string Address

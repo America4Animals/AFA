@@ -33,7 +33,8 @@ namespace AFA.ServiceInterface
         {
             var crueltySpot = request.ToEntity();
             Db.Insert(crueltySpot);
-            return new CrueltySpotResponse { CrueltySpot = new CrueltySpotDto() };
+            var crueltySpotId = Db.GetLastInsertId();
+            return new CrueltySpotResponse { CrueltySpot = new CrueltySpotDto { Id = Convert.ToInt32(crueltySpotId) } };
         }
 
         public object Put(CrueltySpotDto crueltySpotDto)
@@ -93,7 +94,7 @@ namespace AFA.ServiceInterface
         public CrueltySpotsGooglePlacesResponse Get(CrueltySpotsGooglePlaces request)
         {
             var crueltySpots = new List<CrueltySpotDto>();
-            string query = string.Format("select GooglePlaceId " +
+            string query = string.Format("select Id, GooglePlaceId " +
                                      "from CrueltySpot cs " +
                                      "where GooglePlaceId is not null");
 

@@ -127,7 +127,18 @@ namespace AFA.Android.Activities
 
             if (place.HasBeenReported)
             {
-                AlertDialogManager.ShowAlertDialog(this, "", "This place has already been reported", true);
+                new AlertDialog.Builder(this)
+                    .SetTitle("Cruelty already reported here")
+                    .SetMessage("The location you have chosen is already on the cruelty map.")
+                    .SetNegativeButton("Cancel", (o, args) => {})
+                    .SetPositiveButton("Edit Info", (o, args) =>
+                                                        {
+                                                            var intent = new Intent(this, typeof (CrueltySpotActivity));
+                                                            Log.Debug("CrueltySpotId", place.AfaId.ToString());
+                                                            intent.PutExtra(AppConstants.CrueltySpotIdKey, place.AfaId);
+                                                            StartActivity(intent);
+                                                        })
+                    .Show();
             }
             else
             {

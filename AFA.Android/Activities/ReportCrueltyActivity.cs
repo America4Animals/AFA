@@ -24,6 +24,7 @@ namespace AFA.Android
     {
         private EditText _locationInput;
         private EditText _crueltyTypeInput;
+        private EditText _descriptionInput;
         private Button _submitButton;
 
         protected override void OnCreate(Bundle bundle)
@@ -86,6 +87,7 @@ namespace AFA.Android
                 }
             };
 
+            _descriptionInput = FindViewById<EditText>(Resource.Id.DetailsInput);
             
             // ToDo: This line hides the soft keyboard, but doing so makes the EditText only have 1 line.
             // Look into alternative
@@ -98,7 +100,6 @@ namespace AFA.Android
             _submitButton.Click += (sender, args) =>
                                       {
                                           var loadingDialog = ProgressDialog.Show(this, "Submitting", "Please wait...", true);
-                                          var descriptionInput = FindViewById<EditText>(Resource.Id.DetailsInput);
                                           var googlePlaces = new GooglePlacesApi.GooglePlaces();
                                           googlePlaces.GetDetails(ReportCruelty.Reference, response =>
                                                                                   {
@@ -107,7 +108,7 @@ namespace AFA.Android
                                                                                       var crueltySpotDto = new CrueltySpotDto
                                                                                                                {
                                                                                                                    Name = placeDetails.name,
-                                                                                                                   Description = descriptionInput.Text,
+                                                                                                                   Description = _descriptionInput.Text,
                                                                                                                    Address = placeDetails.Address,
                                                                                                                    City = placeDetails.City,
                                                                                                                    StateProvinceAbbreviation = placeDetails.StateOrProvince,
@@ -122,7 +123,9 @@ namespace AFA.Android
 
                                                                                       AfaApplication.ServiceClient.PostAsync(crueltySpotDto,
                                                                                            r => RunOnUiThread(() =>
-                                                                                           {
+                                                                                            {
+                                                                                               var crueltySpotId = r.CrueltySpot.Id;
+                                                                                               
                                                                                                var intent =
                                                                                                    new Intent(this,
                                                                                                               typeof (
@@ -132,7 +135,11 @@ namespace AFA.Android
                                                                                                    AppConstants
                                                                                                        .ShowCrueltySpotAddedSuccessfullyKey,
                                                                                                    true);
+                                                                                               intent.PutExtra(
+                                                                                                   AppConstants.CrueltySpotIdKey, crueltySpotId);
                                                                                                StartActivity(intent);
+                                                                                               loadingDialog.Dismiss();
+                                                                                                ClearAll();
                                                                                            }),
                                                                                            (r, ex) => RunOnUiThread(() =>
                                                                                            {
@@ -140,6 +147,14 @@ namespace AFA.Android
                                                                                            }));
                                                                                   });                                         
                                       };
+        }
+
+        private void ClearAll()
+        {
+            _locationInput.Text = "";
+            _crueltyTypeInput.Text = "";
+            _descriptionInput.Text = "";
+            ReportCruelty.ClearAll();
         }
 
     }

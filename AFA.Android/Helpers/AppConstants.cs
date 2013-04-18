@@ -22,5 +22,7 @@ namespace AFA.Android.Helpers
         public static string CrueltySpotCategoryNameKey = "CrueltySpotCategoryName";
 
         public static string ShowCrueltySpotAddedSuccessfullyKey = "ShowCrueltySpotAddedSuccessfully";
+
+        public static string CrueltySpotIdKey = "CrueltySpotId";
     }
 }
