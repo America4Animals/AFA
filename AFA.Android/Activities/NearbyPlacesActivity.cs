@@ -29,6 +29,7 @@ namespace AFA.Android.Activities
         private string _nextPageToken;
 
         private Button _loadMoreButton;
+        private Button _addNewPlaceButton;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -44,9 +45,19 @@ namespace AFA.Android.Activities
             Log.Debug("Position Lng:", _gpsTracker.Longitude.ToString());
 
             _placesListView = FindViewById<ListView>(Resource.Id.Places);
+
+            var layout = new LinearLayout(this);
             _loadMoreButton = new Button(this);
             _loadMoreButton.Text = "Load More Results";
-            _placesListView.AddFooterView(_loadMoreButton);
+            _loadMoreButton.LayoutParameters = new TableLayout.LayoutParams(TableLayout.LayoutParams.WrapContent,
+                                                                            TableLayout.LayoutParams.WrapContent, 1f);
+            layout.AddView(_loadMoreButton);
+            _addNewPlaceButton = new Button(this);
+            _addNewPlaceButton.Text = "Add New";
+            _addNewPlaceButton.LayoutParameters = new TableLayout.LayoutParams(TableLayout.LayoutParams.WrapContent,
+                                                                            TableLayout.LayoutParams.WrapContent, 1f);
+            layout.AddView(_addNewPlaceButton);
+            _placesListView.AddFooterView(layout);
             
             _loadMoreButton.Click += (sender, args) => FetchMoreResults();
 
