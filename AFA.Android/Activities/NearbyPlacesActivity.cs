@@ -157,12 +157,15 @@ namespace AFA.Android.Activities
                                     typeof(
                                         ReportCrueltyActivity
                                         ));
-                intent.PutExtra(AppConstants.PlaceNameKey,
-                                place.name);
-                intent.PutExtra(AppConstants.PlaceVicinityKey,
-                                place.vicinity);
-                intent.PutExtra(AppConstants.PlaceReferenceKey,
-                                place.reference);
+                //intent.PutExtra(AppConstants.PlaceNameKey,
+                //                place.name);
+                //intent.PutExtra(AppConstants.PlaceVicinityKey,
+                //                place.vicinity);
+                //intent.PutExtra(AppConstants.PlaceReferenceKey,
+                //                place.reference);
+                ReportCruelty.PlaceName = place.name;
+                ReportCruelty.PlaceVicinity = place.vicinity;
+                ReportCruelty.Reference = place.reference;
                 StartActivity(intent);
             }
             

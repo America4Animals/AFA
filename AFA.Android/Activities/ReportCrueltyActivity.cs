@@ -36,35 +36,18 @@ namespace AFA.Android
             _locationInput = FindViewById<EditText>(Resource.Id.LocationInput);
             _crueltyTypeInput = FindViewById<EditText>(Resource.Id.TypeOfCrueltyInput);
 
-            if (!ReportCruelty.LocationSpecified)
+            if (ReportCruelty.LocationSpecified)
             {
-                ReportCruelty.PlaceName = Intent.GetStringExtra(AppConstants.PlaceNameKey);
-                ReportCruelty.PlaceVicinity = Intent.GetStringExtra(AppConstants.PlaceVicinityKey);
-                ReportCruelty.Reference = Intent.GetStringExtra(AppConstants.PlaceReferenceKey);
-
-                if (ReportCruelty.LocationSpecified)
-                {
-                    var locationText = new StringBuilder();
-                    locationText.Append("<font color='#FAA3DA'><b>");
-                    locationText.Append(ReportCruelty.PlaceName);
-                    locationText.Append("</b></font>");
-                    locationText.Append("<br />");
-                    locationText.Append("<font color='#B5B5B5'><small>");
-                    locationText.Append(ReportCruelty.PlaceVicinity);
-                    locationText.Append("</small></font>");
-                    ReportCruelty.PlaceText = locationText.ToString();
-                }
-            }
-
-            if (!String.IsNullOrEmpty(ReportCruelty.PlaceText))
-            {
-                _locationInput.SetText(Html.FromHtml(ReportCruelty.PlaceText), TextView.BufferType.Spannable);     
-            }
-
-            if (!ReportCruelty.CrueltyTypeSpecified)
-            {
-                ReportCruelty.CrueltyTypeName = Intent.GetStringExtra(AppConstants.CrueltySpotCategoryNameKey);
-                ReportCruelty.CrueltyTypeId = Intent.GetIntExtra(AppConstants.CrueltySpotCategoryIdKey, 0);
+                var locationText = new StringBuilder();
+                locationText.Append("<font color='#FAA3DA'><b>");
+                locationText.Append(ReportCruelty.PlaceName);
+                locationText.Append("</b></font>");
+                locationText.Append("<br />");
+                locationText.Append("<font color='#B5B5B5'><small>");
+                locationText.Append(ReportCruelty.PlaceVicinity);
+                locationText.Append("</small></font>");
+                ReportCruelty.PlaceText = locationText.ToString();
+                _locationInput.SetText(Html.FromHtml(ReportCruelty.PlaceText), TextView.BufferType.Spannable);
             }
                       
             _crueltyTypeInput.Text = ReportCruelty.CrueltyTypeName;

@@ -34,8 +34,10 @@ namespace AFA.Android.Activities
             {
                 var crueltySpotCategory = _crueltySpotCategories[e.Position];
                 var intent = new Intent(this, typeof(ReportCrueltyActivity));
-                intent.PutExtra(AppConstants.CrueltySpotCategoryIdKey, crueltySpotCategory.Id);
-                intent.PutExtra(AppConstants.CrueltySpotCategoryNameKey, crueltySpotCategory.Name);
+                //intent.PutExtra(AppConstants.CrueltySpotCategoryIdKey, crueltySpotCategory.Id);
+                //intent.PutExtra(AppConstants.CrueltySpotCategoryNameKey, crueltySpotCategory.Name);
+                ReportCruelty.CrueltyTypeId = crueltySpotCategory.Id;
+                ReportCruelty.CrueltyTypeName = crueltySpotCategory.Name;
                 StartActivity(intent);
             };
 

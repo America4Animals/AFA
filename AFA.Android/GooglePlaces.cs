@@ -229,9 +229,12 @@ namespace AFA.Android.GooglePlacesApi
                     var crueltySpot in
                         r.CrueltySpots)
                 {
-                    _reportedGooglePlaces.Add(
+                    if (!_reportedGooglePlaces.ContainsKey(crueltySpot.GooglePlaceId))
+                    {
+                        _reportedGooglePlaces.Add(
                         crueltySpot.GooglePlaceId,
                         crueltySpot.Id);
+                    }
                 }
                 _reportedGooglePlacesRetrieved = true;
                 SearchCompleted(callback);
