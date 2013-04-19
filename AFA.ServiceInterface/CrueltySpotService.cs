@@ -32,6 +32,20 @@ namespace AFA.ServiceInterface
         public object Post(CrueltySpotDto request)
         {
             var crueltySpot = request.ToEntity();
+
+            if (request.StateProvinceId < 1 && !String.IsNullOrEmpty(request.StateProvinceAbbreviation))
+            {
+                var stateQuery = String.Format("select * " +
+                                               "from StateProvince " +
+                                               "where Abbreviation = '{0}'", request.StateProvinceAbbreviation);
+
+                var stateProvince = Db.Select<StateProvince>(stateQuery).FirstOrDefault();
+                if (stateProvince != null)
+                {
+                    request.StateProvinceId = stateProvince.Id;
+                }
+            }
+
             Db.Insert(crueltySpot);
             var crueltySpotId = Db.GetLastInsertId();
             return new CrueltySpotResponse { CrueltySpot = new CrueltySpotDto { Id = Convert.ToInt32(crueltySpotId) } };
