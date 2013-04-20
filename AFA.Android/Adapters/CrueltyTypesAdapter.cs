@@ -41,7 +41,7 @@ namespace AFA.Android
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var view = convertView ?? _context.LayoutInflater.Inflate(Resource.Layout.PlaceListItem, null);
+            var view = convertView ?? _context.LayoutInflater.Inflate(Resource.Layout.CrueltyTypeListItem, null);
 
             var crueltySpotCategory = _crueltySpotCategorieses[position];
             view.FindViewById<TextView>(Resource.Id.Name).Text = crueltySpotCategory.Name;
