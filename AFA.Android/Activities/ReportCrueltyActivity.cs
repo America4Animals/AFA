@@ -33,6 +33,8 @@ namespace AFA.Android
 
             SetContentView(Resource.Layout.ReportCruelty);
 
+            CrueltyNavMenuHelper.InitCrueltyNavMenu(this, CrueltyNavMenuItem.ReportIt);
+
             _locationInput = FindViewById<EditText>(Resource.Id.LocationInput);
             _crueltyTypeInput = FindViewById<EditText>(Resource.Id.TypeOfCrueltyInput);
 

@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\CrueltyMapActivity.cs" />
     <Compile Include="Activities\CrueltySpotActivity.cs" />
     <Compile Include="Activities\CrueltyTypesActivity.cs" />
     <Compile Include="Activities\NearbyPlacesActivity.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Adapters\PlacesListAdapter.cs" />
     <Compile Include="Adapters\UserListAdapter.cs" />
     <Compile Include="Activities\OrganizationUsersActivity.cs" />
+    <Compile Include="Helpers\CrueltyNavMenuHelper.cs" />
     <Compile Include="Helpers\ReportCruelty.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,6 +122,12 @@
     <AndroidResource Include="Resources\Layout\CrueltySpot.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\Layout\crueltyNavMenu.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\CrueltyMap.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml">
@@ -148,6 +156,9 @@
     <AndroidResource Include="Resources\Drawable\fail.png" />
     <AndroidResource Include="Resources\Drawable\success.png" />
     <AndroidResource Include="Resources\Drawable\search.png" />
+    <AndroidResource Include="Resources\Drawable\bullhornIcon.png" />
+    <AndroidResource Include="Resources\Drawable\pencilIcon.png" />
+    <AndroidResource Include="Resources\Drawable\ellipsisIcon.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

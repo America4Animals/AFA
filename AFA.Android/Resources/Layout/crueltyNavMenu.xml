@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/compassionLayout"
+          android:orientation="horizontal"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content">
+
+  <TextView
+      android:text="Report It"
+      android:layout_height="fill_parent"
+      android:layout_width="0px"
+      android:id="@+id/ReportItMenuButton"
+      android:textSize="12dp"
+      android:gravity="center|center_vertical"
+      android:paddingTop="10dip"
+      android:paddingBottom="10dip"
+      android:paddingLeft="10dip"
+      android:paddingRight="10dip"
+      android:background="@color/black"
+      android:textColor="@color/white"
+      android:drawableTop="@drawable/pencilIcon"
+      android:drawablePadding="5dip"
+      android:layout_weight="1" />
+  <TextView
+      android:text="Track It"
+      android:layout_height="fill_parent"
+      android:layout_width="0px"
+      android:id="@+id/TrackItMenuButton"
+      android:textSize="12dp"
+      android:gravity="center|center_vertical"
+      android:paddingTop="10dip"
+      android:paddingBottom="10dip"
+      android:paddingLeft="10dip"
+      android:paddingRight="10dip"
+      android:background="@color/black"
+      android:textColor="@color/white"
+      android:drawableTop="@drawable/mapIcon"
+      android:drawablePadding="5dip"
+      android:layout_weight="1" />
+  <TextView
+      android:text="Fight It"
+      android:layout_height="fill_parent"
+      android:layout_width="0px"
+      android:id="@+id/FightItMenuButton"
+      android:textSize="12dp"
+      android:gravity="center|center_vertical"
+      android:paddingTop="10dip"
+      android:paddingBottom="10dip"
+      android:paddingLeft="10dip"
+      android:paddingRight="10dip"
+      android:background="@color/black"
+      android:textColor="@color/white"
+      android:drawableTop="@drawable/bullhornIcon"
+      android:drawablePadding="5dip"
+      android:layout_weight="1" />
+
+  <TextView
+        android:text="More"
+        android:layout_height="fill_parent"
+        android:layout_width="0px"
+        android:id="@+id/MoreMenuButton"
+        android:textSize="12dp"
+        android:gravity="center|center_vertical"
+      android:paddingTop="10dip"
+      android:paddingBottom="10dip"
+      android:paddingLeft="10dip"
+      android:paddingRight="10dip"
+      android:background="@color/black"
+      android:textColor="@color/white"
+        android:drawableTop="@drawable/ellipsisIcon"
+      android:drawablePadding="5dip"
+        android:layout_weight="1" />
+</LinearLayout>
