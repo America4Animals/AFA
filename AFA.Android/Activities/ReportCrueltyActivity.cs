@@ -19,7 +19,7 @@ using Android.Views.InputMethods;
 
 namespace AFA.Android
 {
-    [Activity(Label = "Report Cruelty", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Report Cruelty", MainLauncher = false, Icon = "@drawable/icon")]
     public class ReportCrueltyActivity : Activity
     {
         private EditText _locationInput;
