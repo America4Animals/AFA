@@ -172,7 +172,10 @@ namespace AFA.Android
 			public const int speechIcon = 2130837520;
 			
 			// aapt resource value: 0x7f020011
-			public const int success = 2130837521;
+			public const int splash = 2130837521;
+			
+			// aapt resource value: 0x7f020012
+			public const int success = 2130837522;
 			
 			static Drawable()
 			{
@@ -504,6 +507,22 @@ namespace AFA.Android
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f070000
+			public const int Theme_Splash = 2131165184;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Style()
 			{
 			}
 		}

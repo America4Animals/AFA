@@ -123,8 +123,8 @@ namespace AFA_Android.Helpers
                     _latitude = _location.Latitude;
                 }
 
-                //return _latitude;
-                return 40.6878666;
+                return _latitude;
+                //return 40.6878666;
             }
         }
 
@@ -137,8 +137,8 @@ namespace AFA_Android.Helpers
                     _longitude = _location.Longitude;
                 }
 
-                //return _longitude;
-                return -73.9918935;
+                return _longitude;
+                //return -73.9918935;
             }
         }
 
