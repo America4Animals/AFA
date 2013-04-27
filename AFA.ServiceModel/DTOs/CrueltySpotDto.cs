@@ -74,6 +74,9 @@ namespace AFA.ServiceModel.DTOs
     public class CrueltySpotsDto : IReturn<CrueltySpotsResponse>
     {
         public int? CategoryId { get; set; }
+        public string Name { get; set; }
+        public string City { get; set; }
+        public string StateProvinceAbbreviation { get; set; }
     }
 
     public class CrueltySpotsResponse

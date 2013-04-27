@@ -81,17 +81,32 @@ namespace AFA.ServiceInterface
             {
                 throw new NotImplementedException();
             }
+            else if (!String.IsNullOrEmpty(request.Name) && !String.IsNullOrEmpty(request.City) &&
+                     !String.IsNullOrEmpty(request.StateProvinceAbbreviation))
+            {
+                query =
+                    string.Format(
+                        "select cs.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation, csc.Id as CrueltySpotCategoryId, csc.Name as CrueltySpotCategoryName " +
+                        "from CrueltySpot cs " +
+                        "left join StateProvince sp " +
+                        "on cs.StateProvinceId = sp.Id " +
+                        "left join CrueltySpotCategory csc " +
+                        "on cs.CrueltySpotCategoryId = csc.Id " +
+                        "where cs.Name = '{0}' and cs.City = '{1}' and sp.Abbreviation = '{2}'", request.Name, request.City, request.StateProvinceAbbreviation);
+            }
             else
             {
-                query = string.Format("select cs.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation, csc.Id as CrueltySpotCategoryId, csc.Name as CrueltySpotCategoryName " +
-                                     "from CrueltySpot cs " +
-                                     "left join StateProvince sp " +
-                                     "on cs.StateProvinceId = sp.Id " +
-                                     "left join CrueltySpotCategory csc " +
-                                     "on cs.CrueltySpotCategoryId = csc.Id");
-
-                crueltySpots = Db.Select<CrueltySpotDto>(query);
+                query =
+                    string.Format(
+                        "select cs.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation, csc.Id as CrueltySpotCategoryId, csc.Name as CrueltySpotCategoryName " +
+                        "from CrueltySpot cs " +
+                        "left join StateProvince sp " +
+                        "on cs.StateProvinceId = sp.Id " +
+                        "left join CrueltySpotCategory csc " +
+                        "on cs.CrueltySpotCategoryId = csc.Id");
             }
+
+            crueltySpots = Db.Select<CrueltySpotDto>(query);
 
             return new CrueltySpotsResponse
             {
