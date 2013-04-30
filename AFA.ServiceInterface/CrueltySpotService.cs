@@ -75,35 +75,55 @@ namespace AFA.ServiceInterface
         public CrueltySpotsResponse Get(CrueltySpotsDto request)
         {
             var crueltySpots = new List<CrueltySpotDto>();
-            string query;
+            string query =
+                "select cs.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation, csc.Id as CrueltySpotCategoryId, csc.Name as CrueltySpotCategoryName " +
+                "from CrueltySpot cs " +
+                "left join StateProvince sp " +
+                "on cs.StateProvinceId = sp.Id " +
+                "left join CrueltySpotCategory csc " +
+                "on cs.CrueltySpotCategoryId = csc.Id";
+
+            const string WhereClausePrefix = " where ";
+            string whereClause = WhereClausePrefix;
 
             if (request.CategoryId.HasValue)
             {
-                throw new NotImplementedException();
+                whereClause += String.Format("csc.Id = {0}", request.CategoryId);
             }
-            else if (!String.IsNullOrEmpty(request.Name) && !String.IsNullOrEmpty(request.City) &&
-                     !String.IsNullOrEmpty(request.StateProvinceAbbreviation))
+
+            if (!String.IsNullOrEmpty(request.Name))
             {
-                query =
-                    string.Format(
-                        "select cs.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation, csc.Id as CrueltySpotCategoryId, csc.Name as CrueltySpotCategoryName " +
-                        "from CrueltySpot cs " +
-                        "left join StateProvince sp " +
-                        "on cs.StateProvinceId = sp.Id " +
-                        "left join CrueltySpotCategory csc " +
-                        "on cs.CrueltySpotCategoryId = csc.Id " +
-                        "where cs.Name = '{0}' and cs.City = '{1}' and sp.Abbreviation = '{2}'", request.Name, request.City, request.StateProvinceAbbreviation);
+                if (whereClause != WhereClausePrefix)
+                {
+                    whereClause += " and ";
+                }
+
+                whereClause += String.Format("cs.Name = '{0}'", request.Name);
             }
-            else
+
+            if (!String.IsNullOrEmpty(request.City))
             {
-                query =
-                    string.Format(
-                        "select cs.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation, csc.Id as CrueltySpotCategoryId, csc.Name as CrueltySpotCategoryName " +
-                        "from CrueltySpot cs " +
-                        "left join StateProvince sp " +
-                        "on cs.StateProvinceId = sp.Id " +
-                        "left join CrueltySpotCategory csc " +
-                        "on cs.CrueltySpotCategoryId = csc.Id");
+                if (whereClause != WhereClausePrefix)
+                {
+                    whereClause += " and ";
+                }
+
+                whereClause += String.Format("cs.City = '{0}'", request.City);
+            }
+
+            if (!String.IsNullOrEmpty(request.StateProvinceAbbreviation))
+            {
+                if (whereClause != WhereClausePrefix)
+                {
+                    whereClause += " and ";
+                }
+
+                whereClause += String.Format("sp.Abbreviation = '{0}'", request.StateProvinceAbbreviation);
+            }
+
+            if (whereClause != WhereClausePrefix)
+            {
+                query += whereClause;
             }
 
             crueltySpots = Db.Select<CrueltySpotDto>(query);
