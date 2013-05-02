@@ -83,8 +83,8 @@ namespace AFA.Android
             _submitButton.Enabled = ReportCruelty.LocationSpecified && ReportCruelty.CrueltyTypeSpecified;
 
             _submitButton.Click += (sender, args) =>
-                                      {
-                                          var loadingDialog = ProgressDialog.Show(this, "Submitting", "Please wait...", true);
+                                       {
+                                           var loadingDialog = DialogManager.ShowLoadingDialog(this);
                                           var googlePlaces = new GooglePlacesApi.GooglePlaces();
                                           googlePlaces.GetDetails(ReportCruelty.Reference, response =>
                                                                                   {

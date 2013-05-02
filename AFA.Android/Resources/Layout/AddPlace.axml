@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/green"
+    android:paddingLeft="5dip"
+    android:paddingRight="5dip">
+    <TextView
+        android:text="@string/AddPlaceHeader"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/HeaderText"
+        android:textColor="@color/white"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="10dip"
+        android:background="@color/gray"
+        android:gravity="center" />
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/PlaceName"
+        android:hint="Name of Place"
+        android:textColorHint="@color/pink"
+        android:textColor="@color/gray"
+        android:layout_marginBottom="10dip" />
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/StreetAddress"
+        android:hint="Street"
+        android:textColorHint="@color/pink"
+        android:textColor="@color/gray"
+        android:layout_marginBottom="10dip" />
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/City"
+        android:hint="City"
+        android:textColorHint="@color/pink"
+        android:textColor="@color/gray"
+        android:layout_marginBottom="10dip" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip">
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/State"
+            android:layout_weight="1"
+            android:hint="State"
+            android:textColorHint="@color/pink"
+            android:textColor="@color/gray" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Zip"
+            android:layout_weight="1"
+            android:hint="Zip"
+            android:textColorHint="@color/pink"
+            android:textColor="@color/gray" />
+    </LinearLayout>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Email"
+        android:hint="Email"
+        android:textColorHint="@color/pink"
+        android:textColor="@color/gray"
+        android:layout_marginBottom="10dip" />
+
+    <Button
+        android:text="Submit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/SubmitButton" />
+</LinearLayout>

@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\AddPlaceActivity.cs" />
     <Compile Include="Activities\CrueltyMapActivity.cs" />
     <Compile Include="Activities\CrueltySpotActivity.cs" />
     <Compile Include="Activities\CrueltyTypesActivity.cs" />
@@ -64,7 +65,7 @@
     <Compile Include="Activities\EventsActivity.cs" />
     <Compile Include="Adapters\CrueltyTypesAdapter.cs" />
     <Compile Include="GooglePlaces.cs" />
-    <Compile Include="Helpers\AlertDialogManager.cs" />
+    <Compile Include="Helpers\DialogManager.cs" />
     <Compile Include="Helpers\AppConstants.cs" />
     <Compile Include="Helpers\CompassionHelper.cs" />
     <Compile Include="Helpers\GeoHelper.cs" />
@@ -131,6 +132,9 @@
     </AndroidResource>
     <AndroidResource Include="Resources\Values\Styles.xml" />
     <AndroidResource Include="Resources\Drawable\splash.png" />
+    <AndroidResource Include="Resources\Layout\AddPlace.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml">

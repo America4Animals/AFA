@@ -61,6 +61,12 @@ namespace AFA.Android.Activities
             
             _loadMoreButton.Click += (sender, args) => FetchMoreResults();
 
+            _addNewPlaceButton.Click += (sender, args) =>
+                                            {
+                                                var intent = new Intent(this, typeof (AddPlaceActivity));
+                                                StartActivity(intent);
+                                            };
+
             DoPlacesSearch();
 
             var searchButton = FindViewById<ImageButton>(Resource.Id.searchButton);

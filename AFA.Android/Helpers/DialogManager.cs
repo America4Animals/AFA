@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace AFA.Android.Helpers
 {
-    public static class AlertDialogManager
+    public static class DialogManager
     {
         public static void ShowAlertDialog(Context context, string title, string message,
                                     bool isSuccessStatus)
@@ -33,6 +33,11 @@ namespace AFA.Android.Helpers
 
             // Showing Alert Message
             alertDialog.Show();
+        }
+
+        public static ProgressDialog ShowLoadingDialog(Context context)
+        {
+            return ProgressDialog.Show(context, "Submitting", "Please wait...", true);
         }
     }
 }
