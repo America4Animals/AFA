@@ -33,6 +33,31 @@ namespace AFA.Android.Service
             }
         }
 
+        public static List<CrueltySpotDto> GetAll()
+        {
+            var url = String.Format("{0}{1}{2}", AfaApplication.ServiceBaseUrl, RouteBase, AfaApplication.ServiceJsonContentTypeSuffix);
+
+            using (var client = new WebClient())
+            {
+                var response = client.DownloadString(url);
+                return response.FromJson<CrueltySpotsResponse>().CrueltySpots;
+            }
+        }
+
+
+        public static void GetAllAsync<T>(Action<T> callback)
+        {
+            var client = new WebClient();
+            var url = String.Format("{0}{1}{2}", AfaApplication.ServiceBaseUrl, RouteBase, AfaApplication.ServiceJsonContentTypeSuffix);
+
+            client.DownloadStringCompleted += (sender, args) =>
+            {
+                var response = args.Result;
+                callback(response.FromJson<T>());
+            };
+            client.DownloadStringAsync(new Uri(url));
+        }
+
         public static void GetAllGooglePlacesAsync(Action<CrueltySpotsGooglePlacesResponse> callback)
         {
             var client = new WebClient();
@@ -63,7 +88,7 @@ namespace AFA.Android.Service
         {
             var url = String.Format("{0}{1}{2}", AfaApplication.ServiceBaseUrl, RouteBase, AfaApplication.ServiceJsonContentTypeSuffix);
             string json = crueltySpot.ToJson();
-            ServiceHelper.PostJsonAsync<CrueltySpotResponse>(url, json, callback);
+            ServiceHelper.PostJsonAsync(url, json, callback);
         }
     }
 }
