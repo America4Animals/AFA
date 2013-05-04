@@ -38,7 +38,7 @@ namespace AFA.Android
             SetContentView(Resource.Layout.Organization);
 
             _organizationId = Intent.GetIntExtra("organizationId", -1);
-            _organization = AfaApplication.ServiceClient.Get(new OrganizationDto { Id = _organizationId }).Organization;
+            //_organization = AfaApplication.ServiceClient.Get(new OrganizationDto { Id = _organizationId }).Organization;
 
             FindViewById<TextView>(Resource.Id.OrgName).Text = _organization.Name;
 

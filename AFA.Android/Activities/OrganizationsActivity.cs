@@ -11,7 +11,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using ServiceStack.ServiceClient.Web;
+//using ServiceStack.ServiceClient.Web;
 
 namespace AFA.Android
 {
@@ -41,17 +41,17 @@ namespace AFA.Android
                                                     StartActivity(intent);
                                                 };
 
-            AfaApplication.ServiceClient.GetAsync(new OrganizationsDto(), 
-                r => RunOnUiThread(() => 
-                { 
-                    _organizations = r.Organizations.OrderByDescending(o => o.OrganizationAlliesCount).ToList();
-                    _organizationsList.Adapter = new OrganizationListAdapter(this, _organizations);
-                    loadingDialog.Hide();
-                }),
-                (r, ex) => RunOnUiThread(() =>
-                {
-                    throw ex;
-                }));
+            //AfaApplication.ServiceClient.GetAsync(new OrganizationsDto(), 
+            //    r => RunOnUiThread(() => 
+            //    { 
+            //        _organizations = r.Organizations.OrderByDescending(o => o.OrganizationAlliesCount).ToList();
+            //        _organizationsList.Adapter = new OrganizationListAdapter(this, _organizations);
+            //        loadingDialog.Hide();
+            //    }),
+            //    (r, ex) => RunOnUiThread(() =>
+            //    {
+            //        throw ex;
+            //    }));
         }
 
         protected override void OnResume()

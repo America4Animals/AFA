@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AFA.Android.Helpers;
+using AFA.Android.Service;
 using AFA.ServiceModel;
 using AFA.ServiceModel.DTOs;
 using Android.App;
@@ -95,19 +96,20 @@ namespace AFA.Android.Activities
                                                var city = _cityInput.Text;
                                                var stateInput = _stateInput.Text;
                                                var stateAbbreviation = stateInput.Length == 2 ? stateInput : StateNamesAndAbbreviations.StateAbbreviationLookup[stateInput];
-                                               var response =
-                                                   AfaApplication.ServiceClient.Get(new CrueltySpotsDto()
-                                                                                        {
-                                                                                            Name = name,
-                                                                                            City = city,
-                                                                                            StateProvinceAbbreviation
-                                                                                                =
-                                                                                                stateAbbreviation
-                                                                                        });
+                                               //var response =
+                                               //    AfaApplication.ServiceClient.Get(new CrueltySpotsDto()
+                                               //                                         {
+                                               //                                             Name = name,
+                                               //                                             City = city,
+                                               //                                             StateProvinceAbbreviation
+                                               //                                                 =
+                                               //                                                 stateAbbreviation
+                                               //                                         });
+                                               var crueltySpots = CrueltySpotService.Search(name, city, stateAbbreviation);
 
-                                               if (response.CrueltySpots.Any())
+                                               if (crueltySpots.Any())
                                                {
-                                                   var existingPlaceId = response.CrueltySpots.First().Id;
+                                                   var existingPlaceId = crueltySpots.First().Id;
 
                                                    new AlertDialog.Builder(this)
                                                     .SetTitle("Cruelty already reported here")

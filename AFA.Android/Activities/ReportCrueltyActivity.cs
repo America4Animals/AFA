@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AFA.Android.Activities;
 using AFA.Android.Helpers;
+using AFA.Android.Service;
 using AFA.ServiceModel.DTOs;
 using Android.App;
 using Android.Content;
@@ -106,11 +107,38 @@ namespace AFA.Android
                                                                                                                    GooglePlaceId = placeDetails.id
                                                                                                                };
 
-                                                                                      AfaApplication.ServiceClient.PostAsync(crueltySpotDto,
-                                                                                           r => RunOnUiThread(() =>
-                                                                                            {
-                                                                                               var crueltySpotId = r.CrueltySpot.Id;
+                                                                                      //AfaApplication.ServiceClient.PostAsync(crueltySpotDto,
+                                                                                      //     r => RunOnUiThread(() =>
+                                                                                      //      {
+                                                                                      //         var crueltySpotId = r.CrueltySpot.Id;
                                                                                                
+                                                                                      //         var intent =
+                                                                                      //             new Intent(this,
+                                                                                      //                        typeof (
+                                                                                      //                            CrueltySpotActivity
+                                                                                      //                            ));
+                                                                                      //         intent.PutExtra(
+                                                                                      //             AppConstants
+                                                                                      //                 .ShowCrueltySpotAddedSuccessfullyKey,
+                                                                                      //             true);
+                                                                                      //         intent.PutExtra(
+                                                                                      //             AppConstants.CrueltySpotIdKey, crueltySpotId);
+                                                                                      //         StartActivity(intent);
+                                                                                      //         loadingDialog.Dismiss();
+                                                                                      //          ClearAll();
+                                                                                      //     }),
+                                                                                      //     (r, ex) => RunOnUiThread(() =>
+                                                                                      //     {
+                                                                                      //         throw ex;
+                                                                                      //     }));
+
+                                                                                      CrueltySpotService.PostAsync(crueltySpotDto, r => RunOnUiThread(() =>
+                                                                                            {
+                                                                                                var crueltySpotId = r.CrueltySpot.Id;
+                                                                                                Log.Debug(
+                                                                                                    "NewCrueltySpotId",
+                                                                                                    crueltySpotId
+                                                                                                        .ToString());
                                                                                                var intent =
                                                                                                    new Intent(this,
                                                                                                               typeof (
@@ -125,10 +153,6 @@ namespace AFA.Android
                                                                                                StartActivity(intent);
                                                                                                loadingDialog.Dismiss();
                                                                                                 ClearAll();
-                                                                                           }),
-                                                                                           (r, ex) => RunOnUiThread(() =>
-                                                                                           {
-                                                                                               throw ex;
                                                                                            }));
                                                                                   });                                         
                                       };

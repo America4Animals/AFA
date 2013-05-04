@@ -12,6 +12,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AFA.Android.Library;
+using AFA.Android.Service;
 
 namespace AFA.Android.Activities
 {
@@ -20,6 +21,7 @@ namespace AFA.Android.Activities
     {
         private ListView _crueltySpotCategoriesList;
         private IList<CrueltySpotCategory> _crueltySpotCategories;
+        private ProgressDialog _loadingDialog;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -27,7 +29,7 @@ namespace AFA.Android.Activities
 
             SetContentView(Resource.Layout.CrueltyTypes);
 
-            var loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
+            _loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
 
             _crueltySpotCategoriesList = FindViewById<ListView>(Resource.Id.CrueltyTypes);
             _crueltySpotCategoriesList.ItemClick += (sender, e) =>
@@ -41,17 +43,25 @@ namespace AFA.Android.Activities
                 StartActivity(intent);
             };
 
-            AfaApplication.ServiceClient.GetAsync(new CrueltySpotCategories(),
-                r => RunOnUiThread(() =>
-                {
-                    _crueltySpotCategories = r.CrueltySpotCategories.OrderBy(csc => csc.Name).ToList();
-                    _crueltySpotCategoriesList.Adapter = new CrueltyTypesAdapter(this, _crueltySpotCategories);
-                    loadingDialog.Hide();
-                }),
-                (r, ex) => RunOnUiThread(() =>
-                {
-                    throw ex;
-                }));
+            //AfaApplication.ServiceClient.GetAsync(new CrueltySpotCategories(),
+            //    r => RunOnUiThread(() =>
+            //    {
+            //        _crueltySpotCategories = r.CrueltySpotCategories.OrderBy(csc => csc.Name).ToList();
+            //        _crueltySpotCategoriesList.Adapter = new CrueltyTypesAdapter(this, _crueltySpotCategories);
+            //        loadingDialog.Hide();
+            //    }),
+            //    (r, ex) => RunOnUiThread(() =>
+            //    {
+            //        throw ex;
+            //    }));
+
+            CrueltySpotCategoriesService.GetAllAsync(r => RunOnUiThread(() =>
+                              {
+                                  _crueltySpotCategories = r.CrueltySpotCategories.OrderBy(csc => csc.Name).ToList();
+                                  _crueltySpotCategoriesList.Adapter = new CrueltyTypesAdapter(this,
+                                                                                               _crueltySpotCategories);
+                                  _loadingDialog.Hide();
+                              }));
         }
     }
 }

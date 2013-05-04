@@ -42,17 +42,17 @@ namespace AFA.Android
                 StartActivity(intent);
             };
 
-            AfaApplication.ServiceClient.GetAsync(new OrganizationUsers { OrganizationId = Intent.GetIntExtra("organizationId", 0) },
-                r => RunOnUiThread(() =>
-                {
-                    _users = r.Users.ToList();
-                    _usersList.Adapter = new UserListAdapter(this, _users);
-                    loadingDialog.Hide();
-                }),
-                (r, ex) => RunOnUiThread(() =>
-                {
-                    throw ex;
-                }));
+            //AfaApplication.ServiceClient.GetAsync(new OrganizationUsers { OrganizationId = Intent.GetIntExtra("organizationId", 0) },
+            //    r => RunOnUiThread(() =>
+            //    {
+            //        _users = r.Users.ToList();
+            //        _usersList.Adapter = new UserListAdapter(this, _users);
+            //        loadingDialog.Hide();
+            //    }),
+            //    (r, ex) => RunOnUiThread(() =>
+            //    {
+            //        throw ex;
+            //    }));
         }
     }
 }
