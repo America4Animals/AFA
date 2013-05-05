@@ -11,8 +11,8 @@ namespace AFA.ServiceHostAndWeb.Models
         [Required]
         public string Name { get; set; }
         public string Vicinity { get; set; }
-        public decimal Lat { get; set; }
-        public decimal Lng { get; set; }
+        public double Lat { get; set; }
+        public double Lng { get; set; }
         public List<AddressComponent> address_components { get; set; }
         public string formatted_address { get; set; }
         public string formatted_phone_number { get; set; }

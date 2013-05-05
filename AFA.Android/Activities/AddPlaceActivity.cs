@@ -133,7 +133,8 @@ namespace AFA.Android.Activities
                                                                                     Address = address,
                                                                                     City = city,
                                                                                     StateProvinceAbbreviation = stateAbbreviation,
-                                                                                    Zipcode = zipInput
+                                                                                    Zipcode = zipInput,
+                                                                                    Email = FindViewById<EditText>(Resource.Id.Email).Text
                                                                                 };
 
                                                    CommitCrueltyReport();

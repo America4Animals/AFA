@@ -24,8 +24,8 @@ namespace AFA.ServiceModel.DTOs
         public string Email { get; set; }
         public string WebpageUrl { get; set; }
 
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
 
         public string GooglePlaceId { get; set; }
         public string NonGooglePlaceAddressHash { get; set; }

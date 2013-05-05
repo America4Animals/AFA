@@ -27,6 +27,7 @@ namespace AFA.Android
         private EditText _crueltyTypeInput;
         private EditText _descriptionInput;
         private Button _submitButton;
+        private ProgressDialog _loadingDialog;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -38,7 +39,7 @@ namespace AFA.Android
 
             _locationInput = FindViewById<EditText>(Resource.Id.LocationInput);
             _crueltyTypeInput = FindViewById<EditText>(Resource.Id.TypeOfCrueltyInput);
-            
+
             if (_crueltyReport.PlaceSpecified)
             {
                 var locationText = new StringBuilder();
@@ -83,111 +84,109 @@ namespace AFA.Android
             _submitButton = FindViewById<Button>(Resource.Id.SubmitButton);
             _submitButton.Enabled = _crueltyReport.PlaceSpecified && _crueltyReport.CrueltyTypeSpecified;
 
-            _submitButton.Click += (sender, args) =>
-                                       {
-                                           // Create a new Cruelty Spot
-                                           var loadingDialog = DialogManager.ShowLoadingDialog(this);
+            _submitButton.Click +=
+                (sender, args) =>
+                {
+                    // Create a new Cruelty Spot
+                    _loadingDialog = DialogManager.ShowLoadingDialog(this);
+                    CrueltySpotDto newCrueltySpot;
 
-                                           if (_crueltyReport.IsGooglePlace())
-                                           {
-                                               var googlePlaces = new GooglePlacesApi.GooglePlaces();
-                                               googlePlaces.GetDetails(_crueltyReport.GooglePlace.Reference, response =>
-                                            {
-                                                // ToDo: Check Status and handle non-OK
-                                                var placeDetails = response.result;
-                                                var crueltySpotDto = new CrueltySpotDto
-                                                            {
-                                                                Name = placeDetails.name,
-                                                                Description = _descriptionInput.Text,
-                                                                Address
-                                                                    =
-                                                                    placeDetails
-                                                                    .Address,
-                                                                City
-                                                                    =
-                                                                    placeDetails
-                                                                    .City,
-                                                                StateProvinceAbbreviation
-                                                                    =
-                                                                    placeDetails
-                                                                    .StateOrProvince,
-                                                                Zipcode
-                                                                    =
-                                                                    placeDetails
-                                                                    .PostalCode,
-                                                                PhoneNumber
-                                                                    =
-                                                                    placeDetails
-                                                                    .formatted_phone_number,
-                                                                WebpageUrl
-                                                                    =
-                                                                    placeDetails
-                                                                    .website,
-                                                                Latitude
-                                                                    =
-                                                                    placeDetails
-                                                                    .geometry
-                                                                    .location
-                                                                    .lat,
-                                                                Longitude
-                                                                    =
-                                                                    placeDetails
-                                                                    .geometry
-                                                                    .location
-                                                                    .lng,
-                                                                CrueltySpotCategoryId
-                                                                    =
-                                                                    _crueltyReport
-                                                                    .CrueltyType
-                                                                    .Id,
-                                                                GooglePlaceId
-                                                                    =
-                                                                    placeDetails
-                                                                    .id
-                                                            };
+                    if (_crueltyReport.IsGooglePlace())
+                    {
+                        // Fetch details from google
+                        var googlePlaces = new GooglePlacesApi.GooglePlaces();
+                        googlePlaces.GetDetails(_crueltyReport.GooglePlace.Reference, response =>
+                            {
+                                // ToDo: Check Status and handle non-OK
+                                var placeDetails = response.result;
+                                newCrueltySpot = new CrueltySpotDto
+                                                         {
+                                                             Name = placeDetails.name,
+                                                             Description = _descriptionInput.Text,
+                                                             Address = placeDetails.Address,
+                                                             City = placeDetails.City,
+                                                             StateProvinceAbbreviation = placeDetails.StateOrProvince,
+                                                             Zipcode = placeDetails.PostalCode,
+                                                             PhoneNumber = placeDetails.formatted_phone_number,
+                                                             WebpageUrl = placeDetails.website,
+                                                             Latitude = placeDetails.geometry.location.lat,
+                                                             Longitude = placeDetails.geometry.location.lng,
+                                                             CrueltySpotCategoryId = _crueltyReport.CrueltyType.Id,
+                                                             GooglePlaceId = placeDetails.id
+                                                         };
 
-                                                //AfaApplication.ServiceClient.PostAsync(crueltySpotDto,
-                                                //     r => RunOnUiThread(() =>
-                                                //      {
-                                                //         var crueltySpotId = r.CrueltySpot.Id;
+                                SubmitNewCrueltySpot(newCrueltySpot);
+                                
+                            });
+                    }
+                    else
+                    {
+                        // Submit with user lat/lng
+                        var gpsTracker = ((AfaApplication)ApplicationContext).GetGpsTracker(this);
+                        newCrueltySpot = new CrueltySpotDto
+                                             {
+                                                 Name = _crueltyReport.PlaceName,
+                                                 Description = _descriptionInput.Text,
+                                                 Address = _crueltyReport.UserGeneratedPlace.Address,
+                                                 City = _crueltyReport.UserGeneratedPlace.City,
+                                                 StateProvinceAbbreviation = _crueltyReport.UserGeneratedPlace.StateProvinceAbbreviation,
+                                                 Zipcode = _crueltyReport.UserGeneratedPlace.Zipcode,
+                                                 //PhoneNumber = placeDetails.formatted_phone_number,
+                                                 //WebpageUrl = placeDetails.website,
+                                                 Email = _crueltyReport.UserGeneratedPlace.Email,
+                                                 Latitude = gpsTracker.Latitude,
+                                                 Longitude = gpsTracker.Longitude,
+                                                 CrueltySpotCategoryId = _crueltyReport.CrueltyType.Id
+                                             };
 
-                                                //         var intent =
-                                                //             new Intent(this,
-                                                //                        typeof (
-                                                //                            CrueltySpotActivity
-                                                //                            ));
-                                                //         intent.PutExtra(
-                                                //             AppConstants
-                                                //                 .ShowCrueltySpotAddedSuccessfullyKey,
-                                                //             true);
-                                                //         intent.PutExtra(
-                                                //             AppConstants.CrueltySpotIdKey, crueltySpotId);
-                                                //         StartActivity(intent);
-                                                //         loadingDialog.Dismiss();
-                                                //          ClearAll();
-                                                //     }),
-                                                //     (r, ex) => RunOnUiThread(() =>
-                                                //     {
-                                                //         throw ex;
-                                                //     }));
+                        SubmitNewCrueltySpot(newCrueltySpot);
+                    }
 
-                                                CrueltySpotService.PostAsync(crueltySpotDto, r => RunOnUiThread(() =>
-                                                            {
-                                                                var crueltySpotId = r.CrueltySpot.Id;
-                                                                Log.Debug("NewCrueltySpotId",crueltySpotId.ToString());
-                                                                var intent = new Intent(this,typeof(CrueltySpotActivity));
-                                                                intent.PutExtra(AppConstants.ShowCrueltySpotAddedSuccessfullyKey,true);
-                                                                intent.PutExtra(AppConstants.CrueltySpotIdKey, crueltySpotId);
-                                                                ClearAllUi();
-                                                                _crueltyReport.ClearAll();
-                                                                CommitCrueltyReport();
-                                                                StartActivity(intent);
-                                                                loadingDialog.Dismiss();
-                                                            }));
-                                            });
-                                           }
-                                       };
+                    
+                };
 
+        }
+
+        private void SubmitNewCrueltySpot(CrueltySpotDto newCrueltySpot)
+        {
+            //AfaApplication.ServiceClient.PostAsync(crueltySpotDto,
+            //     r => RunOnUiThread(() =>
+            //      {
+            //         var crueltySpotId = r.CrueltySpot.Id;
+
+            //         var intent =
+            //             new Intent(this,
+            //                        typeof (
+            //                            CrueltySpotActivity
+            //                            ));
+            //         intent.PutExtra(
+            //             AppConstants
+            //                 .ShowCrueltySpotAddedSuccessfullyKey,
+            //             true);
+            //         intent.PutExtra(
+            //             AppConstants.CrueltySpotIdKey, crueltySpotId);
+            //         StartActivity(intent);
+            //         loadingDialog.Dismiss();
+            //          ClearAll();
+            //     }),
+            //     (r, ex) => RunOnUiThread(() =>
+            //     {
+            //         throw ex;
+            //     }));
+
+            CrueltySpotService.PostAsync(newCrueltySpot, r => RunOnUiThread(() =>
+            {
+                var crueltySpotId = r.CrueltySpot.Id;
+                Log.Debug("NewCrueltySpotId", crueltySpotId.ToString());
+                var intent = new Intent(this, typeof(CrueltySpotActivity));
+                intent.PutExtra(AppConstants.ShowCrueltySpotAddedSuccessfullyKey, true);
+                intent.PutExtra(AppConstants.CrueltySpotIdKey, crueltySpotId);
+                ClearAllUi();
+                _crueltyReport.ClearAll();
+                CommitCrueltyReport();
+                StartActivity(intent);
+                _loadingDialog.Dismiss();
+            }));
         }
 
         private void ClearAllUi()

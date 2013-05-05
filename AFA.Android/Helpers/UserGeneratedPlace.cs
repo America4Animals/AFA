@@ -19,5 +19,6 @@ namespace AFA.Android.Helpers
         public string City { get; set; }
         public string StateProvinceAbbreviation { get; set; }
         public string Zipcode { get; set; }
+        public string Email { get; set; }
     }
 }
