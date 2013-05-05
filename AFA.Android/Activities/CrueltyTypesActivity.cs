@@ -17,7 +17,7 @@ using AFA.Android.Service;
 namespace AFA.Android.Activities
 {
     [Activity(Label = "Types of Cruelty")]
-    public class CrueltyTypesActivity : Activity
+    public class CrueltyTypesActivity : ReportCrueltyBaseActivity
     {
         private ListView _crueltySpotCategoriesList;
         private IList<CrueltySpotCategory> _crueltySpotCategories;
@@ -36,10 +36,11 @@ namespace AFA.Android.Activities
             {
                 var crueltySpotCategory = _crueltySpotCategories[e.Position];
                 var intent = new Intent(this, typeof(ReportCrueltyActivity));
-                //intent.PutExtra(AppConstants.CrueltySpotCategoryIdKey, crueltySpotCategory.Id);
-                //intent.PutExtra(AppConstants.CrueltySpotCategoryNameKey, crueltySpotCategory.Name);
-                ReportCruelty.CrueltyTypeId = crueltySpotCategory.Id;
-                ReportCruelty.CrueltyTypeName = crueltySpotCategory.Name;
+                var crueltyType = new CrueltyType();
+                crueltyType.Id = crueltySpotCategory.Id;
+                crueltyType.Name = crueltySpotCategory.Name;
+                _crueltyReport.CrueltyType = crueltyType;
+                CommitCrueltyReport();
                 StartActivity(intent);
             };
 

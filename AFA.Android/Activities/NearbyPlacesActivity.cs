@@ -11,11 +11,12 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using ServiceStack.Text;
 
 namespace AFA.Android.Activities
 {
     [Activity(Label = "Nearby Places")]
-    public class NearbyPlacesActivity : Activity
+    public class NearbyPlacesActivity : ReportCrueltyBaseActivity
     {
         private const string PlaceTypes =
             "airport|amusement_park|aquarium|art_gallery|bakery|bar|beauty_salon|book_store|bowling_alley|bus_station|cafe|casino|church|city_hall|clothing_store|convenience_store|courthouse|department_store|doctor|embassy|establishment|food|funeral_home|gas_station|general_contractor|grocery_or_supermarket|hardware_store|health|hindu_temple|home_goods_store|hospital|liquor_store|local_government_office|lodging|meal_delivery|meal_takeaway|movie_theater|museum|night_club|park|pet_store|pharmacy|physiotherapist|place_of_worship|police|restaurant|rv_park|school|shoe_store|shopping_mall|spa|stadium|store|subway_station|train_station|university|veterinary_care|zoo";
@@ -159,19 +160,14 @@ namespace AFA.Android.Activities
             }
             else
             {
-                var intent = new Intent(this,
-                                    typeof(
-                                        ReportCrueltyActivity
-                                        ));
-                //intent.PutExtra(AppConstants.PlaceNameKey,
-                //                place.name);
-                //intent.PutExtra(AppConstants.PlaceVicinityKey,
-                //                place.vicinity);
-                //intent.PutExtra(AppConstants.PlaceReferenceKey,
-                //                place.reference);
-                ReportCruelty.PlaceName = place.name;
-                ReportCruelty.PlaceVicinity = place.vicinity;
-                ReportCruelty.Reference = place.reference;
+                var intent = new Intent(this, typeof(ReportCrueltyActivity));
+                // Must be a google place because if not, it would have been flagged as reported
+                var googlePlace = new AFA.Android.Helpers.GooglePlace();
+                googlePlace.Name = place.name;
+                googlePlace.Vicinity = place.vicinity;
+                googlePlace.Reference = place.reference;
+                _crueltyReport.GooglePlace = googlePlace;
+                CommitCrueltyReport();
                 StartActivity(intent);
             }
             

@@ -17,8 +17,8 @@ using Java.Util;
 
 namespace AFA.Android.Activities
 {
-    [Activity(Label = "My Activity")]
-    public class AddPlaceActivity : Activity
+    [Activity(Label = "Add a New Place")]
+    public class AddPlaceActivity : ReportCrueltyBaseActivity
     {
         private EditText _placeNameInput;
         private EditText _addressInput;
@@ -45,15 +45,15 @@ namespace AFA.Android.Activities
             
             var geocoder = new Geocoder(this, Locale.Default);
             var addresses = geocoder.GetFromLocation(gpsTracker.Latitude, gpsTracker.Longitude, 1);
-            var address = addresses.FirstOrDefault();
-            if (address != null)
+            var myAddress = addresses.FirstOrDefault();
+            if (myAddress != null)
             {
-                var streetAddress = address.GetAddressLine(0);
+                var streetAddress = myAddress.GetAddressLine(0);
                 //var city = address.SubAdminArea; // RETURNS NOTHING
                 //var city = address.Locality; // RETURNS NOTHING
-                var city = address.SubLocality; // e.g. Brooklyn
-                var state = address.AdminArea; // e.g. New York
-                var zip = address.PostalCode;
+                var city = myAddress.SubLocality; // e.g. Brooklyn
+                var state = myAddress.AdminArea; // e.g. New York
+                var zip = myAddress.PostalCode;
 
                 if (!String.IsNullOrEmpty(streetAddress))
                 {
@@ -93,8 +93,10 @@ namespace AFA.Android.Activities
                                            {
                                                var loadingDialog = DialogManager.ShowLoadingDialog(this);
                                                var name = _placeNameInput.Text;
+                                               var address = _addressInput.Text;
                                                var city = _cityInput.Text;
                                                var stateInput = _stateInput.Text;
+                                               var zipInput = _zipInput.Text;
                                                var stateAbbreviation = stateInput.Length == 2 ? stateInput : StateNamesAndAbbreviations.StateAbbreviationLookup[stateInput];
                                                //var response =
                                                //    AfaApplication.ServiceClient.Get(new CrueltySpotsDto()
@@ -125,11 +127,20 @@ namespace AFA.Android.Activities
                                                }
                                                else
                                                {
-                                                   
+                                                   _crueltyReport.UserGeneratedPlace = new UserGeneratedPlace
+                                                                                {
+                                                                                    Name = name,
+                                                                                    Address = address,
+                                                                                    City = city,
+                                                                                    StateProvinceAbbreviation = stateAbbreviation,
+                                                                                    Zipcode = zipInput
+                                                                                };
+
+                                                   CommitCrueltyReport();
+                                                   var intent = new Intent(this, typeof(ReportCrueltyActivity));
+                                                   StartActivity(intent);
+
                                                }
-
-
-                                               
                                            }
                                        };
         }

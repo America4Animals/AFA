@@ -58,10 +58,14 @@
     <Compile Include="Activities\CrueltySpotActivity.cs" />
     <Compile Include="Activities\CrueltyTypesActivity.cs" />
     <Compile Include="Activities\NearbyPlacesActivity.cs" />
+    <Compile Include="Activities\ReportCrueltyBaseActivity.cs" />
     <Compile Include="AfaApplication.cs" />
     <Compile Include="Activities\EventsActivity.cs" />
     <Compile Include="Adapters\CrueltyTypesAdapter.cs" />
+    <Compile Include="Helpers\CrueltyType.cs" />
+    <Compile Include="Helpers\GooglePlace.cs" />
     <Compile Include="Helpers\ServiceHelper.cs" />
+    <Compile Include="Helpers\UserGeneratedPlace.cs" />
     <Compile Include="Service\CrueltySpotCategoriesService.cs" />
     <Compile Include="Service\CrueltySpotService.cs" />
     <Compile Include="Service\GooglePlaces.cs" />
@@ -79,7 +83,7 @@
     <Compile Include="Adapters\UserListAdapter.cs" />
     <Compile Include="Activities\OrganizationUsersActivity.cs" />
     <Compile Include="Helpers\CrueltyNavMenuHelper.cs" />
-    <Compile Include="Helpers\ReportCruelty.cs" />
+    <Compile Include="Helpers\CrueltyReport.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activities\UserActivity.cs" />
