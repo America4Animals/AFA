@@ -7,6 +7,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 
@@ -45,8 +46,10 @@ namespace AFA.Android
             var place = _places[position];
             view.FindViewById<TextView>(Resource.Id.Name).Text = place.name;
             view.FindViewById<TextView>(Resource.Id.Address).Text = place.vicinity;
+            view.FindViewById<TextView>(Resource.Id.ReportedText).Text = place.HasBeenReported ? "Reported" : "";
+
             var distanceLabel = view.FindViewById<TextView>(Resource.Id.Distance);
-            var afaApplication = (AfaApplication)_context.ApplicationContext;
+            //var afaApplication = (AfaApplication)_context.ApplicationContext;
             var gpsTracker = ((AfaApplication)_context.ApplicationContext).GetGpsTracker(_context);
             var myLat = gpsTracker.Latitude;
             var myLng = gpsTracker.Longitude;
@@ -56,6 +59,9 @@ namespace AFA.Android
             var geoHelper = new GeoHelper();
             double distance = geoHelper.Distance(myLat, myLng, Convert.ToDouble(placeLat), Convert.ToDouble(placeLng), 'M');
             distanceLabel.Text = distance.ToString("N2") + " miles";
+
+            
+
             return view;
         }
     }

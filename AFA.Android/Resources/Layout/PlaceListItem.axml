@@ -5,6 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/list_selector"
+    android:gravity="center_vertical"
     android:paddingTop="5dip"
     android:paddingBottom="5dip">
     <TextView
@@ -29,4 +30,15 @@
         android:textColor="@color/gray"
         android:paddingLeft="10dip"
         android:layout_below="@+id/Address" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ReportedText"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        android:paddingRight="10dip"
+        android:textSize="16sp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/Name"
+         />
 </RelativeLayout>

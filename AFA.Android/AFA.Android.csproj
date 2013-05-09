@@ -163,7 +163,9 @@
     <AndroidResource Include="Resources\Drawable\peopleIcon.png" />
     <AndroidResource Include="Resources\Drawable\phoneIcon.png" />
     <AndroidResource Include="Resources\Drawable\rightArrow.png" />
-    <AndroidResource Include="Resources\Layout\compassionMenu.xml" />
+    <AndroidResource Include="Resources\Layout\compassionMenu.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\Drawable\fail.png" />
     <AndroidResource Include="Resources\Drawable\success.png" />
     <AndroidResource Include="Resources\Drawable\search.png" />
