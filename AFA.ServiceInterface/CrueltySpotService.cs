@@ -33,6 +33,7 @@ namespace AFA.ServiceInterface
         {
             var crueltySpot = request.ToEntity();
 
+
             if (request.StateProvinceId < 1 && !String.IsNullOrEmpty(request.StateProvinceAbbreviation))
             {
                 var stateQuery = String.Format("select * " +
@@ -42,10 +43,12 @@ namespace AFA.ServiceInterface
                 var stateProvince = Db.Select<StateProvince>(stateQuery).FirstOrDefault();
                 if (stateProvince != null)
                 {
-                    request.StateProvinceId = stateProvince.Id;
+                    crueltySpot.StateProvinceId = stateProvince.Id;
                 }
             }
 
+            crueltySpot.CreatedAt = DateTime.UtcNow;
+            crueltySpot.LastUpdatedAt = DateTime.UtcNow;
             Db.Insert(crueltySpot);
             var crueltySpotId = Db.GetLastInsertId();
             return new CrueltySpotResponse { CrueltySpot = new CrueltySpotDto { Id = Convert.ToInt32(crueltySpotId) } };
@@ -54,6 +57,7 @@ namespace AFA.ServiceInterface
         public object Put(CrueltySpotDto crueltySpotDto)
         {
             var crueltySpot = crueltySpotDto.ToEntity();
+            crueltySpot.LastUpdatedAt = DateTime.UtcNow;
             Db.Update(crueltySpot);
             return new CrueltySpotResponse { CrueltySpot = new CrueltySpotDto() };
         }
@@ -124,6 +128,16 @@ namespace AFA.ServiceInterface
             if (whereClause != WhereClausePrefix)
             {
                 query += whereClause;
+            }
+
+            if (!String.IsNullOrEmpty(request.SortBy))
+            {
+                query += String.Format(" order by {0}", request.SortBy);
+
+                if (request.SortOrder != null && request.SortOrder.ToLower() == "desc")
+                {
+                    query += " desc";
+                }
             }
 
             crueltySpots = Db.Select<CrueltySpotDto>(query);

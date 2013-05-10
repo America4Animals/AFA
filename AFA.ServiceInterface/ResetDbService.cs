@@ -31,6 +31,8 @@ namespace AFA.ServiceInterface
             Db.CreateTableIfNotExists<Event>();
             Db.CreateTableIfNotExists<CrueltySpot>();
             Db.CreateTableIfNotExists<CrueltySpotCategory>();
+            //Db.DropAndCreateTable<CrueltySpot>();
+            //Db.DropAndCreateTable<CrueltySpotCategory>();
 
             if (Db.Select<StateProvince>().Count == 0)
             {

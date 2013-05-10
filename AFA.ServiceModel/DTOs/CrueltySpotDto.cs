@@ -33,6 +33,9 @@ namespace AFA.ServiceModel.DTOs
         public int CrueltySpotCategoryId { get; set; }
         public string CrueltySpotCategoryName { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+        public DateTime LastUpdatedAt { get; set; }
+
         public int? CallerUserId { get; set; }
 
         public string CityAndState
@@ -77,6 +80,8 @@ namespace AFA.ServiceModel.DTOs
         public string Name { get; set; }
         public string City { get; set; }
         public string StateProvinceAbbreviation { get; set; }
+        public string SortBy { get; set; }
+        public string SortOrder { get; set; }
     }
 
     public class CrueltySpotsResponse

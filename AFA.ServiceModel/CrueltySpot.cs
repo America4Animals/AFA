@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,10 @@ namespace AFA.ServiceModel
 
         public string GooglePlaceId { get; set; }
         public string NonGooglePlaceAddressHash { get; set; }
+
+        [Required]
+        public DateTime CreatedAt { get; set; }
+        public DateTime LastUpdatedAt { get; set; }
 
     }
 }
