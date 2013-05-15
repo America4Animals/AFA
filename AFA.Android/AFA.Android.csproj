@@ -51,6 +51,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="Mono.Android.GoogleMaps" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\AddPlaceActivity.cs" />
@@ -139,6 +140,8 @@
     <AndroidResource Include="Resources\Layout\AddPlace.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\Drawable\monkey.png" />
+    <AndroidResource Include="Resources\Drawable\polarbear.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml">

@@ -9,11 +9,10 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
-        <TextView
-            android:text="Cruelty Map Placeholder"
+        <FrameLayout
+            android:id="@+id/mapWithOverlay"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView1" />
+            android:layout_height="fill_parent" />
     </LinearLayout>
     <include
         android:id="@+id/crueltyNavMenu"
