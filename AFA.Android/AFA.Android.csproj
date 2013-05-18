@@ -175,6 +175,16 @@
     <AndroidResource Include="Resources\Drawable\bullhornIcon.png" />
     <AndroidResource Include="Resources\Drawable\pencilIcon.png" />
     <AndroidResource Include="Resources\Drawable\ellipsisIcon.png" />
+    <AndroidResource Include="Resources\Drawable\cariagges.png" />
+    <AndroidResource Include="Resources\Drawable\foiegras.png" />
+    <AndroidResource Include="Resources\Drawable\fur.png" />
+    <AndroidResource Include="Resources\Drawable\labs.png" />
+    <AndroidResource Include="Resources\Drawable\more.png" />
+    <AndroidResource Include="Resources\Drawable\performance.png" />
+    <AndroidResource Include="Resources\Drawable\petstores.png" />
+    <AndroidResource Include="Resources\Drawable\races.png" />
+    <AndroidResource Include="Resources\Drawable\rodeo.png" />
+    <AndroidResource Include="Resources\Drawable\shark.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

@@ -56,16 +56,16 @@ namespace AFA.ServiceInterface
             {
                 var crueltySpotCategories = new List<CrueltySpotCategory>
                                                 {
-                                                    new CrueltySpotCategory {Name = "Foie Gras"},
-                                                    new CrueltySpotCategory {Name = "Shark Fin"},
-                                                    new CrueltySpotCategory {Name = "Circuses & Rodeos"},
-                                                    new CrueltySpotCategory {Name = "Races"},
-                                                    new CrueltySpotCategory {Name = "Captive Performances"},
-                                                    new CrueltySpotCategory {Name = "Puppy Mill Stores (formerly Pet Stores)"},
-                                                    new CrueltySpotCategory {Name = "Fur Stores"},
-                                                    new CrueltySpotCategory {Name = "Horse Carriages"},
-                                                    new CrueltySpotCategory {Name = "Labs"},
-                                                    new CrueltySpotCategory {Name = "Other"}
+                                                    new CrueltySpotCategory {Name = "Foie Gras", IconName = "foiegras.png"},
+                                                    new CrueltySpotCategory {Name = "Shark Fin", IconName = "shark.png"},
+                                                    new CrueltySpotCategory {Name = "Circuses & Rodeos", IconName = "rodeo.png"},
+                                                    new CrueltySpotCategory {Name = "Races", IconName = "races.png"},
+                                                    new CrueltySpotCategory {Name = "Captive Performances", IconName = "performance.png"},
+                                                    new CrueltySpotCategory {Name = "Puppy Mill Stores (formerly Pet Stores)", IconName = "petstores.png"},
+                                                    new CrueltySpotCategory {Name = "Fur Stores", IconName = "fur.png"},
+                                                    new CrueltySpotCategory {Name = "Horse Carriages", IconName = "cariagges.png"},
+                                                    new CrueltySpotCategory {Name = "Labs", IconName = "labs.png"},
+                                                    new CrueltySpotCategory {Name = "Other", IconName = "more.png"}
                                                 };
 
                 Db.InsertAll(crueltySpotCategories);

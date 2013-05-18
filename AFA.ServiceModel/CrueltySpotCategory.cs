@@ -17,6 +17,7 @@ namespace AFA.ServiceModel
         [Index(Unique = true)]
         public string Name { get; set; }
         public string Description { get; set; }
+        public string IconName { get; set; }
     }
 
     public class CrueltySpotCategoryResponse
