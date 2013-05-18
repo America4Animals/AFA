@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -45,6 +46,9 @@ namespace AFA.Android
 
             var crueltySpotCategory = _crueltySpotCategorieses[position];
             view.FindViewById<TextView>(Resource.Id.Name).Text = crueltySpotCategory.Name;
+            var resourceId = _context.Resources.GetIdentifier(crueltySpotCategory.IconName.Replace(".png", ""), "drawable",
+                                                              _context.PackageName);
+            view.FindViewById<ImageView>(Resource.Id.CrueltyTypeImage).SetImageResource(resourceId);
             return view;
         }
     }
