@@ -107,7 +107,18 @@ namespace AFA.Android.Activities
                                                //                                                 =
                                                //                                                 stateAbbreviation
                                                //                                         });
-                                               var crueltySpots = CrueltySpotService.Search(name, city, stateAbbreviation);
+
+                                               var crueltySpotsService = new CrueltySpotsService();
+
+                                               //var crueltySpots = crueltySpotsService.Search(name, city, stateAbbreviation);
+                                               var crueltySpots = crueltySpotsService.GetMany(new CrueltySpotsDto
+                                                                                                  {
+                                                                                                      Name = name,
+                                                                                                      City = city,
+                                                                                                      StateProvinceAbbreviation
+                                                                                                          =
+                                                                                                          stateAbbreviation
+                                                                                                  });
 
                                                if (crueltySpots.Any())
                                                {

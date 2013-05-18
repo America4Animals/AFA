@@ -174,7 +174,8 @@ namespace AFA.Android
             //         throw ex;
             //     }));
 
-            CrueltySpotService.PostAsync(newCrueltySpot, r => RunOnUiThread(() =>
+            var crueltySpotsService = new CrueltySpotsService();
+            crueltySpotsService.PostAsync(newCrueltySpot, r => RunOnUiThread(() =>
             {
                 var crueltySpotId = r.CrueltySpot.Id;
                 Log.Debug("NewCrueltySpotId", crueltySpotId.ToString());

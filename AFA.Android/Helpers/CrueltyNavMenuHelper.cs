@@ -41,6 +41,12 @@ namespace AFA.Android.Helpers
                 activity.StartActivity(intent);
             };
 
+            fightItItem.Click += (sender, args) =>
+                {
+                    var intent = new Intent(activity, typeof (FightItActivity));
+                    activity.StartActivity(intent);
+                };
+
             switch (activeItem)
             {
                 case CrueltyNavMenuItem.ReportIt:

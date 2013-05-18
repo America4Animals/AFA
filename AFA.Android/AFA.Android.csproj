@@ -58,6 +58,7 @@
     <Compile Include="Activities\CrueltyMapActivity.cs" />
     <Compile Include="Activities\CrueltySpotActivity.cs" />
     <Compile Include="Activities\CrueltyTypesActivity.cs" />
+    <Compile Include="Activities\FightItActivity.cs" />
     <Compile Include="Activities\NearbyPlacesActivity.cs" />
     <Compile Include="Activities\ReportCrueltyBaseActivity.cs" />
     <Compile Include="AfaApplication.cs" />
@@ -66,9 +67,10 @@
     <Compile Include="Helpers\CrueltyType.cs" />
     <Compile Include="Helpers\GooglePlace.cs" />
     <Compile Include="Helpers\ServiceHelper.cs" />
+    <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="Helpers\UserGeneratedPlace.cs" />
     <Compile Include="Service\CrueltySpotCategoriesService.cs" />
-    <Compile Include="Service\CrueltySpotService.cs" />
+    <Compile Include="Service\CrueltySpotsService.cs" />
     <Compile Include="Service\GooglePlaces.cs" />
     <Compile Include="Helpers\DialogManager.cs" />
     <Compile Include="Helpers\AppConstants.cs" />
@@ -142,6 +144,9 @@
     </AndroidResource>
     <AndroidResource Include="Resources\Drawable\monkey.png" />
     <AndroidResource Include="Resources\Drawable\polarbear.jpg" />
+    <AndroidResource Include="Resources\Layout\FightIt.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml">

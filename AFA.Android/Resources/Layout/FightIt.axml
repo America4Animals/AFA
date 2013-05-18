@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <Linearlayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <ImageView
+            android:src="@drawable/sharkFin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:id="@+id/CrueltyTypeImage" />
+        <Linearlayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Name"
+                android:textColor="@color/pink"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingLeft="10dip" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Address"
+                android:textColor="@color/black"
+                android:paddingLeft="10dip"
+                android:layout_below="@+id/Name" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Distance"
+                android:textColor="@color/gray"
+                android:paddingLeft="10dip"
+                android:layout_below="@+id/Address" />
+        </Linearlayout>
+    </Linearlayout>
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/CrueltySpots"
+        android:divider="@color/gray"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/list_selector" />
+</LinearLayout>

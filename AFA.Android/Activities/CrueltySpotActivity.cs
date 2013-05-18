@@ -30,7 +30,8 @@ namespace AFA.Android.Activities
             Log.Debug("CrueltySpotDetails", crueltySpotId.ToString());
             var tv = FindViewById<TextView>(Resource.Id.textView1);
             //_crueltySpot = AfaApplication.ServiceClient.Get(new CrueltySpotDto { Id = crueltySpotId }).CrueltySpot;
-            _crueltySpot = CrueltySpotService.GetById(crueltySpotId);
+            var crueltySpotsService = new CrueltySpotsService();
+            _crueltySpot = crueltySpotsService.GetById(crueltySpotId);
             tv.Text = String.Format("DETAILS about {0}", _crueltySpot.Name);
 
             var showSuccessAddedAlert = Intent.GetBooleanExtra(AppConstants.ShowCrueltySpotAddedSuccessfullyKey, false);
