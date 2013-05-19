@@ -17,7 +17,7 @@ namespace AFA.ServiceInterface
         /// </summary>
         public CrueltySpotResponse Get(CrueltySpotDto request)
         {
-            var query = string.Format("select cs.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation, csc.Id as CrueltySpotCategoryId, csc.Name as CrueltySpotCategoryName " +
+            var query = string.Format("select cs.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation, csc.Id as CrueltySpotCategoryId, csc.Name as CrueltySpotCategoryName, csc.IconName as CrueltySpotCategoryIconName " +
                                      "from CrueltySpot cs " +
                                      "left join StateProvince sp " +
                                      "on cs.StateProvinceId = sp.Id " +
@@ -80,7 +80,7 @@ namespace AFA.ServiceInterface
         {
             var crueltySpots = new List<CrueltySpotDto>();
             string query =
-                "select cs.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation, csc.Id as CrueltySpotCategoryId, csc.Name as CrueltySpotCategoryName " +
+                "select cs.*, sp.Name as StateProvinceName, sp.Abbreviation as StateProvinceAbbreviation, csc.Id as CrueltySpotCategoryId, csc.Name as CrueltySpotCategoryName, csc.IconName as CrueltySpotCategoryIconName " +
                 "from CrueltySpot cs " +
                 "left join StateProvince sp " +
                 "on cs.StateProvinceId = sp.Id " +

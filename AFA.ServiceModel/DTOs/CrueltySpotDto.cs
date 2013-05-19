@@ -32,6 +32,7 @@ namespace AFA.ServiceModel.DTOs
 
         public int CrueltySpotCategoryId { get; set; }
         public string CrueltySpotCategoryName { get; set; }
+        public string CrueltySpotCategoryIconName { get; set; }
 
         public DateTime CreatedAt { get; set; }
         public DateTime LastUpdatedAt { get; set; }

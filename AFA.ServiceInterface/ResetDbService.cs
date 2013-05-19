@@ -29,8 +29,8 @@ namespace AFA.ServiceInterface
             Db.CreateTableIfNotExists<OrganizationComment>();
             Db.CreateTableIfNotExists<EventCategory>();
             Db.CreateTableIfNotExists<Event>();
-            Db.CreateTableIfNotExists<CrueltySpot>();
             Db.CreateTableIfNotExists<CrueltySpotCategory>();
+            Db.CreateTableIfNotExists<CrueltySpot>();
             //Db.DropAndCreateTable<CrueltySpot>();
             //Db.DropAndCreateTable<CrueltySpotCategory>();
 
