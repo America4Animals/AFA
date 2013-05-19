@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using System.Linq;
 using System.Configuration;
 using System.Collections.Generic;
@@ -102,6 +103,14 @@ namespace AFA.ServiceHostAndWeb.App_Start
                                                      new OrmLiteConnectionFactory(
                                                          "~/App_Data/db.sqlite".MapHostAbsolutePath(),
                                                          SqliteOrmLiteDialectProvider.Instance));
+
+            //var dbFactory =
+            //    new OrmLiteConnectionFactory(
+            //        @"Server=EINSTEIN\SQLEXPRESS;Database=AFA;Trusted_Connection=True;",
+            //        SqlServerDialect.Provider);
+
+            //container.Register<IDbConnectionFactory>(dbFactory);
+
 
             // Reset DB
             using (var resetDb = container.Resolve<ResetDbService>())
