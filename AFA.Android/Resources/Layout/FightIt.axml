@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <Linearlayout
+    android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:background="@color/white">
+    <LinearLayout
         android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:paddingTop="10dip">
         <ImageView
             android:src="@drawable/sharkFin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
             android:id="@+id/CrueltyTypeImage" />
-        <Linearlayout
+        <LinearLayout
             android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Name"
+                android:text="[Name]"
                 android:textColor="@color/pink"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -29,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Address"
+                android:text="[Address]"
                 android:textColor="@color/black"
                 android:paddingLeft="10dip"
                 android:layout_below="@+id/Name" />
@@ -36,18 +48,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Distance"
+                android:text="[Distance]"
                 android:textColor="@color/gray"
                 android:paddingLeft="10dip"
                 android:layout_below="@+id/Address" />
-        </Linearlayout>
-    </Linearlayout>
-    <ListView
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="fill_parent"
+        </LinearLayout>
+    </LinearLayout>
+    <include
+        android:id="@+id/crueltyNavMenu"
+        layout="@layout/crueltyNavMenu"
+        android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
-        android:id="@+id/CrueltySpots"
-        android:divider="@color/gray"
-        android:dividerHeight="1dp"
-        android:listSelector="@drawable/list_selector" />
-</LinearLayout>
+        android:layout_width="fill_parent" />
+</RelativeLayout>

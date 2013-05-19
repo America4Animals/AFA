@@ -226,17 +226,17 @@ namespace AFA.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f04001b
-			public const int Address = 2130968603;
+			// aapt resource value: 0x7f04001d
+			public const int Address = 2130968605;
 			
-			// aapt resource value: 0x7f040033
-			public const int AddressButton = 2130968627;
+			// aapt resource value: 0x7f040032
+			public const int AddressButton = 2130968626;
 			
-			// aapt resource value: 0x7f040036
-			public const int Allies = 2130968630;
+			// aapt resource value: 0x7f040035
+			public const int Allies = 2130968629;
 			
-			// aapt resource value: 0x7f04002b
-			public const int CalendarIconButton = 2130968619;
+			// aapt resource value: 0x7f04002a
+			public const int CalendarIconButton = 2130968618;
 			
 			// aapt resource value: 0x7f04000e
 			public const int CalendarMenuButton = 2130968590;
@@ -244,17 +244,14 @@ namespace AFA.Android
 			// aapt resource value: 0x7f040008
 			public const int City = 2130968584;
 			
-			// aapt resource value: 0x7f040035
-			public const int CityState = 2130968629;
+			// aapt resource value: 0x7f040034
+			public const int CityState = 2130968628;
+			
+			// aapt resource value: 0x7f04002e
+			public const int CommentsButton = 2130968622;
 			
 			// aapt resource value: 0x7f04002f
-			public const int CommentsButton = 2130968623;
-			
-			// aapt resource value: 0x7f040030
-			public const int ContactLabel = 2130968624;
-			
-			// aapt resource value: 0x7f04001d
-			public const int CrueltySpots = 2130968605;
+			public const int ContactLabel = 2130968623;
 			
 			// aapt resource value: 0x7f040017
 			public const int CrueltyTypeImage = 2130968599;
@@ -265,20 +262,20 @@ namespace AFA.Android
 			// aapt resource value: 0x7f040025
 			public const int DescriptionText = 2130968613;
 			
-			// aapt resource value: 0x7f040042
-			public const int DetailsInput = 2130968642;
+			// aapt resource value: 0x7f040041
+			public const int DetailsInput = 2130968641;
 			
-			// aapt resource value: 0x7f04001c
-			public const int Distance = 2130968604;
+			// aapt resource value: 0x7f04001e
+			public const int Distance = 2130968606;
 			
 			// aapt resource value: 0x7f04000b
 			public const int Email = 2130968587;
 			
-			// aapt resource value: 0x7f040031
-			public const int EmailButton = 2130968625;
+			// aapt resource value: 0x7f040030
+			public const int EmailButton = 2130968624;
 			
-			// aapt resource value: 0x7f04002c
-			public const int EventsButton = 2130968620;
+			// aapt resource value: 0x7f04002b
+			public const int EventsButton = 2130968619;
 			
 			// aapt resource value: 0x7f040014
 			public const int FightItMenuButton = 2130968596;
@@ -286,14 +283,14 @@ namespace AFA.Android
 			// aapt resource value: 0x7f040026
 			public const int FollowingButton = 2130968614;
 			
-			// aapt resource value: 0x7f040038
-			public const int FollowingLabel = 2130968632;
+			// aapt resource value: 0x7f040037
+			public const int FollowingLabel = 2130968631;
 			
 			// aapt resource value: 0x7f040005
 			public const int HeaderText = 2130968581;
 			
-			// aapt resource value: 0x7f040040
-			public const int LocationInput = 2130968640;
+			// aapt resource value: 0x7f04003f
+			public const int LocationInput = 2130968639;
 			
 			// aapt resource value: 0x7f040015
 			public const int MoreMenuButton = 2130968597;
@@ -304,11 +301,11 @@ namespace AFA.Android
 			// aapt resource value: 0x7f040023
 			public const int NeedVolunteersLabel = 2130968611;
 			
-			// aapt resource value: 0x7f040029
-			public const int NewsButton = 2130968617;
-			
 			// aapt resource value: 0x7f040028
-			public const int NewsIconButton = 2130968616;
+			public const int NewsButton = 2130968616;
+			
+			// aapt resource value: 0x7f040027
+			public const int NewsIconButton = 2130968615;
 			
 			// aapt resource value: 0x7f040020
 			public const int OrgImage = 2130968608;
@@ -316,29 +313,29 @@ namespace AFA.Android
 			// aapt resource value: 0x7f040022
 			public const int OrgName = 2130968610;
 			
-			// aapt resource value: 0x7f040039
-			public const int OrganizationUsers = 2130968633;
+			// aapt resource value: 0x7f040038
+			public const int OrganizationUsers = 2130968632;
 			
-			// aapt resource value: 0x7f040037
-			public const int Organizations = 2130968631;
+			// aapt resource value: 0x7f040036
+			public const int Organizations = 2130968630;
 			
 			// aapt resource value: 0x7f04000f
 			public const int OrgsMenuButton = 2130968591;
 			
-			// aapt resource value: 0x7f040032
-			public const int PhoneButton = 2130968626;
+			// aapt resource value: 0x7f040031
+			public const int PhoneButton = 2130968625;
 			
 			// aapt resource value: 0x7f040006
 			public const int PlaceName = 2130968582;
 			
-			// aapt resource value: 0x7f04003e
-			public const int Places = 2130968638;
+			// aapt resource value: 0x7f04003d
+			public const int Places = 2130968637;
 			
 			// aapt resource value: 0x7f040012
 			public const int ReportItMenuButton = 2130968594;
 			
-			// aapt resource value: 0x7f04003a
-			public const int ReportedText = 2130968634;
+			// aapt resource value: 0x7f040039
+			public const int ReportedText = 2130968633;
 			
 			// aapt resource value: 0x7f040009
 			public const int State = 2130968585;
@@ -352,20 +349,20 @@ namespace AFA.Android
 			// aapt resource value: 0x7f040013
 			public const int TrackItMenuButton = 2130968595;
 			
-			// aapt resource value: 0x7f040041
-			public const int TypeOfCrueltyInput = 2130968641;
+			// aapt resource value: 0x7f040040
+			public const int TypeOfCrueltyInput = 2130968640;
 			
 			// aapt resource value: 0x7f040024
 			public const int UniteButton = 2130968612;
 			
+			// aapt resource value: 0x7f040042
+			public const int UserImage = 2130968642;
+			
 			// aapt resource value: 0x7f040043
-			public const int UserImage = 2130968643;
+			public const int UserName = 2130968643;
 			
-			// aapt resource value: 0x7f040044
-			public const int UserName = 2130968644;
-			
-			// aapt resource value: 0x7f040034
-			public const int WebsiteButton = 2130968628;
+			// aapt resource value: 0x7f040033
+			public const int WebsiteButton = 2130968627;
 			
 			// aapt resource value: 0x7f04000a
 			public const int Zip = 2130968586;
@@ -379,32 +376,32 @@ namespace AFA.Android
 			// aapt resource value: 0x7f040011
 			public const int crueltyNavMenu = 2130968593;
 			
-			// aapt resource value: 0x7f04003f
-			public const int headerText = 2130968639;
+			// aapt resource value: 0x7f04003e
+			public const int headerText = 2130968638;
 			
 			// aapt resource value: 0x7f040004
 			public const int hybrid = 2130968580;
 			
-			// aapt resource value: 0x7f04001e
-			public const int linearLayout1 = 2130968606;
+			// aapt resource value: 0x7f04001b
+			public const int linearLayout1 = 2130968603;
 			
-			// aapt resource value: 0x7f040027
-			public const int linearLayout2 = 2130968615;
+			// aapt resource value: 0x7f04001c
+			public const int linearLayout2 = 2130968604;
 			
-			// aapt resource value: 0x7f04002a
-			public const int linearLayout3 = 2130968618;
+			// aapt resource value: 0x7f040029
+			public const int linearLayout3 = 2130968617;
 			
-			// aapt resource value: 0x7f04002d
-			public const int linearLayout4 = 2130968621;
+			// aapt resource value: 0x7f04002c
+			public const int linearLayout4 = 2130968620;
 			
-			// aapt resource value: 0x7f04003c
-			public const int locationSearch = 2130968636;
+			// aapt resource value: 0x7f04003b
+			public const int locationSearch = 2130968635;
 			
 			// aapt resource value: 0x7f040010
 			public const int mapWithOverlay = 2130968592;
 			
-			// aapt resource value: 0x7f040045
-			public const int navArrow = 2130968645;
+			// aapt resource value: 0x7f040044
+			public const int navArrow = 2130968644;
 			
 			// aapt resource value: 0x7f040000
 			public const int none = 2130968576;
@@ -412,8 +409,8 @@ namespace AFA.Android
 			// aapt resource value: 0x7f040001
 			public const int normal = 2130968577;
 			
-			// aapt resource value: 0x7f04003b
-			public const int placeNameSearch = 2130968635;
+			// aapt resource value: 0x7f04003a
+			public const int placeNameSearch = 2130968634;
 			
 			// aapt resource value: 0x7f04001f
 			public const int relativeLayout1 = 2130968607;
@@ -424,11 +421,11 @@ namespace AFA.Android
 			// aapt resource value: 0x7f040002
 			public const int satellite = 2130968578;
 			
-			// aapt resource value: 0x7f04003d
-			public const int searchButton = 2130968637;
+			// aapt resource value: 0x7f04003c
+			public const int searchButton = 2130968636;
 			
-			// aapt resource value: 0x7f04002e
-			public const int speechIconButton = 2130968622;
+			// aapt resource value: 0x7f04002d
+			public const int speechIconButton = 2130968621;
 			
 			// aapt resource value: 0x7f040003
 			public const int terrain = 2130968579;

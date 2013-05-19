@@ -9,6 +9,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using ServiceStack.Text;
@@ -115,6 +116,15 @@ namespace AFA.Android.Service
         //    }
         //}
 
+        public CrueltySpotResponse Post(CrueltySpotDto request)
+        {
+            _url = new StringBuilder();
+            _url.Append(GetBaseUrl());
+            _url.AppendJsonFormatQueryStringParam();
+            //Log.Debug("AFA Posting to ServiceHelper", request.ToJson());
+            return ServiceHelper.PostJson<CrueltySpotResponse>(_url.ToString(), request.ToJson());
+        }
+
         public void PostAsync(CrueltySpotDto crueltySpot, Action<CrueltySpotResponse> callback)
         {
             //var url = String.Format("{0}{1}{2}", AfaApplication.ServiceBaseUrl, RouteBase, AfaApplication.ServiceJsonContentTypeSuffix);
@@ -123,6 +133,7 @@ namespace AFA.Android.Service
             _url.AppendJsonFormatQueryStringParam();
 
             string json = crueltySpot.ToJson();
+            //Log.Debug("Posting JSON", json);
             ServiceHelper.PostJsonAsync(_url.ToString(), json, callback);
         }
 

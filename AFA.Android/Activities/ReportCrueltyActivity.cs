@@ -17,6 +17,7 @@ using Android.Widget;
 using Android.Text.Style;
 using System.Drawing;
 using Android.Views.InputMethods;
+using ServiceStack.Text;
 
 namespace AFA.Android
 {
@@ -178,7 +179,7 @@ namespace AFA.Android
             crueltySpotsService.PostAsync(newCrueltySpot, r => RunOnUiThread(() =>
             {
                 var crueltySpotId = r.CrueltySpot.Id;
-                Log.Debug("NewCrueltySpotId", crueltySpotId.ToString());
+                //Log.Debug("NewCrueltySpotId", crueltySpotId.ToString());
                 var intent = new Intent(this, typeof(CrueltySpotActivity));
                 intent.PutExtra(AppConstants.ShowCrueltySpotAddedSuccessfullyKey, true);
                 intent.PutExtra(AppConstants.CrueltySpotIdKey, crueltySpotId);
