@@ -6,6 +6,8 @@ using Android.Views;
 using Android.Widget;
 using AFA.Android.Helpers;
 using AFA_Android.Helpers;
+using AFA.ServiceModel.DTOs;
+using AFA.Android.Service;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Support.V4.App;
@@ -22,19 +24,11 @@ namespace AFA.Android.Activities
     public class CrueltyMapActivity : FragmentActivity
 	{
 
-		private static readonly LatLng InMaui = new LatLng (20.72110, -156.44776);
-		private static readonly LatLng LeaveFromHereToMaui = new LatLng (82.4986, -62.348);
-		private static readonly LatLng[] LocationForCustomIconMarkers = new[] {
-			new LatLng(40.741773, -74.004986),
-			new LatLng(41.051696, -73.545667),
-			new LatLng(41.311197, -72.902646)
-		};
-		private string _gotoMauiMarkerId;
 		private GoogleMap _map;
 		private SupportMapFragment _mapFragment;
-		private Marker _polarBearMarker;
-		private GroundOverlay _polarBearOverlay;
 		private GPSTracker _gpsTracker;
+		List<CrueltySpotDto> _crueltySpots;
+		private CrueltySpotsService crueltySpotsService;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -69,46 +63,6 @@ namespace AFA.Android.Activities
 			_map.MarkerClick += MapOnMarkerClick;
 		}
 
-		private void AddInitialPolarBarToMap ()
-		{
-			MarkerOptions markerOptions = new MarkerOptions ()
-				.SetSnippet ("Click me to go on vacation.")
-					.SetPosition (LeaveFromHereToMaui)
-					.SetTitle ("Goto Maui");
-			_polarBearMarker = _map.AddMarker (markerOptions);
-			_polarBearMarker.ShowInfoWindow ();
-
-			_gotoMauiMarkerId = _polarBearMarker.Id;
-
-			PositionPolarBearGroundOverlay (LeaveFromHereToMaui);
-		}
-		/// <summary>
-		///   Add three markers to the map.
-		/// </summary>
-		private void AddMonkeyMarkersToMap ()
-		{
-			for (int i = 0; i < LocationForCustomIconMarkers.Length; i++) {
-				BitmapDescriptor icon = BitmapDescriptorFactory.FromResource (Resource.Drawable.monkey);
-				MarkerOptions mapOption = new MarkerOptions ()
-					.SetPosition (LocationForCustomIconMarkers[i])
-						.InvokeIcon (icon)
-						.SetSnippet (String.Format("This is marker #{0}.", i))
-						.SetTitle (String.Format("Marker {0}", i));
-				_map.AddMarker (mapOption);
-			}
-		}
-
-		private void AddDefaultMarkersToMap ()
-		{
-			for (int i = 0; i < LocationForCustomIconMarkers.Length; i++) {
-			
-				MarkerOptions mapOption = new MarkerOptions ()
-					.SetPosition (LocationForCustomIconMarkers[i])
-						.SetSnippet (String.Format("This is marker #{0}.", i))
-						.SetTitle (String.Format("Marker {0}", i));
-				_map.AddMarker (mapOption);
-			}
-		}
 
 		private void InitMapFragment ()
 		{
@@ -129,29 +83,11 @@ namespace AFA.Android.Activities
 		private void MapOnMarkerClick (object sender, GoogleMap.MarkerClickEventArgs markerClickEventArgs)
 		{
 			Marker marker = markerClickEventArgs.P0; // TODO [TO201212142221] Need to fix the name of this with MetaData.xml
-			if (marker.Id.Equals (_gotoMauiMarkerId)) {
-				PositionPolarBearGroundOverlay (InMaui);
-				_map.AnimateCamera (CameraUpdateFactory.NewLatLngZoom(InMaui, 13));
-				_gotoMauiMarkerId = null;
-				_polarBearMarker.Remove ();
-				_polarBearMarker = null;
-			} else {
-				Toast.MakeText (this, String.Format ("You clicked on Marker ID {0}", marker.Id), ToastLength.Short).Show ();
-			}
+			Toast.MakeText (this, marker.Title, ToastLength.Short).Show ();
+
 		}
 
-		private void PositionPolarBearGroundOverlay (LatLng position)
-		{
-			if (_polarBearOverlay == null) {
-				BitmapDescriptor image = BitmapDescriptorFactory.FromResource (Resource.Drawable.polarbear);
-				GroundOverlayOptions groundOverlayOptions = new GroundOverlayOptions ()
-					.Position (position, 150, 200)
-						.InvokeImage (image);
-				_polarBearOverlay = _map.AddGroundOverlay (groundOverlayOptions);
-			} else {
-				_polarBearOverlay.Position = InMaui;
-			}
-		}
+
 
 		private void SetupMapIfNeeded ()
 		{
@@ -162,14 +98,41 @@ namespace AFA.Android.Activities
 
 					//	AddInitialPolarBarToMap();
 					LatLng myLocation = new LatLng (_gpsTracker.Latitude, _gpsTracker.Longitude);
+					crueltySpotsService = new CrueltySpotsService();
+					_crueltySpots = crueltySpotsService.GetMany(new CrueltySpotsDto
+					                                                               {
+						SortBy = "createdAt",
+						SortOrder = "desc"
+					});
+					MarkerOptions mapOption;
+					LatLng crueltyLocation;
+					LatLngBounds.Builder builder = new LatLngBounds.Builder ();
+					builder.Include (myLocation);
+					foreach (CrueltySpotDto spot in _crueltySpots) // Loop through List with foreach
+					{
+						crueltyLocation = new LatLng (spot.Latitude, spot.Longitude);
+						builder.Include (crueltyLocation);
+						Console.WriteLine("latitude: " + spot.Latitude + " longtitude: "+spot.Longitude		 );
+						mapOption = new MarkerOptions ()
+							.SetPosition (crueltyLocation)
+								.SetSnippet ("This is cruelty spot: "+spot.Name)
+								.SetTitle ("This is cruelty spot: "+spot.Name);
+						_map.AddMarker (mapOption);
+
+
+
+					}
+
 				//	LatLngBounds bounds = new LatLngBounds.Builder ().Include (myLocation).Build ();
-					MarkerOptions mapOption = new MarkerOptions ()
+					mapOption = new MarkerOptions ()
 						.SetPosition (myLocation)
-							.SetSnippet (String.Format("This is marker #{0}.", 0))
-							.SetTitle (String.Format("Marker {0}", 0));
+							.SetSnippet ("Your location")
+							.SetTitle ("Your location")
+							.InvokeIcon (BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueOrange));
 					_map.AddMarker (mapOption);
+					
 					// Move the map so that it is showing the markers we added above.
-					_map.AnimateCamera (CameraUpdateFactory.NewLatLngZoom(myLocation,13));
+					_map.AnimateCamera (CameraUpdateFactory.NewLatLngZoom(myLocation,3));
 				}
 			}
 		}
