@@ -20,7 +20,8 @@ namespace AFA.Android.Activities
     {
         private ProgressDialog _loadingDialog;
         private ListView _crueltySpotsList;
-        private IList<CrueltySpotDto> _crueltySpots;
+        private CrueltySpotDto _featuredCrueltySpot;
+        private List<CrueltySpotDto> _otherCrueltySpots;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -30,35 +31,43 @@ namespace AFA.Android.Activities
             CrueltyNavMenuHelper.InitCrueltyNavMenu(this, CrueltyNavMenuItem.FightIt);
 
             _loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
-            var crueltySpotsService = new CrueltySpotsService();
 
+            _crueltySpotsList = FindViewById<ListView>(Resource.Id.CrueltySpots);
+            
+            var crueltySpotsService = new CrueltySpotsService();
             crueltySpotsService.GetManyAsync<CrueltySpotsResponse>(new CrueltySpotsDto
                                                  {
                                                      SortBy = "createdAt",
                                                      SortOrder = "desc"
-                                                 }, r => RunOnUiThread(() =>
+                                                 }, r => RunOnUiThread(() 
+                                                     =>
                                                      {
-                                                         _crueltySpots = r.CrueltySpots;
-                                                         if (_crueltySpots.Any())
+                                                         var allCrueltySpots = r.CrueltySpots;      
+                                                         
+                                                         if (allCrueltySpots.Any())
                                                          {
-                                                             var featuredCrueltySpot = _crueltySpots.First();
-                                                             var resourceId = Resources.GetIdentifier(featuredCrueltySpot.CrueltySpotCategoryIconName.Replace(".png", ""), "drawable", PackageName);
+                                                             _featuredCrueltySpot = allCrueltySpots.First();
+                                                             var resourceId = Resources.GetIdentifier(_featuredCrueltySpot.CrueltySpotCategoryIconName.Replace(".png", ""), "drawable", PackageName);
                                                              FindViewById<ImageView>(Resource.Id.CrueltyTypeImage).SetImageResource(resourceId);
-                                                             FindViewById<TextView>(Resource.Id.Name).Text = featuredCrueltySpot.Name;
-                                                             FindViewById<TextView>(Resource.Id.Address).Text = featuredCrueltySpot.Address;
+                                                             FindViewById<TextView>(Resource.Id.Name).Text = _featuredCrueltySpot.Name;
+                                                             FindViewById<TextView>(Resource.Id.Address).Text = _featuredCrueltySpot.Address;
                                                              FindViewById<TextView>(Resource.Id.boycotts).Visibility = ViewStates.Visible;
                                                              FindViewById<LinearLayout>(Resource.Id.linearLayoutFeatured).Visibility = ViewStates.Visible;
 
-                                                             var distanceLabel = FindViewById<TextView>(Resource.Id.Distance);
-                                                             var gpsTracker = ((AfaApplication)ApplicationContext).GetGpsTracker(this);
-                                                             var myLat = gpsTracker.Latitude;
-                                                             var myLng = gpsTracker.Longitude;
-                                                             var geoHelper = new GeoHelper();
-                                                             double distance = geoHelper.Distance(myLat, myLng, featuredCrueltySpot.Latitude, featuredCrueltySpot.Longitude, 'M');
-                                                             distanceLabel.Text = distance.ToString("N2") + " miles";
+                                                              var distanceLabel = FindViewById<TextView>(Resource.Id.Distance);
+                                                              var gpsTracker = ((AfaApplication) ApplicationContext).GetGpsTracker(this);
+                                                              var myLat = gpsTracker.Latitude;
+                                                              var myLng = gpsTracker.Longitude;
+                                                              var geoHelper = new GeoHelper();
+                                                              double distance = geoHelper.Distance(myLat, myLng, _featuredCrueltySpot.Latitude, _featuredCrueltySpot.Longitude, 'M');
+                                                              distanceLabel.Text = distance.ToString("N2") + " miles";
 
-                                                             _crueltySpotsList = FindViewById<ListView>(Resource.Id.CrueltySpots);
-                                                             _crueltySpotsList.Adapter = new CrueltySpotsAdapter(this, _crueltySpots.Skip(1).ToList());
+                                                             if (allCrueltySpots.Count > 1)
+                                                             {
+                                                                 _otherCrueltySpots = allCrueltySpots.Skip(1).ToList();
+                                                                 _crueltySpotsList.Adapter =
+                                                                     new CrueltySpotsAdapter(this, _otherCrueltySpots.ToList());
+                                                             }
                                                              _loadingDialog.Hide();
                                                          }
                                                          else
@@ -67,39 +76,20 @@ namespace AFA.Android.Activities
                                                          }
                                                      }));
 
-            //_crueltySpots = crueltySpotsService.GetMany(new CrueltySpotsDto
-            //                                {
-            //                                    SortBy = "createdAt",
-            //                                    SortOrder = "desc"
-            //                                });
-            //if (_crueltySpots.Any())
-            //{
-            //    var featuredCrueltySpot = _crueltySpots.First();
-            //    var resourceId = Resources.GetIdentifier(featuredCrueltySpot.CrueltySpotCategoryIconName.Replace(".png", ""), "drawable", PackageName);
-            //    FindViewById<ImageView>(Resource.Id.CrueltyTypeImage).SetImageResource(resourceId);
-                
-            //    FindViewById<TextView>(Resource.Id.Name).Text = featuredCrueltySpot.Name;
-            //    FindViewById<TextView>(Resource.Id.Address).Text = featuredCrueltySpot.Address;
+            FindViewById<LinearLayout>(Resource.Id.linearLayoutFeatured).Click += (sender, e) => NavigateToCrueltySpotDetails(_featuredCrueltySpot.Id);
 
-            //    var distanceLabel = FindViewById<TextView>(Resource.Id.Distance);
-            //    var gpsTracker = ((AfaApplication)ApplicationContext).GetGpsTracker(this);
-            //    var myLat = gpsTracker.Latitude;
-            //    var myLng = gpsTracker.Longitude;
-            //    var geoHelper = new GeoHelper();
-            //    double distance = geoHelper.Distance(myLat, myLng, featuredCrueltySpot.Latitude, featuredCrueltySpot.Longitude, 'M');
-            //    distanceLabel.Text = distance.ToString("N2") + " miles";
+            _crueltySpotsList.ItemClick += (sender, e) =>
+            {
+                var crueltySpot = _otherCrueltySpots[e.Position];
+                NavigateToCrueltySpotDetails(crueltySpot.Id);
+            };
+        }
 
-            //    _crueltySpotsList = FindViewById<ListView>(Resource.Id.CrueltySpots);
-            //    _crueltySpotsList.Adapter = new CrueltySpotsAdapter(this, _crueltySpots.Skip(1).ToList());
-            //    _loadingDialog.Hide();
-            //}
-            //else
-            //{
-            //    // ToDo: Handle case where there are no cruelty spots
-            //}
-
-            //_loadingDialog.Hide();
-
+        private void NavigateToCrueltySpotDetails(int crueltySpotId)
+        {
+            var intent = new Intent(this, typeof(CrueltySpotActivity));
+            intent.PutExtra(AppConstants.CrueltySpotIdKey, crueltySpotId);
+            StartActivity(intent);
         }
     }
 }
