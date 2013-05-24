@@ -71,6 +71,28 @@ namespace AFA.Android.Service
             }
         }
 
+        public void GetManyAsync<T>(CrueltySpotsDto request, Action<T> callback)
+        {
+            var client = new WebClient();
+            _url = new StringBuilder();
+            _url.Append(GetBaseUrl());
+            _url.AppendQueryStringParam(NameParamKey, request.Name);
+            _url.AppendQueryStringParam(CityParamKey, request.City);
+            _url.AppendQueryStringParam(StateKey, request.StateProvinceAbbreviation);
+            _url.AppendQueryStringParam(SortByParamKey, request.SortBy);
+            _url.AppendQueryStringParam(SortOrderParamKey, request.SortOrder);
+            _url.AppendJsonFormatQueryStringParam();
+			//Log.Debug ("URL: ", _url.ToString());
+
+            client.DownloadStringCompleted += (sender, args) =>
+            {
+                var response = args.Result;
+                callback(response.FromJson<T>());
+            };
+
+            client.DownloadStringAsync(new Uri(_url.ToString()));
+        }
+
         public void GetAllAsync<T>(Action<T> callback)
         {
             var client = new WebClient();

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_selector"
+    android:paddingTop="5dip"
+    android:paddingBottom="5dip">
+    <ImageView
+        android:src="@drawable/sharkFin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:id="@+id/CrueltyTypeImage" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Name"
+        android:text="[Name]"
+        android:textColor="@color/pink"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingLeft="10dip"
+        android:layout_toRightOf="@id/CrueltyTypeImage" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Address"
+        android:text="[Address]"
+        android:textColor="@color/black"
+        android:paddingLeft="10dip"
+        android:layout_below="@+id/Name"
+        android:layout_toRightOf="@id/CrueltyTypeImage" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Distance"
+        android:text="[Distance]"
+        android:textColor="@color/gray"
+        android:paddingLeft="10dip"
+        android:layout_below="@+id/Address"
+        android:layout_toRightOf="@id/CrueltyTypeImage" />
+</RelativeLayout>

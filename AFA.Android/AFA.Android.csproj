@@ -61,6 +61,7 @@
     <Compile Include="Activities\FightItActivity.cs" />
     <Compile Include="Activities\NearbyPlacesActivity.cs" />
     <Compile Include="Activities\ReportCrueltyBaseActivity.cs" />
+    <Compile Include="Adapters\CrueltySpotsAdapter.cs" />
     <Compile Include="AfaApplication.cs" />
     <Compile Include="Activities\EventsActivity.cs" />
     <Compile Include="Adapters\CrueltyTypesAdapter.cs" />
@@ -145,6 +146,9 @@
     <AndroidResource Include="Resources\Drawable\monkey.png" />
     <AndroidResource Include="Resources\Drawable\polarbear.jpg" />
     <AndroidResource Include="Resources\Layout\FightIt.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\CrueltySpotListItem.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
