@@ -48,8 +48,9 @@ namespace AFA.Android.Activities
 			// Pause the GPS - we won't have to worry about showing the 
 			// location.
 			_map.MyLocationEnabled = false;
+			_map.Clear ();
 
-			_map.MarkerClick -= MapOnMarkerClick;
+		_map.MarkerClick -= MapOnMarkerClick;
 		}
 
 		protected override void OnResume ()
@@ -60,7 +61,7 @@ namespace AFA.Android.Activities
 			_map.MyLocationEnabled = true;
 
 			// Setup a handler for when the user clicks on a marker.
-			_map.MarkerClick += MapOnMarkerClick;
+		   _map.MarkerClick += MapOnMarkerClick;
 		}
 
 
@@ -83,7 +84,13 @@ namespace AFA.Android.Activities
 		private void MapOnMarkerClick (object sender, GoogleMap.MarkerClickEventArgs markerClickEventArgs)
 		{
 			Marker marker = markerClickEventArgs.P0; // TODO [TO201212142221] Need to fix the name of this with MetaData.xml
-			Toast.MakeText (this, marker.Title, ToastLength.Short).Show ();
+			float zoomValue = 12;
+			if (_map.CameraPosition.Zoom > 12)
+			{
+				zoomValue = _map.CameraPosition.Zoom;
+			}
+			_map.AnimateCamera (CameraUpdateFactory.NewLatLngZoom(marker.Position,zoomValue));
+			marker.ShowInfoWindow ();
 
 		}
 
@@ -93,48 +100,48 @@ namespace AFA.Android.Activities
 		{
 			if (_map == null) {
 				_map = _mapFragment.Map;
-				if (_map != null) {
+			}
+			if (_map != null) {
 				
 
-					//	AddInitialPolarBarToMap();
-					LatLng myLocation = new LatLng (_gpsTracker.Latitude, _gpsTracker.Longitude);
-					crueltySpotsService = new CrueltySpotsService();
-					_crueltySpots = crueltySpotsService.GetMany(new CrueltySpotsDto
+				//	AddInitialPolarBarToMap();
+				LatLng myLocation = new LatLng (_gpsTracker.Latitude, _gpsTracker.Longitude);
+				crueltySpotsService = new CrueltySpotsService ();
+				_crueltySpots = crueltySpotsService.GetMany (new CrueltySpotsDto
 					                                                               {
 						SortBy = "createdAt",
 						SortOrder = "desc"
 					});
-					MarkerOptions mapOption;
-					LatLng crueltyLocation;
-					LatLngBounds.Builder builder = new LatLngBounds.Builder ();
-					builder.Include (myLocation);
-					foreach (CrueltySpotDto spot in _crueltySpots) // Loop through List with foreach
-					{
-						crueltyLocation = new LatLng (spot.Latitude, spot.Longitude);
-						builder.Include (crueltyLocation);
-						Console.WriteLine("latitude: " + spot.Latitude + " longtitude: "+spot.Longitude		 );
-						mapOption = new MarkerOptions ()
+				MarkerOptions mapOption;
+				LatLng crueltyLocation;
+				LatLngBounds.Builder builder = new LatLngBounds.Builder ();
+				builder.Include (myLocation);
+				foreach (CrueltySpotDto spot in _crueltySpots) { // Loop through List with foreach
+					crueltyLocation = new LatLng (spot.Latitude, spot.Longitude);
+					builder.Include (crueltyLocation);
+					Console.WriteLine ("latitude: " + spot.Latitude + " longtitude: "+spot.Longitude);
+					mapOption = new MarkerOptions ()
 							.SetPosition (crueltyLocation)
-								.SetSnippet ("This is cruelty spot: "+spot.Name)
-								.SetTitle ("This is cruelty spot: "+spot.Name);
-						_map.AddMarker (mapOption);
+								.SetSnippet (spot.Address)
+								.SetTitle (spot.Name);
+					_map.AddMarker (mapOption);
 
 
 
-					}
+				}
 
 				//	LatLngBounds bounds = new LatLngBounds.Builder ().Include (myLocation).Build ();
-					mapOption = new MarkerOptions ()
+			/*	mapOption = new MarkerOptions ()
 						.SetPosition (myLocation)
 							.SetSnippet ("Your location")
 							.SetTitle ("Your location")
 							.InvokeIcon (BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueOrange));
-					_map.AddMarker (mapOption);
+				_map.AddMarker (mapOption);*/
 					
-					// Move the map so that it is showing the markers we added above.
-					_map.AnimateCamera (CameraUpdateFactory.NewLatLngZoom(myLocation,3));
-				}
+				// Move the map so that it is showing the markers we added above.
+				_map.AnimateCamera (CameraUpdateFactory.NewLatLngZoom(myLocation,3));
 			}
+		
 		}
 	}
 }
