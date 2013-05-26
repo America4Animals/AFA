@@ -65,6 +65,20 @@ namespace AFA.ServiceModel.DTOs
                 return "";
             }
         }
+
+        public string CityStateAndZip
+        {
+            get
+            {
+                var cityAndState = CityAndState;
+                if (!String.IsNullOrEmpty(Zipcode))
+                {
+                    return String.Format("{0} {1}", cityAndState, Zipcode);
+                }
+
+                return cityAndState;
+            }
+        }
     }
 
     public class CrueltySpotResponse
