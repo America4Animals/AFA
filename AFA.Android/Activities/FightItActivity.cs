@@ -68,12 +68,13 @@ namespace AFA.Android.Activities
                                                                  _crueltySpotsList.Adapter =
                                                                      new CrueltySpotsAdapter(this, _otherCrueltySpots.ToList());
                                                              }
-                                                             _loadingDialog.Hide();
                                                          }
                                                          else
                                                          {
                                                              // ToDo: Handle case where there are no cruelty spots
                                                          }
+
+                                                         _loadingDialog.Hide();
                                                      }));
 
             FindViewById<LinearLayout>(Resource.Id.linearLayoutFeatured).Click += (sender, e) => NavigateToCrueltySpotDetails(_featuredCrueltySpot.Id);
