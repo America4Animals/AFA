@@ -30,7 +30,6 @@ namespace AFA.Android.Activities
             _loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
 
             var crueltySpotId = Intent.GetIntExtra(AppConstants.CrueltySpotIdKey, 0);
-            var tv = FindViewById<TextView>(Resource.Id.textView1);
             //_crueltySpot = AfaApplication.ServiceClient.Get(new CrueltySpotDto { Id = crueltySpotId }).CrueltySpot;
             var crueltySpotsService = new CrueltySpotsService();
 
@@ -38,7 +37,11 @@ namespace AFA.Android.Activities
                 RunOnUiThread(() =>
                     {
                         _crueltySpot = r.CrueltySpot;
-                        tv.Text = String.Format("DETAILS about {0}", _crueltySpot.Name);
+                        var formattedAddress = String.Format("{0}\n{1}", _crueltySpot.Address, _crueltySpot.CityStateAndZip);
+                        FindViewById<TextView>(Resource.Id.Name).Text = _crueltySpot.Name;
+                        FindViewById<TextView>(Resource.Id.Address).Text = formattedAddress;
+                        var resourceId = Resources.GetIdentifier(_crueltySpot.CrueltySpotCategoryIconName.Replace(".png", ""), "drawable", PackageName);
+                        FindViewById<ImageView>(Resource.Id.CrueltyTypeImage).SetImageResource(resourceId);
 
                         _loadingDialog.Hide();
 
