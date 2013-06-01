@@ -151,6 +151,7 @@
     <AndroidResource Include="Resources\Layout\CrueltySpotListItem.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\Layout\custom_info_content.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml">
