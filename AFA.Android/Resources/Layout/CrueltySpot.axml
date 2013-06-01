@@ -13,9 +13,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayoutTop"
-        android:paddingTop="10dip"
+        android:paddingTop="20dip"
         android:background="@color/white"
-        android:paddingBottom="10dip">
+        android:paddingBottom="20dip">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/Name"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:paddingLeft="5dip"
             android:gravity="center"
@@ -37,11 +37,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/Address"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="16sp"
         android:paddingLeft="10dip"
         android:background="@color/gray"
-        android:paddingTop="10dip"
-        android:paddingBottom="10dip" />
+        android:paddingTop="20dip"
+        android:paddingBottom="20dip" />
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
@@ -49,9 +49,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayoutActionMenu"
-        android:paddingTop="10dip"
+        android:paddingTop="20dip"
         android:background="@color/black"
-        android:paddingBottom="10dip">
+        android:paddingBottom="20dip">
         <Button
             android:text="The Issue"
             android:layout_width="wrap_content"
@@ -60,7 +60,9 @@
             android:layout_weight="1"
             android:layout_marginLeft="5dip"
             android:textColor="@color/black"
-            android:background="@color/pink" />
+            android:background="@color/pink"
+            android:minHeight="50dip"
+            android:textSize="16sp" />
         <Button
             android:text="Take Action"
             android:layout_width="wrap_content"
@@ -69,7 +71,9 @@
             android:layout_weight="1"
             android:layout_marginRight="5dip"
             android:textColor="@color/gray"
-            android:background="@color/green" />
+            android:background="@color/green"
+            android:minHeight="50dip"
+            android:textSize="16sp" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -78,9 +82,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayoutBoycott"
-        android:paddingTop="10dip"
+        android:paddingTop="30dip"
         android:background="@color/gray"
-        android:paddingBottom="10dip">
+        android:paddingBottom="30dip">
         <Button
             android:text="Boycott"
             android:layout_width="wrap_content"
@@ -90,15 +94,20 @@
             android:textColor="@color/black"
             android:background="@color/pink"
             android:layout_marginRight="10dip"
-            android:paddingLeft="10dip"
-            android:paddingRight="10dip" />
+            android:paddingLeft="20dip"
+            android:paddingRight="20dip"
+            android:textSize="20sp"
+            android:paddingTop="20dip"
+            android:paddingBottom="20dip"
+            android:textStyle="normal" />
         <TextView
             android:text="@string/boycottActionDesctiption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/takeActionButton"
             android:layout_marginRight="10dip"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="16sp" />
     </LinearLayout>
     <Button
         android:text="Edit This Info"
@@ -110,5 +119,7 @@
         android:background="@color/white"
         android:layout_marginRight="10dip"
         android:paddingLeft="10dip"
-        android:paddingRight="10dip" />
+        android:paddingRight="10dip"
+        android:minHeight="50dip"
+        android:textSize="16sp" />
 </LinearLayout>
