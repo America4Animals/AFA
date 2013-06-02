@@ -70,56 +70,88 @@
             android:id="@+id/takeActionButton"
             android:layout_weight="1"
             android:layout_marginRight="5dip"
-            android:textColor="@color/gray"
+            android:textColor="@color/black"
             android:background="@color/green"
             android:minHeight="50dip"
             android:textSize="16sp" />
     </LinearLayout>
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayoutBoycott"
-        android:paddingTop="30dip"
-        android:background="@color/gray"
-        android:paddingBottom="30dip">
-        <Button
-            android:text="Boycott"
-            android:layout_width="wrap_content"
+        android:background="@color/gray">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/boycottButton"
+            android:id="@+id/linearLayoutBoycottInner"
+            android:paddingTop="30dip"
+            android:background="@color/gray"
+            android:paddingBottom="30dip">
+            <Button
+                android:text="Boycott"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/boycottButton"
+                android:layout_marginLeft="10dip"
+                android:textColor="@color/black"
+                android:background="@color/pink"
+                android:layout_marginRight="10dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:textSize="20sp"
+                android:paddingTop="20dip"
+                android:paddingBottom="20dip"
+                android:textStyle="normal" />
+            <TextView
+                android:text="@string/boycottActionDesctiption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/takeActionButton"
+                android:layout_marginRight="10dip"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <Button
+            android:text="Edit This Info"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editInfoButton"
             android:layout_marginLeft="10dip"
             android:textColor="@color/black"
-            android:background="@color/pink"
+            android:background="@color/white"
             android:layout_marginRight="10dip"
-            android:paddingLeft="20dip"
-            android:paddingRight="20dip"
-            android:textSize="20sp"
-            android:paddingTop="20dip"
-            android:paddingBottom="20dip"
-            android:textStyle="normal" />
-        <TextView
-            android:text="@string/boycottActionDesctiption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/takeActionButton"
-            android:layout_marginRight="10dip"
-            android:textColor="@color/black"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:minHeight="50dip"
             android:textSize="16sp" />
     </LinearLayout>
-    <Button
-        android:text="Edit This Info"
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editInfoButton"
-        android:layout_marginLeft="10dip"
-        android:textColor="@color/black"
-        android:background="@color/white"
-        android:layout_marginRight="10dip"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip"
-        android:minHeight="50dip"
-        android:textSize="16sp" />
+        android:id="@+id/linearLayoutTheIssue"
+        android:visibility="gone"
+        android:background="@color/gray">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/issueDescription"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:paddingLeft="10dip"
+            android:background="@color/white"
+            android:paddingTop="20dip"
+            android:paddingBottom="20dip"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="30dip" />
+    </LinearLayout>
 </LinearLayout>
