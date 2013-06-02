@@ -142,16 +142,32 @@
         android:background="@color/gray">
         <TextView
             android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/issueName"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:paddingLeft="20dip"
+            android:background="@color/white"
+            android:paddingTop="20dip"
+            android:paddingBottom="10dip"
+            android:paddingRight="20dip"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="30dip"
+            android:gravity="center"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:text="Blah blah blah"
             android:id="@+id/issueDescription"
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:paddingLeft="10dip"
+            android:paddingLeft="20dip"
             android:background="@color/white"
-            android:paddingTop="20dip"
             android:paddingBottom="20dip"
+            android:paddingRight="20dip"
             android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="30dip" />
+            android:layout_marginRight="10dip" />
     </LinearLayout>
 </LinearLayout>

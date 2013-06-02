@@ -86,7 +86,9 @@ namespace AFA.Android.Activities
                                                                 RunOnUiThread(() 
                                                                     =>
                                                                     {
-                                                                        FindViewById<TextView>(Resource.Id.issueDescription).Text = response.CrueltySpotCategory.Description;
+                                                                        var crueltySpotCategory = response.CrueltySpotCategory;
+                                                                        FindViewById<TextView>(Resource.Id.issueName).Text = crueltySpotCategory.Name;
+                                                                        FindViewById<TextView>(Resource.Id.issueDescription).Text = crueltySpotCategory.Description;
                                                                     }));
                     }));
 
@@ -120,7 +122,6 @@ namespace AFA.Android.Activities
 
         private void SetButtonState(Button button, bool isEnabled)
         {
-            //setTextColor(getContext().getResources().getColor(R.color.info_button_text_color));
             button.SetTextColor(isEnabled
                                     ? this.Resources.GetColor(Resource.Color.black)
                                     : this.Resources.GetColor(Resource.Color.gray));
