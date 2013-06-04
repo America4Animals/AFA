@@ -51,7 +51,7 @@ namespace AFA.Android.Activities
                                                              FindViewById<ImageView>(Resource.Id.CrueltyTypeImage).SetImageResource(resourceId);
                                                              FindViewById<TextView>(Resource.Id.Name).Text = _featuredCrueltySpot.Name;
                                                              FindViewById<TextView>(Resource.Id.Address).Text = _featuredCrueltySpot.Address;
-                                                             FindViewById<TextView>(Resource.Id.boycotts).Visibility = ViewStates.Visible;
+                                                             //FindViewById<TextView>(Resource.Id.boycotts).Visibility = ViewStates.Visible;
                                                              FindViewById<LinearLayout>(Resource.Id.linearLayoutFeatured).Visibility = ViewStates.Visible;
 
                                                               var distanceLabel = FindViewById<TextView>(Resource.Id.Distance);
