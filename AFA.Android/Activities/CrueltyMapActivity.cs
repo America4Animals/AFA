@@ -30,8 +30,6 @@ namespace AFA.Android.Activities
 		class CustomInfoWindowAdapter : Java.Lang.Object, GoogleMap.IInfoWindowAdapter
 		{
 
-
-
 			// These a both viewgroups containing an ImageView with id "badge" and two TextViews with id
 			// "title" and "snippet".
 		
@@ -62,9 +60,11 @@ namespace AFA.Android.Activities
 			{
 
 				var resourceId = 0;
-				if (parent._crueltyLookup.ContainsKey (marker.Title)) {
-					CrueltySpotDto spot = parent._crueltyLookup [marker.Title];
-					resourceId = parent.Resources.GetIdentifier (spot.CrueltySpotCategoryIconName.Replace(".png", ""), "drawable", parent.PackageName);
+				if (parent._crueltyLookup.ContainsKey (marker.Id)) {
+					CrueltySpotDto spot = parent._crueltyLookup [marker.Id];
+					if (spot.CrueltySpotCategoryIconName != null) {
+						resourceId = parent.Resources.GetIdentifier (spot.CrueltySpotCategoryIconName.Replace(".png", ""), "drawable", parent.PackageName);
+					}
 				}
 				((ImageView)view.FindViewById (Resource.Id.badge)).SetImageResource (resourceId);
 
@@ -174,11 +174,11 @@ namespace AFA.Android.Activities
 				//	AddInitialPolarBarToMap();
 				LatLng myLocation = new LatLng (_gpsTracker.Latitude, _gpsTracker.Longitude);
 				crueltySpotsService = new CrueltySpotsService ();
-				_crueltySpots = crueltySpotsService.GetMany (new CrueltySpotsDto
-					                                                               {
+				_crueltySpots = crueltySpotsService.GetMany (new CrueltySpotsDto{
 						SortBy = "createdAt",
 						SortOrder = "desc"
-					});
+				});
+
 				MarkerOptions mapOption;
 				LatLng crueltyLocation;
 				LatLngBounds.Builder builder = new LatLngBounds.Builder ();
@@ -186,15 +186,15 @@ namespace AFA.Android.Activities
 				foreach (CrueltySpotDto spot in _crueltySpots) { // Loop through List with foreach
 					crueltyLocation = new LatLng (spot.Latitude, spot.Longitude);
 					builder.Include (crueltyLocation);
-					Console.WriteLine ("latitude: " + spot.Latitude + " longtitude: "+spot.Longitude);
+					Console.WriteLine ("inside callback latitude: " + spot.Latitude + " longtitude: "+spot.Longitude);
 					mapOption = new MarkerOptions ()
-							.SetPosition (crueltyLocation)
-								.SetSnippet (spot.Address)
-								.SetTitle (spot.Name);
-					_crueltyLookup.Add (spot.Name, spot);
-					_map.AddMarker (mapOption);
+								.SetPosition (crueltyLocation)
+									.SetSnippet (spot.Address)
+									.SetTitle (spot.Name);
 
+					Marker marker = _map.AddMarker (mapOption);
 
+					_crueltyLookup.Add (marker.Id, spot);
 
 				}
 
@@ -220,8 +220,8 @@ namespace AFA.Android.Activities
 
 		public void OnInfoWindowClick (Marker marker)
 		{
-			if (_crueltyLookup.ContainsKey (marker.Title)) {
-				CrueltySpotDto spot = _crueltyLookup [marker.Title];
+			if (_crueltyLookup.ContainsKey (marker.Id)) {
+				CrueltySpotDto spot = _crueltyLookup [marker.Id];
 				NavigateToCrueltySpotDetails (spot.Id);
 			}
 		}
