@@ -44,7 +44,7 @@ namespace AFA.Android
             if (_crueltyReport.PlaceSpecified)
             {
                 var locationText = new StringBuilder();
-                locationText.Append("<font color='#FAA3DA'><b>");
+                locationText.Append("<font color='#D34C96'><b>");
                 locationText.Append(_crueltyReport.PlaceName);
                 locationText.Append("</b></font>");
                 locationText.Append("<br />");

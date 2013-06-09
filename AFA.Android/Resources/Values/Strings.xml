@@ -6,14 +6,18 @@
     <string name="ReportCrueltyHeader">We need your eyes and ears to find out where cruelty is occurring! Fill out this form to let your community know!</string>
   <string name="AddPlaceHeader">Use this form to add a new cruelty spot or edit an existing one.</string>
   <string name="boycottActionDesctiption">Join a boycott of this business</string>
-
+  <string name="messageActionDesctiption">Send an email requesting them to stop harming animals</string>
+  <string name="shareActionDesctiption">Inform others of the cruelty happening here</string>
+  
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="pink">#FAA3DA</color>
-    <color name="green">#BBE66C</color>
+    <color name="pink">#D34C96</color>
+    <color name="green">#D0E06E</color>
     <color name="lightgreen">#D0ED99</color>
     <color name="red">#EE2C2C</color>
-    <color name="gray">#B5B5B5</color>
+    <color name="gray">#D1D2D4</color>
+    <color name="mediumgray">#818286</color>
+    <color name="darkgray">#2C2A2B</color>
     <color name="red">#bd362f</color>
   
     <string name="mapsAppText" >Show Maps App</string>

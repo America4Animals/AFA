@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:minWidth="25px"
     android:minHeight="25px"
-    android:background="@color/gray">
+    android:background="@color/white">
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
@@ -14,8 +14,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayoutTop"
         android:paddingTop="20dip"
-        android:background="@color/white"
-        android:paddingBottom="20dip">
+        android:background="@drawable/dark_gray_round_border"
+        android:paddingBottom="20dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dip">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,23 +28,40 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/Name"
-            android:textColor="@color/black"
+            android:textColor="@color/pink"
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingLeft="5dip"
             android:gravity="center"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
-    <TextView
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Address"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:paddingLeft="10dip"
-        android:background="@color/gray"
+        android:id="@+id/linearLayoutAddress"
+        android:background="@color/white"
         android:paddingTop="20dip"
-        android:paddingBottom="20dip" />
+        android:paddingBottom="20dip">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Address"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:paddingLeft="10dip"
+            android:background="@color/white"
+            android:layout_weight="2" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dip"
+            android:src="@drawable/furpin"
+            android:id="@+id/mapPin"
+            android:layout_gravity="right" />
+    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
@@ -49,9 +69,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayoutActionMenu"
-        android:paddingTop="20dip"
-        android:background="@color/black"
-        android:paddingBottom="20dip">
+        android:paddingTop="5dip"
+        android:background="@color/gray"
+        android:paddingBottom="5dip">
         <Button
             android:text="The Issue"
             android:layout_width="wrap_content"
@@ -59,10 +79,11 @@
             android:id="@+id/isueButton"
             android:layout_weight="1"
             android:layout_marginLeft="5dip"
-            android:textColor="@color/black"
-            android:background="@color/pink"
+            android:textColor="@color/green"
+            android:background="@color/mediumgray"
             android:minHeight="50dip"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_marginRight="2.5dip" />
         <Button
             android:text="Take Action"
             android:layout_width="wrap_content"
@@ -70,17 +91,18 @@
             android:id="@+id/takeActionButton"
             android:layout_weight="1"
             android:layout_marginRight="5dip"
-            android:textColor="@color/black"
-            android:background="@color/green"
+            android:textColor="@color/green"
+            android:background="@color/darkgray"
             android:minHeight="50dip"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_marginLeft="2.5dip" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:id="@+id/linearLayoutBoycott"
         android:background="@color/gray">
         <LinearLayout
@@ -89,10 +111,45 @@
             android:minHeight="25px"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayoutBoycottInner"
-            android:paddingTop="30dip"
+            android:id="@+id/linearLayoutMessage"
+            android:paddingTop="20dip"
             android:background="@color/gray"
-            android:paddingBottom="30dip">
+            android:paddingBottom="10dip">
+            <Button
+                android:text="Message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/messageButton"
+                android:layout_marginLeft="10dip"
+                android:textColor="@color/black"
+                android:background="@color/green"
+                android:layout_marginRight="10dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:minHeight="50dip"
+                android:width="130dip" />
+            <TextView
+                android:text="@string/messageActionDesctiption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/messageDescription"
+                android:layout_marginRight="10dip"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayoutBoycottInner"
+            android:paddingTop="10dip"
+            android:background="@color/gray"
+            android:paddingBottom="10dip">
             <Button
                 android:text="Boycott"
                 android:layout_width="wrap_content"
@@ -100,22 +157,58 @@
                 android:id="@+id/boycottButton"
                 android:layout_marginLeft="10dip"
                 android:textColor="@color/black"
-                android:background="@color/pink"
+                android:background="@color/green"
                 android:layout_marginRight="10dip"
                 android:paddingLeft="20dip"
                 android:paddingRight="20dip"
                 android:textSize="20sp"
-                android:paddingTop="20dip"
-                android:paddingBottom="20dip"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                android:minHeight="50dip"
+                android:width="130dip" />
             <TextView
                 android:text="@string/boycottActionDesctiption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/takeActionButton"
+                android:id="@+id/boycottDescription"
                 android:layout_marginRight="10dip"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayoutShare"
+            android:paddingTop="10dip"
+            android:background="@color/gray"
+            android:paddingBottom="20dip">
+            <Button
+                android:text="Share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shareButton"
+                android:layout_marginLeft="10dip"
+                android:textColor="@color/black"
+                android:background="@color/green"
+                android:layout_marginRight="10dip"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:minHeight="50dip"
+                android:width="130dip" />
+            <TextView
+                android:text="@string/shareActionDesctiption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shareDescription"
+                android:layout_marginRight="10dip"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
         <Button
             android:text="Edit This Info"
@@ -136,13 +229,13 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:id="@+id/linearLayoutTheIssue"
         android:visibility="gone"
         android:background="@color/gray">
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/issueName"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -168,6 +261,7 @@
             android:paddingBottom="20dip"
             android:paddingRight="20dip"
             android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip" />
+            android:layout_marginRight="10dip"
+            android:layout_marginBottom="10dip" />
     </LinearLayout>
 </LinearLayout>

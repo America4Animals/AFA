@@ -122,9 +122,13 @@ namespace AFA.Android.Activities
 
         private void SetButtonState(Button button, bool isEnabled)
         {
-            button.SetTextColor(isEnabled
-                                    ? this.Resources.GetColor(Resource.Color.black)
-                                    : this.Resources.GetColor(Resource.Color.gray));
+            //button.SetTextColor(isEnabled
+            //                        ? this.Resources.GetColor(Resource.Color.black)
+            //                        : this.Resources.GetColor(Resource.Color.gray));
+
+            button.SetBackgroundColor(isEnabled
+                ? this.Resources.GetColor(Resource.Color.mediumgray)
+                : this.Resources.GetColor(Resource.Color.darkgray));
 
             button.Enabled = isEnabled;
         }
