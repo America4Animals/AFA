@@ -57,6 +57,8 @@ namespace AFA.Android.Activities
 
             SetContentView(Resource.Layout.CrueltySpot);
 
+            CrueltyNavMenuHelper.InitCrueltyNavMenu(this, CrueltyNavMenuItem.Child);
+
             _loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
 
             var crueltySpotId = Intent.GetIntExtra(AppConstants.CrueltySpotIdKey, 0);

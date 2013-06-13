@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -44,7 +44,8 @@
         android:id="@+id/linearLayoutAddress"
         android:background="@color/white"
         android:paddingTop="20dip"
-        android:paddingBottom="20dip">
+        android:paddingBottom="20dip"
+        android:layout_below="@+id/linearLayoutTop">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,6 +72,7 @@
         android:id="@+id/linearLayoutActionMenu"
         android:paddingTop="5dip"
         android:background="@color/gray"
+        android:layout_below="@+id/linearLayoutAddress"
         android:paddingBottom="5dip">
         <Button
             android:text="The Issue"
@@ -104,6 +106,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/linearLayoutBoycott"
+        android:layout_below="@+id/linearLayoutActionMenu"
+        android:layout_marginBottom="20dip"
         android:background="@color/gray">
         <LinearLayout
             android:orientation="horizontal"
@@ -219,6 +223,7 @@
             android:textColor="@color/black"
             android:background="@color/white"
             android:layout_marginRight="10dip"
+            android:layout_marginBottom="10dip"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
             android:minHeight="50dip"
@@ -232,6 +237,7 @@
         android:layout_height="fill_parent"
         android:id="@+id/linearLayoutTheIssue"
         android:visibility="gone"
+        android:layout_below="@+id/linearLayoutActionMenu"
         android:background="@color/gray">
         <TextView
             android:layout_width="fill_parent"
@@ -252,7 +258,6 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Blah blah blah"
             android:id="@+id/issueDescription"
             android:textColor="@color/black"
             android:textSize="14sp"
@@ -264,4 +269,11 @@
             android:layout_marginRight="10dip"
             android:layout_marginBottom="10dip" />
     </LinearLayout>
-</LinearLayout>
+    <include
+        android:id="@+id/crueltyNavMenu"
+        layout="@layout/crueltyNavMenu"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/linearLayoutContainer"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent" />
+</RelativeLayout>
