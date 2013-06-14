@@ -4,6 +4,7 @@
     <string name="ApplicationName">AFA.Android</string>
 
     <string name="ReportCrueltyHeader">We need your eyes and ears to find out where cruelty is occurring! Fill out this form to let your community know!</string>
+  <string name="EmergencyText">If this is an emergency</string>
   <string name="AddPlaceHeader">Use this form to add a new cruelty spot or edit an existing one.</string>
   <string name="boycottActionDesctiption">Join a boycott of this business</string>
   <string name="messageActionDesctiption">Send an email requesting them to stop harming animals</string>
@@ -18,7 +19,7 @@
     <color name="gray">#D1D2D4</color>
     <color name="mediumgray">#818286</color>
     <color name="darkgray">#2C2A2B</color>
-    <color name="red">#bd362f</color>
+    <color name="red">#BE1E2D</color>
   
     <string name="mapsAppText" >Show Maps App</string>
   <string name="mapsAppTextDescription">Start up the Android Map application.</string>

@@ -152,6 +152,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\custom_info_content.xml" />
+    <AndroidResource Include="Resources\Drawable\button_red.xml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml">
@@ -197,7 +200,10 @@
     <AndroidResource Include="Resources\Drawable\shark.png" />
     <AndroidResource Include="Resources\Drawable\dark_gray_round_border.xml" />
     <AndroidResource Include="Resources\Drawable\furpin.png" />
-    <AndroidResource Include="Resources\Drawable\green_bordered_button.xml" />
+    <AndroidResource Include="Resources\Drawable\button_green.xml" />
+    <AndroidResource Include="Resources\Drawable\button_pink.xml" />
+    <AndroidResource Include="Resources\Drawable\mapbackground.png" />
+    <AndroidResource Include="Resources\Drawable\rounded_rectangle.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
