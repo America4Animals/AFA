@@ -204,6 +204,7 @@
     <AndroidResource Include="Resources\Drawable\button_pink.xml" />
     <AndroidResource Include="Resources\Drawable\mapbackground.png" />
     <AndroidResource Include="Resources\Drawable\rounded_rectangle.xml" />
+    <AndroidResource Include="Resources\Drawable\appback.jpg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:minWidth="25px"
     android:minHeight="25px"
-    android:background="@drawable/mapbackground"
+    android:background="@drawable/appback"
     android:focusable="true"
     android:focusableInTouchMode="true">
     <LinearLayout
