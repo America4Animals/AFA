@@ -197,6 +197,7 @@
     <AndroidResource Include="Resources\Drawable\shark.png" />
     <AndroidResource Include="Resources\Drawable\dark_gray_round_border.xml" />
     <AndroidResource Include="Resources\Drawable\furpin.png" />
+    <AndroidResource Include="Resources\Drawable\green_bordered_button.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

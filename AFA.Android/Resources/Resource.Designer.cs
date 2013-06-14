@@ -157,73 +157,76 @@ namespace AFA.Android
 			public const int furpin = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int Icon = 2130837514;
+			public const int green_bordered_button = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int labs = 2130837515;
+			public const int Icon = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int list_selector = 2130837516;
+			public const int labs = 2130837516;
 			
 			// aapt resource value: 0x7f02000d
-			public const int mapIcon = 2130837517;
+			public const int list_selector = 2130837517;
 			
 			// aapt resource value: 0x7f02000e
-			public const int monitorIcon = 2130837518;
+			public const int mapIcon = 2130837518;
 			
 			// aapt resource value: 0x7f02000f
-			public const int monkey = 2130837519;
+			public const int monitorIcon = 2130837519;
 			
 			// aapt resource value: 0x7f020010
-			public const int more = 2130837520;
+			public const int monkey = 2130837520;
 			
 			// aapt resource value: 0x7f020011
-			public const int newsIcon = 2130837521;
+			public const int more = 2130837521;
 			
 			// aapt resource value: 0x7f020012
-			public const int pencilIcon = 2130837522;
+			public const int newsIcon = 2130837522;
 			
 			// aapt resource value: 0x7f020013
-			public const int peopleIcon = 2130837523;
+			public const int pencilIcon = 2130837523;
 			
 			// aapt resource value: 0x7f020014
-			public const int performance = 2130837524;
+			public const int peopleIcon = 2130837524;
 			
 			// aapt resource value: 0x7f020015
-			public const int petstores = 2130837525;
+			public const int performance = 2130837525;
 			
 			// aapt resource value: 0x7f020016
-			public const int phoneIcon = 2130837526;
+			public const int petstores = 2130837526;
 			
 			// aapt resource value: 0x7f020017
-			public const int polarbear = 2130837527;
+			public const int phoneIcon = 2130837527;
 			
 			// aapt resource value: 0x7f020018
-			public const int races = 2130837528;
+			public const int polarbear = 2130837528;
 			
 			// aapt resource value: 0x7f020019
-			public const int rightArrow = 2130837529;
+			public const int races = 2130837529;
 			
 			// aapt resource value: 0x7f02001a
-			public const int rodeo = 2130837530;
+			public const int rightArrow = 2130837530;
 			
 			// aapt resource value: 0x7f02001b
-			public const int search = 2130837531;
+			public const int rodeo = 2130837531;
 			
 			// aapt resource value: 0x7f02001c
-			public const int shark = 2130837532;
+			public const int search = 2130837532;
 			
 			// aapt resource value: 0x7f02001d
-			public const int sharkFin = 2130837533;
+			public const int shark = 2130837533;
 			
 			// aapt resource value: 0x7f02001e
-			public const int speechIcon = 2130837534;
+			public const int sharkFin = 2130837534;
 			
 			// aapt resource value: 0x7f02001f
-			public const int splash = 2130837535;
+			public const int speechIcon = 2130837535;
 			
 			// aapt resource value: 0x7f020020
-			public const int success = 2130837536;
+			public const int splash = 2130837536;
+			
+			// aapt resource value: 0x7f020021
+			public const int success = 2130837537;
 			
 			static Drawable()
 			{
