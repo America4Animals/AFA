@@ -76,7 +76,7 @@
         android:paddingBottom="5dip">
         <Button
             android:text="The Issue"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:id="@+id/isueButton"
             android:layout_weight="1"
@@ -85,19 +85,31 @@
             android:background="@color/mediumgray"
             android:minHeight="50dip"
             android:textSize="16sp"
-            android:layout_marginRight="2.5dip" />
+            android:layout_marginRight="2dip" />
         <Button
             android:text="Take Action"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:id="@+id/takeActionButton"
             android:layout_weight="1"
-            android:layout_marginRight="5dip"
             android:textColor="@color/green"
             android:background="@color/darkgray"
             android:minHeight="50dip"
             android:textSize="16sp"
-            android:layout_marginLeft="2.5dip" />
+            android:layout_marginLeft="2dip"
+            android:layout_marginRight="2dip" />
+        <Button
+            android:text="Activity"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:id="@+id/activityActionButton"
+            android:layout_weight="1"
+            android:layout_marginRight="5dip"
+            android:textColor="@color/green"
+            android:background="@color/mediumgray"
+            android:minHeight="50dip"
+            android:textSize="16sp"
+            android:layout_marginLeft="2dip" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
