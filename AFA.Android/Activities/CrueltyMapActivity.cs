@@ -98,7 +98,7 @@ namespace AFA.Android.Activities
 		private SupportMapFragment _mapFragment;
 		private GPSTracker _gpsTracker;
 		List<CrueltySpotDto> _crueltySpots;
-		private CrueltySpotsService crueltySpotsService;
+		private CrueltySpotsService _crueltySpotsService;
 		Dictionary<String,CrueltySpotDto> _crueltyLookup = new Dictionary<String,CrueltySpotDto> ();
 
 		protected override void OnCreate (Bundle bundle)
@@ -173,47 +173,94 @@ namespace AFA.Android.Activities
 
 				//	AddInitialPolarBarToMap();
 				LatLng myLocation = new LatLng (_gpsTracker.Latitude, _gpsTracker.Longitude);
-				crueltySpotsService = new CrueltySpotsService ();
-				_crueltySpots = crueltySpotsService.GetMany (new CrueltySpotsDto{
-						SortBy = "createdAt",
-						SortOrder = "desc"
-				});
+                _crueltySpotsService = new CrueltySpotsService();
+                //_crueltySpots = crueltySpotsService.GetMany (new CrueltySpotsDto{
+                //        SortBy = "createdAt",
+                //        SortOrder = "desc"
+                //});
 
-				MarkerOptions mapOption;
-				LatLng crueltyLocation;
-				LatLngBounds.Builder builder = new LatLngBounds.Builder ();
-				builder.Include (myLocation);
-				foreach (CrueltySpotDto spot in _crueltySpots) { // Loop through List with foreach
-					crueltyLocation = new LatLng (spot.Latitude, spot.Longitude);
-					builder.Include (crueltyLocation);
-					Console.WriteLine ("inside callback latitude: " + spot.Latitude + " longtitude: "+spot.Longitude);
-					mapOption = new MarkerOptions ()
-								.SetPosition (crueltyLocation)
-									.SetSnippet (spot.Address)
-									.SetTitle (spot.Name);
+                //MarkerOptions mapOption;
+                //LatLng crueltyLocation;
+                //LatLngBounds.Builder builder = new LatLngBounds.Builder ();
+                //builder.Include (myLocation);
+                //foreach (CrueltySpotDto spot in _crueltySpots) { // Loop through List with foreach
+                //    crueltyLocation = new LatLng (spot.Latitude, spot.Longitude);
+                //    builder.Include (crueltyLocation);
+                //    Console.WriteLine ("inside callback latitude: " + spot.Latitude + " longtitude: "+spot.Longitude);
+                //    mapOption = new MarkerOptions ()
+                //                .SetPosition (crueltyLocation)
+                //                    .SetSnippet (spot.Address)
+                //                    .SetTitle (spot.Name);
 
-					Marker marker = _map.AddMarker (mapOption);
+                //    Marker marker = _map.AddMarker (mapOption);
 
-					_crueltyLookup.Add (marker.Id, spot);
+                //    _crueltyLookup.Add (marker.Id, spot);
 
-				}
+                //}
 
-				//	LatLngBounds bounds = new LatLngBounds.Builder ().Include (myLocation).Build ();
-				/*	mapOption = new MarkerOptions ()
-						.SetPosition (myLocation)
-							.SetSnippet ("Your location")
-							.SetTitle ("Your location")
-							.InvokeIcon (BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueOrange));
-				_map.AddMarker (mapOption);*/
+                ////	LatLngBounds bounds = new LatLngBounds.Builder ().Include (myLocation).Build ();
+                ///*	mapOption = new MarkerOptions ()
+                //        .SetPosition (myLocation)
+                //            .SetSnippet ("Your location")
+                //            .SetTitle ("Your location")
+                //            .InvokeIcon (BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueOrange));
+                //_map.AddMarker (mapOption);*/
 					
-				// Move the map so that it is showing the markers we added above.
-				_map.SetInfoWindowAdapter (new CustomInfoWindowAdapter (this));
+                //// Move the map so that it is showing the markers we added above.
+                //_map.SetInfoWindowAdapter (new CustomInfoWindowAdapter (this));
 
-				// Set listeners for marker events.  See the bottom of this class for their behavior.
+                //// Set listeners for marker events.  See the bottom of this class for their behavior.
 
-				_map.SetOnInfoWindowClickListener (this);
+                //_map.SetOnInfoWindowClickListener (this);
 
-				_map.AnimateCamera (CameraUpdateFactory.NewLatLngZoom(myLocation,3));
+                //_map.AnimateCamera (CameraUpdateFactory.NewLatLngZoom(myLocation,3));
+
+                _crueltySpotsService.GetManyAsync<CrueltySpotsResponse>(new CrueltySpotsDto
+                {
+                    SortBy = "createdAt",
+                    SortOrder = "desc"
+                }, r => RunOnUiThread(()
+                                                     =>
+                {
+                    _crueltySpots = r.CrueltySpots;
+
+                    MarkerOptions mapOption;
+                    LatLng crueltyLocation;
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                    builder.Include(myLocation);
+                    foreach (CrueltySpotDto spot in _crueltySpots)
+                    { // Loop through List with foreach
+                        crueltyLocation = new LatLng(spot.Latitude, spot.Longitude);
+                        builder.Include(crueltyLocation);
+                        Console.WriteLine("inside callback latitude: " + spot.Latitude + " longtitude: " + spot.Longitude);
+                        mapOption = new MarkerOptions()
+                                    .SetPosition(crueltyLocation)
+                                        .SetSnippet(spot.Address)
+                                        .SetTitle(spot.Name);
+
+                        Marker marker = _map.AddMarker(mapOption);
+
+                        _crueltyLookup.Add(marker.Id, spot);
+
+                    }
+
+                    //	LatLngBounds bounds = new LatLngBounds.Builder ().Include (myLocation).Build ();
+                    /*	mapOption = new MarkerOptions ()
+                            .SetPosition (myLocation)
+                                .SetSnippet ("Your location")
+                                .SetTitle ("Your location")
+                                .InvokeIcon (BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueOrange));
+                    _map.AddMarker (mapOption);*/
+
+                    // Move the map so that it is showing the markers we added above.
+                    _map.SetInfoWindowAdapter(new CustomInfoWindowAdapter(this));
+
+                    // Set listeners for marker events.  See the bottom of this class for their behavior.
+
+                    _map.SetOnInfoWindowClickListener(this);
+
+                    _map.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(myLocation, 3));
+                }));
 			}
 		
 		}
