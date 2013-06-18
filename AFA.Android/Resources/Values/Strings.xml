@@ -9,6 +9,17 @@
   <string name="boycottActionDesctiption">Join a boycott of this business</string>
   <string name="messageActionDesctiption">Send an email requesting them to stop harming animals</string>
   <string name="shareActionDesctiption">Inform others of the cruelty happening here</string>
+  <string name="IntroHeaderText">America for Animals</string>
+  <string name="IntroTeaserText">How are your going to help animals today?</string>
+
+  <string name="IntroReportLabel">Report Cruelty</string>
+  <string name="IntroReportSubLabel">Put animal cruelty on the map so others can take action.</string>
+
+  <string name="IntroTrackLabel">Track Cruelty</string>
+  <string name="IntroTrackSubLabel">See where cruelty is occurring in your community.</string>
+
+  <string name="IntroFightLabel">Fight Cruelty</string>
+  <string name="IntroFightSubLabel">Choose a location and take action with the push of a button.</string>
   
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
