@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-
+using AFA.Android.Activities;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -24,7 +24,7 @@ namespace AFA.Android
 			base.OnCreate (bundle);
 			Thread.Sleep(2000);
 			// Start our real activity
-			StartActivity (typeof (ReportCrueltyActivity));
+			StartActivity (typeof (IntroActivity));
 		}
 	}
 }

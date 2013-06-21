@@ -29,16 +29,8 @@ namespace AFA.Android.Service
         public const string SortByParamKey = "sortBy";
         public const string SortOrderParamKey = "sortOrder";
 
-        //public const string SearchQueryStringParams = "?name={0}&city={1}&stateProvinceAbbreviation={2}";
-
-        //public CrueltySpotsService()
-        //{
-        //    _url = new StringBuilder();
-        //}
-
         public CrueltySpotDto GetById(int id)
         {
-            //var url = String.Format("{0}{1}/{2}{3}", AfaApplication.ServiceBaseUrl, RouteBase, id, AfaApplication.ServiceJsonContentTypeSuffix);
             _url = new StringBuilder();
             _url.Append(GetBaseUrl());
             _url.Append("/");
@@ -50,6 +42,24 @@ namespace AFA.Android.Service
                 var response = client.DownloadString(_url.ToString());
                 return response.FromJson<CrueltySpotResponse>().CrueltySpot;
             }
+        }
+
+        public void GetByIdAsync<T>(int id, Action<T> callback)
+        {
+            _url = new StringBuilder();
+            _url.Append(GetBaseUrl());
+            _url.Append("/");
+            _url.Append(id);
+            _url.AppendJsonFormatQueryStringParam();
+
+            var client = new WebClient();
+            client.DownloadStringCompleted += (sender, args) =>
+            {
+                var response = args.Result;
+                callback(response.FromJson<T>());
+            };
+
+            client.DownloadStringAsync(new Uri(_url.ToString()));
         }
 
         public List<CrueltySpotDto> GetMany(CrueltySpotsDto request)
@@ -69,6 +79,28 @@ namespace AFA.Android.Service
                 var response = client.DownloadString(url.ToString());
                 return response.FromJson<CrueltySpotsResponse>().CrueltySpots;
             }
+        }
+
+        public void GetManyAsync<T>(CrueltySpotsDto request, Action<T> callback)
+        {
+            var client = new WebClient();
+            _url = new StringBuilder();
+            _url.Append(GetBaseUrl());
+            _url.AppendQueryStringParam(NameParamKey, request.Name);
+            _url.AppendQueryStringParam(CityParamKey, request.City);
+            _url.AppendQueryStringParam(StateKey, request.StateProvinceAbbreviation);
+            _url.AppendQueryStringParam(SortByParamKey, request.SortBy);
+            _url.AppendQueryStringParam(SortOrderParamKey, request.SortOrder);
+            _url.AppendJsonFormatQueryStringParam();
+			//Log.Debug ("URL: ", _url.ToString());
+
+            client.DownloadStringCompleted += (sender, args) =>
+            {
+                var response = args.Result;
+                callback(response.FromJson<T>());
+            };
+
+            client.DownloadStringAsync(new Uri(_url.ToString()));
         }
 
         public void GetAllAsync<T>(Action<T> callback)
@@ -104,36 +136,21 @@ namespace AFA.Android.Service
             client.DownloadStringAsync(new Uri(_url.ToString()));
         }
 
-        //public List<CrueltySpotDto> Search(string name, string city, string stateAbbreviation)
-        //{
-        //    string queryString = String.Format(SearchQueryStringParams, name, city, stateAbbreviation);
-        //    var url = String.Format("{0}{1}{2}{3}", AfaApplication.ServiceBaseUrl, RouteBase, queryString, AfaApplication.ServiceJsonContentTypeSuffixWithExistingQueryString);
-            
-        //    using (var client = new WebClient())
-        //    {
-        //        var response = client.DownloadString(url);
-        //        return response.FromJson<CrueltySpotsResponse>().CrueltySpots;
-        //    }
-        //}
-
         public CrueltySpotResponse Post(CrueltySpotDto request)
         {
             _url = new StringBuilder();
             _url.Append(GetBaseUrl());
             _url.AppendJsonFormatQueryStringParam();
-            //Log.Debug("AFA Posting to ServiceHelper", request.ToJson());
             return ServiceHelper.PostJson<CrueltySpotResponse>(_url.ToString(), request.ToJson());
         }
 
         public void PostAsync(CrueltySpotDto crueltySpot, Action<CrueltySpotResponse> callback)
         {
-            //var url = String.Format("{0}{1}{2}", AfaApplication.ServiceBaseUrl, RouteBase, AfaApplication.ServiceJsonContentTypeSuffix);
             _url = new StringBuilder();
             _url.Append(GetBaseUrl());
             _url.AppendJsonFormatQueryStringParam();
 
             string json = crueltySpot.ToJson();
-            //Log.Debug("Posting JSON", json);
             ServiceHelper.PostJsonAsync(_url.ToString(), json, callback);
         }
 

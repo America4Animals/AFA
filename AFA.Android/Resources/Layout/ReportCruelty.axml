@@ -4,29 +4,57 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:minWidth="25px"
-    android:minHeight="25px">
+    android:minHeight="25px"
+    android:background="@drawable/appback"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:layout_marginTop="15dip"
+        android:layout_marginBottom="25dip"
+        android:id="@+id/layoutEmergency">
+        <TextView
+            android:text="@string/EmergencyText"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/headerText"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dip"
+            android:layout_marginBottom="10dip"
+            android:gravity="right|center_vertical"
+            android:textSize="16sp"
+            android:layout_weight="2"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="15dip" />
+        <Button
+            android:text="press here"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/EmergencyButton"
+            android:layout_marginRight="10dip"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@drawable/button_red"
+            android:minHeight="50dip"
+            android:layout_marginTop="10dip"
+            android:layout_marginBottom="10dip"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip" />
+    </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/green"
-        android:paddingLeft="5dip"
-        android:paddingRight="5dip"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-        <TextView
-            android:text="@string/ReportCrueltyHeader"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/headerText"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dip"
-            android:layout_marginBottom="10dip"
-            android:gravity="center" />
+        android:layout_marginRight="10dip"
+        android:layout_marginLeft="10dip"
+        android:layout_below="@+id/layoutEmergency">
         <EditText
             android:singleLine="false"
             android:lines="2"
-            android:gravity="top"
+            android:gravity="center_vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/LocationInput"
@@ -42,22 +70,48 @@
             android:textColorHint="@color/pink"
             android:hint="Type of Cruelty"
             android:layout_marginBottom="10dip" />
-        <EditText
-            android:singleLine="false"
-            android:lines="5"
-            android:gravity="top"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/DetailsInput"
-            android:textColor="@color/pink"
-            android:textColorHint="@color/pink"
-            android:hint="Add any details here..."
-            android:layout_marginBottom="10dip" />
+            android:layout_marginTop="15dip"
+            android:layout_marginBottom="15dip"
+            android:id="@+id/layoutMoreButtons">
+            <Button
+                android:text="Add Photo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_green"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:minHeight="50dip"
+                android:id="@+id/PhotoButton"
+                android:layout_weight="1"
+                android:width="130dip"
+                android:layout_marginRight="10dip" />
+            <Button
+                android:text="Add Details"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_green"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:minHeight="50dip"
+                android:layout_weight="1"
+                android:id="@+id/DetailsButton"
+                android:width="130dip"
+                android:layout_marginLeft="10dip" />
+        </LinearLayout>
         <Button
             android:text="Submit Report"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/SubmitButton" />
+            android:background="@drawable/button_pink"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:minHeight="50dip"
+            android:id="@+id/SubmitButton"
+            android:layout_marginTop="20dip" />
     </LinearLayout>
     <include
         android:id="@+id/crueltyNavMenu"

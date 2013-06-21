@@ -4,37 +4,102 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Text;
+using Android.Text.Style;
 using AFA.Android.Helpers;
 using AFA_Android.Helpers;
+using AFA.ServiceModel.DTOs;
+using AFA.Android.Service;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Support.V4.App;
+using Android.Graphics;
+using Android.Graphics.Drawables;
 using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace AFA.Android.Activities
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-
 	[Activity(Label = "@string/activity_label_mapwithmarkers")]
-    public class CrueltyMapActivity : FragmentActivity
+	public class CrueltyMapActivity : FragmentActivity , GoogleMap.IOnInfoWindowClickListener
 	{
 
-		private static readonly LatLng InMaui = new LatLng (20.72110, -156.44776);
-		private static readonly LatLng LeaveFromHereToMaui = new LatLng (82.4986, -62.348);
-		private static readonly LatLng[] LocationForCustomIconMarkers = new[] {
-			new LatLng(40.741773, -74.004986),
-			new LatLng(41.051696, -73.545667),
-			new LatLng(41.311197, -72.902646)
-		};
-		private string _gotoMauiMarkerId;
+		class CustomInfoWindowAdapter : Java.Lang.Object, GoogleMap.IInfoWindowAdapter
+		{
+
+			// These a both viewgroups containing an ImageView with id "badge" and two TextViews with id
+			// "title" and "snippet".
+		
+			private readonly View mContents;
+			CrueltyMapActivity parent;
+
+			internal CustomInfoWindowAdapter (CrueltyMapActivity parent)
+			{
+
+				mContents = parent.LayoutInflater.Inflate (Resource.Layout.custom_info_content, null);
+				this.parent = parent;
+
+			}
+
+			public View GetInfoWindow (Marker marker)
+			{
+				return null;
+			}
+
+			public View GetInfoContents (Marker marker)
+			{
+
+				Render (marker, mContents);
+				return mContents;
+			}
+
+			private void Render (Marker marker, View view)
+			{
+
+				var resourceId = 0;
+				if (parent._crueltyLookup.ContainsKey (marker.Id)) {
+					CrueltySpotDto spot = parent._crueltyLookup [marker.Id];
+					if (spot.CrueltySpotCategoryIconName != null) {
+						resourceId = parent.Resources.GetIdentifier (spot.CrueltySpotCategoryIconName.Replace(".png", ""), "drawable", parent.PackageName);
+					}
+				}
+				((ImageView)view.FindViewById (Resource.Id.badge)).SetImageResource (resourceId);
+
+				String title = marker.Title;
+				TextView titleUi = ((TextView)view.FindViewById (Resource.Id.title));
+				if (title != null) {
+					// Spannable string allows us to edit the formatting of the text.
+					SpannableString titleText = new SpannableString (title);
+				
+					// FIXME: this somehow rejects to compile
+					//titleText.SetSpan (new ForegroundColorSpan(Color.Red), 0, titleText.Length, st);
+					titleUi.TextFormatted = (titleText);
+				} else {
+					titleUi.Text = ("");
+				}
+
+				String snippet = marker.Snippet;
+				TextView snippetUi = ((TextView)view.FindViewById (Resource.Id.snippet));
+				if (snippet != null) {
+					SpannableString snippetText = new SpannableString (snippet);
+					//	snippetText.SetSpan(new ForegroundColorSpan(Color.Magenta), 0, 10, 0);
+					//	snippetText.SetSpan(new ForegroundColorSpan(Color.Blue), 12, 21, 0);
+					snippetUi.TextFormatted = (snippetText);
+				} else {
+					snippetUi.Text = ("");
+				}
+			}
+		}
+
 		private GoogleMap _map;
 		private SupportMapFragment _mapFragment;
-		private Marker _polarBearMarker;
-		private GroundOverlay _polarBearOverlay;
 		private GPSTracker _gpsTracker;
+		List<CrueltySpotDto> _crueltySpots;
+		private CrueltySpotsService _crueltySpotsService;
+		Dictionary<String,CrueltySpotDto> _crueltyLookup = new Dictionary<String,CrueltySpotDto> ();
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -54,6 +119,7 @@ namespace AFA.Android.Activities
 			// Pause the GPS - we won't have to worry about showing the 
 			// location.
 			_map.MyLocationEnabled = false;
+			_map.Clear ();
 
 			_map.MarkerClick -= MapOnMarkerClick;
 		}
@@ -67,47 +133,6 @@ namespace AFA.Android.Activities
 
 			// Setup a handler for when the user clicks on a marker.
 			_map.MarkerClick += MapOnMarkerClick;
-		}
-
-		private void AddInitialPolarBarToMap ()
-		{
-			MarkerOptions markerOptions = new MarkerOptions ()
-				.SetSnippet ("Click me to go on vacation.")
-					.SetPosition (LeaveFromHereToMaui)
-					.SetTitle ("Goto Maui");
-			_polarBearMarker = _map.AddMarker (markerOptions);
-			_polarBearMarker.ShowInfoWindow ();
-
-			_gotoMauiMarkerId = _polarBearMarker.Id;
-
-			PositionPolarBearGroundOverlay (LeaveFromHereToMaui);
-		}
-		/// <summary>
-		///   Add three markers to the map.
-		/// </summary>
-		private void AddMonkeyMarkersToMap ()
-		{
-			for (int i = 0; i < LocationForCustomIconMarkers.Length; i++) {
-				BitmapDescriptor icon = BitmapDescriptorFactory.FromResource (Resource.Drawable.monkey);
-				MarkerOptions mapOption = new MarkerOptions ()
-					.SetPosition (LocationForCustomIconMarkers[i])
-						.InvokeIcon (icon)
-						.SetSnippet (String.Format("This is marker #{0}.", i))
-						.SetTitle (String.Format("Marker {0}", i));
-				_map.AddMarker (mapOption);
-			}
-		}
-
-		private void AddDefaultMarkersToMap ()
-		{
-			for (int i = 0; i < LocationForCustomIconMarkers.Length; i++) {
-			
-				MarkerOptions mapOption = new MarkerOptions ()
-					.SetPosition (LocationForCustomIconMarkers[i])
-						.SetSnippet (String.Format("This is marker #{0}.", i))
-						.SetTitle (String.Format("Marker {0}", i));
-				_map.AddMarker (mapOption);
-			}
 		}
 
 		private void InitMapFragment ()
@@ -129,49 +154,130 @@ namespace AFA.Android.Activities
 		private void MapOnMarkerClick (object sender, GoogleMap.MarkerClickEventArgs markerClickEventArgs)
 		{
 			Marker marker = markerClickEventArgs.P0; // TODO [TO201212142221] Need to fix the name of this with MetaData.xml
-			if (marker.Id.Equals (_gotoMauiMarkerId)) {
-				PositionPolarBearGroundOverlay (InMaui);
-				_map.AnimateCamera (CameraUpdateFactory.NewLatLngZoom(InMaui, 13));
-				_gotoMauiMarkerId = null;
-				_polarBearMarker.Remove ();
-				_polarBearMarker = null;
-			} else {
-				Toast.MakeText (this, String.Format ("You clicked on Marker ID {0}", marker.Id), ToastLength.Short).Show ();
+			float zoomValue = 10;
+			if (_map.CameraPosition.Zoom > zoomValue) {
+				zoomValue = _map.CameraPosition.Zoom;
 			}
-		}
+			_map.AnimateCamera (CameraUpdateFactory.NewLatLngZoom(marker.Position,zoomValue));
+			marker.ShowInfoWindow ();
 
-		private void PositionPolarBearGroundOverlay (LatLng position)
-		{
-			if (_polarBearOverlay == null) {
-				BitmapDescriptor image = BitmapDescriptorFactory.FromResource (Resource.Drawable.polarbear);
-				GroundOverlayOptions groundOverlayOptions = new GroundOverlayOptions ()
-					.Position (position, 150, 200)
-						.InvokeImage (image);
-				_polarBearOverlay = _map.AddGroundOverlay (groundOverlayOptions);
-			} else {
-				_polarBearOverlay.Position = InMaui;
-			}
 		}
 
 		private void SetupMapIfNeeded ()
 		{
 			if (_map == null) {
 				_map = _mapFragment.Map;
-				if (_map != null) {
+			}
+			if (_map != null) {
 				
 
-					//	AddInitialPolarBarToMap();
-					LatLng myLocation = new LatLng (_gpsTracker.Latitude, _gpsTracker.Longitude);
-				//	LatLngBounds bounds = new LatLngBounds.Builder ().Include (myLocation).Build ();
-					MarkerOptions mapOption = new MarkerOptions ()
-						.SetPosition (myLocation)
-							.SetSnippet (String.Format("This is marker #{0}.", 0))
-							.SetTitle (String.Format("Marker {0}", 0));
-					_map.AddMarker (mapOption);
-					// Move the map so that it is showing the markers we added above.
-					_map.AnimateCamera (CameraUpdateFactory.NewLatLngZoom(myLocation,13));
-				}
+				//	AddInitialPolarBarToMap();
+				LatLng myLocation = new LatLng (_gpsTracker.Latitude, _gpsTracker.Longitude);
+                _crueltySpotsService = new CrueltySpotsService();
+                //_crueltySpots = crueltySpotsService.GetMany (new CrueltySpotsDto{
+                //        SortBy = "createdAt",
+                //        SortOrder = "desc"
+                //});
+
+                //MarkerOptions mapOption;
+                //LatLng crueltyLocation;
+                //LatLngBounds.Builder builder = new LatLngBounds.Builder ();
+                //builder.Include (myLocation);
+                //foreach (CrueltySpotDto spot in _crueltySpots) { // Loop through List with foreach
+                //    crueltyLocation = new LatLng (spot.Latitude, spot.Longitude);
+                //    builder.Include (crueltyLocation);
+                //    Console.WriteLine ("inside callback latitude: " + spot.Latitude + " longtitude: "+spot.Longitude);
+                //    mapOption = new MarkerOptions ()
+                //                .SetPosition (crueltyLocation)
+                //                    .SetSnippet (spot.Address)
+                //                    .SetTitle (spot.Name);
+
+                //    Marker marker = _map.AddMarker (mapOption);
+
+                //    _crueltyLookup.Add (marker.Id, spot);
+
+                //}
+
+                ////	LatLngBounds bounds = new LatLngBounds.Builder ().Include (myLocation).Build ();
+                ///*	mapOption = new MarkerOptions ()
+                //        .SetPosition (myLocation)
+                //            .SetSnippet ("Your location")
+                //            .SetTitle ("Your location")
+                //            .InvokeIcon (BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueOrange));
+                //_map.AddMarker (mapOption);*/
+					
+                //// Move the map so that it is showing the markers we added above.
+                //_map.SetInfoWindowAdapter (new CustomInfoWindowAdapter (this));
+
+                //// Set listeners for marker events.  See the bottom of this class for their behavior.
+
+                //_map.SetOnInfoWindowClickListener (this);
+
+                //_map.AnimateCamera (CameraUpdateFactory.NewLatLngZoom(myLocation,3));
+
+                _crueltySpotsService.GetManyAsync<CrueltySpotsResponse>(new CrueltySpotsDto
+                {
+                    SortBy = "createdAt",
+                    SortOrder = "desc"
+                }, r => RunOnUiThread(()
+                                                     =>
+                {
+                    _crueltySpots = r.CrueltySpots;
+
+                    MarkerOptions mapOption;
+                    LatLng crueltyLocation;
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                    builder.Include(myLocation);
+                    foreach (CrueltySpotDto spot in _crueltySpots)
+                    { // Loop through List with foreach
+                        crueltyLocation = new LatLng(spot.Latitude, spot.Longitude);
+                        builder.Include(crueltyLocation);
+                        Console.WriteLine("inside callback latitude: " + spot.Latitude + " longtitude: " + spot.Longitude);
+                        mapOption = new MarkerOptions()
+                                    .SetPosition(crueltyLocation)
+                                        .SetSnippet(spot.Address)
+                                        .SetTitle(spot.Name);
+
+                        Marker marker = _map.AddMarker(mapOption);
+
+                        _crueltyLookup.Add(marker.Id, spot);
+
+                    }
+
+                    //	LatLngBounds bounds = new LatLngBounds.Builder ().Include (myLocation).Build ();
+                    /*	mapOption = new MarkerOptions ()
+                            .SetPosition (myLocation)
+                                .SetSnippet ("Your location")
+                                .SetTitle ("Your location")
+                                .InvokeIcon (BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueOrange));
+                    _map.AddMarker (mapOption);*/
+
+                    // Move the map so that it is showing the markers we added above.
+                    _map.SetInfoWindowAdapter(new CustomInfoWindowAdapter(this));
+
+                    // Set listeners for marker events.  See the bottom of this class for their behavior.
+
+                    _map.SetOnInfoWindowClickListener(this);
+
+                    _map.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(myLocation, 3));
+                }));
 			}
+		
+		}
+
+		public void OnInfoWindowClick (Marker marker)
+		{
+			if (_crueltyLookup.ContainsKey (marker.Id)) {
+				CrueltySpotDto spot = _crueltyLookup [marker.Id];
+				NavigateToCrueltySpotDetails (spot.Id);
+			}
+		}
+
+		private void NavigateToCrueltySpotDetails (int crueltySpotId)
+		{
+			var intent = new Intent (this, typeof(CrueltySpotActivity));
+			intent.PutExtra (AppConstants.CrueltySpotIdKey, crueltySpotId);
+			StartActivity (intent);
 		}
 	}
 }

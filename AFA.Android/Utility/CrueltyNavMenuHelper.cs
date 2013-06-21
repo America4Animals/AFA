@@ -17,7 +17,8 @@ namespace AFA.Android.Helpers
         ReportIt,
         TrackIt,
         FightIt,
-        More
+        More,
+        Child
     }
 
     public class CrueltyNavMenuHelper

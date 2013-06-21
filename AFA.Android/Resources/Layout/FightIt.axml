@@ -12,8 +12,9 @@
         android:minHeight="25px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1"
-        android:paddingTop="10dip">
+        android:id="@+id/linearLayoutFeatured"
+        android:paddingTop="10dip"
+        android:visibility="invisible">
         <ImageView
             android:src="@drawable/sharkFin"
             android:layout_width="wrap_content"
@@ -54,6 +55,38 @@
                 android:layout_below="@+id/Address" />
         </LinearLayout>
     </LinearLayout>
+<!--<LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3"
+        android:layout_below="@+id/linearLayoutFeatured">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/boycotts"
+            android:text="[n] boycotts"
+            android:textColor="@color/black"
+            android:background="@color/gray"
+            android:paddingLeft="10dip"
+            android:paddingTop="5dip"
+            android:paddingBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"
+            android:visibility="invisible" />
+    </LinearLayout>-->
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/CrueltySpots"
+        android:divider="@color/gray"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/list_selector"
+        android:layout_below="@+id/linearLayout3" />
     <include
         android:id="@+id/crueltyNavMenu"
         layout="@layout/crueltyNavMenu"

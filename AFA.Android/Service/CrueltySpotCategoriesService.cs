@@ -16,11 +16,13 @@ using Android.Util;
 
 namespace AFA.Android.Service
 {
-    public static class CrueltySpotCategoriesService
+    public class CrueltySpotCategoriesService
     {
-        public static string RouteBase = "crueltyspotcategories";
+        private StringBuilder _url;
 
-        public static void GetAllAsync(Action<CrueltySpotCategoriesResponse> callback)
+        public const string RouteBase = "crueltyspotcategories";
+
+        public void GetAllAsync(Action<CrueltySpotCategoriesResponse> callback)
         {
             var client = new WebClient();
             //var url = String.Format("{0}{1}{2}", AfaApplication.ServiceBaseUrl, RouteBase, AfaApplication.ServiceJsonContentTypeSuffix);
@@ -34,6 +36,29 @@ namespace AFA.Android.Service
                 callback(response.FromJson<CrueltySpotCategoriesResponse>());
             };
             client.DownloadStringAsync(new Uri(url.ToString()));
+        }
+
+        public void GetByIdAsync<T>(int id, Action<T> callback)
+        {
+            _url = new StringBuilder();
+            _url.Append(GetBaseUrl());
+            _url.Append("/");
+            _url.Append(id);
+            _url.AppendJsonFormatQueryStringParam();
+
+            var client = new WebClient();
+            client.DownloadStringCompleted += (sender, args) =>
+            {
+                var response = args.Result;
+                callback(response.FromJson<T>());
+            };
+
+            client.DownloadStringAsync(new Uri(_url.ToString()));
+        }
+
+        private string GetBaseUrl(string route = RouteBase)
+        {
+            return AfaApplication.ServiceBaseUrl + route;
         }
     }
 }

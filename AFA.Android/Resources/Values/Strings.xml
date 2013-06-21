@@ -4,17 +4,34 @@
     <string name="ApplicationName">AFA.Android</string>
 
     <string name="ReportCrueltyHeader">We need your eyes and ears to find out where cruelty is occurring! Fill out this form to let your community know!</string>
-
+  <string name="EmergencyText">If this is an emergency</string>
   <string name="AddPlaceHeader">Use this form to add a new cruelty spot or edit an existing one.</string>
+  <string name="boycottActionDesctiption">Join a boycott of this business</string>
+  <string name="messageActionDesctiption">Send an email requesting them to stop harming animals</string>
+  <string name="shareActionDesctiption">Inform others of the cruelty happening here</string>
+  <string name="IntroHeaderText">America for Animals</string>
+  <string name="IntroTeaserText">How are your going to help animals today?</string>
 
+  <string name="IntroReportLabel">Report Cruelty</string>
+  <string name="IntroReportSubLabel">Put animal cruelty on the map so others can take action.</string>
+
+  <string name="IntroTrackLabel">Track Cruelty</string>
+  <string name="IntroTrackSubLabel">See where cruelty is occurring in your community.</string>
+
+  <string name="IntroFightLabel">Fight Cruelty</string>
+  <string name="IntroFightSubLabel">Choose a location and take action with the push of a button.</string>
+  
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="pink">#FAA3DA</color>
-    <color name="green">#BBE66C</color>
+    <color name="pink">#D34C96</color>
+    <color name="green">#D0E06E</color>
     <color name="lightgreen">#D0ED99</color>
     <color name="red">#EE2C2C</color>
-    <color name="gray">#B5B5B5</color>
-    <color name="red">#bd362f</color>
+    <color name="gray">#D1D2D4</color>
+    <color name="mediumgray">#818286</color>
+    <color name="darkgray">#2C2A2B</color>
+    <color name="red">#BE1E2D</color>
+  
     <string name="mapsAppText" >Show Maps App</string>
   <string name="mapsAppTextDescription">Start up the Android Map application.</string>
   <string name="streetViewText" >Show Street View</string>

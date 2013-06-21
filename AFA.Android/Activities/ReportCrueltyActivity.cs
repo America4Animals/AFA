@@ -44,7 +44,7 @@ namespace AFA.Android
             if (_crueltyReport.PlaceSpecified)
             {
                 var locationText = new StringBuilder();
-                locationText.Append("<font color='#FAA3DA'><b>");
+                locationText.Append("<font color='#D34C96'><b>");
                 locationText.Append(_crueltyReport.PlaceName);
                 locationText.Append("</b></font>");
                 locationText.Append("<br />");
@@ -75,7 +75,7 @@ namespace AFA.Android
                 }
             };
 
-            _descriptionInput = FindViewById<EditText>(Resource.Id.DetailsInput);
+            //_descriptionInput = FindViewById<EditText>(Resource.Id.DetailsInput);
 
             // ToDo: This line hides the soft keyboard, but doing so makes the EditText only have 1 line.
             // Look into alternative
@@ -103,7 +103,7 @@ namespace AFA.Android
                                 newCrueltySpot = new CrueltySpotDto
                                                          {
                                                              Name = placeDetails.name,
-                                                             Description = _descriptionInput.Text,
+                                                             //Description = _descriptionInput.Text,
                                                              Address = placeDetails.Address,
                                                              City = placeDetails.City,
                                                              StateProvinceAbbreviation = placeDetails.StateOrProvince,
@@ -127,7 +127,7 @@ namespace AFA.Android
                         newCrueltySpot = new CrueltySpotDto
                                              {
                                                  Name = _crueltyReport.PlaceName,
-                                                 Description = _descriptionInput.Text,
+                                                 //Description = _descriptionInput.Text,
                                                  Address = _crueltyReport.UserGeneratedPlace.Address,
                                                  City = _crueltyReport.UserGeneratedPlace.City,
                                                  StateProvinceAbbreviation = _crueltyReport.UserGeneratedPlace.StateProvinceAbbreviation,
@@ -195,7 +195,7 @@ namespace AFA.Android
         {
             _locationInput.Text = "";
             _crueltyTypeInput.Text = "";
-            _descriptionInput.Text = "";
+            //_descriptionInput.Text = "";
         }
 
     }

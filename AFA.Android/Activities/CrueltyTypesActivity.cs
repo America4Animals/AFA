@@ -57,7 +57,8 @@ namespace AFA.Android.Activities
             //        throw ex;
             //    }));
 
-            CrueltySpotCategoriesService.GetAllAsync(r => RunOnUiThread(() =>
+            var crueltySpotCategoriesService = new CrueltySpotCategoriesService();
+            crueltySpotCategoriesService.GetAllAsync(r => RunOnUiThread(() =>
                               {
                                   _crueltySpotCategories = r.CrueltySpotCategories.OrderBy(csc => csc.Name).ToList();
                                   _crueltySpotCategoriesList.Adapter = new CrueltyTypesAdapter(this,
