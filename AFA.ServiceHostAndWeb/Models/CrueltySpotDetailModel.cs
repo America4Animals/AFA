@@ -24,8 +24,16 @@ namespace AFA.ServiceHostAndWeb.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string WebpageUrl { get; set; }
+
         public string GooglePlaceId { get; set; }
         public string NonGooglePlaceAddressHash { get; set; }
+
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime LastUpdatedAt { get; set; }
+
         public SelectList AllStateProvinces { get; set; }
         public SelectList AllCrueltySpotCategories { get; set; }
     }

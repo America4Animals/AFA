@@ -84,5 +84,19 @@
             @Html.DisplayFor(m => m.WebpageUrl)
         </div>
     </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.Latitude, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.Latitude)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.Longitude, new { @class = "control-label" })
+        <div class="controls">
+            @Html.DisplayFor(m => m.Longitude)
+        </div>
+    </div>
 
 </div>

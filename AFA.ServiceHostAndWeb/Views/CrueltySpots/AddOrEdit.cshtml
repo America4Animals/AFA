@@ -74,6 +74,20 @@
         </div>
     </div>
     
+    <div class="control-group">
+        @Html.LabelFor(m => m.Latitude, new { @class = "control-label" })
+        <div class="controls">
+            @Html.TextBoxFor(m => m.Latitude)
+        </div>
+    </div>
+    
+    <div class="control-group">
+        @Html.LabelFor(m => m.Longitude, new { @class = "control-label" })
+        <div class="controls">
+            @Html.TextBoxFor(m => m.Longitude)
+        </div>
+    </div>
+    
 </fieldset>
 
 <div class="control-group">
