@@ -54,9 +54,16 @@ namespace AFA.ServiceInterface
                     Name = "District of Columbia"
                 };
 
+                var virginia = new StateProvince
+                {
+                    Abbreviation = "VA",
+                    Name = "Virginia"
+                };
+
                 Db.Insert(newYork);
                 Db.Insert(california);
                 Db.Insert(dc);
+                Db.Insert(virginia);
             }
 
             if (Db.Select<CrueltySpotCategory>().Count == 0)
