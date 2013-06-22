@@ -13,6 +13,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Util;
+using AFA.Android.Utility;
 
 namespace AFA.Android.Activities
 {
@@ -62,7 +63,6 @@ namespace AFA.Android.Activities
             _loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
 
             var crueltySpotId = Intent.GetIntExtra(AppConstants.CrueltySpotIdKey, 0);
-            //_crueltySpot = AfaApplication.ServiceClient.Get(new CrueltySpotDto { Id = crueltySpotId }).CrueltySpot;
             var crueltySpotsService = new CrueltySpotsService();
             crueltySpotsService.GetByIdAsync<CrueltySpotResponse>(crueltySpotId, r =>
                 RunOnUiThread(() =>
@@ -71,9 +71,11 @@ namespace AFA.Android.Activities
                         var formattedAddress = String.Format("{0}\n{1}", _crueltySpot.Address, _crueltySpot.CityStateAndZip);
                         FindViewById<TextView>(Resource.Id.Name).Text = _crueltySpot.Name;
                         FindViewById<TextView>(Resource.Id.Address).Text = formattedAddress;
-                        var resourceId = Resources.GetIdentifier(_crueltySpot.CrueltySpotCategoryIconName.Replace(".png", ""), "drawable", PackageName);
+                        var resourceId = ResourceHelper.GetDrawableResourceId(this,
+                                                                              _crueltySpot.CrueltySpotCategoryIconName,
+                                                                              ResourceSize.Medium);
                         FindViewById<ImageView>(Resource.Id.CrueltyTypeImage).SetImageResource(resourceId);
-                        SetState(CrueltySpotViewState.TakeAction);
+                        SetViewState(CrueltySpotViewState.TakeAction);
                         _loadingDialog.Hide();
 
                         var showSuccessAddedAlert = Intent.GetBooleanExtra(AppConstants.ShowCrueltySpotAddedSuccessfullyKey, false);
@@ -96,11 +98,11 @@ namespace AFA.Android.Activities
 
             
 
-            IssueButton.Click += (sender, args) => SetState(CrueltySpotViewState.TheIssue);
-            TakeActionButton.Click += (sender, args) => SetState(CrueltySpotViewState.TakeAction);
+            IssueButton.Click += (sender, args) => SetViewState(CrueltySpotViewState.TheIssue);
+            TakeActionButton.Click += (sender, args) => SetViewState(CrueltySpotViewState.TakeAction);
         }
 
-        private void SetState(CrueltySpotViewState state)
+        private void SetViewState(CrueltySpotViewState state)
         {
             _boycottArea = FindViewById<LinearLayout>(Resource.Id.linearLayoutBoycott);
             _theIssueArea = FindViewById<LinearLayout>(Resource.Id.linearLayoutTheIssue);
@@ -124,10 +126,6 @@ namespace AFA.Android.Activities
 
         private void SetButtonState(Button button, bool isEnabled)
         {
-            //button.SetTextColor(isEnabled
-            //                        ? this.Resources.GetColor(Resource.Color.black)
-            //                        : this.Resources.GetColor(Resource.Color.gray));
-
             button.SetBackgroundColor(isEnabled
                 ? this.Resources.GetColor(Resource.Color.mediumgray)
                 : this.Resources.GetColor(Resource.Color.darkgray));

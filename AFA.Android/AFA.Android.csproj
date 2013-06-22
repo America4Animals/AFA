@@ -68,6 +68,7 @@
     <Compile Include="Adapters\CrueltyTypesAdapter.cs" />
     <Compile Include="Utility\CrueltyType.cs" />
     <Compile Include="Utility\GooglePlace.cs" />
+    <Compile Include="Utility\ResourceHelper.cs" />
     <Compile Include="Utility\ServiceHelper.cs" />
     <Compile Include="Utility\UrlHelper.cs" />
     <Compile Include="Utility\UserGeneratedPlace.cs" />
@@ -213,6 +214,24 @@
     <AndroidResource Include="Resources\Drawable\report.png" />
     <AndroidResource Include="Resources\Drawable\track.png" />
     <AndroidResource Include="Resources\Drawable\border_top_bottom.xml" />
+    <AndroidResource Include="Resources\Drawable\cariagges_lg.png" />
+    <AndroidResource Include="Resources\Drawable\foiegras_lg.png" />
+    <AndroidResource Include="Resources\Drawable\fur_lg.png" />
+    <AndroidResource Include="Resources\Drawable\labs_lg.png" />
+    <AndroidResource Include="Resources\Drawable\performance_lg.png" />
+    <AndroidResource Include="Resources\Drawable\petstores_lg.png" />
+    <AndroidResource Include="Resources\Drawable\races_lg.png" />
+    <AndroidResource Include="Resources\Drawable\rodeo_lg.png" />
+    <AndroidResource Include="Resources\Drawable\shark_lg.png" />
+    <AndroidResource Include="Resources\Drawable\cariagges_med.png" />
+    <AndroidResource Include="Resources\Drawable\foiegras_med.png" />
+    <AndroidResource Include="Resources\Drawable\fur_med.png" />
+    <AndroidResource Include="Resources\Drawable\labs_med.png" />
+    <AndroidResource Include="Resources\Drawable\performance_med.png" />
+    <AndroidResource Include="Resources\Drawable\petstores_med.png" />
+    <AndroidResource Include="Resources\Drawable\races_med.png" />
+    <AndroidResource Include="Resources\Drawable\rodeo_med.png" />
+    <AndroidResource Include="Resources\Drawable\shark_med.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
