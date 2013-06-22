@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace AFA.Android.Activities
 {
-    [Activity(Label = "Intro")]
+    [Activity(Label = "@string/ApplicationName")]
     public class IntroActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)

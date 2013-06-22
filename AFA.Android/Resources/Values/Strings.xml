@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="Hello">Hello World, Click Me!</string>
-    <string name="ApplicationName">AFA.Android</string>
+    <string name="ApplicationName">Animal Ally</string>
 
     <string name="ReportCrueltyHeader">We need your eyes and ears to find out where cruelty is occurring! Fill out this form to let your community know!</string>
   <string name="EmergencyText">If this is an emergency</string>
@@ -10,7 +10,7 @@
   <string name="messageActionDesctiption">Send an email requesting them to stop harming animals</string>
   <string name="shareActionDesctiption">Inform others of the cruelty happening here</string>
   <string name="IntroHeaderText">America for Animals</string>
-  <string name="IntroTeaserText">How are your going to help animals today?</string>
+  <string name="IntroTeaserText">How are you going to help animals today?</string>
 
   <string name="IntroReportLabel">Report Cruelty</string>
   <string name="IntroReportSubLabel">Put animal cruelty on the map so others can take action.</string>
