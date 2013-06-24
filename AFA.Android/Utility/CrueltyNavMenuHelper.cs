@@ -17,7 +17,7 @@ namespace AFA.Android.Helpers
         ReportIt,
         TrackIt,
         FightIt,
-        More,
+        Legend,
         Child
     }
 
@@ -48,6 +48,12 @@ namespace AFA.Android.Helpers
                     activity.StartActivity(intent);
                 };
 
+			moreItItem.Click += (sender, args) =>
+			{
+				var intent = new Intent(activity, typeof (LegendActivity));
+				activity.StartActivity(intent);
+			};
+
             switch (activeItem)
             {
                 case CrueltyNavMenuItem.ReportIt:
@@ -62,7 +68,7 @@ namespace AFA.Android.Helpers
                     fightItItem.SetBackgroundResource(Resource.Color.gray);
                     fightItItem.Enabled = false;
                     break;
-                case CrueltyNavMenuItem.More:
+                case CrueltyNavMenuItem.Legend:
                     moreItItem.SetBackgroundResource(Resource.Color.gray);
                     moreItItem.Enabled = false;
                     break;

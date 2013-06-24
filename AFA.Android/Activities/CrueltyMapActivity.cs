@@ -100,6 +100,12 @@ namespace AFA.Android.Activities
 		List<CrueltySpotDto> _crueltySpots;
 		private CrueltySpotsService _crueltySpotsService;
 		Dictionary<String,CrueltySpotDto> _crueltyLookup = new Dictionary<String,CrueltySpotDto> ();
+		Dictionary<String,float> _pinColorLookup = new Dictionary<String,float> 
+		{
+			{"cariaggespin",128}, {"foiegraspin",56}, {"labspin",198}, {"morepin",327}, 
+			{"petstorespin",209}, {"racespin",259}, {"rodeopin",33},{"sharkpin",302}, 
+			{"furpin",68} ,{"performancepin",354}
+		};
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -226,17 +232,24 @@ namespace AFA.Android.Activities
 
                     MarkerOptions mapOption;
                     LatLng crueltyLocation;
-                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
+					LatLngBounds.Builder builder = new LatLngBounds.Builder();
                     builder.Include(myLocation);
                     foreach (CrueltySpotDto spot in _crueltySpots)
                     { // Loop through List with foreach
                         crueltyLocation = new LatLng(spot.Latitude, spot.Longitude);
                         builder.Include(crueltyLocation);
                         Console.WriteLine("inside callback latitude: " + spot.Latitude + " longtitude: " + spot.Longitude);
+						float defaultValue = 33;
+						Console.WriteLine("spot icon name: " + spot.CrueltySpotCategoryIconName.Replace(".png", "pin"));
+						if (_pinColorLookup.ContainsKey(spot.CrueltySpotCategoryIconName.Replace(".png", "pin")))
+						{
+							defaultValue = _pinColorLookup[spot.CrueltySpotCategoryIconName.Replace(".png", "pin")];
+						}
                         mapOption = new MarkerOptions()
                                     .SetPosition(crueltyLocation)
                                         .SetSnippet(spot.Address)
-                                        .SetTitle(spot.Name);
+                                        .SetTitle(spot.Name)
+								.InvokeIcon(BitmapDescriptorFactory.DefaultMarker(defaultValue));
 
                         Marker marker = _map.AddMarker(mapOption);
 

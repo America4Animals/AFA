@@ -19,6 +19,7 @@ namespace AFA.Android
         private readonly Activity _context;
         private readonly IList<CrueltySpotCategory> _crueltySpotCategorieses;
 
+
         public CrueltyTypesAdapter(Activity context, IList<CrueltySpotCategory> crueltySpotCategories)
         {
             _context = context;

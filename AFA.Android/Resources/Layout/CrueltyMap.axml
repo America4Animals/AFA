@@ -8,12 +8,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-        <FrameLayout
-            android:id="@+id/mapWithOverlay"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
-    </LinearLayout>
+        android:layout_height="fill_parent"
+        android:id="@+id/mapWithOverlay" />
     <include
         android:id="@+id/crueltyNavMenu"
         layout="@layout/crueltyNavMenu"
