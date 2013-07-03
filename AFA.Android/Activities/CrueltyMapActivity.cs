@@ -160,7 +160,7 @@ namespace AFA.Android.Activities
 		private void MapOnMarkerClick (object sender, GoogleMap.MarkerClickEventArgs markerClickEventArgs)
 		{
 			Marker marker = markerClickEventArgs.P0; // TODO [TO201212142221] Need to fix the name of this with MetaData.xml
-			float zoomValue = 10;
+			float zoomValue = 11;
 			if (_map.CameraPosition.Zoom > zoomValue) {
 				zoomValue = _map.CameraPosition.Zoom;
 			}
@@ -175,52 +175,13 @@ namespace AFA.Android.Activities
 				_map = _mapFragment.Map;
 			}
 			if (_map != null) {
-				
 
-				//	AddInitialPolarBarToMap();
 				LatLng myLocation = new LatLng (_gpsTracker.Latitude, _gpsTracker.Longitude);
-                _crueltySpotsService = new CrueltySpotsService();
-                //_crueltySpots = crueltySpotsService.GetMany (new CrueltySpotsDto{
-                //        SortBy = "createdAt",
-                //        SortOrder = "desc"
-                //});
+				_crueltySpotsService = new CrueltySpotsService();
 
-                //MarkerOptions mapOption;
-                //LatLng crueltyLocation;
-                //LatLngBounds.Builder builder = new LatLngBounds.Builder ();
-                //builder.Include (myLocation);
-                //foreach (CrueltySpotDto spot in _crueltySpots) { // Loop through List with foreach
-                //    crueltyLocation = new LatLng (spot.Latitude, spot.Longitude);
-                //    builder.Include (crueltyLocation);
-                //    Console.WriteLine ("inside callback latitude: " + spot.Latitude + " longtitude: "+spot.Longitude);
-                //    mapOption = new MarkerOptions ()
-                //                .SetPosition (crueltyLocation)
-                //                    .SetSnippet (spot.Address)
-                //                    .SetTitle (spot.Name);
-
-                //    Marker marker = _map.AddMarker (mapOption);
-
-                //    _crueltyLookup.Add (marker.Id, spot);
-
-                //}
-
-                ////	LatLngBounds bounds = new LatLngBounds.Builder ().Include (myLocation).Build ();
-                ///*	mapOption = new MarkerOptions ()
-                //        .SetPosition (myLocation)
-                //            .SetSnippet ("Your location")
-                //            .SetTitle ("Your location")
-                //            .InvokeIcon (BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueOrange));
-                //_map.AddMarker (mapOption);*/
-					
-                //// Move the map so that it is showing the markers we added above.
-                //_map.SetInfoWindowAdapter (new CustomInfoWindowAdapter (this));
-
-                //// Set listeners for marker events.  See the bottom of this class for their behavior.
-
-                //_map.SetOnInfoWindowClickListener (this);
-
-                //_map.AnimateCamera (CameraUpdateFactory.NewLatLngZoom(myLocation,3));
-
+				
+				_map.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(myLocation, 11));
+		
                 _crueltySpotsService.GetManyAsync<CrueltySpotsResponse>(new CrueltySpotsDto
                 {
                     SortBy = "createdAt",
@@ -236,11 +197,15 @@ namespace AFA.Android.Activities
                     builder.Include(myLocation);
                     foreach (CrueltySpotDto spot in _crueltySpots)
                     { // Loop through List with foreach
+						if (spot.Name.CompareTo ("Universoul Circus") == 0)
+						{
+							continue;
+						}
                         crueltyLocation = new LatLng(spot.Latitude, spot.Longitude);
                         builder.Include(crueltyLocation);
-                        Console.WriteLine("inside callback latitude: " + spot.Latitude + " longtitude: " + spot.Longitude);
+                       
 						float defaultValue = 33;
-						Console.WriteLine("spot icon name: " + spot.CrueltySpotCategoryIconName.Replace(".png", "pin"));
+
 						if (_pinColorLookup.ContainsKey(spot.CrueltySpotCategoryIconName.Replace(".png", "pin")))
 						{
 							defaultValue = _pinColorLookup[spot.CrueltySpotCategoryIconName.Replace(".png", "pin")];
@@ -257,14 +222,7 @@ namespace AFA.Android.Activities
 
                     }
 
-                    //	LatLngBounds bounds = new LatLngBounds.Builder ().Include (myLocation).Build ();
-                    /*	mapOption = new MarkerOptions ()
-                            .SetPosition (myLocation)
-                                .SetSnippet ("Your location")
-                                .SetTitle ("Your location")
-                                .InvokeIcon (BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueOrange));
-                    _map.AddMarker (mapOption);*/
-
+                  
                     // Move the map so that it is showing the markers we added above.
                     _map.SetInfoWindowAdapter(new CustomInfoWindowAdapter(this));
 
@@ -272,7 +230,7 @@ namespace AFA.Android.Activities
 
                     _map.SetOnInfoWindowClickListener(this);
 
-                    _map.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(myLocation, 3));
+                    
                 }));
 			}
 		
