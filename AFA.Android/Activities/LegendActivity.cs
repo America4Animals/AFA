@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AFA.Android.Helpers;
+using AFA.Android.Library.ServiceModel;
 using AFA.ServiceModel;
 using AFA.ServiceModel.DTOs;
 using Android.App;
@@ -24,7 +25,7 @@ namespace AFA.Android.Activities
 		private IList<CrueltySpotCategory> _crueltySpotCategories;
 		private ProgressDialog _loadingDialog;
 
-		protected override void OnCreate(Bundle bundle)
+		protected async override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
 
@@ -34,27 +35,11 @@ namespace AFA.Android.Activities
 
 			_crueltySpotCategoriesList = FindViewById<ListView>(Resource.Id.Legend);
 
-
-			//AfaApplication.ServiceClient.GetAsync(new CrueltySpotCategories(),
-			//    r => RunOnUiThread(() =>
-			//    {
-			//        _crueltySpotCategories = r.CrueltySpotCategories.OrderBy(csc => csc.Name).ToList();
-			//        _crueltySpotCategoriesList.Adapter = new CrueltyTypesAdapter(this, _crueltySpotCategories);
-			//        loadingDialog.Hide();
-			//    }),
-			//    (r, ex) => RunOnUiThread(() =>
-			//    {
-			//        throw ex;
-			//    }));
-
-			var crueltySpotCategoriesService = new CrueltySpotCategoriesService();
-			crueltySpotCategoriesService.GetAllAsync(r => RunOnUiThread(() =>
-			                                                            {
-				_crueltySpotCategories = r.CrueltySpotCategories.OrderBy(csc => csc.Name).ToList();
-				_crueltySpotCategoriesList.Adapter = new LegendAdapter(this,
-				                                                             _crueltySpotCategories);
-				_loadingDialog.Hide();
-			}));
+            var crueltySpotCategoriesService = new CrueltySpotCategoriesService();
+            var crueltySpotCategories = await crueltySpotCategoriesService.GetAllAsync();
+            _crueltySpotCategories = crueltySpotCategories.ToList();
+            _crueltySpotCategoriesList.Adapter = new CrueltyTypesAdapter(this, _crueltySpotCategories);
+            _loadingDialog.Hide();
 		}
 	}
 }

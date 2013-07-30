@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using AFA.Android.Activities;
 using AFA.Android.Helpers;
+using AFA.Android.Library.ServiceModel;
 using AFA.Android.Service;
+using AFA.Android.Utility;
 using AFA.ServiceModel.DTOs;
 using Android.App;
 using Android.Content;
@@ -75,8 +77,6 @@ namespace AFA.Android
                 }
             };
 
-            //_descriptionInput = FindViewById<EditText>(Resource.Id.DetailsInput);
-
             // ToDo: This line hides the soft keyboard, but doing so makes the EditText only have 1 line.
             // Look into alternative
             //_locationInput.InputType = InputTypes.Null;
@@ -90,7 +90,8 @@ namespace AFA.Android
                 {
                     // Create a new Cruelty Spot
                     _loadingDialog = DialogManager.ShowLoadingDialog(this);
-                    CrueltySpotDto newCrueltySpot;
+                    //CrueltySpotDto newCrueltySpot;
+                    CrueltySpot newCrueltySpot;
 
                     if (_crueltyReport.IsGooglePlace())
                     {
@@ -100,7 +101,8 @@ namespace AFA.Android
                             {
                                 // ToDo: Check Status and handle non-OK
                                 var placeDetails = response.result;
-                                newCrueltySpot = new CrueltySpotDto
+
+                                newCrueltySpot = new CrueltySpot
                                                          {
                                                              Name = placeDetails.name,
                                                              //Description = _descriptionInput.Text,
@@ -124,21 +126,22 @@ namespace AFA.Android
                     {
                         // Submit with user lat/lng
                         var gpsTracker = ((AfaApplication)ApplicationContext).GetGpsTracker(this);
-                        newCrueltySpot = new CrueltySpotDto
-                                             {
-                                                 Name = _crueltyReport.PlaceName,
-                                                 //Description = _descriptionInput.Text,
-                                                 Address = _crueltyReport.UserGeneratedPlace.Address,
-                                                 City = _crueltyReport.UserGeneratedPlace.City,
-                                                 StateProvinceAbbreviation = _crueltyReport.UserGeneratedPlace.StateProvinceAbbreviation,
-                                                 Zipcode = _crueltyReport.UserGeneratedPlace.Zipcode,
-                                                 //PhoneNumber = placeDetails.formatted_phone_number,
-                                                 //WebpageUrl = placeDetails.website,
-                                                 Email = _crueltyReport.UserGeneratedPlace.Email,
-                                                 Latitude = gpsTracker.Latitude,
-                                                 Longitude = gpsTracker.Longitude,
-                                                 CrueltySpotCategoryId = _crueltyReport.CrueltyType.Id
-                                             };
+
+                        newCrueltySpot = new CrueltySpot
+                        {
+                            Name = _crueltyReport.PlaceName,
+                            //Description = _descriptionInput.Text,
+                            Address = _crueltyReport.UserGeneratedPlace.Address,
+                            City = _crueltyReport.UserGeneratedPlace.City,
+                            StateProvinceAbbreviation = _crueltyReport.UserGeneratedPlace.StateProvinceAbbreviation,
+                            Zipcode = _crueltyReport.UserGeneratedPlace.Zipcode,
+                            //PhoneNumber = placeDetails.formatted_phone_number,
+                            //WebpageUrl = placeDetails.website,
+                            Email = _crueltyReport.UserGeneratedPlace.Email,
+                            Latitude = gpsTracker.Latitude,
+                            Longitude = gpsTracker.Longitude,
+                            CrueltySpotCategoryId = _crueltyReport.CrueltyType.Id
+                        };
 
                         SubmitNewCrueltySpot(newCrueltySpot);
                     }
@@ -148,47 +151,22 @@ namespace AFA.Android
 
         }
 
-        private void SubmitNewCrueltySpot(CrueltySpotDto newCrueltySpot)
+        private async void SubmitNewCrueltySpot(CrueltySpot newCrueltySpot)
         {
-            //AfaApplication.ServiceClient.PostAsync(crueltySpotDto,
-            //     r => RunOnUiThread(() =>
-            //      {
-            //         var crueltySpotId = r.CrueltySpot.Id;
+            var crueltySpotsService = new CrueltySpotsService();        
+            var newCrueltySpotId = await crueltySpotsService.SaveAsync(newCrueltySpot);
 
-            //         var intent =
-            //             new Intent(this,
-            //                        typeof (
-            //                            CrueltySpotActivity
-            //                            ));
-            //         intent.PutExtra(
-            //             AppConstants
-            //                 .ShowCrueltySpotAddedSuccessfullyKey,
-            //             true);
-            //         intent.PutExtra(
-            //             AppConstants.CrueltySpotIdKey, crueltySpotId);
-            //         StartActivity(intent);
-            //         loadingDialog.Dismiss();
-            //          ClearAll();
-            //     }),
-            //     (r, ex) => RunOnUiThread(() =>
-            //     {
-            //         throw ex;
-            //     }));
-
-            var crueltySpotsService = new CrueltySpotsService();
-            crueltySpotsService.PostAsync(newCrueltySpot, r => RunOnUiThread(() =>
+            RunOnUiThread(() =>
             {
-                var crueltySpotId = r.CrueltySpot.Id;
-                //Log.Debug("NewCrueltySpotId", crueltySpotId.ToString());
                 var intent = new Intent(this, typeof(CrueltySpotActivity));
                 intent.PutExtra(AppConstants.ShowCrueltySpotAddedSuccessfullyKey, true);
-                intent.PutExtra(AppConstants.CrueltySpotIdKey, crueltySpotId);
+                intent.PutExtra(AppConstants.CrueltySpotIdKey, newCrueltySpotId);
                 ClearAllUi();
                 _crueltyReport.ClearAll();
                 CommitCrueltyReport();
                 StartActivity(intent);
                 _loadingDialog.Dismiss();
-            }));
+            });
         }
 
         private void ClearAllUi()

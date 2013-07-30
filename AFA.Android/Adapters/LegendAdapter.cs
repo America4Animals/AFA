@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using AFA.Android.Library.ServiceModel;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
@@ -38,7 +38,8 @@ namespace AFA.Android
 
 		public override long GetItemId(int position)
 		{
-			return _crueltySpotCategorieses[position].Id;
+			//return _crueltySpotCategorieses[position].Id;
+		    return 0;
 		}
 
 		public override View GetView(int position, View convertView, ViewGroup parent)

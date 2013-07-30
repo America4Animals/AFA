@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+
+namespace AFA.Android.Utility
+{
+    public static class DebugHelper
+    {
+        public static string AfaDebugKeyTemplate = "AfaDebug - {0}";
+
+        public static string LogEntryKey(string keyText)
+        {
+            return String.Format(AfaDebugKeyTemplate, keyText);
+        }
+    }
+}

@@ -72,7 +72,9 @@
     <Compile Include="AfaApplication.cs" />
     <Compile Include="Activities\EventsActivity.cs" />
     <Compile Include="Adapters\CrueltyTypesAdapter.cs" />
+    <Compile Include="Service\ParseHelper.cs" />
     <Compile Include="Utility\CrueltyType.cs" />
+    <Compile Include="Utility\DebugHelper.cs" />
     <Compile Include="Utility\GooglePlace.cs" />
     <Compile Include="Utility\ResourceHelper.cs" />
     <Compile Include="Utility\ServiceHelper.cs" />

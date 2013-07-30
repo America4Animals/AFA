@@ -10,12 +10,11 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace AFA.Android.Helpers
+namespace AFA.Android.Service
 {
-    public class CrueltyType
+    public static class ParseHelper
     {
-        //public int Id { get; set; }
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public static string CrueltySpotCategoryClassName = "CrueltySpotCategory";
+        public static string CrueltySpotClassName = "CrueltySpot";
     }
 }
