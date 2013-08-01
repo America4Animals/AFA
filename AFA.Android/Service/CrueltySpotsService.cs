@@ -33,38 +33,10 @@ namespace AFA.Android.Service
         public const string SortByParamKey = "sortBy";
         public const string SortOrderParamKey = "sortOrder";
 
-        public CrueltySpotDto GetById(int id)
-        {
-            _url = new StringBuilder();
-            _url.Append(GetBaseUrl());
-            _url.Append("/");
-            _url.Append(id);
-            _url.AppendJsonFormatQueryStringParam();
+        public const string NameField = "name";
+        public const string CityField = "city";
+        public const string StateProvinceAbbreviationField = "stateProvinceAbbreviation";
 
-            using(var client = new WebClient())
-            {
-                var response = client.DownloadString(_url.ToString());
-                return response.FromJson<CrueltySpotResponse>().CrueltySpot;
-            }
-        }
-
-        //public void GetByIdAsync<T>(int id, Action<T> callback)
-        //{
-        //    _url = new StringBuilder();
-        //    _url.Append(GetBaseUrl());
-        //    _url.Append("/");
-        //    _url.Append(id);
-        //    _url.AppendJsonFormatQueryStringParam();
-
-        //    var client = new WebClient();
-        //    client.DownloadStringCompleted += (sender, args) =>
-        //    {
-        //        var response = args.Result;
-        //        callback(response.FromJson<T>());
-        //    };
-
-        //    client.DownloadStringAsync(new Uri(_url.ToString()));
-        //}
 
         public async Task<CrueltySpot> GetByIdAsync(string id, bool includeCategory = false)
         {
@@ -81,23 +53,71 @@ namespace AFA.Android.Service
             return await ConvertToPoco(crueltySpotParse, includeCategory);
         }
 
-        public List<CrueltySpotDto> GetMany(CrueltySpotsDto request)
-        {
-            //var url = String.Format("{0}{1}{2}", AfaApplication.ServiceBaseUrl, RouteBase, AfaApplication.ServiceJsonContentTypeSuffix);
-            var url = new StringBuilder();
-            url.Append(GetBaseUrl());
-            url.AppendQueryStringParam(NameParamKey, request.Name);
-            url.AppendQueryStringParam(CityParamKey, request.City);
-            url.AppendQueryStringParam(StateKey, request.StateProvinceAbbreviation);
-            url.AppendQueryStringParam(SortByParamKey, request.SortBy);
-            url.AppendQueryStringParam(SortOrderParamKey, request.SortOrder);
-            url.AppendJsonFormatQueryStringParam();
+        //public List<CrueltySpotDto> GetMany(CrueltySpotsDto request)
+        //{
+        //    //var url = String.Format("{0}{1}{2}", AfaApplication.ServiceBaseUrl, RouteBase, AfaApplication.ServiceJsonContentTypeSuffix);
+        //    var url = new StringBuilder();
+        //    url.Append(GetBaseUrl());
+        //    url.AppendQueryStringParam(NameParamKey, request.Name);
+        //    url.AppendQueryStringParam(CityParamKey, request.City);
+        //    url.AppendQueryStringParam(StateKey, request.StateProvinceAbbreviation);
+        //    url.AppendQueryStringParam(SortByParamKey, request.SortBy);
+        //    url.AppendQueryStringParam(SortOrderParamKey, request.SortOrder);
+        //    url.AppendJsonFormatQueryStringParam();
 
-            using (var client = new WebClient())
+        //    using (var client = new WebClient())
+        //    {
+        //        var response = client.DownloadString(url.ToString());
+        //        return response.FromJson<CrueltySpotsResponse>().CrueltySpots;
+        //    }
+        //}
+
+        public async Task<List<CrueltySpot>> GetMany(CrueltySpot request, bool retrieveCategoryTypes)
+        {
+            //var query = ParseObject.GetQuery(ParseHelper.CrueltySpotClassName);
+
+//            if (!String.IsNullOrEmpty(request.Name))
+//            {
+//                query.WhereEqualTo(NameField, request.Name);
+//            }
+//
+//            if (!string.IsNullOrEmpty(request.City))
+//            {
+//                query.WhereEqualTo(CityField, request.City);
+//            }
+//
+//            if (!string.IsNullOrEmpty(request.StateProvinceAbbreviation))
+//            {
+//                query.WhereEqualTo(StateProvinceAbbreviationField, request.StateProvinceAbbreviation);
+//            }
+
+//			var query = ParseObject.GetQuery(ParseHelper.CrueltySpotClassName)
+//				.WhereEqualTo(NameField, request.Name)
+//				.WhereEqualTo(CityField, request.City)
+//				.WhereEqualTo(StateProvinceAbbreviationField, request.StateProvinceAbbreviation);
+
+//			var query = from crueltySpot in ParseObject.GetQuery(ParseHelper.CrueltySpotClassName)
+//				where crueltySpot.Get<string>(NameField).ToLower().Equals(request.Name.ToLower())
+//					&& crueltySpot.Get<string>(CityField).ToLower().Equals(request.City.ToLower())
+//					&& crueltySpot.Get<string>(StateProvinceAbbreviationField).ToLower().Equals(request.StateProvinceAbbreviation.ToLower())
+//					select crueltySpot;
+
+			var query = from crueltySpot in ParseObject.GetQuery(ParseHelper.CrueltySpotClassName)
+				where crueltySpot.Get<string>(NameField).Equals(request.Name)
+					&& crueltySpot.Get<string>(CityField).Equals(request.City)
+					&& crueltySpot.Get<string>(StateProvinceAbbreviationField).Equals(request.StateProvinceAbbreviation)
+					select crueltySpot;
+
+            var crueltySpotsParse = await query.FindAsync();
+
+            var crueltySpots = new List<CrueltySpot>();
+            foreach (var crueltySpotParse in crueltySpotsParse)
             {
-                var response = client.DownloadString(url.ToString());
-                return response.FromJson<CrueltySpotsResponse>().CrueltySpots;
+                var crueltySpot = await ConvertToPoco(crueltySpotParse, retrieveCategoryTypes);
+                crueltySpots.Add(crueltySpot);
             }
+
+            return crueltySpots;
         }
 
         public void GetManyAsync<T>(CrueltySpotsDto request, Action<T> callback)
@@ -199,11 +219,11 @@ namespace AFA.Android.Service
             var crueltySpotCategoriesService = new CrueltySpotCategoriesService();
             //var crueltySpotCategoryParse = await crueltySpotCategoriesService.GetParseObjectByIdAsync(crueltySpot.CrueltySpotCategoryId);
             var crueltySpotParse = new ParseObject(ParseHelper.CrueltySpotClassName);
-            crueltySpotParse["name"] = crueltySpot.Name;
+            crueltySpotParse[NameField] = crueltySpot.Name;
             crueltySpotParse["description"] = crueltySpot.Description;
             crueltySpotParse["address"] = crueltySpot.Address;
-            crueltySpotParse["city"] = crueltySpot.City;
-            crueltySpotParse["stateProvinceAbbreviation"] = crueltySpot.StateProvinceAbbreviation;
+            crueltySpotParse[CityField] = crueltySpot.City;
+            crueltySpotParse[StateProvinceAbbreviationField] = crueltySpot.StateProvinceAbbreviation;
             crueltySpotParse["zipcode"] = crueltySpot.Zipcode;
             crueltySpotParse["phoneNumber"] = crueltySpot.PhoneNumber;
             crueltySpotParse["email"] = crueltySpot.Email;
@@ -237,13 +257,13 @@ namespace AFA.Android.Service
             string email;
             string webpageUrl;
             string googlePlaceId;
-            string nonGooglePlaceAddressHash;        
+            string nonGooglePlaceAddressHash;
 
-            crueltySpotParse.TryGetValue("name", out name);
+            crueltySpotParse.TryGetValue(NameField, out name);
             crueltySpotParse.TryGetValue("description", out description);
             crueltySpotParse.TryGetValue("address", out address);
-            crueltySpotParse.TryGetValue("city", out city);
-            crueltySpotParse.TryGetValue("stateProvinceAbbreviation", out stateProvinceAbbreviation);
+            crueltySpotParse.TryGetValue(CityField, out city);
+            crueltySpotParse.TryGetValue(StateProvinceAbbreviationField, out stateProvinceAbbreviation);
             crueltySpotParse.TryGetValue("zipcode", out zipcode);
             crueltySpotParse.TryGetValue("phoneNumber", out phoneNumber);
             crueltySpotParse.TryGetValue("email", out email);

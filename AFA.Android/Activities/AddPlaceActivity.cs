@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AFA.Android.Helpers;
+using AFA.Android.Library.ServiceModel;
 using AFA.Android.Service;
 using AFA.ServiceModel;
 using AFA.ServiceModel.DTOs;
@@ -42,7 +43,7 @@ namespace AFA.Android.Activities
             _submitButton.Enabled = false;
 
             var gpsTracker = ((AfaApplication)ApplicationContext).GetGpsTracker(this);
-            
+
             var geocoder = new Geocoder(this, Locale.Default);
             var addresses = geocoder.GetFromLocation(gpsTracker.Latitude, gpsTracker.Longitude, 1);
             var myAddress = addresses.FirstOrDefault();
@@ -51,7 +52,15 @@ namespace AFA.Android.Activities
                 var streetAddress = myAddress.GetAddressLine(0);
                 //var city = address.SubAdminArea; // RETURNS NOTHING
                 //var city = address.Locality; // RETURNS NOTHING
-                var city = myAddress.SubLocality; // e.g. Brooklyn
+                //var city = myAddress.SubLocality; // e.g. Brooklyn
+
+                // Try to get a city
+                string city = myAddress.SubLocality;
+                if (String.IsNullOrEmpty(city))
+                {
+                    city = myAddress.Locality;
+                }
+
                 var state = myAddress.AdminArea; // e.g. New York
                 var zip = myAddress.PostalCode;
 
@@ -80,81 +89,74 @@ namespace AFA.Android.Activities
             _cityInput.AfterTextChanged += (sender, args) => ValidateInput();
             _stateInput.AfterTextChanged += (sender, args) => ValidateInput();
 
-            _submitButton.Click += (sender, args) =>
-                                       {
-                                           var validInput = ValidateInput();
-                                           if (!validInput)
-                                           {
-                                               DialogManager.ShowAlertDialog(this, "Incomplete Submission",
-                                                                                  "Please supply a Name, City and State",
-                                                                                  false);
-                                           }
-                                           else
-                                           {
-                                               var loadingDialog = DialogManager.ShowLoadingDialog(this);
-                                               var name = _placeNameInput.Text;
-                                               var address = _addressInput.Text;
-                                               var city = _cityInput.Text;
-                                               var stateInput = _stateInput.Text;
-                                               var zipInput = _zipInput.Text;
-                                               var stateAbbreviation = stateInput.Length == 2 ? stateInput : StateNamesAndAbbreviations.StateAbbreviationLookup[stateInput];
-                                               //var response =
-                                               //    AfaApplication.ServiceClient.Get(new CrueltySpotsDto()
-                                               //                                         {
-                                               //                                             Name = name,
-                                               //                                             City = city,
-                                               //                                             StateProvinceAbbreviation
-                                               //                                                 =
-                                               //                                                 stateAbbreviation
-                                               //                                         });
+            _submitButton.Click += async delegate(object sender, EventArgs args)
+                {
+                    var validInput = ValidateInput();
+                    if (!validInput)
+                    {
+                        DialogManager.ShowAlertDialog(this, "Incomplete Submission",
+                                                           "Please supply a Name, City and State",
+                                                           false);
+                    }
+                    else
+                    {
+                        var loadingDialog = DialogManager.ShowLoadingDialog(this);
+                        var name = _placeNameInput.Text;
+                        var address = _addressInput.Text;
+                        var city = _cityInput.Text;
+                        var stateInput = _stateInput.Text;
+                        var zipInput = _zipInput.Text;
+                        var stateAbbreviation = stateInput.Length == 2 ? stateInput : StateNamesAndAbbreviations.StateAbbreviationLookup[stateInput];
 
-                                               var crueltySpotsService = new CrueltySpotsService();
+                        var crueltySpotsService = new CrueltySpotsService();
+                        var crueltySpots = await crueltySpotsService.GetMany(new CrueltySpot
+                                                                           {
+                                                                               Name = name,
+                                                                               City = city,
+                                                                               StateProvinceAbbreviation
+                                                                                   =
+                                                                                   stateAbbreviation
+                                                                           }, false);
 
-                                               //var crueltySpots = crueltySpotsService.Search(name, city, stateAbbreviation);
-                                               var crueltySpots = crueltySpotsService.GetMany(new CrueltySpotsDto
-                                                                                                  {
-                                                                                                      Name = name,
-                                                                                                      City = city,
-                                                                                                      StateProvinceAbbreviation
-                                                                                                          =
-                                                                                                          stateAbbreviation
-                                                                                                  });
+                        RunOnUiThread(()
+                            =>
+                            {
+                                if (crueltySpots.Any())
+                                {
+                                    var existingPlaceId = crueltySpots.First().Id;
 
-                                               if (crueltySpots.Any())
-                                               {
-                                                   var existingPlaceId = crueltySpots.First().Id;
+                                    new AlertDialog.Builder(this)
+                                        .SetTitle("Cruelty already reported here")
+                                        .SetMessage("The location you have chosen is already on the cruelty map.")
+                                        .SetNegativeButton("Cancel", (o, args1) => { })
+                                        .SetPositiveButton("Edit Info", (o, args1) =>
+                                            {
+                                                var intent = new Intent(this,typeof(CrueltySpotActivity));
+                                                intent.PutExtra(AppConstants.CrueltySpotIdKey, existingPlaceId);
+                                                StartActivity(intent);
+                                            })
+                                        .Show();
+                                }
+                                else
+                                {
+                                    _crueltyReport.UserGeneratedPlace = new UserGeneratedPlace
+                                                                            {
+                                                                                Name = name,
+                                                                                Address = address,
+                                                                                City = city,
+                                                                                StateProvinceAbbreviation = stateAbbreviation,
+                                                                                Zipcode = zipInput,
+                                                                                Email = FindViewById<EditText>(Resource.Id.Email).Text
+                                                                            };
 
-                                                   new AlertDialog.Builder(this)
-                                                    .SetTitle("Cruelty already reported here")
-                                                    .SetMessage("The location you have chosen is already on the cruelty map.")
-                                                    .SetNegativeButton("Cancel", (o, args1) => { })
-                                                    .SetPositiveButton("Edit Info", (o, args1) =>
-                                                    {
-                                                        var intent = new Intent(this, typeof(CrueltySpotActivity));
-                                                        intent.PutExtra(AppConstants.CrueltySpotIdKey, existingPlaceId);
-                                                        StartActivity(intent);
-                                                    })
-                                                    .Show();
-                                               }
-                                               else
-                                               {
-                                                   _crueltyReport.UserGeneratedPlace = new UserGeneratedPlace
-                                                                                {
-                                                                                    Name = name,
-                                                                                    Address = address,
-                                                                                    City = city,
-                                                                                    StateProvinceAbbreviation = stateAbbreviation,
-                                                                                    Zipcode = zipInput,
-                                                                                    Email = FindViewById<EditText>(Resource.Id.Email).Text
-                                                                                };
+                                    CommitCrueltyReport();
+                                    var intent = new Intent(this, typeof(ReportCrueltyActivity));
+                                    StartActivity(intent);
+                                }
+                            });
 
-                                                   CommitCrueltyReport();
-                                                   var intent = new Intent(this, typeof(ReportCrueltyActivity));
-                                                   StartActivity(intent);
-
-                                               }
-                                           }
-                                       };
+                    };
+                };
         }
 
         private bool ValidateInput()

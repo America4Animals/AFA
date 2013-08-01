@@ -6,7 +6,7 @@
     android:minWidth="25px"
     android:minHeight="25px"
     android:background="@color/white">
-    <LinearLayout
+<!-- <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
@@ -55,7 +55,7 @@
                 android:layout_below="@+id/Address" />
         </LinearLayout>
     </LinearLayout>
-<!--<LinearLayout
+<LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"

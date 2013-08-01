@@ -21,10 +21,6 @@ namespace AFA.Android.Service
 {
     public class CrueltySpotCategoriesService
     {
-        private StringBuilder _url;
-
-        public const string RouteBase = "crueltyspotcategories";
-
         public async Task<List<CrueltySpotCategory>> GetAllAsync()
         {
             var query = ParseObject.GetQuery(ParseHelper.CrueltySpotCategoryClassName);
@@ -51,29 +47,6 @@ namespace AFA.Android.Service
         {
             var query = ParseObject.GetQuery(ParseHelper.CrueltySpotCategoryClassName);
             return await query.GetAsync(id);
-        }
-
-        public void GetByIdAsync<T>(int id, Action<T> callback)
-        {
-            _url = new StringBuilder();
-            _url.Append(GetBaseUrl());
-            _url.Append("/");
-            _url.Append(id);
-            _url.AppendJsonFormatQueryStringParam();
-
-            var client = new WebClient();
-            client.DownloadStringCompleted += (sender, args) =>
-            {
-                var response = args.Result;
-                callback(response.FromJson<T>());
-            };
-
-            client.DownloadStringAsync(new Uri(_url.ToString()));
-        }
-
-        private string GetBaseUrl(string route = RouteBase)
-        {
-            return AfaApplication.ServiceBaseUrl + route;
         }
 
         public CrueltySpotCategory ConvertToPoco(ParseObject crueltySpotCategoryParse)
