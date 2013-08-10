@@ -38,19 +38,23 @@ namespace AFA.Android.Service
         public const string StateProvinceAbbreviationField = "stateProvinceAbbreviation";
 
 
-        public async Task<CrueltySpot> GetByIdAsync(string id, bool includeCategory = false)
+        public async Task<CrueltySpot> GetByIdAsync(string id, bool includeCategory)
         {
-            Log.Debug(DebugHelper.LogEntryKey("Entering GetByIdAsync"), id);
-            var query = ParseObject.GetQuery(ParseHelper.CrueltySpotClassName);
+            //var query = ParseObject.GetQuery(ParseHelper.CrueltySpotClassName);
+            //if (includeCategory)
+            //{
+            //    query.Include("crueltySpotCategory");
+            //}
+
+            //var crueltySpotParse = await query.GetAsync(id);
+            //return await ConvertToPoco(crueltySpotParse, includeCategory);
+            var query = new ParseQuery<CrueltySpot>();
             if (includeCategory)
             {
-                query.Include("crueltySpotCategory");
+				query = query.Include("crueltySpotCategory");
             }
-
-            Log.Debug(DebugHelper.LogEntryKey("Before call to get object"), id);
-            var crueltySpotParse = await query.GetAsync(id);
-            Log.Debug(DebugHelper.LogEntryKey("After call to get object"), id);
-            return await ConvertToPoco(crueltySpotParse, includeCategory);
+            var result = await query.GetAsync(id);
+            return result;
         }
 
         //public List<CrueltySpotDto> GetMany(CrueltySpotsDto request)
@@ -74,50 +78,57 @@ namespace AFA.Android.Service
 
         public async Task<List<CrueltySpot>> GetMany(CrueltySpot request, bool retrieveCategoryTypes)
         {
-            //var query = ParseObject.GetQuery(ParseHelper.CrueltySpotClassName);
+//            //var query = ParseObject.GetQuery(ParseHelper.CrueltySpotClassName);
 
-//            if (!String.IsNullOrEmpty(request.Name))
+////            if (!String.IsNullOrEmpty(request.Name))
+////            {
+////                query.WhereEqualTo(NameField, request.Name);
+////            }
+////
+////            if (!string.IsNullOrEmpty(request.City))
+////            {
+////                query.WhereEqualTo(CityField, request.City);
+////            }
+////
+////            if (!string.IsNullOrEmpty(request.StateProvinceAbbreviation))
+////            {
+////                query.WhereEqualTo(StateProvinceAbbreviationField, request.StateProvinceAbbreviation);
+////            }
+
+////			var query = ParseObject.GetQuery(ParseHelper.CrueltySpotClassName)
+////				.WhereEqualTo(NameField, request.Name)
+////				.WhereEqualTo(CityField, request.City)
+////				.WhereEqualTo(StateProvinceAbbreviationField, request.StateProvinceAbbreviation);
+
+////			var query = from crueltySpot in ParseObject.GetQuery(ParseHelper.CrueltySpotClassName)
+////				where crueltySpot.Get<string>(NameField).ToLower().Equals(request.Name.ToLower())
+////					&& crueltySpot.Get<string>(CityField).ToLower().Equals(request.City.ToLower())
+////					&& crueltySpot.Get<string>(StateProvinceAbbreviationField).ToLower().Equals(request.StateProvinceAbbreviation.ToLower())
+////					select crueltySpot;
+
+//            var query = from crueltySpot in ParseObject.GetQuery(ParseHelper.CrueltySpotClassName)
+//                where crueltySpot.Get<string>(NameField).Equals(request.Name)
+//                    && crueltySpot.Get<string>(CityField).Equals(request.City)
+//                    && crueltySpot.Get<string>(StateProvinceAbbreviationField).Equals(request.StateProvinceAbbreviation)
+//                    select crueltySpot;
+
+//            var crueltySpotsParse = await query.FindAsync();
+
+//            var crueltySpots = new List<CrueltySpot>();
+//            foreach (var crueltySpotParse in crueltySpotsParse)
 //            {
-//                query.WhereEqualTo(NameField, request.Name);
-//            }
-//
-//            if (!string.IsNullOrEmpty(request.City))
-//            {
-//                query.WhereEqualTo(CityField, request.City);
-//            }
-//
-//            if (!string.IsNullOrEmpty(request.StateProvinceAbbreviation))
-//            {
-//                query.WhereEqualTo(StateProvinceAbbreviationField, request.StateProvinceAbbreviation);
+//                var crueltySpot = await ConvertToPoco(crueltySpotParse, retrieveCategoryTypes);
+//                crueltySpots.Add(crueltySpot);
 //            }
 
-//			var query = ParseObject.GetQuery(ParseHelper.CrueltySpotClassName)
-//				.WhereEqualTo(NameField, request.Name)
-//				.WhereEqualTo(CityField, request.City)
-//				.WhereEqualTo(StateProvinceAbbreviationField, request.StateProvinceAbbreviation);
+//            return crueltySpots;
 
-//			var query = from crueltySpot in ParseObject.GetQuery(ParseHelper.CrueltySpotClassName)
-//				where crueltySpot.Get<string>(NameField).ToLower().Equals(request.Name.ToLower())
-//					&& crueltySpot.Get<string>(CityField).ToLower().Equals(request.City.ToLower())
-//					&& crueltySpot.Get<string>(StateProvinceAbbreviationField).ToLower().Equals(request.StateProvinceAbbreviation.ToLower())
-//					select crueltySpot;
-
-			var query = from crueltySpot in ParseObject.GetQuery(ParseHelper.CrueltySpotClassName)
-				where crueltySpot.Get<string>(NameField).Equals(request.Name)
-					&& crueltySpot.Get<string>(CityField).Equals(request.City)
-					&& crueltySpot.Get<string>(StateProvinceAbbreviationField).Equals(request.StateProvinceAbbreviation)
-					select crueltySpot;
-
-            var crueltySpotsParse = await query.FindAsync();
-
-            var crueltySpots = new List<CrueltySpot>();
-            foreach (var crueltySpotParse in crueltySpotsParse)
-            {
-                var crueltySpot = await ConvertToPoco(crueltySpotParse, retrieveCategoryTypes);
-                crueltySpots.Add(crueltySpot);
-            }
-
-            return crueltySpots;
+            var query = new ParseQuery<CrueltySpot>()
+                .WhereEqualTo(NameField, request.Name)
+                .WhereEqualTo(CityField, request.City)
+                .WhereEqualTo(StateProvinceAbbreviationField, request.StateProvinceAbbreviation);
+            var results = await query.FindAsync();
+            return results.ToList();
         }
 
         public void GetManyAsync<T>(CrueltySpotsDto request, Action<T> callback)
@@ -131,7 +142,7 @@ namespace AFA.Android.Service
             _url.AppendQueryStringParam(SortByParamKey, request.SortBy);
             _url.AppendQueryStringParam(SortOrderParamKey, request.SortOrder);
             _url.AppendJsonFormatQueryStringParam();
-			//Log.Debug ("URL: ", _url.ToString());
+            //Log.Debug ("URL: ", _url.ToString());
 
             client.DownloadStringCompleted += (sender, args) =>
             {
@@ -142,41 +153,52 @@ namespace AFA.Android.Service
             client.DownloadStringAsync(new Uri(_url.ToString()));
         }
 
-        
 
-        public void GetAllAsync<T>(Action<T> callback)
-        {
-            var client = new WebClient();
-            //var url = String.Format("{0}{1}{2}", AfaApplication.ServiceBaseUrl, RouteBase, AfaApplication.ServiceJsonContentTypeSuffix);
-            _url = new StringBuilder();
-            _url.Append(GetBaseUrl());
-            _url.AppendJsonFormatQueryStringParam();
 
-            client.DownloadStringCompleted += (sender, args) =>
-            {
-                var response = args.Result;
-                callback(response.FromJson<T>());
-            };
-            client.DownloadStringAsync(new Uri(_url.ToString()));
-        }
+        //public void GetAllAsync<T>(Action<T> callback)
+        //{
+        //    var client = new WebClient();
+        //    var url = String.Format("{0}{1}{2}", AfaApplication.ServiceBaseUrl, RouteBase, AfaApplication.ServiceJsonContentTypeSuffix);
+        //    _url = new StringBuilder();
+        //    _url.Append(GetBaseUrl());
+        //    _url.AppendJsonFormatQueryStringParam();
+
+        //    client.DownloadStringCompleted += (sender, args) =>
+        //    {
+        //        var response = args.Result;
+        //        callback(response.FromJson<T>());
+        //    };
+        //    client.DownloadStringAsync(new Uri(_url.ToString()));
+        //}
 
 		public async Task<List<CrueltySpot>> GetAllAsync(bool retrieveCategoryTypes)
         {
-            var query = ParseObject.GetQuery(ParseHelper.CrueltySpotClassName);
-			if (retrieveCategoryTypes) {
-				query.Include ("crueltySpotCategory");
-			}
+            //var query = ParseObject.GetQuery(ParseHelper.CrueltySpotClassName);
+            //if (retrieveCategoryTypes) {
+            //    query.Include ("crueltySpotCategory");
+            //}
 
-            IEnumerable<ParseObject> crueltySpotsParse = await query.FindAsync();
+            //IEnumerable<ParseObject> crueltySpotsParse = await query.FindAsync();
 
-            var crueltySpots = new List<CrueltySpot>();
-            foreach (var crueltySpotParse in crueltySpotsParse)
+            //var crueltySpots = new List<CrueltySpot>();
+            //foreach (var crueltySpotParse in crueltySpotsParse)
+            //{
+            //    var crueltySpot = await ConvertToPoco(crueltySpotParse, retrieveCategoryTypes);
+            //    crueltySpots.Add(crueltySpot);
+            //}
+
+            //return crueltySpots;
+
+		    //var query = new ParseQuery<CrueltySpot>().Include("crueltySpotCategory");
+			var query = new ParseQuery<CrueltySpot> ();
+            
+            if (retrieveCategoryTypes)
             {
-                var crueltySpot = await ConvertToPoco(crueltySpotParse, retrieveCategoryTypes);
-                crueltySpots.Add(crueltySpot);
+				query = query.Include("crueltySpotCategory");
             }
 
-            return crueltySpots;
+		    var result = await query.FindAsync();
+		    return result.ToList();
         }
 
         public void GetAllGooglePlacesAsync(Action<CrueltySpotsGooglePlacesResponse> callback)
@@ -216,25 +238,30 @@ namespace AFA.Android.Service
 
         public async Task<string> SaveAsync(CrueltySpot crueltySpot)
         {
-            var crueltySpotCategoriesService = new CrueltySpotCategoriesService();
-            //var crueltySpotCategoryParse = await crueltySpotCategoriesService.GetParseObjectByIdAsync(crueltySpot.CrueltySpotCategoryId);
-            var crueltySpotParse = new ParseObject(ParseHelper.CrueltySpotClassName);
-            crueltySpotParse[NameField] = crueltySpot.Name;
-            crueltySpotParse["description"] = crueltySpot.Description;
-            crueltySpotParse["address"] = crueltySpot.Address;
-            crueltySpotParse[CityField] = crueltySpot.City;
-            crueltySpotParse[StateProvinceAbbreviationField] = crueltySpot.StateProvinceAbbreviation;
-            crueltySpotParse["zipcode"] = crueltySpot.Zipcode;
-            crueltySpotParse["phoneNumber"] = crueltySpot.PhoneNumber;
-            crueltySpotParse["email"] = crueltySpot.Email;
-            crueltySpotParse["webpageUrl"] = crueltySpot.WebpageUrl;
-            crueltySpotParse["location"] = new ParseGeoPoint(crueltySpot.Latitude, crueltySpot.Longitude);
-            crueltySpotParse["googlePlaceId"] = crueltySpot.GooglePlaceId;
-            crueltySpotParse["nonGooglePlaceAddressHash"] = crueltySpot.NonGooglePlaceAddressHash;
-            //crueltySpotParse["crueltySpotCategory"] = crueltySpotCategoryParse;
-            crueltySpotParse["crueltySpotCategory"] = ParseObject.CreateWithoutData(ParseHelper.CrueltySpotCategoryClassName, crueltySpot.CrueltySpotCategoryId);
-            await crueltySpotParse.SaveAsync();
-            return crueltySpotParse.ObjectId;
+            //var crueltySpotCategoriesService = new CrueltySpotCategoriesService();
+            ////var crueltySpotCategoryParse = await crueltySpotCategoriesService.GetParseObjectByIdAsync(crueltySpot.CrueltySpotCategoryId);
+            //var crueltySpotParse = new ParseObject(ParseHelper.CrueltySpotClassName);
+            //crueltySpotParse[NameField] = crueltySpot.Name;
+            //crueltySpotParse["description"] = crueltySpot.Description;
+            //crueltySpotParse["address"] = crueltySpot.Address;
+            //crueltySpotParse[CityField] = crueltySpot.City;
+            //crueltySpotParse[StateProvinceAbbreviationField] = crueltySpot.StateProvinceAbbreviation;
+            //crueltySpotParse["zipcode"] = crueltySpot.Zipcode;
+            //crueltySpotParse["phoneNumber"] = crueltySpot.PhoneNumber;
+            //crueltySpotParse["email"] = crueltySpot.Email;
+            //crueltySpotParse["webpageUrl"] = crueltySpot.WebpageUrl;
+            //crueltySpotParse["location"] = new ParseGeoPoint(crueltySpot.Latitude, crueltySpot.Longitude);
+            //crueltySpotParse["googlePlaceId"] = crueltySpot.GooglePlaceId;
+            //crueltySpotParse["nonGooglePlaceAddressHash"] = crueltySpot.NonGooglePlaceAddressHash;
+            ////crueltySpotParse["crueltySpotCategory"] = crueltySpotCategoryParse;
+            //crueltySpotParse["crueltySpotCategory"] = ParseObject.CreateWithoutData(ParseHelper.CrueltySpotCategoryClassName, crueltySpot.CrueltySpotCategoryId);
+            //await crueltySpotParse.SaveAsync();
+            //return crueltySpotParse.ObjectId;
+
+            crueltySpot.Location = new ParseGeoPoint(crueltySpot.Latitude, crueltySpot.Longitude);
+            //crueltySpot.CrueltySpotCategory = ParseObject.CreateWithoutData<CrueltySpotCategory>(crueltySpot.CrueltySpotCategoryId);
+            await crueltySpot.SaveAsync();
+            return crueltySpot.ObjectId;
         }
 
         private string GetBaseUrl(string route = RouteBase)
@@ -242,62 +269,63 @@ namespace AFA.Android.Service
             return AfaApplication.ServiceBaseUrl + route;
         }
 
-        private async Task<CrueltySpot> ConvertToPoco(ParseObject crueltySpotParse, bool retrieveCategoryTypes)
-        {
-            var crueltySpot = new CrueltySpot();
-            crueltySpot.Id = crueltySpotParse.ObjectId;
+        //private async Task<CrueltySpot> ConvertToPoco(ParseObject crueltySpotParse, bool retrieveCategoryTypes)
+        //{
+        //    var crueltySpot = new CrueltySpot();
+        //    crueltySpot.Id = crueltySpotParse.ObjectId;
 
-            string name;
-            string description;
-            string address;
-            string city;
-            string stateProvinceAbbreviation;
-            string zipcode;
-            string phoneNumber;
-            string email;
-            string webpageUrl;
-            string googlePlaceId;
-            string nonGooglePlaceAddressHash;
+        //    string name;
+        //    string description;
+        //    string address;
+        //    string city;
+        //    string stateProvinceAbbreviation;
+        //    string zipcode;
+        //    string phoneNumber;
+        //    string email;
+        //    string webpageUrl;
+        //    string googlePlaceId;
+        //    string nonGooglePlaceAddressHash;
 
-            crueltySpotParse.TryGetValue(NameField, out name);
-            crueltySpotParse.TryGetValue("description", out description);
-            crueltySpotParse.TryGetValue("address", out address);
-            crueltySpotParse.TryGetValue(CityField, out city);
-            crueltySpotParse.TryGetValue(StateProvinceAbbreviationField, out stateProvinceAbbreviation);
-            crueltySpotParse.TryGetValue("zipcode", out zipcode);
-            crueltySpotParse.TryGetValue("phoneNumber", out phoneNumber);
-            crueltySpotParse.TryGetValue("email", out email);
-            crueltySpotParse.TryGetValue("webpageUrl", out webpageUrl);
-            crueltySpotParse.TryGetValue("googlePlaceId", out googlePlaceId);
-            crueltySpotParse.TryGetValue("nonGooglePlaceAddressHash", out nonGooglePlaceAddressHash);
+        //    crueltySpotParse.TryGetValue(NameField, out name);
+        //    crueltySpotParse.TryGetValue("description", out description);
+        //    crueltySpotParse.TryGetValue("address", out address);
+        //    crueltySpotParse.TryGetValue(CityField, out city);
+        //    crueltySpotParse.TryGetValue(StateProvinceAbbreviationField, out stateProvinceAbbreviation);
+        //    crueltySpotParse.TryGetValue("zipcode", out zipcode);
+        //    crueltySpotParse.TryGetValue("phoneNumber", out phoneNumber);
+        //    crueltySpotParse.TryGetValue("email", out email);
+        //    crueltySpotParse.TryGetValue("webpageUrl", out webpageUrl);
+        //    crueltySpotParse.TryGetValue("googlePlaceId", out googlePlaceId);
+        //    crueltySpotParse.TryGetValue("nonGooglePlaceAddressHash", out nonGooglePlaceAddressHash);
 
-            var parseGeoPoint = crueltySpotParse.Get<ParseGeoPoint>("location");
-            crueltySpot.Latitude = parseGeoPoint.Latitude;
-            crueltySpot.Longitude = parseGeoPoint.Longitude;
+        //    var parseGeoPoint = crueltySpotParse.Get<ParseGeoPoint>("location");
+        //    crueltySpot.Latitude = parseGeoPoint.Latitude;
+        //    crueltySpot.Longitude = parseGeoPoint.Longitude;
 
-            crueltySpot.Name = name;
-            crueltySpot.Description = description;
-            crueltySpot.Address = address;
-            crueltySpot.City = city;
-            crueltySpot.StateProvinceAbbreviation = stateProvinceAbbreviation;
-            crueltySpot.Zipcode = zipcode;
-            crueltySpot.PhoneNumber = phoneNumber;
-            crueltySpot.Email = email;
-            crueltySpot.WebpageUrl = webpageUrl;
-            crueltySpot.GooglePlaceId = googlePlaceId;
-            crueltySpot.NonGooglePlaceAddressHash = nonGooglePlaceAddressHash;
+        //    crueltySpot.Name = name;
+        //    crueltySpot.Description = description;
+        //    crueltySpot.Address = address;
+        //    crueltySpot.City = city;
+        //    crueltySpot.StateProvinceAbbreviation = stateProvinceAbbreviation;
+        //    crueltySpot.Zipcode = zipcode;
+        //    crueltySpot.PhoneNumber = phoneNumber;
+        //    crueltySpot.Email = email;
+        //    crueltySpot.WebpageUrl = webpageUrl;
+        //    crueltySpot.GooglePlaceId = googlePlaceId;
+        //    crueltySpot.NonGooglePlaceAddressHash = nonGooglePlaceAddressHash;
 
-            if (retrieveCategoryTypes)
-            {
-                var crueltySpotCategoriesService = new CrueltySpotCategoriesService();
-                var crueltySpotCategoryParse = crueltySpotParse.Get<ParseObject>("crueltySpotCategory");
-                await crueltySpotCategoryParse.FetchIfNeededAsync();
-                crueltySpot.CrueltySpotCategory = crueltySpotCategoriesService.ConvertToPoco(crueltySpotCategoryParse);
-				crueltySpot.CrueltySpotCategoryId = crueltySpot.CrueltySpotCategory.Id;
-            }
+        //    if (retrieveCategoryTypes)
+        //    {
+        //        var crueltySpotCategoriesService = new CrueltySpotCategoriesService();
+        //        var crueltySpotCategoryParse = crueltySpotParse.Get<ParseObject>("crueltySpotCategory");
+        //        await crueltySpotCategoryParse.FetchIfNeededAsync();
+        //        //crueltySpot.CrueltySpotCategory = crueltySpotCategoriesService.ConvertToPoco(crueltySpotCategoryParse);
+        //        //crueltySpot.CrueltySpotCategoryId = crueltySpot.CrueltySpotCategory.Id;
+        //        crueltySpot.CrueltySpotCategoryId = crueltySpot.CrueltySpotCategory.ObjectId;
+        //    }
 
-            return crueltySpot;
-        }
+        //    return crueltySpot;
+        //}
 
     }
 }

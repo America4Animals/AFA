@@ -37,6 +37,9 @@
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
+    <Reference Include="Parse.Android">
+      <HintPath>..\packages\Parse.Android\Parse.Android.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Common">
       <HintPath>..\packages\ServiceStack.Common.MonoDroid\ServiceStack.Common.dll</HintPath>
     </Reference>

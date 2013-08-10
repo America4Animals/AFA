@@ -9,35 +9,123 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Parse;
 
 namespace AFA.Android.Library.ServiceModel
 {
-    public class CrueltySpot
+    [ParseClassName("CrueltySpot")]
+    public class CrueltySpot : ParseObject
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
-        //public string StateProvinceId { get; set; }
-        //public string StateProvinceName { get; set; }
-        public string StateProvinceAbbreviation { get; set; }
-        public string Zipcode { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Email { get; set; }
-        public string WebpageUrl { get; set; }
+        //public string Id { get; set; }
 
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        [ParseFieldName("name")]
+        public string Name
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
 
-        public string GooglePlaceId { get; set; }
-        public string NonGooglePlaceAddressHash { get; set; }
+        [ParseFieldName("description")]
+        public string Description
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
 
-        public CrueltySpotCategory CrueltySpotCategory { get; set; }
+        [ParseFieldName("address")]
+        public string Address
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
 
-        public string CrueltySpotCategoryId { get; set; }
-        //public string CrueltySpotCategoryName { get; set; }
-        //public string CrueltySpotCategoryIconName { get; set; }
+        [ParseFieldName("city")]
+        public string City
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+
+        [ParseFieldName("stateProvinceAbbreviation")]
+        public string StateProvinceAbbreviation
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+
+        [ParseFieldName("zipcode")]
+        public string Zipcode
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+
+        [ParseFieldName("phoneNumber")]
+        public string PhoneNumber
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+
+        [ParseFieldName("email")]
+        public string Email
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+
+        [ParseFieldName("webpageUrl")]
+        public string WebpageUrl
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+		
+        public double Latitude
+        {
+			get { return Location.Latitude; }
+        }
+		
+        public double Longitude
+        {
+			get { return Location.Longitude; }
+        }
+
+        [ParseFieldName("googlePlaceId")]
+        public string GooglePlaceId
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+
+        [ParseFieldName("nonGooglePlaceAddressHash")]
+        public string NonGooglePlaceAddressHash
+        {
+            get { return GetProperty<string>(); }
+            set { SetProperty(value); }
+        }
+
+        [ParseFieldName("crueltySpotCategory")]
+        public CrueltySpotCategory CrueltySpotCategory
+        {
+            get { return GetProperty<CrueltySpotCategory>(); }
+            set { SetProperty(value); }
+        }
+
+        [ParseFieldName("location")]
+        public ParseGeoPoint Location
+        {
+            get { return GetProperty<ParseGeoPoint>(); }
+            set { SetProperty(value); }
+        }
+
+		public string CrueltySpotCategoryId 
+		{ 
+			get 
+			{
+				return CrueltySpotCategory == null ? "0" : CrueltySpotCategory.ObjectId;
+			} 
+		}
 
         public string CityAndState
         {

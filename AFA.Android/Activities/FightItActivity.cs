@@ -43,7 +43,8 @@ namespace AFA.Android.Activities
             _crueltySpotsList.ItemClick += (sender, e) =>
             {
                 var crueltySpot = _crueltySpots[e.Position];
-                NavigateToCrueltySpotDetails(crueltySpot.Id);
+                //NavigateToCrueltySpotDetails(crueltySpot.Id);
+                NavigateToCrueltySpotDetails(crueltySpot.ObjectId);
             };
             
             //var crueltySpotsService = new CrueltySpotsService();
@@ -115,15 +116,20 @@ namespace AFA.Android.Activities
                 //    _crueltySpotsList.Adapter =
                 //        new CrueltySpotsAdapter(this, _otherCrueltySpots.ToList());
                 //}
-                _crueltySpots = allCrueltySpots;
-                _crueltySpotsList.Adapter = new CrueltySpotsAdapter(this, _crueltySpots);
+
+				RunOnUiThread (() => {
+					_crueltySpots = allCrueltySpots;
+					_crueltySpotsList.Adapter = new CrueltySpotsAdapter(this, _crueltySpots);
+					_loadingDialog.Hide();
+				});
+               
             }
             else
             {
                 // ToDo: Handle case where there are no cruelty spots
             }
 
-            _loadingDialog.Hide();
+           
         }
 
         private void NavigateToCrueltySpotDetails(string crueltySpotId)

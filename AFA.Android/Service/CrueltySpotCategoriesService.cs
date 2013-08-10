@@ -23,17 +23,21 @@ namespace AFA.Android.Service
     {
         public async Task<List<CrueltySpotCategory>> GetAllAsync()
         {
-            var query = ParseObject.GetQuery(ParseHelper.CrueltySpotCategoryClassName);
-            IEnumerable<ParseObject> crueltySpotCategoriesParse = await query.FindAsync();
+            //var query = ParseObject.GetQuery(ParseHelper.CrueltySpotCategoryClassName);
+            //IEnumerable<ParseObject> crueltySpotCategoriesParse = await query.FindAsync();
 
-            var crueltySpotCategories = new List<CrueltySpotCategory>();
-            foreach (var crueltySpotCategoryParse in crueltySpotCategoriesParse)
-            {
-                var crueltySpotCategory = ConvertToPoco(crueltySpotCategoryParse);
-                crueltySpotCategories.Add(crueltySpotCategory);
-            }
+            //var crueltySpotCategories = new List<CrueltySpotCategory>();
+            //foreach (var crueltySpotCategoryParse in crueltySpotCategoriesParse)
+            //{
+            //    var crueltySpotCategory = ConvertToPoco(crueltySpotCategoryParse);
+            //    crueltySpotCategories.Add(crueltySpotCategory);
+            //}
 
-            return crueltySpotCategories;
+            //return crueltySpotCategories;
+
+            var query = new ParseQuery<CrueltySpotCategory>();
+            var result = await query.FindAsync();
+            return result.ToList();
         }
 
         public async Task<CrueltySpotCategory> GetByIdAsync(string id)
@@ -41,18 +45,22 @@ namespace AFA.Android.Service
             var query = ParseObject.GetQuery(ParseHelper.CrueltySpotCategoryClassName);
             var crueltySpotCategoryParse = await query.GetAsync(id);
             return ConvertToPoco(crueltySpotCategoryParse);
+
+            //var query = new ParseQuery<CrueltySpotCategory>();
+            //var result = await query.GetAsync(id);
+            //return result;
         }
 
-        public async Task<ParseObject> GetParseObjectByIdAsync(string id)
-        {
-            var query = ParseObject.GetQuery(ParseHelper.CrueltySpotCategoryClassName);
-            return await query.GetAsync(id);
-        }
+        //public async Task<ParseObject> GetParseObjectByIdAsync(string id)
+        //{
+        //    var query = ParseObject.GetQuery(ParseHelper.CrueltySpotCategoryClassName);
+        //    return await query.GetAsync(id);
+        //}
 
         public CrueltySpotCategory ConvertToPoco(ParseObject crueltySpotCategoryParse)
         {
             var crueltySpotCategory = new CrueltySpotCategory();
-            crueltySpotCategory.Id = crueltySpotCategoryParse.ObjectId;
+            //crueltySpotCategory.Id = crueltySpotCategoryParse.ObjectId;
             string name;
             string description;
             string iconName;

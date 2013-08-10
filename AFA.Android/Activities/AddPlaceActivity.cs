@@ -123,7 +123,8 @@ namespace AFA.Android.Activities
                             {
                                 if (crueltySpots.Any())
                                 {
-                                    var existingPlaceId = crueltySpots.First().Id;
+                                    //var existingPlaceId = crueltySpots.First().Id;
+                                    var existingPlaceId = crueltySpots.First().ObjectId;
 
                                     new AlertDialog.Builder(this)
                                         .SetTitle("Cruelty already reported here")

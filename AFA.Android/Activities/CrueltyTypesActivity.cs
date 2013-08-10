@@ -15,6 +15,7 @@ using Android.Views;
 using Android.Widget;
 using AFA.Android.Library;
 using AFA.Android.Service;
+using Parse;
 
 namespace AFA.Android.Activities
 {
@@ -39,7 +40,8 @@ namespace AFA.Android.Activities
                 var crueltySpotCategory = _crueltySpotCategories[e.Position];
                 var intent = new Intent(this, typeof(ReportCrueltyActivity));
                 var crueltyType = new CrueltyType();
-                crueltyType.Id = crueltySpotCategory.Id;
+                //crueltyType.Id = crueltySpotCategory.Id;
+                crueltyType.Id = crueltySpotCategory.ObjectId;
                 crueltyType.Name = crueltySpotCategory.Name;
                 _crueltyReport.CrueltyType = crueltyType;
                 CommitCrueltyReport();
@@ -49,9 +51,31 @@ namespace AFA.Android.Activities
             var crueltySpotCategoriesService = new CrueltySpotCategoriesService();
 
             var crueltySpotCategories = await crueltySpotCategoriesService.GetAllAsync();
-            _crueltySpotCategories = crueltySpotCategories.ToList();
-            _crueltySpotCategoriesList.Adapter = new CrueltyTypesAdapter(this, _crueltySpotCategories);
-            _loadingDialog.Hide();
+            RunOnUiThread(() =>
+                {
+                    _crueltySpotCategories = crueltySpotCategories;
+                    _crueltySpotCategoriesList.Adapter = new CrueltyTypesAdapter(this, _crueltySpotCategories);
+                    _loadingDialog.Hide();
+                });
+
+			/*SetContentView (Resource.Layout.Test);
+			var textView = FindViewById<TextView> (Resource.Id.textView1);
+			var query = new ParseQuery<CrueltySpotCategory> ();
+			var result = await query.FindAsync ();
+			var output = "";
+			foreach (var crueltySpotCategory in result) {
+				output += "Name: " + crueltySpotCategory.Name;
+				output += "\n";
+				output += "Description: " + crueltySpotCategory.Description;
+				output += "\n";
+				output += "Icon: " + crueltySpotCategory.IconName;
+				output += "\n";
+			}
+
+			RunOnUiThread (() => {
+				textView.Text = output;
+			});*/
+            
         }
     }
 }

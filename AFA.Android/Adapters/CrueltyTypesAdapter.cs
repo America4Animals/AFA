@@ -17,23 +17,23 @@ namespace AFA.Android
     class CrueltyTypesAdapter : BaseAdapter<CrueltySpotCategory>
     {
         private readonly Activity _context;
-        private readonly IList<CrueltySpotCategory> _crueltySpotCategorieses;
+        private readonly IList<CrueltySpotCategory> _crueltySpotCategories;
 
 
         public CrueltyTypesAdapter(Activity context, IList<CrueltySpotCategory> crueltySpotCategories)
         {
             _context = context;
-            _crueltySpotCategorieses = crueltySpotCategories;
+            _crueltySpotCategories = crueltySpotCategories;
         }
 
         public override CrueltySpotCategory this[int position]
         {
-            get { return _crueltySpotCategorieses[position]; }
+            get { return _crueltySpotCategories[position]; }
         }
 
         public override int Count
         {
-            get { return _crueltySpotCategorieses.Count; }
+            get { return _crueltySpotCategories.Count; }
         }
 
         public override long GetItemId(int position)
@@ -46,7 +46,7 @@ namespace AFA.Android
         {
             var view = convertView ?? _context.LayoutInflater.Inflate(Resource.Layout.CrueltyTypeListItem, null);
 
-            var crueltySpotCategory = _crueltySpotCategorieses[position];
+            var crueltySpotCategory = _crueltySpotCategories[position];
             view.FindViewById<TextView>(Resource.Id.Name).Text = crueltySpotCategory.Name;
             var resourceId = _context.Resources.GetIdentifier(crueltySpotCategory.IconName.Replace(".png", ""), "drawable",
                                                               _context.PackageName);
