@@ -109,14 +109,12 @@ namespace AFA.Android.Activities
                         var stateAbbreviation = stateInput.Length == 2 ? stateInput : StateNamesAndAbbreviations.StateAbbreviationLookup[stateInput];
 
                         var crueltySpotsService = new CrueltySpotsService();
-                        var crueltySpots = await crueltySpotsService.GetMany(new CrueltySpot
+                        var crueltySpots = await crueltySpotsService.GetManyAsync(new CrueltySpot
                                                                            {
                                                                                Name = name,
                                                                                City = city,
-                                                                               StateProvinceAbbreviation
-                                                                                   =
-                                                                                   stateAbbreviation
-                                                                           }, false);
+                                                                               StateProvinceAbbreviation = stateAbbreviation
+                                                                           }, false, CrueltySpotSortField.CreatedAt, SortDirection.Asc);
 
                         RunOnUiThread(()
                             =>

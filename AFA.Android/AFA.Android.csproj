@@ -71,7 +71,9 @@
     <Compile Include="AfaApplication.cs" />
     <Compile Include="Activities\EventsActivity.cs" />
     <Compile Include="Adapters\CrueltyTypesAdapter.cs" />
+    <Compile Include="Service\CrueltySpotSortField.cs" />
     <Compile Include="Service\ParseHelper.cs" />
+    <Compile Include="Service\SortDirection.cs" />
     <Compile Include="Utility\CrueltyType.cs" />
     <Compile Include="Utility\DebugHelper.cs" />
     <Compile Include="Utility\GooglePlace.cs" />

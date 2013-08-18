@@ -23,18 +23,6 @@ namespace AFA.Android.Service
     {
         public async Task<List<CrueltySpotCategory>> GetAllAsync()
         {
-            //var query = ParseObject.GetQuery(ParseHelper.CrueltySpotCategoryClassName);
-            //IEnumerable<ParseObject> crueltySpotCategoriesParse = await query.FindAsync();
-
-            //var crueltySpotCategories = new List<CrueltySpotCategory>();
-            //foreach (var crueltySpotCategoryParse in crueltySpotCategoriesParse)
-            //{
-            //    var crueltySpotCategory = ConvertToPoco(crueltySpotCategoryParse);
-            //    crueltySpotCategories.Add(crueltySpotCategory);
-            //}
-
-            //return crueltySpotCategories;
-
             var query = new ParseQuery<CrueltySpotCategory>();
             var result = await query.FindAsync();
             return result.ToList();
@@ -42,13 +30,13 @@ namespace AFA.Android.Service
 
         public async Task<CrueltySpotCategory> GetByIdAsync(string id)
         {
-            var query = ParseObject.GetQuery(ParseHelper.CrueltySpotCategoryClassName);
-            var crueltySpotCategoryParse = await query.GetAsync(id);
-            return ConvertToPoco(crueltySpotCategoryParse);
+            //var query = ParseObject.GetQuery(ParseHelper.CrueltySpotCategoryClassName);
+            //var crueltySpotCategoryParse = await query.GetAsync(id);
+            //return ConvertToPoco(crueltySpotCategoryParse);
 
-            //var query = new ParseQuery<CrueltySpotCategory>();
-            //var result = await query.GetAsync(id);
-            //return result;
+            var query = new ParseQuery<CrueltySpotCategory>();
+            var result = await query.GetAsync(id);
+            return result;
         }
 
         //public async Task<ParseObject> GetParseObjectByIdAsync(string id)
@@ -57,20 +45,20 @@ namespace AFA.Android.Service
         //    return await query.GetAsync(id);
         //}
 
-        public CrueltySpotCategory ConvertToPoco(ParseObject crueltySpotCategoryParse)
-        {
-            var crueltySpotCategory = new CrueltySpotCategory();
-            //crueltySpotCategory.Id = crueltySpotCategoryParse.ObjectId;
-            string name;
-            string description;
-            string iconName;
-            crueltySpotCategoryParse.TryGetValue("name", out name);
-            crueltySpotCategoryParse.TryGetValue("description", out description);
-            crueltySpotCategoryParse.TryGetValue("iconName", out iconName);
-            crueltySpotCategory.Name = name;
-            crueltySpotCategory.Description = description;
-            crueltySpotCategory.IconName = iconName;
-            return crueltySpotCategory;
-        }
+        //public CrueltySpotCategory ConvertToPoco(ParseObject crueltySpotCategoryParse)
+        //{
+        //    var crueltySpotCategory = new CrueltySpotCategory();
+        //    //crueltySpotCategory.Id = crueltySpotCategoryParse.ObjectId;
+        //    string name;
+        //    string description;
+        //    string iconName;
+        //    crueltySpotCategoryParse.TryGetValue("name", out name);
+        //    crueltySpotCategoryParse.TryGetValue("description", out description);
+        //    crueltySpotCategoryParse.TryGetValue("iconName", out iconName);
+        //    crueltySpotCategory.Name = name;
+        //    crueltySpotCategory.Description = description;
+        //    crueltySpotCategory.IconName = iconName;
+        //    return crueltySpotCategory;
+        //}
     }
 }
