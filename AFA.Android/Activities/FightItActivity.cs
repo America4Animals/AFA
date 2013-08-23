@@ -6,7 +6,6 @@ using AFA.Android.Adapters;
 using AFA.Android.Helpers;
 using AFA.Android.Library.ServiceModel;
 using AFA.Android.Service;
-using AFA.ServiceModel.DTOs;
 using Android.App;
 using Android.Content;
 using Android.OS;

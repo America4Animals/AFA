@@ -9,7 +9,6 @@ using Android.Text;
 using Android.Text.Style;
 using AFA.Android.Helpers;
 using AFA_Android.Helpers;
-using AFA.ServiceModel.DTOs;
 using AFA.Android.Service;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;

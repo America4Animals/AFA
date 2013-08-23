@@ -12,17 +12,17 @@ using Android.Widget;
 
 namespace AFA.Android
 {
-    //[Activity(Label = "Events", MainLauncher = true, Icon = "@drawable/icon")]
-    [Activity(Label = "Events")]
-    public class EventsActivity : Activity
-    {
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
+    ////[Activity(Label = "Events", MainLauncher = true, Icon = "@drawable/icon")]
+    //[Activity(Label = "Events")]
+    //public class EventsActivity : Activity
+    //{
+    //    protected override void OnCreate(Bundle bundle)
+    //    {
+    //        base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.Events);
+    //        SetContentView(Resource.Layout.Events);
 
-            CompassionHelper.InitCompassionMenu(this, true);
-        }
-    }
+    //        CompassionHelper.InitCompassionMenu(this, true);
+    //    }
+    //}
 }

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using AFA.Android.Helpers;
 using AFA.Android.Library.ServiceModel;
 using AFA.Android.Utility;
-using AFA.ServiceModel.DTOs;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -16,7 +15,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Parse;
-using ServiceStack.Text;
+//using ServiceStack.Text;
 
 namespace AFA.Android.Service
 {

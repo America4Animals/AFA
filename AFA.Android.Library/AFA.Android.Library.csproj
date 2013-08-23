@@ -40,21 +40,6 @@
     <Reference Include="Parse.Android">
       <HintPath>..\packages\Parse.Android\Parse.Android.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Common">
-      <HintPath>..\packages\ServiceStack.Common.MonoDroid\ServiceStack.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\packages\ServiceStack.Common.MonoDroid\ServiceStack.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.OrmLite">
-      <HintPath>..\packages\ServiceStack.OrmLite.SqlServer.3.9.32\lib\ServiceStack.OrmLite.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.OrmLite.SqlServer">
-      <HintPath>..\packages\ServiceStack.OrmLite.SqlServer.3.9.32\lib\ServiceStack.OrmLite.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>..\packages\ServiceStack.Common.MonoDroid\ServiceStack.Text.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -62,28 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AFA.ServiceModel\DTOs\CrueltySpotDto.cs">
-      <Link>ServiceModel\DTOs\CrueltySpotDto.cs</Link>
-    </Compile>
-    <Compile Include="..\AFA.ServiceModel\DTOs\EventDto.cs">
-      <Link>ServiceModel\DTOs\EventDto.cs</Link>
-    </Compile>
-    <Compile Include="..\AFA.ServiceModel\DTOs\OrganizationDto.cs">
-      <Link>ServiceModel\DTOs\OrganizationDto.cs</Link>
-    </Compile>
-    <Compile Include="..\AFA.ServiceModel\DTOs\UserDto.cs">
-      <Link>ServiceModel\DTOs\UserDto.cs</Link>
-    </Compile>
-    <Compile Include="..\AFA.ServiceModel\EventCategory.cs">
-      <Link>ServiceModel\EventCategory.cs</Link>
-    </Compile>
-    <Compile Include="..\AFA.ServiceModel\OrganizationCategory.cs">
-      <Link>ServiceModel\OrganizationCategory.cs</Link>
-    </Compile>
-    <Compile Include="..\AFA.ServiceModel\StateProvince.cs">
-      <Link>ServiceModel\StateProvince.cs</Link>
-    </Compile>
-    <Compile Include="Helpers\GlobalHelper.cs" />
+    <Compile Include="Helpers\StateNamesAndAbbreviations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceModel\CrueltySpot.cs" />
     <Compile Include="ServiceModel\CrueltySpotCategory.cs" />

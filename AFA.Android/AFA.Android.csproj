@@ -46,12 +46,6 @@
     <Reference Include="Parse.Android">
       <HintPath>..\packages\Parse.Android\Parse.Android.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\packages\ServiceStack.Common.MonoDroid\ServiceStack.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>..\packages\ServiceStack.Common.MonoDroid\ServiceStack.Text.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -78,7 +72,6 @@
     <Compile Include="Utility\DebugHelper.cs" />
     <Compile Include="Utility\GooglePlace.cs" />
     <Compile Include="Utility\ResourceHelper.cs" />
-    <Compile Include="Utility\ServiceHelper.cs" />
     <Compile Include="Utility\UrlHelper.cs" />
     <Compile Include="Utility\UserGeneratedPlace.cs" />
     <Compile Include="Service\CrueltySpotCategoriesService.cs" />

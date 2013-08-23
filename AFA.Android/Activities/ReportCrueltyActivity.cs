@@ -7,7 +7,6 @@ using AFA.Android.Helpers;
 using AFA.Android.Library.ServiceModel;
 using AFA.Android.Service;
 using AFA.Android.Utility;
-using AFA.ServiceModel.DTOs;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -19,7 +18,7 @@ using Android.Widget;
 using Android.Text.Style;
 using System.Drawing;
 using Android.Views.InputMethods;
-using ServiceStack.Text;
+//using ServiceStack.Text;
 using Parse;
 
 namespace AFA.Android
