@@ -41,6 +41,14 @@ namespace AFA.Android.Service
             return result;
         }
 
+        /// <summary>
+        /// Get many cruelty spots matching the criteria specified in the request parameter
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="retrieveCategoryTypes"></param>
+        /// <param name="sortField"></param>
+        /// <param name="sortDirection"></param>
+        /// <returns></returns>
         public async Task<List<CrueltySpot>> GetManyAsync(CrueltySpot request, bool retrieveCategoryTypes,
             CrueltySpotSortField sortField, SortDirection sortDirection)
         {
@@ -75,6 +83,31 @@ namespace AFA.Android.Service
                     break;
             }
 
+            return results.ToList();
+        }
+
+        /// <summary>
+        /// Get many cruelty spots matching the specified category IDs
+        /// </summary>
+        /// <param name="crueltySpotCategoryIds"></param>
+        /// <param name="retrieveCategoryTypes"></param>
+        /// <returns></returns>
+        public async Task<List<CrueltySpot>> GetManyAsync(IEnumerable<string> crueltySpotCategoryIds,
+                                                          bool retrieveCategoryTypes)
+        {
+            var categoriesQuery = from crueltySpotCategory in new ParseQuery<CrueltySpotCategory>()
+                                  where crueltySpotCategoryIds.Contains(crueltySpotCategory.ObjectId)
+                                  select crueltySpotCategory;
+
+            var query = new ParseQuery<CrueltySpot>()
+                .WhereMatchesQuery(CrueltySpotCategoryFieldName, categoriesQuery);
+
+            if (retrieveCategoryTypes)
+            {
+                query = query.Include(CrueltySpotCategoryFieldName);
+            }
+
+            var results = await query.FindAsync();
             return results.ToList();
         }
 
