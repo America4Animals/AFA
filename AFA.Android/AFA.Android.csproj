@@ -59,6 +59,7 @@
     <Compile Include="Activities\CrueltyTypesActivity.cs" />
     <Compile Include="Activities\FightItActivity.cs" />
     <Compile Include="Activities\IntroActivity.cs" />
+    <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\NearbyPlacesActivity.cs" />
     <Compile Include="Activities\ReportCrueltyBaseActivity.cs" />
     <Compile Include="Adapters\CrueltySpotsAdapter.cs" />
@@ -265,6 +266,10 @@
     <ProjectReference Include="..\AFA.Android.Library\AFA.Android.Library.csproj">
       <Project>{B4F2B335-5E88-4E81-9F4F-83DC08417AD7}</Project>
       <Name>AFA.Android.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.Facebook\Xamarin.Facebook.csproj">
+      <Project>{33b8df4f-e480-4b97-8da1-beb89ca6b644}</Project>
+      <Name>Xamarin.Facebook</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
