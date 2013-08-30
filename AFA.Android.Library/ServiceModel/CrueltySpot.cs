@@ -81,8 +81,7 @@ namespace AFA.Android.Library.ServiceModel
             set { SetProperty(value); }
         }
 		
-        public double Latitude
-        {
+        public double Latitude {
 			get { return Location.Latitude; }
         }
 		

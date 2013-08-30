@@ -45,6 +45,7 @@ namespace AFA.Android.Activities
 
             var crueltySpotsService = new CrueltySpotsService();
             var allCrueltySpots = await crueltySpotsService.GetAllAsync(true);
+
             if (allCrueltySpots.Any())
             {
 				RunOnUiThread (() => {
