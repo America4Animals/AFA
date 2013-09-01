@@ -46,6 +46,7 @@ namespace AFA.Android.Activities
             };
 
             var crueltySpotsService = new CrueltySpotsService();
+
 			ISharedPreferences sp = Application.Context.GetSharedPreferences(PackageName, FileCreationMode.Private);
 			var allCrueltySpots = new List<CrueltySpot> ();
 			var categoryList = sp.GetString ("categories", null);
@@ -62,7 +63,6 @@ namespace AFA.Android.Activities
 					allCrueltySpots = await crueltySpotsService.GetAllAsync (true);
 				}
 			}
-
 
             if (allCrueltySpots.Any())
             {

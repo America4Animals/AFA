@@ -24,6 +24,7 @@ namespace AFA.Android.Service
         public const string NameField = "name";
         public const string CityField = "city";
         public const string StateProvinceAbbreviationField = "stateProvinceAbbreviation";
+		public const string LocationField = "location";
 
         public const string CrueltySpotCategoryFieldName = "crueltySpotCategory";
 
@@ -73,6 +74,7 @@ namespace AFA.Android.Service
                 query = query.WhereEqualTo(StateProvinceAbbreviationField, request.StateProvinceAbbreviation);
             }
 
+
             var results = await query.FindAsync();
 
             switch (sortField)
@@ -110,6 +112,21 @@ namespace AFA.Android.Service
             var results = await query.FindAsync();
             return results.ToList();
         }
+
+		public async Task<List<CrueltySpot>> GetManyAsync(double latitude, double longititude, int distanceInMiles, bool retrieveCategoryTypes)
+		{
+			var requestGeoPoint = new ParseGeoPoint (latitude, longititude);
+			var query = new ParseQuery<CrueltySpot> ();
+			query = query.WhereWithinDistance(LocationField, requestGeoPoint, ParseGeoDistance.FromMiles(distanceInMiles));
+
+			if (retrieveCategoryTypes)
+			{
+				query = query.Include(CrueltySpotCategoryFieldName);
+			}
+
+			var results = await query.FindAsync();
+			return results.ToList();
+		}
 
         public async Task<List<CrueltySpot>> GetAllAsync(bool retrieveCategoryTypes)
         {
