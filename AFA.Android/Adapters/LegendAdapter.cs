@@ -10,6 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Graphics;
 
 namespace AFA.Android
 {
@@ -54,8 +55,16 @@ namespace AFA.Android
 			                                              _context.PackageName);
 
 			view.FindViewById<ImageView>(Resource.Id.CrueltyTypePin).SetImageResource(resourceId);
+			CheckBox categoryCheckbox = view.FindViewById<CheckBox>(Resource.Id.categorySelected);
+			categoryCheckbox.SetBackgroundColor (Color.Gray);
+			categoryCheckbox.Checked = true;
 
-
+			categoryCheckbox.Click += (o, e) => {
+				if (categoryCheckbox.Checked)
+					Toast.MakeText (_context, "selected " + crueltySpotCategory.ObjectId, ToastLength.Short).Show ();
+				else
+					Toast.MakeText (_context, "Not selected " + crueltySpotCategory.ObjectId, ToastLength.Short).Show ();
+			};
 
 			return view;
 		}

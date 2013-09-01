@@ -13,6 +13,7 @@ using Android.Views;
 using Android.Widget;
 using AFA.Android.Library;
 using AFA.Android.Service;
+using Android.Preferences;
 
 namespace AFA.Android.Activities
 {
@@ -36,7 +37,15 @@ namespace AFA.Android.Activities
             var crueltySpotCategoriesService = new CrueltySpotCategoriesService();
             var crueltySpotCategories = await crueltySpotCategoriesService.GetAllAsync();
             _crueltySpotCategories = crueltySpotCategories.ToList();
-            _crueltySpotCategoriesList.Adapter = new CrueltyTypesAdapter(this, _crueltySpotCategories);
+			ISharedPreferences sp = Application.Context.GetSharedPreferences(PackageName, FileCreationMode.Private);
+			var categoryIds = "";
+			foreach (CrueltySpotCategory value in _crueltySpotCategories) {
+				categoryIds += value.ObjectId;
+				categoryIds += ":";
+			}
+			var returnVal = sp.Edit ().PutString ("categories", categoryIds).Commit ();
+		
+            _crueltySpotCategoriesList.Adapter = new LegendAdapter(this, _crueltySpotCategories);
             _loadingDialog.Hide();
 		}
 	}

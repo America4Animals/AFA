@@ -12,6 +12,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Preferences;
 
 namespace AFA.Android.Activities
 {
@@ -25,6 +26,7 @@ namespace AFA.Android.Activities
         //private List<CrueltySpotDto> _otherCrueltySpots;
         //private List<CrueltySpot> _otherCrueltySpots;
         private List<CrueltySpot> _crueltySpots; 
+
 
         protected async override void OnCreate(Bundle bundle)
         {
@@ -44,7 +46,24 @@ namespace AFA.Android.Activities
             };
 
             var crueltySpotsService = new CrueltySpotsService();
-            var allCrueltySpots = await crueltySpotsService.GetAllAsync(true);
+			ISharedPreferences sp = Application.Context.GetSharedPreferences(PackageName, FileCreationMode.Private);
+			var allCrueltySpots = new List<CrueltySpot> ();
+			var categoryList = sp.GetString ("categories", null);
+			if (categoryList == null) {
+
+				allCrueltySpots = await crueltySpotsService.GetAllAsync (true);
+		    
+			} else {
+				List<String> categoryIds = categoryList.Split (':').ToList<String> ();
+				if (categoryIds.Count () > 0) {
+					allCrueltySpots = await crueltySpotsService.GetManyAsync (categoryIds, true);
+
+				} else {
+					allCrueltySpots = await crueltySpotsService.GetAllAsync (true);
+				}
+			}
+
+
             if (allCrueltySpots.Any())
             {
 				RunOnUiThread (() => {
