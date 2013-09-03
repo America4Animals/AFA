@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AFA.Android.Library.ServiceModel;
+using AFA.Android.Helpers;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
@@ -57,14 +58,30 @@ namespace AFA.Android
 			view.FindViewById<ImageView>(Resource.Id.CrueltyTypePin).SetImageResource(resourceId);
 			CheckBox categoryCheckbox = view.FindViewById<CheckBox>(Resource.Id.categorySelected);
 			categoryCheckbox.SetBackgroundColor (Color.Gray);
-			categoryCheckbox.Checked = true;
 
-			categoryCheckbox.Click += (o, e) => {
-				if (categoryCheckbox.Checked)
-					Toast.MakeText (_context, "selected " + crueltySpotCategory.ObjectId, ToastLength.Short).Show ();
-				else
-					Toast.MakeText (_context, "Not selected " + crueltySpotCategory.ObjectId, ToastLength.Short).Show ();
-			};
+			List<String> categoryIds = UserPreferencesHelper.GetFilterCategories ();
+			// no filter has been set so by default enable the fitler
+
+			if (categoryIds.Contains (crueltySpotCategory.ObjectId)) {
+				categoryCheckbox.Checked = true;
+			} else {
+				categoryCheckbox.Checked = false;
+			}
+
+			if (convertView == null) {
+				categoryCheckbox.Click += (sender, args) => {
+
+
+					if (categoryCheckbox.Checked) {
+						Toast.MakeText (_context, "selected " + crueltySpotCategory.ObjectId, ToastLength.Short).Show ();
+						UserPreferencesHelper.addCategoryFilter (crueltySpotCategory.ObjectId);
+					} else {
+						Toast.MakeText (_context, "Not selected " + crueltySpotCategory.ObjectId, ToastLength.Short).Show ();
+						UserPreferencesHelper.removeCategoryFilter (crueltySpotCategory.ObjectId);
+					}
+
+				};
+			}
 
 			return view;
 		}

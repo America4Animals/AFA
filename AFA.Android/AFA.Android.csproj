@@ -98,6 +98,7 @@
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Activities\LegendActivity.cs" />
     <Compile Include="Adapters\LegendAdapter.cs" />
+    <Compile Include="Utility\UserPreferencesHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

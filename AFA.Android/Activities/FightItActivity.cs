@@ -16,73 +16,86 @@ using Android.Preferences;
 
 namespace AFA.Android.Activities
 {
-    [Activity(Label = "Fight It")]
-    public class FightItActivity : Activity
-    {
-        private ProgressDialog _loadingDialog;
-        private ListView _crueltySpotsList;
-        //private CrueltySpotDto _featuredCrueltySpot;
-        //private CrueltySpot _featuredCrueltySpot;
-        //private List<CrueltySpotDto> _otherCrueltySpots;
-        //private List<CrueltySpot> _otherCrueltySpots;
-        private List<CrueltySpot> _crueltySpots; 
+	[Activity(Label = "Fight It")]
+	public class FightItActivity : Activity
+	{
+		private ProgressDialog _loadingDialog;
+		private ListView _crueltySpotsList;
+		//private CrueltySpotDto _featuredCrueltySpot;
+		//private CrueltySpot _featuredCrueltySpot;
+		//private List<CrueltySpotDto> _otherCrueltySpots;
+		//private List<CrueltySpot> _otherCrueltySpots;
+		private List<CrueltySpot> _crueltySpots;
 
+		protected override void OnCreate(Bundle bundle)
+		{
+			base.OnCreate(bundle);
 
-        protected async override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
+			SetContentView(Resource.Layout.FightIt);
+			CrueltyNavMenuHelper.InitCrueltyNavMenu(this, CrueltyNavMenuItem.FightIt);
 
-            SetContentView(Resource.Layout.FightIt);
-            CrueltyNavMenuHelper.InitCrueltyNavMenu(this, CrueltyNavMenuItem.FightIt);
+			_loadingDialog = LoadingDialogManager.ShowLoadingDialog (this);
 
-            _loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
+			_crueltySpotsList = FindViewById<ListView>(Resource.Id.CrueltySpots);
 
-            _crueltySpotsList = FindViewById<ListView>(Resource.Id.CrueltySpots);
+			_crueltySpotsList.ItemClick += (sender, e) =>
+			{
+				var crueltySpot = _crueltySpots[e.Position];
+				NavigateToCrueltySpotDetails(crueltySpot.ObjectId);
+			};
+			setupSpots ();
+			_loadingDialog.Dismiss();
 
-            _crueltySpotsList.ItemClick += (sender, e) =>
-            {
-                var crueltySpot = _crueltySpots[e.Position];
-                NavigateToCrueltySpotDetails(crueltySpot.ObjectId);
-            };
+		}
 
-            var crueltySpotsService = new CrueltySpotsService();
+		private void NavigateToCrueltySpotDetails (string crueltySpotId)
+		{
+			var intent = new Intent (this, typeof(CrueltySpotActivity));
+			intent.PutExtra (AppConstants.CrueltySpotIdKey, crueltySpotId);
+			StartActivity (intent);
+		}
 
-			ISharedPreferences sp = Application.Context.GetSharedPreferences(PackageName, FileCreationMode.Private);
-			var allCrueltySpots = new List<CrueltySpot> ();
-			var categoryList = sp.GetString ("categories", null);
-			if (categoryList == null) {
+		private async void setupSpots()
+		{
 
-				allCrueltySpots = await crueltySpotsService.GetAllAsync (true);
-		    
+			var crueltySpotsService = new CrueltySpotsService ();
+
+			List<String> categories = UserPreferencesHelper.GetFilterCategories ();
+			if (categories.Count () == 0) {
+
+				_crueltySpots = await crueltySpotsService.GetAllAsync (true);
+
 			} else {
-				List<String> categoryIds = categoryList.Split (':').ToList<String> ();
-				if (categoryIds.Count () > 0) {
-					allCrueltySpots = await crueltySpotsService.GetManyAsync (categoryIds, true);
 
-				} else {
-					allCrueltySpots = await crueltySpotsService.GetAllAsync (true);
-				}
+				_crueltySpots = await crueltySpotsService.GetManyAsync (categories, true);
+
 			}
 
-            if (allCrueltySpots.Any())
-            {
+			if (_crueltySpots.Any ()) {
 				RunOnUiThread (() => {
-					_crueltySpots = allCrueltySpots;
-					_crueltySpotsList.Adapter = new CrueltySpotsAdapter(this, _crueltySpots);
-					_loadingDialog.Hide();
-				});               
-            }
-            else
-            {
-                // ToDo: Handle case where there are no cruelty spots
-            }         
-        }
 
-        private void NavigateToCrueltySpotDetails(string crueltySpotId)
-        {
-            var intent = new Intent(this, typeof(CrueltySpotActivity));
-            intent.PutExtra(AppConstants.CrueltySpotIdKey, crueltySpotId);
-            StartActivity(intent);
-        }
-    }
+					_crueltySpotsList.Adapter = new CrueltySpotsAdapter (this, _crueltySpots);
+					Toast.MakeText (this, "got into dismiss code", ToastLength.Short).Show ();
+					_loadingDialog.Dismiss();
+
+				});               
+			} else {
+				// ToDo: Handle case where there are no cruelty spots
+			}         
+
+
+		}
+
+			
+
+		protected override void OnResume ()
+		{
+			base.OnResume ();
+			_loadingDialog = LoadingDialogManager.ShowLoadingDialog (this);
+			setupSpots();
+
+		}
+		
+
+	}
 }

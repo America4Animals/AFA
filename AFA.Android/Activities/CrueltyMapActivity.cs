@@ -184,58 +184,18 @@ namespace AFA.Android.Activities
 				
 				_map.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(myLocation, 11));
 		
-                //_crueltySpotsService.GetManyAsync<CrueltySpotsResponse>(new CrueltySpotsDto
-                //{
-                //    SortBy = "createdAt",
-                //    SortOrder = "desc"
-                //}, r => RunOnUiThread(()
-                //                                     =>
-                //{
-                //    _crueltySpots = r.CrueltySpots;
+				List<String> categories = UserPreferencesHelper.GetFilterCategories ();
+				if (categories.Count () == 0) {
 
-                //    MarkerOptions mapOption;
-                //    LatLng crueltyLocation;
-                //    LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                //    builder.Include(myLocation);
-                //    foreach (CrueltySpotDto spot in _crueltySpots)
-                //    { // Loop through List with foreach
-                //        if (spot.Name.CompareTo ("Universoul Circus") == 0)
-                //        {
-                //            continue;
-                //        }
-                //        crueltyLocation = new LatLng(spot.Latitude, spot.Longitude);
-                //        builder.Include(crueltyLocation);
-                       
-                //        float defaultValue = 33;
+					_crueltySpots = await _crueltySpotsService.GetManyAsync(new CrueltySpot(), true, CrueltySpotSortField.CreatedAt, SortDirection.Asc);
 
-                //        if (_pinColorLookup.ContainsKey(spot.CrueltySpotCategoryIconName.Replace(".png", "pin")))
-                //        {
-                //            defaultValue = _pinColorLookup[spot.CrueltySpotCategoryIconName.Replace(".png", "pin")];
-                //        }
-                //        mapOption = new MarkerOptions()
-                //                    .SetPosition(crueltyLocation)
-                //                        .SetSnippet(spot.Address)
-                //                        .SetTitle(spot.Name)
-                //                .InvokeIcon(BitmapDescriptorFactory.DefaultMarker(defaultValue));
 
-                //        Marker marker = _map.AddMarker(mapOption);
+				} else {
 
-                //        _crueltyLookup.Add(marker.Id, spot);
+					_crueltySpots = await _crueltySpotsService.GetManyAsync(categories,true);
 
-                //    }
 
-                  
-                //    // Move the map so that it is showing the markers we added above.
-                //    _map.SetInfoWindowAdapter(new CustomInfoWindowAdapter(this));
-
-                //    // Set listeners for marker events.  See the bottom of this class for their behavior.
-
-                //    _map.SetOnInfoWindowClickListener(this);
-
-                    
-                //}));
-
-			    _crueltySpots = await _crueltySpotsService.GetManyAsync(new CrueltySpot(), true, CrueltySpotSortField.CreatedAt, SortDirection.Asc);
+				}
 
                 RunOnUiThread(() =>
                     {

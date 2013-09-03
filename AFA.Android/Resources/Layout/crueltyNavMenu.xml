@@ -53,7 +53,7 @@
         android:drawablePadding="5dip"
         android:layout_weight="1" />
     <TextView
-        android:text="Legend"
+        android:text="Filter/Legend"
         android:layout_height="fill_parent"
         android:layout_width="0px"
         android:id="@+id/MoreMenuButton"

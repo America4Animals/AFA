@@ -17,36 +17,44 @@ using Android.Preferences;
 
 namespace AFA.Android.Activities
 {
-	[Activity(Label = "Legend")]
+	[Activity(Label = "Filter/Legend")]
 	public class LegendActivity : ReportCrueltyBaseActivity
 	{
 		private ListView _crueltySpotCategoriesList;
 		private IList<CrueltySpotCategory> _crueltySpotCategories;
 		private ProgressDialog _loadingDialog;
 
-		protected async override void OnCreate(Bundle bundle)
+		protected async override void OnCreate (Bundle bundle)
 		{
-			base.OnCreate(bundle);
+			base.OnCreate (bundle);
 
-			SetContentView(Resource.Layout.Legend);
+			SetContentView (Resource.Layout.Legend);
 
-			_loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
+			_loadingDialog = LoadingDialogManager.ShowLoadingDialog (this);
 
-			_crueltySpotCategoriesList = FindViewById<ListView>(Resource.Id.Legend);
+			_crueltySpotCategoriesList = FindViewById<ListView> (Resource.Id.Legend);
 
-            var crueltySpotCategoriesService = new CrueltySpotCategoriesService();
-            var crueltySpotCategories = await crueltySpotCategoriesService.GetAllAsync();
-            _crueltySpotCategories = crueltySpotCategories.ToList();
-			ISharedPreferences sp = Application.Context.GetSharedPreferences(PackageName, FileCreationMode.Private);
-			var categoryIds = "";
-			foreach (CrueltySpotCategory value in _crueltySpotCategories) {
-				categoryIds += value.ObjectId;
-				categoryIds += ":";
+			var crueltySpotCategoriesService = new CrueltySpotCategoriesService ();
+			_crueltySpotCategories = await crueltySpotCategoriesService.GetAllAsync ();
+
+			RunOnUiThread (() => {
+				_loadingDialog.Dismiss ();
+				_crueltySpotCategoriesList.Adapter = new LegendAdapter (this, _crueltySpotCategories);
+				
+
+			});               
+
+
+			List<String> categories = UserPreferencesHelper.GetFilterCategories ();
+			if (categories.Count () == 0) {
+				foreach (CrueltySpotCategory category in _crueltySpotCategories) {
+					categories.Add (category.ObjectId);
+				}
+				UserPreferencesHelper.SaveFilterCategories (categories);
 			}
-			var returnVal = sp.Edit ().PutString ("categories", categoryIds).Commit ();
-		
-            _crueltySpotCategoriesList.Adapter = new LegendAdapter(this, _crueltySpotCategories);
-            _loadingDialog.Hide();
+
+
+
 		}
 	}
 }
