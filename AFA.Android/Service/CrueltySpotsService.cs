@@ -74,16 +74,17 @@ namespace AFA.Android.Service
                 query = query.WhereEqualTo(StateProvinceAbbreviationField, request.StateProvinceAbbreviation);
             }
 
+            query = ApplySort(query, sortField, sortDirection);
 
             var results = await query.FindAsync();
 
-            switch (sortField)
-            {
-                case CrueltySpotSortField.CreatedAt:
-                    results = sortDirection == SortDirection.Asc ? 
-                        results.OrderBy(r => r.CreatedAt) : results.OrderByDescending(r => r.CreatedAt);
-                    break;
-            }
+            //switch (sortField)
+            //{
+            //    case CrueltySpotSortField.CreatedAt:
+            //        results = sortDirection == SortDirection.Asc ? 
+            //            results.OrderBy(r => r.CreatedAt) : results.OrderByDescending(r => r.CreatedAt);
+            //        break;
+            //}
 
             return results.ToList();
         }
@@ -93,9 +94,14 @@ namespace AFA.Android.Service
         /// </summary>
         /// <param name="crueltySpotCategoryIds"></param>
         /// <param name="retrieveCategoryTypes"></param>
+        /// <param name="sortField"></param>
+        /// <param name="sortDirection"></param>
         /// <returns></returns>
-        public async Task<List<CrueltySpot>> GetManyAsync(IEnumerable<string> crueltySpotCategoryIds,
-                                                          bool retrieveCategoryTypes)
+        public async Task<List<CrueltySpot>> GetManyAsync(
+            IEnumerable<string> crueltySpotCategoryIds,
+            bool retrieveCategoryTypes, 
+            CrueltySpotSortField sortField, 
+            SortDirection sortDirection)
         {
             var categoriesQuery = from crueltySpotCategory in new ParseQuery<CrueltySpotCategory>()
                                   where crueltySpotCategoryIds.Contains(crueltySpotCategory.ObjectId)
@@ -109,11 +115,15 @@ namespace AFA.Android.Service
                 query = query.Include(CrueltySpotCategoryFieldName);
             }
 
+            query = ApplySort(query, sortField, sortDirection);
+
             var results = await query.FindAsync();
             return results.ToList();
         }
 
-		public async Task<List<CrueltySpot>> GetManyAsync(double latitude, double longititude, int distanceInMiles, bool retrieveCategoryTypes)
+        public async Task<List<CrueltySpot>> GetManyAsync(double latitude, double longititude, int distanceInMiles, bool retrieveCategoryTypes, 
+            CrueltySpotSortField sortField,
+            SortDirection sortDirection)
 		{
 			var requestGeoPoint = new ParseGeoPoint (latitude, longititude);
 			var query = new ParseQuery<CrueltySpot> ();
@@ -123,6 +133,8 @@ namespace AFA.Android.Service
 			{
 				query = query.Include(CrueltySpotCategoryFieldName);
 			}
+
+            query = ApplySort(query, sortField, sortDirection);
 
 			var results = await query.FindAsync();
 			return results.ToList();
@@ -156,6 +168,19 @@ namespace AFA.Android.Service
             crueltySpot.Location = new ParseGeoPoint(crueltySpot.Latitude, crueltySpot.Longitude);
             await crueltySpot.SaveAsync();
             return crueltySpot.ObjectId;
+        }
+
+        private ParseQuery<T> ApplySort<T>(ParseQuery<T> query, CrueltySpotSortField sortField, SortDirection sortDirection) where T : ParseObject
+        {
+            switch (sortField)
+            {
+                case CrueltySpotSortField.CreatedAt:
+                    query = sortDirection == SortDirection.Asc ?
+                        query.OrderBy(r => r.CreatedAt) : query.OrderByDescending(r => r.CreatedAt);
+                    break;
+            }
+
+            return query;
         }
     }
 }

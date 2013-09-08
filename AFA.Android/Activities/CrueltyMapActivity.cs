@@ -185,16 +185,11 @@ namespace AFA.Android.Activities
 				_map.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(myLocation, 11));
 		
 				List<String> categories = UserPreferencesHelper.GetFilterCategories ();
-				if (categories.Count () == 0) {
-
+				if (!categories.Any()) {
 					_crueltySpots = await _crueltySpotsService.GetManyAsync(new CrueltySpot(), true, CrueltySpotSortField.CreatedAt, SortDirection.Asc);
 
-
 				} else {
-
-					_crueltySpots = await _crueltySpotsService.GetManyAsync(categories,true);
-
-
+					_crueltySpots = await _crueltySpotsService.GetManyAsync(categories, true, CrueltySpotSortField.CreatedAt, SortDirection.Asc);
 				}
 
                 RunOnUiThread(() =>

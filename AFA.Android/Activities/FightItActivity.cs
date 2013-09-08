@@ -61,14 +61,10 @@ namespace AFA.Android.Activities
 			var crueltySpotsService = new CrueltySpotsService ();
 
 			List<String> categories = UserPreferencesHelper.GetFilterCategories ();
-			if (categories.Count () == 0) {
-
+			if (!categories.Any()) {
 				_crueltySpots = await crueltySpotsService.GetAllAsync (true);
-
 			} else {
-
-				_crueltySpots = await crueltySpotsService.GetManyAsync (categories, true);
-
+				_crueltySpots = await crueltySpotsService.GetManyAsync (categories, true, CrueltySpotSortField.CreatedAt, SortDirection.Asc);
 			}
 
 			if (_crueltySpots.Any ()) {
