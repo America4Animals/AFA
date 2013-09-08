@@ -42,5 +42,10 @@
   <string name="activity_label_mapwithmarkers" >Track It</string>
   <string name="basic_map">Basic Demo"</string>
   <string name="basic_map_description">Display the MapFragment in an AXML file.</string>
+  
+  <string name="hello_user">Hello %1$s!</string>
+  <string name="cancelled">Cancelled</string>
+  <string name="permission_not_granted">Unable to perform selected action because permissions were not granted.</string>
+  <string name="ok">OK</string>
 
 </resources>
