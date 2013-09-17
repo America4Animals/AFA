@@ -9,11 +9,14 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using ActionBar_Sherlock.App;
+
+
 
 namespace AFA.Android.Activities
 {
     [Activity]
-    public class ReportCrueltyBaseActivity : Activity
+	public class ReportCrueltyBaseActivity : SherlockActivity
     {
         protected CrueltyReport _crueltyReport;
 

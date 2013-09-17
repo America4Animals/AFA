@@ -176,6 +176,7 @@
     <AndroidResource Include="Resources\Drawable\petstorespin.png" />
     <AndroidResource Include="Resources\Drawable\racespin.png" />
     <AndroidResource Include="Resources\Drawable\sharkpin.png" />
+    <AndroidResource Include="Resources\menu\report_menu.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml">
@@ -267,5 +268,12 @@
       <Project>{B4F2B335-5E88-4E81-9F4F-83DC08417AD7}</Project>
       <Name>AFA.Android.Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ActionBarSherlockBinding\ActionBarSherlockBinding.csproj">
+      <Project>{7DD1B370-B15A-46B1-A3D9-4A31FC0B2C19}</Project>
+      <Name>ActionBarSherlockBinding</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\menu\" />
   </ItemGroup>
 </Project>

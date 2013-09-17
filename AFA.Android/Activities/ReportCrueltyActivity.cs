@@ -20,6 +20,8 @@ using System.Drawing;
 using Android.Views.InputMethods;
 //using ServiceStack.Text;
 using Parse;
+using ActionBar_Sherlock.App;
+using ActionBar_Sherlock.View;
 
 namespace AFA.Android
 {
@@ -150,6 +152,13 @@ namespace AFA.Android
                     
 			};
 
+		}
+
+		public override bool OnCreateOptionsMenu (ActionBar_Sherlock.View.IMenu menu)
+		{
+			base.OnCreateOptionsMenu (menu);
+			SupportMenuInflater.Inflate (Resource.Menu.report_menu, menu);
+			return true;
 		}
 
 		private async void SubmitNewCrueltySpot (CrueltySpot newCrueltySpot)
