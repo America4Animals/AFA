@@ -78,14 +78,6 @@ namespace AFA.Android.Service
 
             var results = await query.FindAsync();
 
-            //switch (sortField)
-            //{
-            //    case CrueltySpotSortField.CreatedAt:
-            //        results = sortDirection == SortDirection.Asc ? 
-            //            results.OrderBy(r => r.CreatedAt) : results.OrderByDescending(r => r.CreatedAt);
-            //        break;
-            //}
-
             return results.ToList();
         }
 
@@ -103,12 +95,73 @@ namespace AFA.Android.Service
             CrueltySpotSortField sortField, 
             SortDirection sortDirection)
         {
-            var categoriesQuery = from crueltySpotCategory in new ParseQuery<CrueltySpotCategory>()
-                                  where crueltySpotCategoryIds.Contains(crueltySpotCategory.ObjectId)
-                                  select crueltySpotCategory;
+            //var categoriesQuery = from crueltySpotCategory in new ParseQuery<CrueltySpotCategory>()
+            //                      where crueltySpotCategoryIds.Contains(crueltySpotCategory.ObjectId)
+            //                      select crueltySpotCategory;
 
-            var query = new ParseQuery<CrueltySpot>()
-                .WhereMatchesQuery(CrueltySpotCategoryFieldName, categoriesQuery);
+            //var query = new ParseQuery<CrueltySpot>()
+            //    .WhereMatchesQuery(CrueltySpotCategoryFieldName, categoriesQuery);
+
+            //if (retrieveCategoryTypes)
+            //{
+            //    query = query.Include(CrueltySpotCategoryFieldName);
+            //}
+
+            //query = ApplySort(query, sortField, sortDirection);
+
+            //var results = await query.FindAsync();
+            //return results.ToList();
+
+            return await GetManyAsync(null, crueltySpotCategoryIds, retrieveCategoryTypes, sortField, sortDirection);
+        }
+
+        public async Task<List<CrueltySpot>> GetManyAsync(
+            GeoQueryRequest geoQueryRequest, 
+            bool retrieveCategoryTypes, 
+            CrueltySpotSortField sortField,
+            SortDirection sortDirection)
+		{
+            //var requestGeoPoint = new ParseGeoPoint(geoQueryRequest.Latitude, geoQueryRequest.Longititude);
+            //var query = new ParseQuery<CrueltySpot> ();
+            //query = query.WhereWithinDistance(LocationField, requestGeoPoint, ParseGeoDistance.FromMiles(geoQueryRequest.DistanceInMiles));
+
+            //if (retrieveCategoryTypes)
+            //{
+            //    query = query.Include(CrueltySpotCategoryFieldName);
+            //}
+
+            //query = ApplySort(query, sortField, sortDirection);
+
+            //var results = await query.FindAsync();
+            //return results.ToList();
+
+            return await GetManyAsync(geoQueryRequest, null, retrieveCategoryTypes, sortField, sortDirection);
+		}
+
+        public async Task<List<CrueltySpot>> GetManyAsync(
+            GeoQueryRequest geoQueryRequest,
+            IEnumerable<string> crueltySpotCategoryIds,
+            bool retrieveCategoryTypes,
+            CrueltySpotSortField sortField,
+            SortDirection sortDirection
+            )
+        {
+            var query = new ParseQuery<CrueltySpot>();
+
+            if (geoQueryRequest != null)
+            {
+                var requestGeoPoint = new ParseGeoPoint(geoQueryRequest.Latitude, geoQueryRequest.Longititude);
+                query = query.WhereWithinDistance(LocationField, requestGeoPoint, ParseGeoDistance.FromMiles(geoQueryRequest.DistanceInMiles));
+            }
+
+            if (crueltySpotCategoryIds != null)
+            {
+                var categoriesQuery = from crueltySpotCategory in new ParseQuery<CrueltySpotCategory>()
+                                      where crueltySpotCategoryIds.Contains(crueltySpotCategory.ObjectId)
+                                      select crueltySpotCategory;
+
+                query = query.WhereMatchesQuery(CrueltySpotCategoryFieldName, categoriesQuery);
+            }
 
             if (retrieveCategoryTypes)
             {
@@ -116,29 +169,9 @@ namespace AFA.Android.Service
             }
 
             query = ApplySort(query, sortField, sortDirection);
-
             var results = await query.FindAsync();
             return results.ToList();
         }
-
-        public async Task<List<CrueltySpot>> GetManyAsync(double latitude, double longititude, int distanceInMiles, bool retrieveCategoryTypes, 
-            CrueltySpotSortField sortField,
-            SortDirection sortDirection)
-		{
-			var requestGeoPoint = new ParseGeoPoint (latitude, longititude);
-			var query = new ParseQuery<CrueltySpot> ();
-			query = query.WhereWithinDistance(LocationField, requestGeoPoint, ParseGeoDistance.FromMiles(distanceInMiles));
-
-			if (retrieveCategoryTypes)
-			{
-				query = query.Include(CrueltySpotCategoryFieldName);
-			}
-
-            query = ApplySort(query, sortField, sortDirection);
-
-			var results = await query.FindAsync();
-			return results.ToList();
-		}
 
         public async Task<List<CrueltySpot>> GetAllAsync(bool retrieveCategoryTypes)
         {
