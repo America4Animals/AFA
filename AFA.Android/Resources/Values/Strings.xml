@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Hello">Hello World, Click Me!</string>
-    <string name="ApplicationName">Animal Ally</string>
+  <string name="ApplicationName">Animal Ally</string>
+  <string name="FacebookAppId">542287645808009</string>
 
-    <string name="ReportCrueltyHeader">We need your eyes and ears to find out where cruelty is occurring! Fill out this form to let your community know!</string>
+  <string name="ReportCrueltyHeader">We need your eyes and ears to find out where cruelty is occurring! Fill out this form to let your community know!</string>
   <string name="EmergencyText">If this is an emergency</string>
   <string name="AddPlaceHeader">Use this form to add a new cruelty spot or edit an existing one.</string>
   <string name="boycottActionDesctiption">Join a boycott of this business</string>
@@ -20,19 +20,19 @@
 
   <string name="IntroFightLabel">Fight Cruelty</string>
   <string name="IntroFightSubLabel">Choose a location and take action with the push of a button.</string>
-  
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
-    <color name="pink">#D34C96</color>
-    <color name="green">#D0E06E</color>
-    <color name="lightgreen">#D0ED99</color>
-    <color name="red">#EE2C2C</color>
-    <color name="gray">#D1D2D4</color>
-    <color name="mediumgray">#818286</color>
-    <color name="darkgray">#2C2A2B</color>
-    <color name="red">#BE1E2D</color>
-  
-    <string name="mapsAppText" >Show Maps App</string>
+
+  <color name="white">#FFFFFF</color>
+  <color name="black">#000000</color>
+  <color name="pink">#D34C96</color>
+  <color name="green">#D0E06E</color>
+  <color name="lightgreen">#D0ED99</color>
+  <color name="red">#EE2C2C</color>
+  <color name="gray">#D1D2D4</color>
+  <color name="mediumgray">#818286</color>
+  <color name="darkgray">#2C2A2B</color>
+  <color name="red">#BE1E2D</color>
+
+  <string name="mapsAppText" >Show Maps App</string>
   <string name="mapsAppTextDescription">Start up the Android Map application.</string>
   <string name="streetViewText" >Show Street View</string>
   <string name="showMapActivityDescription">Show how use a MapFragment in an Activity.</string>
@@ -43,4 +43,9 @@
   <string name="basic_map">Basic Demo"</string>
   <string name="basic_map_description">Display the MapFragment in an AXML file.</string>
   
+  <string name="hello_user">Hello %1$s!</string>
+  <string name="cancelled">Cancelled</string>
+  <string name="permission_not_granted">Unable to perform selected action because permissions were not granted.</string>
+  <string name="ok">OK</string>
+
 </resources>

@@ -59,6 +59,8 @@
     <Compile Include="Activities\CrueltyTypesActivity.cs" />
     <Compile Include="Activities\FightItActivity.cs" />
     <Compile Include="Activities\IntroActivity.cs" />
+    <Compile Include="Activities\LoginActivity.cs" />
+    <Compile Include="Activities\LoginParseActivity.cs" />
     <Compile Include="Activities\NearbyPlacesActivity.cs" />
     <Compile Include="Activities\ReportCrueltyBaseActivity.cs" />
     <Compile Include="Adapters\CrueltySpotsAdapter.cs" />
@@ -178,6 +180,7 @@
     <AndroidResource Include="Resources\Drawable\racespin.png" />
     <AndroidResource Include="Resources\Drawable\sharkpin.png" />
     <AndroidResource Include="Resources\menu\report_menu.xml" />
+    <AndroidResource Include="Resources\Layout\Login.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml">
@@ -272,6 +275,10 @@
     <ProjectReference Include="..\ActionBarSherlockBinding\ActionBarSherlockBinding.csproj">
       <Project>{7DD1B370-B15A-46B1-A3D9-4A31FC0B2C19}</Project>
       <Name>ActionBarSherlockBinding</Name>
+      </ProjectReference>
+    <ProjectReference Include="..\Xamarin.Facebook\Xamarin.Facebook.csproj">
+      <Project>{33B8DF4F-E480-4B97-8DA1-BEB89CA6B644}</Project>
+      <Name>Xamarin.Facebook</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

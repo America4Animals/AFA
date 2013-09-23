@@ -25,6 +25,8 @@ namespace AFA.Android
 			Thread.Sleep(2000);
 			// Start our real activity
 			StartActivity (typeof (IntroActivity));
+            //StartActivity(typeof(LoginActivity));
+            //StartActivity(typeof(LoginParseActivity));
 		}
 	}
 }
