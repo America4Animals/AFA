@@ -69,6 +69,19 @@ namespace AFA.Android.Helpers
 
 			return SaveFilterCategories (categories);
 		}
+
+		public static bool IsFirstTimeLaunch()
+		{
+			var sp = Application.Context.GetSharedPreferences(Application.Context.PackageName, FileCreationMode.Private);
+			var hasLaunchedBefore = sp.GetBoolean (AppConstants.HasLaunchedAppKey, false);
+
+			if (!hasLaunchedBefore) 
+			{
+				sp.Edit ().PutBoolean (AppConstants.HasLaunchedAppKey, true).Commit ();
+			}
+
+			return !hasLaunchedBefore;
+		}
 	}
 	
 }
