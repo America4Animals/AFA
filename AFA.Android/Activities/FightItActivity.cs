@@ -13,6 +13,11 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Preferences;
+using AFA.Android.Helpers;
+using AFA_Android.Helpers;
+using AFA.Android.Utility;
+
+
 
 namespace AFA.Android.Activities
 {
@@ -26,12 +31,14 @@ namespace AFA.Android.Activities
 		//private List<CrueltySpotDto> _otherCrueltySpots;
 		//private List<CrueltySpot> _otherCrueltySpots;
 		private List<CrueltySpot> _crueltySpots;
+		private GPSTracker _gpsTracker;
 
 		protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
 
 			SetContentView(Resource.Layout.FightIt);
+			_gpsTracker = ((AfaApplication)ApplicationContext).GetGpsTracker(this);
 			CrueltyNavMenuHelper.InitCrueltyNavMenu(this, CrueltyNavMenuItem.FightIt);
 
 			_loadingDialog = LoadingDialogManager.ShowLoadingDialog (this);
@@ -61,10 +68,33 @@ namespace AFA.Android.Activities
 			var crueltySpotsService = new CrueltySpotsService ();
 
 			List<String> categories = UserPreferencesHelper.GetFilterCategories ();
+			GeoQueryRequest geoQueryRequest = null;
+			if (UserPreferencesHelper.getClosestSpotsFilter () == true) {
+				geoQueryRequest = new GeoQueryRequest ();
+				geoQueryRequest.Latitude = _gpsTracker.Latitude;
+				geoQueryRequest.Longititude = _gpsTracker.Longitude;
+				geoQueryRequest.DistanceInMiles = 50;
+			}
+
 			if (!categories.Any()) {
-				_crueltySpots = await crueltySpotsService.GetAllAsync (true);
+				if (geoQueryRequest != null) {
+				
+					_crueltySpots = await crueltySpotsService.GetManyAsync (geoQueryRequest, 
+					                                                        true, 
+					                                                        CrueltySpotSortField.CreatedAt,
+					                                                        SortDirection.Asc);
+				} 
+				else {
+					_crueltySpots = await crueltySpotsService.GetAllAsync (true);
+				}
+
+
 			} else {
-				_crueltySpots = await crueltySpotsService.GetManyAsync (categories, true, CrueltySpotSortField.CreatedAt, SortDirection.Asc);
+				if (geoQueryRequest != null) {
+					_crueltySpots = await crueltySpotsService.GetManyAsync (geoQueryRequest, categories, true, CrueltySpotSortField.CreatedAt, SortDirection.Asc);
+				} else {
+					_crueltySpots = await crueltySpotsService.GetManyAsync (categories, true, CrueltySpotSortField.CreatedAt, SortDirection.Asc);
+				}
 			}
 
 			if (_crueltySpots.Any ()) {

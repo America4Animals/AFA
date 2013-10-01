@@ -4,6 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/white">
+    <CheckBox
+        android:id="@+id/chooseClosest"
+        android:layout_marginRight="10dip"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show only within 50 miles" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"

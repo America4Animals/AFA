@@ -14,6 +14,7 @@ using Android.Widget;
 using Android.Util;
 using AFA.Android.Utility;
 
+
 namespace AFA.Android.Activities
 {
     [Activity(Label = "Cruelty Spot")]
@@ -25,6 +26,7 @@ namespace AFA.Android.Activities
         private Button _takeActionButton;
         private LinearLayout _boycottArea;
         private LinearLayout _theIssueArea;
+
 
         private Button IssueButton
         {

@@ -14,6 +14,7 @@ using Android.Widget;
 using AFA.Android.Library;
 using AFA.Android.Service;
 using Android.Preferences;
+using Android.Graphics;
 
 namespace AFA.Android.Activities
 {
@@ -29,6 +30,20 @@ namespace AFA.Android.Activities
 			base.OnCreate (bundle);
 
 			SetContentView (Resource.Layout.Legend);
+
+			CheckBox closestFilterCheckbox = FindViewById<CheckBox>(Resource.Id.chooseClosest);
+			Boolean filterClosest = UserPreferencesHelper.getClosestSpotsFilter ();
+			closestFilterCheckbox.Checked = filterClosest;
+
+			closestFilterCheckbox.Click += (sender, args) => {
+
+				if (closestFilterCheckbox.Checked) {
+					UserPreferencesHelper.setClosestSpotsFilter (true);
+				} else {
+					UserPreferencesHelper.setClosestSpotsFilter (false);
+				}
+			};
+
 
 			_loadingDialog = LoadingDialogManager.ShowLoadingDialog (this);
 

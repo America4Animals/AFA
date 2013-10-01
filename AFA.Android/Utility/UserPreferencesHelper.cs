@@ -15,6 +15,19 @@ namespace AFA.Android.Helpers
 	public static class UserPreferencesHelper
 	{
 
+		public static Boolean getClosestSpotsFilter()
+		{
+			ISharedPreferences sp = Application.Context.GetSharedPreferences(Application.Context.PackageName, FileCreationMode.Private);
+			return sp.GetBoolean ("closestSpotsFilter", false);
+
+		}
+
+		public static void setClosestSpotsFilter(bool value)
+		{
+			ISharedPreferences sp = Application.Context.GetSharedPreferences(Application.Context.PackageName, FileCreationMode.Private);
+			sp.Edit ().PutBoolean ("closestSpotsFilter", value).Commit ();
+		}
+
 		public static List<String> GetFilterCategories()
 		{
 			ISharedPreferences sp = Application.Context.GetSharedPreferences(Application.Context.PackageName, FileCreationMode.Private);
