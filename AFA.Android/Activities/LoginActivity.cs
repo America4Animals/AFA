@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -13,6 +13,7 @@ using Android.Support.V4.App;
 using Xamarin.FacebookBinding;
 using Xamarin.FacebookBinding.Model;
 using Xamarin.FacebookBinding.Widget;
+using Parse;
 
 [assembly: MetaData("com.facebook.sdk.ApplicationId", Value = "@string/FacebookAppId")]
 
@@ -20,16 +21,18 @@ namespace AFA.Android.Activities
 {
     [Activity(Label = "Login", WindowSoftInputMode = SoftInput.AdjustResize)]
     public class LoginActivity : FragmentActivity
-    {
+	{
 		//readonly String PENDING_ACTION_BUNDLE_KEY = "com.facebook.samples.hellofacebook:PendingAction";
 		private Session.IStatusCallback _callback;
 		private UiLifecycleHelper _uiHelper;
 		private IGraphUser _user;
 		private LoginButton _loginButton;
-		private TextView _greeting;
+		private Button _continueAnonymouslyButton;
+		//private TextView _greeting;
 		//private ViewGroup _controlsContainer;
-		private ProfilePictureView _profilePictureView;
+		//private ProfilePictureView _profilePictureView;
 		private PendingAction _pendingAction = PendingAction.NONE;
+		private ParseUser _parseUser;
 
 		public LoginActivity()
 		{
@@ -52,10 +55,10 @@ namespace AFA.Android.Activities
 				_owner = owner;
 			}
 
-		    public void Call(Session session, SessionState state, Java.Lang.Exception exception)
-		    {
-                _owner.OnSessionStateChange(session, state, exception);
-		    }
+			public void Call(Session session, SessionState state, Java.Lang.Exception exception)
+			{
+				_owner.OnSessionStateChange(session, state, exception);
+			}
 		}
 
 		class MyUserInfoChangedCallback : Java.Lang.Object, LoginButton.IUserInfoChangedCallback
@@ -71,13 +74,12 @@ namespace AFA.Android.Activities
 			{
 				_owner._user = user;
 				_owner.UpdateUI ();
-
 			}
 		}        
 
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
+		protected override void OnCreate(Bundle bundle)
+		{
+			base.OnCreate(bundle);
 
 			_uiHelper = new UiLifecycleHelper (this, _callback);
 
@@ -85,16 +87,21 @@ namespace AFA.Android.Activities
 
 			_loginButton = (LoginButton)FindViewById (Resource.Id.login_button);
 			_loginButton.UserInfoChangedCallback = new MyUserInfoChangedCallback (this);
-			_profilePictureView = FindViewById<ProfilePictureView> (Resource.Id.profilePicture);
-			_greeting = FindViewById<TextView> (Resource.Id.greeting);
+			_loginButton.SetReadPermissions(new List<string>{"email"});
+			//_profilePictureView = FindViewById<ProfilePictureView> (Resource.Id.profilePicture);
+			//_greeting = FindViewById<TextView> (Resource.Id.greeting);
 
-        }
+			_continueAnonymouslyButton = FindViewById<Button>(Resource.Id.btnNoLogin);
+			_continueAnonymouslyButton.Click += (object sender, EventArgs e) => StartActivity (typeof (IntroActivity));;
+
+			UpdateUI ();
+		}
 
 		protected override void OnResume ()
 		{
 			base.OnResume ();
 			_uiHelper.OnResume ();
-            UpdateUI();
+			UpdateUI();
 		}
 
 		protected override void OnSaveInstanceState (Bundle outState)
@@ -137,20 +144,39 @@ namespace AFA.Android.Activities
 			} else if (state == SessionState.OpenedTokenUpdated) {
 				HandlePendingAction ();
 			}
+
 			UpdateUI ();
 		}
 
-		private void UpdateUI()
+		private async void UpdateUI()
 		{
 			Session session = Session.ActiveSession;
 			bool openSession = (session != null && session.IsOpened);
 
-			if (openSession && _user != null) {
-				_profilePictureView.ProfileId = (_user.Id);
-				_greeting.Text = GetString (Resource.String.hello_user, new Java.Lang.String (_user.FirstName));
+			if (openSession && _user != null)
+			{
+				// Authenticated with Facebook
+
+				//_profilePictureView.ProfileId = (_user.Id);
+				//_greeting.Text = GetString (Resource.String.hello_user, new Java.Lang.String (_user.FirstName));
+
+				if (ParseUser.CurrentUser == null) {
+					_parseUser = await LoginParse (_user.Id, session.AccessToken, DateTime.MaxValue);
+					StartActivity (typeof(IntroActivity));
+				} else {
+					// Authenticated with Parse and Facebook
+					_continueAnonymouslyButton.Visibility = ViewStates.Invisible;
+				}
 			} else {
-				_profilePictureView.ProfileId = (null);
-				_greeting.Text = (null);
+				//_profilePictureView.ProfileId = (null);
+				//_greeting.Text = (null);
+
+				// Not authenticated with Facebook
+				if (ParseUser.CurrentUser != null) {
+					ParseUser.LogOut ();
+				}
+
+				_continueAnonymouslyButton.Visibility = ViewStates.Visible;
 			}
 		}
 
@@ -161,5 +187,17 @@ namespace AFA.Android.Activities
 			// will succeed.
 			_pendingAction = PendingAction.NONE;
 		}
-    }
+
+		private async Task<ParseUser> LoginParse(string userFacebookId, string accessToken, DateTime sessionExpiration)
+		{
+			var parseUser = await ParseFacebookUtils.LogInAsync(userFacebookId, accessToken, sessionExpiration);
+
+			if (String.IsNullOrEmpty(parseUser.Email)) {
+				parseUser.Email = _user.GetProperty("email").ToString();
+				await parseUser.SaveAsync();
+			}
+
+			return parseUser;
+		}
+	}
 }

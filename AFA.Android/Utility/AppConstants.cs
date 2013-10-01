@@ -24,5 +24,7 @@ namespace AFA.Android.Helpers
         public static string ShowCrueltySpotAddedSuccessfullyKey = "ShowCrueltySpotAddedSuccessfully";
 
         public static string CrueltySpotIdKey = "CrueltySpotId";
+
+		public static string HasLaunchedAppKey = "AfaHasLaunchedBefore";
     }
 }
