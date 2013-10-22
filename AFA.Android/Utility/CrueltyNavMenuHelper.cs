@@ -23,9 +23,9 @@ namespace AFA.Android.Helpers
 
     public class CrueltyNavMenuHelper
     {
-        public static void InitCrueltyNavMenu(Activity activity, CrueltyNavMenuItem activeItem)
+        public static void InitCrueltyNavMenu(View view, CrueltyNavMenuItem activeItem)
         {
-            var reportItItem = activity.FindViewById<TextView>(Resource.Id.ReportItMenuButton);
+            var reportItItem = view.FindViewById<TextView>(Resource.Id.ReportItMenuButton);
             var trackItItem = activity.FindViewById<TextView>(Resource.Id.TrackItMenuButton);
             var fightItItem = activity.FindViewById<TextView>(Resource.Id.FightItMenuButton);
             var moreItItem = activity.FindViewById<TextView>(Resource.Id.MoreMenuButton);

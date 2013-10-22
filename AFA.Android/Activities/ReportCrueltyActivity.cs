@@ -8,6 +8,7 @@ using AFA.Android.Library.ServiceModel;
 using AFA.Android.Service;
 using AFA.Android.Utility;
 using Android.App;
+using Android.Support.V4.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -22,28 +23,44 @@ using Android.Views.InputMethods;
 using Parse;
 using ActionBar_Sherlock.App;
 using ActionBar_Sherlock.View;
+using SherlockActionBar = ActionBar_Sherlock.App.ActionBar;
+using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 
 namespace AFA.Android
 {
 	[Activity(Label = "Report Cruelty", MainLauncher = false, Icon = "@drawable/icon")]
-	public class ReportCrueltyActivity : ReportCrueltyBaseActivity
+	public class ReportCrueltyActivity : Fragment
 	{
 		private EditText _locationInput;
 		private EditText _crueltyTypeInput;
 		private EditText _descriptionInput;
 		private Button _submitButton;
 		private ProgressDialog _loadingDialog;
+		private RelativeLayout ll;
+		private FragmentActivity fa;
+		protected CrueltyReport _crueltyReport;
 
-		protected override void OnCreate (Bundle bundle)
+		public override void OnCreate (Bundle savedInstanceState)
 		{
-			base.OnCreate (bundle);
+			base.OnCreate (savedInstanceState);
+		}
 
-			SetContentView (Resource.Layout.ReportCruelty);
+		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+	    {
+			fa = base.Activity;
+			ll = (RelativeLayout) inflater.Inflate(Resource.Layout.ReportCruelty, container, false);
 
-			CrueltyNavMenuHelper.InitCrueltyNavMenu (this, CrueltyNavMenuItem.ReportIt);
+			//CrueltyNavMenuHelper.InitCrueltyNavMenu (this, CrueltyNavMenuItem.ReportIt);
 
-			_locationInput = FindViewById<EditText> (Resource.Id.LocationInput);
-			_crueltyTypeInput = FindViewById<EditText> (Resource.Id.TypeOfCrueltyInput);
+			_crueltyReport = ((AfaApplication)fa.ApplicationContext).CrueltyReport;
+			if (_crueltyReport == null)
+			{
+				_crueltyReport = new CrueltyReport();
+				((AfaApplication)fa.ApplicationContext).CrueltyReport = _crueltyReport;
+			}
+
+			_locationInput = ll.FindViewById<EditText> (Resource.Id.LocationInput);
+			_crueltyTypeInput = ll.FindViewById<EditText> (Resource.Id.TypeOfCrueltyInput);
 
 			if (_crueltyReport.PlaceSpecified) {
 				var locationText = new StringBuilder ();
@@ -63,7 +80,7 @@ namespace AFA.Android
 			_locationInput.FocusChange += (sender, args) =>
 			{
 				if (args.HasFocus) {
-					var intent = new Intent (this, typeof(NearbyPlacesActivity));
+					var intent = new Intent (fa, typeof(NearbyPlacesActivity));
 					StartActivity (intent);
 				}
 			};
@@ -71,7 +88,7 @@ namespace AFA.Android
 			_crueltyTypeInput.FocusChange += (sender, args) =>
 			{
 				if (args.HasFocus) {
-					var intent = new Intent (this, typeof(CrueltyTypesActivity));
+					var intent = new Intent (fa, typeof(CrueltyTypesActivity));
 					StartActivity (intent);
 				}
 			};
@@ -81,14 +98,14 @@ namespace AFA.Android
 			//_locationInput.InputType = InputTypes.Null;
 			_crueltyTypeInput.InputType = InputTypes.Null;
 
-			_submitButton = FindViewById<Button> (Resource.Id.SubmitButton);
+			_submitButton = ll.FindViewById<Button> (Resource.Id.SubmitButton);
 			_submitButton.Enabled = _crueltyReport.PlaceSpecified && _crueltyReport.CrueltyTypeSpecified;
 
 			_submitButton.Click +=
                 (sender, args) =>
 			{
 				// Create a new Cruelty Spot
-				_loadingDialog = DialogManager.ShowLoadingDialog (this);
+				_loadingDialog = DialogManager.ShowLoadingDialog (fa);
 				//CrueltySpotDto newCrueltySpot;
 				CrueltySpot newCrueltySpot;
 
@@ -124,7 +141,7 @@ namespace AFA.Android
 					});
 				} else {
 					// Submit with user lat/lng
-					var gpsTracker = ((AfaApplication)ApplicationContext).GetGpsTracker (this);
+					var gpsTracker = ((AfaApplication)fa.ApplicationContext).GetGpsTracker (fa);
 
 					var latitude = gpsTracker.Latitude;
 					var longitude = gpsTracker.Longitude;
@@ -152,23 +169,26 @@ namespace AFA.Android
                     
 			};
 
-		}
+				return ll;  
 
+		}
+		/*
 		public override bool OnCreateOptionsMenu (ActionBar_Sherlock.View.IMenu menu)
 		{
 			base.OnCreateOptionsMenu (menu);
 			SupportMenuInflater.Inflate (Resource.Menu.report_menu, menu);
 			return true;
 		}
+		*/
 
 		private async void SubmitNewCrueltySpot (CrueltySpot newCrueltySpot)
 		{
 			var crueltySpotsService = new CrueltySpotsService ();        
 			var newCrueltySpotId = await crueltySpotsService.SaveAsync (newCrueltySpot);
 
-			RunOnUiThread (() =>
+			fa.RunOnUiThread (() =>
 			{
-				var intent = new Intent (this, typeof(CrueltySpotActivity));
+				var intent = new Intent (fa, typeof(CrueltySpotActivity));
 				intent.PutExtra (AppConstants.ShowCrueltySpotAddedSuccessfullyKey, true);
 				intent.PutExtra (AppConstants.CrueltySpotIdKey, newCrueltySpotId);
 				ClearAllUi ();
@@ -185,5 +205,10 @@ namespace AFA.Android
 			_crueltyTypeInput.Text = "";
 			//_descriptionInput.Text = "";
 		}
+		protected void CommitCrueltyReport()
+		{
+			((AfaApplication)fa.ApplicationContext).CrueltyReport = _crueltyReport;
+		}
+
 	}
 }

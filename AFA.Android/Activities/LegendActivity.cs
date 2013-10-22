@@ -19,13 +19,13 @@ using Android.Graphics;
 namespace AFA.Android.Activities
 {
 	[Activity(Label = "Filter/Legend")]
-	public class LegendActivity : ReportCrueltyBaseActivity
+	public class LegendActivity : Activity
 	{
 		private ListView _crueltySpotCategoriesList;
 		private IList<CrueltySpotCategory> _crueltySpotCategories;
 		private ProgressDialog _loadingDialog;
 
-		protected async override void OnCreate (Bundle bundle)
+		protected override async  void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 

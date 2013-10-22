@@ -117,7 +117,7 @@ namespace AFA.Android.Activities
 			InitMapFragment ();
 			SetupMapIfNeeded ();
 
-			CrueltyNavMenuHelper.InitCrueltyNavMenu (this, CrueltyNavMenuItem.TrackIt);
+		
 		}
 
 		protected override void OnPause ()

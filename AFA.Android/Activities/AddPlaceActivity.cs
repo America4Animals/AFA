@@ -18,7 +18,7 @@ using Java.Util;
 namespace AFA.Android.Activities
 {
     [Activity(Label = "Add a New Place")]
-    public class AddPlaceActivity : ReportCrueltyBaseActivity
+    public class AddPlaceActivity : Activity
     {
         private EditText _placeNameInput;
         private EditText _addressInput;
@@ -27,7 +27,7 @@ namespace AFA.Android.Activities
         private EditText _zipInput;
         private Button _submitButton;
 
-        protected override void OnCreate(Bundle bundle)
+		protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
@@ -137,7 +137,8 @@ namespace AFA.Android.Activities
                                 }
                                 else
                                 {
-                                    _crueltyReport.UserGeneratedPlace = new UserGeneratedPlace
+							    	CrueltyReport _crueltyReport = ((AfaApplication)ApplicationContext).CrueltyReport;
+									_crueltyReport.UserGeneratedPlace = new UserGeneratedPlace
                                                                             {
                                                                                 Name = name,
                                                                                 Address = address,
@@ -147,7 +148,7 @@ namespace AFA.Android.Activities
                                                                                 Email = FindViewById<EditText>(Resource.Id.Email).Text
                                                                             };
 
-                                    CommitCrueltyReport();
+                                    
                                     var intent = new Intent(this, typeof(ReportCrueltyActivity));
                                     StartActivity(intent);
                                 }

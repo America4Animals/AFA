@@ -16,13 +16,17 @@ using Android.Preferences;
 using AFA.Android.Helpers;
 using AFA_Android.Helpers;
 using AFA.Android.Utility;
-
+using ActionBar_Sherlock.App;
+using ActionBar_Sherlock.View;
+using SherlockActionBar = ActionBar_Sherlock.App.ActionBar;
+using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
+using Android.Support.V4.App;
 
 
 namespace AFA.Android.Activities
 {
 	[Activity(Label = "Fight It")]
-	public class FightItActivity : Activity
+	public class FightItActivity : Fragment
 	{
 		private ProgressDialog _loadingDialog;
 		private ListView _crueltySpotsList;
@@ -32,18 +36,20 @@ namespace AFA.Android.Activities
 		//private List<CrueltySpot> _otherCrueltySpots;
 		private List<CrueltySpot> _crueltySpots;
 		private GPSTracker _gpsTracker;
+		private RelativeLayout ll;
+		private FragmentActivity fa;
 
-		protected override void OnCreate(Bundle bundle)
+		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
-			base.OnCreate(bundle);
+			fa = base.Activity;
+			ll = (RelativeLayout) inflater.Inflate(Resource.Layout.FightIt, container, false);
+		
 
-			SetContentView(Resource.Layout.FightIt);
-			_gpsTracker = ((AfaApplication)ApplicationContext).GetGpsTracker(this);
-			CrueltyNavMenuHelper.InitCrueltyNavMenu(this, CrueltyNavMenuItem.FightIt);
+			_gpsTracker = ((AfaApplication)fa.ApplicationContext).GetGpsTracker(fa);
+		
+			_loadingDialog = LoadingDialogManager.ShowLoadingDialog (fa);
 
-			_loadingDialog = LoadingDialogManager.ShowLoadingDialog (this);
-
-			_crueltySpotsList = FindViewById<ListView>(Resource.Id.CrueltySpots);
+			_crueltySpotsList = ll.FindViewById<ListView>(Resource.Id.CrueltySpots);
 
 			_crueltySpotsList.ItemClick += (sender, e) =>
 			{
@@ -52,12 +58,13 @@ namespace AFA.Android.Activities
 			};
 			setupSpots ();
 			_loadingDialog.Dismiss();
+			return ll;
 
 		}
 
 		private void NavigateToCrueltySpotDetails (string crueltySpotId)
 		{
-			var intent = new Intent (this, typeof(CrueltySpotActivity));
+			var intent = new Intent (fa, typeof(CrueltySpotActivity));
 			intent.PutExtra (AppConstants.CrueltySpotIdKey, crueltySpotId);
 			StartActivity (intent);
 		}
@@ -98,10 +105,10 @@ namespace AFA.Android.Activities
 			}
 
 			if (_crueltySpots.Any ()) {
-				RunOnUiThread (() => {
+				fa.RunOnUiThread (() => {
 
-					_crueltySpotsList.Adapter = new CrueltySpotsAdapter (this, _crueltySpots);
-					Toast.MakeText (this, "got into dismiss code", ToastLength.Short).Show ();
+					_crueltySpotsList.Adapter = new CrueltySpotsAdapter (fa, _crueltySpots);
+					Toast.MakeText (fa, "got into dismiss code", ToastLength.Short).Show ();
 					_loadingDialog.Dismiss();
 
 				});               
@@ -114,10 +121,10 @@ namespace AFA.Android.Activities
 
 			
 
-		protected override void OnResume ()
+		public override void OnResume ()
 		{
 			base.OnResume ();
-			_loadingDialog = LoadingDialogManager.ShowLoadingDialog (this);
+			_loadingDialog = LoadingDialogManager.ShowLoadingDialog (fa);
 			setupSpots();
 
 		}

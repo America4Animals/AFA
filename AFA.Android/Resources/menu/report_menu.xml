@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:id="@+id/settings" android:icon="@android:drawable/ic_menu_preferences" 
-	android:showAsAction="always|withText" android:title="Settings" android:titleCondensed="Settings">
+	android:showAsAction="always" android:title="Settings" android:titleCondensed="Settings" >
 	</item>
-	<item android:id="@+id/help" android:icon="@android:drawable/ic_menu_help" android:showAsAction="always|withText" 
+	<item android:id="@+id/help" android:icon="@android:drawable/ic_menu_help" android:showAsAction="always" 
 	android:title="Help" android:titleCondensed="Help">
 	</item>
 </menu>

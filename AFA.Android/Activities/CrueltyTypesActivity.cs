@@ -18,13 +18,13 @@ using Parse;
 namespace AFA.Android.Activities
 {
     [Activity(Label = "Types of Cruelty")]
-    public class CrueltyTypesActivity : ReportCrueltyBaseActivity
+    public class CrueltyTypesActivity : Activity
     {
         private ListView _crueltySpotCategoriesList;
         private IList<CrueltySpotCategory> _crueltySpotCategories;
         private ProgressDialog _loadingDialog;
 
-        protected async override void OnCreate(Bundle bundle)
+		protected override async  void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
@@ -41,8 +41,9 @@ namespace AFA.Android.Activities
                 //crueltyType.Id = crueltySpotCategory.Id;
                 crueltyType.Id = crueltySpotCategory.ObjectId;
                 crueltyType.Name = crueltySpotCategory.Name;
+				CrueltyReport _crueltyReport = ((AfaApplication)ApplicationContext).CrueltyReport; 
                 _crueltyReport.CrueltyType = crueltyType;
-                CommitCrueltyReport();
+               
                 StartActivity(intent);
             };
 
