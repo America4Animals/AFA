@@ -19,7 +19,7 @@ using Parse;
 
 namespace AFA.Android.Activities
 {
-    [Activity(Label = "Login", WindowSoftInputMode = SoftInput.AdjustResize)]
+    [Activity(Label = "Welcome", WindowSoftInputMode = SoftInput.AdjustResize)]
     public class LoginActivity : FragmentActivity
 	{
 		//readonly String PENDING_ACTION_BUNDLE_KEY = "com.facebook.samples.hellofacebook:PendingAction";
