@@ -112,10 +112,5 @@
             android:id="@+id/SubmitButton"
             android:layout_marginTop="20dip" />
     </LinearLayout>
-    <include
-        android:id="@+id/crueltyNavMenu"
-        layout="@layout/crueltyNavMenu"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent" />
+  
 </RelativeLayout>

@@ -16,7 +16,7 @@ using Android.Widget;
 namespace AFA.Android.Activities
 {
     [Activity(Label = "Nearby Places")]
-    public class NearbyPlacesActivity : ReportCrueltyBaseActivity
+    public class NearbyPlacesActivity : Activity
     {
         private const string PlaceTypes =
             "airport|amusement_park|aquarium|art_gallery|bakery|bar|beauty_salon|book_store|bowling_alley|bus_station|cafe|casino|church|city_hall|clothing_store|convenience_store|courthouse|department_store|doctor|embassy|establishment|food|funeral_home|gas_station|general_contractor|grocery_or_supermarket|hardware_store|health|hindu_temple|home_goods_store|hospital|liquor_store|local_government_office|lodging|meal_delivery|meal_takeaway|movie_theater|museum|night_club|park|pet_store|pharmacy|physiotherapist|place_of_worship|police|restaurant|rv_park|school|shoe_store|shopping_mall|spa|stadium|store|subway_station|train_station|university|veterinary_care|zoo";
@@ -32,7 +32,7 @@ namespace AFA.Android.Activities
         private Button _loadMoreButton;
         private Button _addNewPlaceButton;
 
-        protected override void OnCreate(Bundle bundle)
+		protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
@@ -166,8 +166,9 @@ namespace AFA.Android.Activities
                 googlePlace.Name = place.name;
                 googlePlace.Vicinity = place.vicinity;
                 googlePlace.Reference = place.reference;
+				CrueltyReport _crueltyReport = ((AfaApplication)ApplicationContext).CrueltyReport;
                 _crueltyReport.GooglePlace = googlePlace;
-                CommitCrueltyReport();
+  
                 StartActivity(intent);
             }
             
