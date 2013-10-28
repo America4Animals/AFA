@@ -11,6 +11,13 @@
         android:layout_height="fill_parent"
         android:background="#FFF"
         android:id="@+id/main_ui_container">
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/allyLogo"
+            android:src="@drawable/animal_ally_logo"
+            android:gravity="center"
+            android:layout_marginTop="15dip" />
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

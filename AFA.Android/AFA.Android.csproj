@@ -35,7 +35,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -182,6 +181,7 @@
     </AndroidResource>
     <AndroidResource Include="Resources\Drawable\collectionsview.png" />
     <AndroidResource Include="Resources\Drawable\locationplace.png" />
+    <AndroidResource Include="Resources\Drawable\animal_ally_logo.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml">
