@@ -11,7 +11,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AFA.Android.Helpers;
-
+using Parse;
 
 namespace AFA.Android
 {
@@ -31,7 +31,11 @@ namespace AFA.Android
 //				StartActivity (typeof (IntroActivity));
 //			}
 
-			StartActivity(typeof(LoginActivity));
+			if (ParseUser.CurrentUser != null) {
+				StartActivity (typeof(IntroActivity));
+			} else {
+				StartActivity(typeof(LoginActivity));
+			}
 		}
 	}
 }
