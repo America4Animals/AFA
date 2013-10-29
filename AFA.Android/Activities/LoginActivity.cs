@@ -13,6 +13,9 @@ using Android.Support.V4.App;
 using Xamarin.FacebookBinding;
 using Xamarin.FacebookBinding.Model;
 using Xamarin.FacebookBinding.Widget;
+using AFA.Android.Helpers;
+using Android.Util;
+using AFA.Android.Utility;
 using Parse;
 
 [assembly: MetaData("com.facebook.sdk.ApplicationId", Value = "@string/FacebookAppId")]
@@ -33,6 +36,8 @@ namespace AFA.Android.Activities
 		//private ProfilePictureView _profilePictureView;
 		private PendingAction _pendingAction = PendingAction.NONE;
 		private ParseUser _parseUser;
+		private LinearLayout _mainLayoutView;
+		private ProgressDialog _loadingDialog;
 
 		public LoginActivity()
 		{
@@ -90,6 +95,8 @@ namespace AFA.Android.Activities
 			_loginButton.SetReadPermissions(new List<string>{"email"});
 			//_profilePictureView = FindViewById<ProfilePictureView> (Resource.Id.profilePicture);
 			//_greeting = FindViewById<TextView> (Resource.Id.greeting);
+
+			_mainLayoutView = FindViewById<LinearLayout> (Resource.Id.main_ui_container);
 
 			_continueAnonymouslyButton = FindViewById<Button>(Resource.Id.btnNoLogin);
 			_continueAnonymouslyButton.Click += (object sender, EventArgs e) => StartActivity (typeof (IntroActivity));;
@@ -150,6 +157,11 @@ namespace AFA.Android.Activities
 
 		private async void UpdateUI()
 		{
+			_mainLayoutView.Visibility = ViewStates.Visible;
+			if (_loadingDialog != null && _loadingDialog.IsShowing) {
+				_loadingDialog.Dismiss ();
+			}
+
 			Session session = Session.ActiveSession;
 			bool openSession = (session != null && session.IsOpened);
 
@@ -161,6 +173,8 @@ namespace AFA.Android.Activities
 				//_greeting.Text = GetString (Resource.String.hello_user, new Java.Lang.String (_user.FirstName));
 
 				if (ParseUser.CurrentUser == null) {
+					_mainLayoutView.Visibility = ViewStates.Invisible;
+					_loadingDialog = DialogManager.ShowLoadingDialog (this, "Logging in", "Please wait...");
 					_parseUser = await LoginParse (_user.Id, session.AccessToken, DateTime.MaxValue);
 					StartActivity (typeof(IntroActivity));
 				} else {

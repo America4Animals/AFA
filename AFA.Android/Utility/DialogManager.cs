@@ -39,5 +39,10 @@ namespace AFA.Android.Helpers
         {
             return ProgressDialog.Show(context, "Submitting", "Please wait...", true);
         }
+
+		public static ProgressDialog ShowLoadingDialog(Context context, string title, string message)
+		{
+			return ProgressDialog.Show (context, title, message, true);
+		}
     }
 }
