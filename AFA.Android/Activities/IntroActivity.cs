@@ -145,7 +145,7 @@ namespace AFA.Android.Activities
 			fightItTab.SetTag ("fight");
 			SupportActionBar.AddTab (fightItTab);
 
-        
+			SupportActionBar.SelectTab (trackItTab);
 		}
 
 		public void OnTabReselected (SherlockActionBar.Tab tab, FragmentTransaction transaction)
