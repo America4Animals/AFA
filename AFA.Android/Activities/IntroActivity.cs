@@ -25,11 +25,10 @@ using AFA.Android.Service;
 using AFA.Android.Library.ServiceModel;
 
 
-
 namespace AFA.Android.Activities
 {
 	[Activity (Label = "@string/ApplicationName")]
-	public class IntroActivity : SherlockFragmentActivity, ActionBar.ITabListener, GoogleMap.IOnInfoWindowClickListener
+	public class IntroActivity : AfaBaseActivity, ActionBar.ITabListener, GoogleMap.IOnInfoWindowClickListener
 	{
 		Fragment reportFragment;
 		Fragment fightitFragment;
@@ -218,6 +217,7 @@ namespace AFA.Android.Activities
 			}
 
 		}
+
 		private void InitMapFragment ()
 		{
 			_mapFragment = SupportFragmentManager.FindFragmentByTag ("map") as SupportMapFragment;
@@ -370,10 +370,11 @@ namespace AFA.Android.Activities
 				var intent = new Intent(this,typeof(LegendActivity));
 			
 				StartActivity(intent);
-
-
+				return true;
 			}
-			return true;
+
+			return base.OnOptionsItemSelected (item);
+
 		}
 
 

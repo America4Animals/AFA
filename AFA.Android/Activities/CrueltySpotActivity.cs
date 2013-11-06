@@ -18,7 +18,7 @@ using AFA.Android.Utility;
 namespace AFA.Android.Activities
 {
     [Activity(Label = "Cruelty Spot")]
-    public class CrueltySpotActivity : Activity
+    public class CrueltySpotActivity : AfaBaseActivity
     {
         private ProgressDialog _loadingDialog;
         private CrueltySpot _crueltySpot;
