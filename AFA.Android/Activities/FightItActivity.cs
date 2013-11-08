@@ -13,7 +13,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Preferences;
-using AFA.Android.Helpers;
 using AFA_Android.Helpers;
 using AFA.Android.Utility;
 using ActionBar_Sherlock.App;

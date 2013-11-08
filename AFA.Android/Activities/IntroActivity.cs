@@ -23,6 +23,7 @@ using AFA.Android.Helpers;
 using AFA_Android.Helpers;
 using AFA.Android.Service;
 using AFA.Android.Library.ServiceModel;
+using AFA.Android.Utility;
 
 
 namespace AFA.Android.Activities
@@ -288,12 +289,17 @@ namespace AFA.Android.Activities
 				_map.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(myLocation, 11));
 
 				List<String> categories = UserPreferencesHelper.GetFilterCategories ();
+
+				DebugHelper.WriteDebugEntry ("Fetched categories for mapping (" + categories.Count + ")");
+
 				if (!categories.Any()) {
 					_crueltySpots = await _crueltySpotsService.GetManyAsync(new CrueltySpot(), true, CrueltySpotSortField.CreatedAt, SortDirection.Asc);
 
 				} else {
 					_crueltySpots = await _crueltySpotsService.GetManyAsync(categories, true, CrueltySpotSortField.CreatedAt, SortDirection.Asc);
 				}
+
+				DebugHelper.WriteDebugEntry ("Fetched CrueltySPots for mapping");
 
 				RunOnUiThread(() =>
 				              {
