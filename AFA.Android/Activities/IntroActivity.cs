@@ -23,13 +23,13 @@ using AFA.Android.Helpers;
 using AFA_Android.Helpers;
 using AFA.Android.Service;
 using AFA.Android.Library.ServiceModel;
-
+using AFA.Android.Utility;
 
 
 namespace AFA.Android.Activities
 {
 	[Activity (Label = "@string/ApplicationName")]
-	public class IntroActivity : SherlockFragmentActivity, ActionBar.ITabListener, GoogleMap.IOnInfoWindowClickListener
+	public class IntroActivity : AfaBaseActivity, ActionBar.ITabListener, GoogleMap.IOnInfoWindowClickListener
 	{
 		Fragment reportFragment;
 		Fragment fightitFragment;
@@ -218,6 +218,7 @@ namespace AFA.Android.Activities
 			}
 
 		}
+
 		private void InitMapFragment ()
 		{
 			_mapFragment = SupportFragmentManager.FindFragmentByTag ("map") as SupportMapFragment;
@@ -288,12 +289,17 @@ namespace AFA.Android.Activities
 				_map.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(myLocation, 11));
 
 				List<String> categories = UserPreferencesHelper.GetFilterCategories ();
+
+				DebugHelper.WriteDebugEntry ("Fetched categories for mapping (" + categories.Count + ")");
+
 				if (!categories.Any()) {
 					_crueltySpots = await _crueltySpotsService.GetManyAsync(new CrueltySpot(), true, CrueltySpotSortField.CreatedAt, SortDirection.Asc);
 
 				} else {
 					_crueltySpots = await _crueltySpotsService.GetManyAsync(categories, true, CrueltySpotSortField.CreatedAt, SortDirection.Asc);
 				}
+
+				DebugHelper.WriteDebugEntry ("Fetched CrueltySPots for mapping");
 
 				RunOnUiThread(() =>
 				              {
@@ -370,10 +376,11 @@ namespace AFA.Android.Activities
 				var intent = new Intent(this,typeof(LegendActivity));
 			
 				StartActivity(intent);
-
-
+				return true;
 			}
-			return true;
+
+			return base.OnOptionsItemSelected (item);
+
 		}
 
 

@@ -2320,6 +2320,9 @@ namespace AFA.Android
 			// aapt resource value: 0x7f050033
 			public const int common_signin_button_text_long = 2131034163;
 			
+			// aapt resource value: 0x7f050056
+			public const int loginMenuItem = 2131034198;
+			
 			// aapt resource value: 0x7f050049
 			public const int mapsAppText = 2131034185;
 			
