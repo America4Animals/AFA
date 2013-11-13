@@ -3,8 +3,17 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <FrameLayout android:id="@+id/fragmentContainer"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent" />
-                 
+    <LinearLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="0.9" />
+    <Button
+        android:text="List"
+        android:id="@+id/ListButton"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:layout_weight="0.1" />
 </LinearLayout>
