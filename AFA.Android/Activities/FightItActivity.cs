@@ -107,7 +107,7 @@ namespace AFA.Android.Activities
 				fa.RunOnUiThread (() => {
 
 					_crueltySpotsList.Adapter = new CrueltySpotsAdapter (fa, _crueltySpots);
-					Toast.MakeText (fa, "got into dismiss code", ToastLength.Short).Show ();
+					//Toast.MakeText (fa, "got into dismiss code", ToastLength.Short).Show ();
 					_loadingDialog.Dismiss();
 
 				});               

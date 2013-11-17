@@ -50,5 +50,6 @@
   <string name="ok">OK</string>
   
   <string name="loginMenuItem">Login</string>
+  <string name="logoutMenuItem">Logout</string>
 
 </resources>

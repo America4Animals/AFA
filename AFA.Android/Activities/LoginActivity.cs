@@ -99,7 +99,7 @@ namespace AFA.Android.Activities
 			_mainLayoutView = FindViewById<LinearLayout> (Resource.Id.main_ui_container);
 
 			_continueAnonymouslyButton = FindViewById<Button>(Resource.Id.btnNoLogin);
-			_continueAnonymouslyButton.Click += (object sender, EventArgs e) => StartActivity (typeof (IntroActivity));;
+			_continueAnonymouslyButton.Click += (object sender, EventArgs e) => StartActivity (typeof (IntroActivity));
 
 			UpdateUI ();
 		}

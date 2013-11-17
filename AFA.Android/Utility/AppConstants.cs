@@ -26,5 +26,7 @@ namespace AFA.Android.Helpers
         public static string CrueltySpotIdKey = "CrueltySpotId";
 
 		public static string HasLaunchedAppKey = "AfaHasLaunchedBefore";
+		
+		public const int LoginLogoutMenuItemId = 10;
     }
 }

@@ -103,6 +103,7 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Activities\AfaBaseActivity.cs" />
     <Compile Include="Activities\HomeFragment.cs" />
+    <Compile Include="Utility\FacebookHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
