@@ -104,6 +104,7 @@
     <Compile Include="Activities\AfaBaseActivity.cs" />
     <Compile Include="Activities\HomeFragment.cs" />
     <Compile Include="Utility\FacebookHelper.cs" />
+    <Compile Include="AfaConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

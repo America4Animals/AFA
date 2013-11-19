@@ -39,7 +39,7 @@ namespace AFA.Android.Activities
             SetContentView(Resource.Layout.Places);
 
             _gpsTracker = ((AfaApplication)ApplicationContext).GetGpsTracker(this);
-            _googlePlaces = new GooglePlacesApi.GooglePlaces();
+			_googlePlaces = new GooglePlacesApi.GooglePlaces(AfaConfig.GoogleApiKey);
             _loading = LoadingDialogManager.ShowLoadingDialog(this);
 
             Log.Debug("Position Lat:", _gpsTracker.Latitude.ToString());

@@ -111,7 +111,7 @@ namespace AFA.Android
 
 				if (_crueltyReport.IsGooglePlace ()) {
 					// Fetch details from google
-					var googlePlaces = new GooglePlacesApi.GooglePlaces ();
+					var googlePlaces = new GooglePlacesApi.GooglePlaces (AfaConfig.GoogleApiKey);
 					googlePlaces.GetDetails (_crueltyReport.GooglePlace.Reference, response =>
 					{
 						// ToDo: Check Status and handle non-OK

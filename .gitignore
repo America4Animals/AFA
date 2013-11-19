@@ -167,3 +167,5 @@ db.sqlite
 AFA.userprefs
 AFA.Android.userprefs
 AFA.Android/com.afa.android.crueltyapp.apk
+
+AfaConfig.cs
