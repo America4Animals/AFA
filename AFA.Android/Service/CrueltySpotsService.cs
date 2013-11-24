@@ -15,7 +15,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Parse;
-//using ServiceStack.Text;
+using Newtonsoft.Json;
 
 namespace AFA.Android.Service
 {
@@ -114,8 +114,8 @@ namespace AFA.Android.Service
 
             //var results = await query.FindAsync();
             //return results.ToList();
-
-            return await GetManyAsync(null, crueltySpotCategoryIds, retrieveCategoryTypes, sortField, sortDirection);
+			DebugHelper.WriteDebugEntry ("Getting cruelty spots for category IDs: " + JsonConvert.SerializeObject(crueltySpotCategoryIds));
+			return await GetManyAsync(null, crueltySpotCategoryIds.ToList(), retrieveCategoryTypes, sortField, sortDirection);
         }
 
         public async Task<List<CrueltySpot>> GetManyAsync(
@@ -143,7 +143,7 @@ namespace AFA.Android.Service
 
         public async Task<List<CrueltySpot>> GetManyAsync(
             GeoQueryRequest geoQueryRequest,
-            IEnumerable<string> crueltySpotCategoryIds,
+			List<string> crueltySpotCategoryIds,
             bool retrieveCategoryTypes,
             CrueltySpotSortField sortField,
             SortDirection sortDirection
@@ -159,11 +159,19 @@ namespace AFA.Android.Service
 
             if (crueltySpotCategoryIds != null)
             {
-                var categoriesQuery = from crueltySpotCategory in new ParseQuery<CrueltySpotCategory>()
+				DebugHelper.WriteDebugEntry ("Begin apply category filter for cruelty spots for category IDs: " + JsonConvert.SerializeObject(crueltySpotCategoryIds));
+				var categoriesQuery = from crueltySpotCategory in new ParseQuery<CrueltySpotCategory>()
                                       where crueltySpotCategoryIds.Contains(crueltySpotCategory.ObjectId)
                                       select crueltySpotCategory;
 
                 query = query.WhereMatchesQuery(CrueltySpotCategoryFieldName, categoriesQuery);
+
+				/*var categoriesQuery = from crueltySpotCategory in new ParseQuery<CrueltySpotCategory>()
+					                      where crueltySpotCategoryIds.Contains(crueltySpotCategory.Get<string>("objectId"))
+				                      select crueltySpotCategory;
+
+				query = query.WhereMatchesQuery(CrueltySpotCategoryFieldName, categoriesQuery);*/
+				DebugHelper.WriteDebugEntry ("End apply category filter");
             }
 
             if (retrieveCategoryTypes)
