@@ -188,6 +188,8 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\HomeFragment.axml" />
+    <AndroidResource Include="Resources\Drawable\ic_action_about.png" />
+    <AndroidResource Include="Resources\Drawable\ic_menu_filter.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml">
