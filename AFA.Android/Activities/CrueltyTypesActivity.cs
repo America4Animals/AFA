@@ -30,15 +30,17 @@ namespace AFA.Android.Activities
 
             SetContentView(Resource.Layout.CrueltyTypes);
 
-            _loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
+            //_loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
+            _loadingDialog = DialogManager.ShowLoadingDialog(this, "Retrieving Cruelty Types");
 
             _crueltySpotCategoriesList = FindViewById<ListView>(Resource.Id.CrueltyTypes);
             _crueltySpotCategoriesList.ItemClick += (sender, e) =>
             {
                 var crueltySpotCategory = _crueltySpotCategories[e.Position];
-                var intent = new Intent(this, typeof(ReportCrueltyActivity));
+                //var intent = new Intent(this, typeof(ReportCrueltyFragment));
+                var intent = new Intent(this, typeof(IntroActivity));
+                intent.PutExtra("tab", "report");
                 var crueltyType = new CrueltyType();
-                //crueltyType.Id = crueltySpotCategory.Id;
                 crueltyType.Id = crueltySpotCategory.ObjectId;
                 crueltyType.Name = crueltySpotCategory.Name;
 				CrueltyReport _crueltyReport = ((AfaApplication)ApplicationContext).CrueltyReport; 

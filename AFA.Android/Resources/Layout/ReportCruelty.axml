@@ -59,6 +59,7 @@
             android:id="@+id/LocationInput"
             android:textColor="@color/pink"
             android:textColorHint="@color/pink"
+            android:focusableInTouchMode="false"
             android:hint="Location"
             android:layout_marginBottom="10dip" />
         <EditText
@@ -68,6 +69,7 @@
             android:textColor="@color/pink"
             android:textColorHint="@color/pink"
             android:hint="Type of Cruelty"
+            android:focusableInTouchMode="false"
             android:layout_marginBottom="10dip" />
         <LinearLayout
             android:orientation="horizontal"
@@ -112,5 +114,4 @@
             android:id="@+id/SubmitButton"
             android:layout_marginTop="20dip" />
     </LinearLayout>
-  
 </RelativeLayout>

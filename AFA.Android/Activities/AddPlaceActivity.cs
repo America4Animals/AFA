@@ -99,7 +99,7 @@ namespace AFA.Android.Activities
                     }
                     else
                     {
-                        var loadingDialog = DialogManager.ShowLoadingDialog(this);
+                        var loadingDialog = DialogManager.ShowSubmittingDialog(this);
                         var name = _placeNameInput.Text;
                         var address = _addressInput.Text;
                         var city = _cityInput.Text;
@@ -149,7 +149,7 @@ namespace AFA.Android.Activities
                                                                             };
 
                                     
-                                    var intent = new Intent(this, typeof(ReportCrueltyActivity));
+                                    var intent = new Intent(this, typeof(ReportCrueltyFragment));
                                     StartActivity(intent);
                                 }
                             });

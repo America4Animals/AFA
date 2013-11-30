@@ -40,7 +40,7 @@ namespace AFA.Android.Activities
 
             _gpsTracker = ((AfaApplication)ApplicationContext).GetGpsTracker(this);
 			_googlePlaces = new GooglePlacesApi.GooglePlaces(AfaConfig.GoogleApiKey);
-            _loading = LoadingDialogManager.ShowLoadingDialog(this);
+		    _loading = DialogManager.ShowLoadingDialog(this, "Retrieving Nearby Places");
 
             Log.Debug("Position Lat:", _gpsTracker.Latitude.ToString());
             Log.Debug("Position Lng:", _gpsTracker.Longitude.ToString());
@@ -160,7 +160,9 @@ namespace AFA.Android.Activities
             }
             else
             {
-                var intent = new Intent(this, typeof(ReportCrueltyActivity));
+                //var intent = new Intent(this, typeof(ReportCrueltyFragment));
+                var intent = new Intent(this, typeof(IntroActivity));
+                intent.PutExtra("tab", "report");
                 // Must be a google place because if not, it would have been flagged as reported
                 var googlePlace = new AFA.Android.Helpers.GooglePlace();
                 googlePlace.Name = place.name;

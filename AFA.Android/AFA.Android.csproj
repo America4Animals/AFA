@@ -89,7 +89,7 @@
     <Compile Include="Utility\LoadingDialogManager.cs" />
     <Compile Include="Adapters\OrganizationListAdapter.cs" />
     <Compile Include="Activities\OrganizationsActivity.cs" />
-    <Compile Include="Activities\ReportCrueltyActivity.cs" />
+    <Compile Include="Activities\ReportCrueltyFragment.cs" />
     <Compile Include="Adapters\PlacesListAdapter.cs" />
     <Compile Include="Adapters\UserListAdapter.cs" />
     <Compile Include="Activities\OrganizationUsersActivity.cs" />
@@ -109,159 +109,159 @@
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\Layout\crueltyNavMenu.xml">
+    <AndroidResource Include="Resources\layout\crueltyNavMenu.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Values\Styles.xml" />
-    <AndroidResource Include="Resources\Drawable\splash.png" />
-    <AndroidResource Include="Resources\Drawable\monkey.png" />
-    <AndroidResource Include="Resources\Drawable\polarbear.jpg" />
-    <AndroidResource Include="Resources\Layout\custom_info_content.xml" />
-    <AndroidResource Include="Resources\Drawable\button_red.xml">
+    <AndroidResource Include="Resources\values\Styles.xml" />
+    <AndroidResource Include="Resources\drawable\splash.png" />
+    <AndroidResource Include="Resources\drawable\monkey.png" />
+    <AndroidResource Include="Resources\drawable\polarbear.jpg" />
+    <AndroidResource Include="Resources\layout\custom_info_content.xml" />
+    <AndroidResource Include="Resources\drawable\button_red.xml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Drawable\performancepin.png" />
-    <AndroidResource Include="Resources\Drawable\rodeopin.png" />
-    <AndroidResource Include="Resources\Drawable\foiegraspin.png" />
-    <AndroidResource Include="Resources\Drawable\cariaggespin.png" />
-    <AndroidResource Include="Resources\Drawable\labspin.png" />
-    <AndroidResource Include="Resources\Drawable\morepin.png" />
-    <AndroidResource Include="Resources\Drawable\petstorespin.png" />
-    <AndroidResource Include="Resources\Drawable\racespin.png" />
-    <AndroidResource Include="Resources\Drawable\sharkpin.png" />
+    <AndroidResource Include="Resources\drawable\performancepin.png" />
+    <AndroidResource Include="Resources\drawable\rodeopin.png" />
+    <AndroidResource Include="Resources\drawable\foiegraspin.png" />
+    <AndroidResource Include="Resources\drawable\cariaggespin.png" />
+    <AndroidResource Include="Resources\drawable\labspin.png" />
+    <AndroidResource Include="Resources\drawable\morepin.png" />
+    <AndroidResource Include="Resources\drawable\petstorespin.png" />
+    <AndroidResource Include="Resources\drawable\racespin.png" />
+    <AndroidResource Include="Resources\drawable\sharkpin.png" />
     <AndroidResource Include="Resources\menu\report_menu.xml" />
-    <AndroidResource Include="Resources\Layout\AddPlace.axml">
+    <AndroidResource Include="Resources\layout\AddPlace.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\CrueltyMap.axml">
+    <AndroidResource Include="Resources\layout\CrueltyMap.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\CrueltySpot.axml">
+    <AndroidResource Include="Resources\layout\CrueltySpot.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\CrueltySpotListItem.axml">
+    <AndroidResource Include="Resources\layout\CrueltySpotListItem.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\CrueltyTypeListItem.axml">
+    <AndroidResource Include="Resources\layout\CrueltyTypeListItem.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\CrueltyTypes.axml">
+    <AndroidResource Include="Resources\layout\CrueltyTypes.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\Events.axml">
+    <AndroidResource Include="Resources\layout\Events.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\FightIt.axml">
+    <AndroidResource Include="Resources\layout\FightIt.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\Legend.axml" />
-    <AndroidResource Include="Resources\Layout\LegendListItem.axml" />
-    <AndroidResource Include="Resources\Layout\Login.axml" />
-    <AndroidResource Include="Resources\Layout\Organization.axml">
+    <AndroidResource Include="Resources\layout\Legend.axml" />
+    <AndroidResource Include="Resources\layout\LegendListItem.axml" />
+    <AndroidResource Include="Resources\layout\Login.axml" />
+    <AndroidResource Include="Resources\layout\Organization.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\OrganizationListItem.axml">
+    <AndroidResource Include="Resources\layout\OrganizationListItem.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\Organizations.axml">
+    <AndroidResource Include="Resources\layout\Organizations.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\OrganizationUsers.axml">
+    <AndroidResource Include="Resources\layout\OrganizationUsers.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\PlaceListItem.axml">
+    <AndroidResource Include="Resources\layout\PlaceListItem.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\Places.axml">
+    <AndroidResource Include="Resources\layout\Places.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\ReportCruelty.axml">
+    <AndroidResource Include="Resources\layout\ReportCruelty.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\UserListItem.axml">
+    <AndroidResource Include="Resources\layout\UserListItem.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Drawable\collectionsview.png" />
-    <AndroidResource Include="Resources\Drawable\locationplace.png" />
-    <AndroidResource Include="Resources\Drawable\animal_ally_logo.jpg" />
-    <AndroidResource Include="Resources\Layout\Intro.axml">
+    <AndroidResource Include="Resources\drawable\collectionsview.png" />
+    <AndroidResource Include="Resources\drawable\locationplace.png" />
+    <AndroidResource Include="Resources\drawable\animal_ally_logo.jpg" />
+    <AndroidResource Include="Resources\layout\Intro.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Layout\HomeFragment.axml" />
-    <AndroidResource Include="Resources\Drawable\ic_action_about.png" />
-    <AndroidResource Include="Resources\Drawable\ic_menu_filter.png" />
+    <AndroidResource Include="Resources\layout\HomeFragment.axml" />
+    <AndroidResource Include="Resources\drawable\ic_action_about.png" />
+    <AndroidResource Include="Resources\drawable\ic_menu_filter.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Values\Strings.xml">
+    <AndroidResource Include="Resources\values\Strings.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\Icon.png" />
+    <AndroidResource Include="Resources\drawable\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\sharkFin.png" />
+    <AndroidResource Include="Resources\drawable\sharkFin.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
-    <AndroidResource Include="Resources\Drawable\list_selector.xml" />
-    <AndroidResource Include="Resources\Drawable\newsIcon.png" />
-    <AndroidResource Include="Resources\Drawable\calendarIcon.png" />
-    <AndroidResource Include="Resources\Drawable\speechIcon.png" />
-    <AndroidResource Include="Resources\Drawable\downloadIcon.png" />
-    <AndroidResource Include="Resources\Drawable\mapIcon.png" />
-    <AndroidResource Include="Resources\Drawable\monitorIcon.png" />
-    <AndroidResource Include="Resources\Drawable\peopleIcon.png" />
-    <AndroidResource Include="Resources\Drawable\phoneIcon.png" />
-    <AndroidResource Include="Resources\Drawable\rightArrow.png" />
-    <AndroidResource Include="Resources\Layout\compassionMenu.xml">
+    <AndroidResource Include="Resources\drawable\list_selector.xml" />
+    <AndroidResource Include="Resources\drawable\newsIcon.png" />
+    <AndroidResource Include="Resources\drawable\calendarIcon.png" />
+    <AndroidResource Include="Resources\drawable\speechIcon.png" />
+    <AndroidResource Include="Resources\drawable\downloadIcon.png" />
+    <AndroidResource Include="Resources\drawable\mapIcon.png" />
+    <AndroidResource Include="Resources\drawable\monitorIcon.png" />
+    <AndroidResource Include="Resources\drawable\peopleIcon.png" />
+    <AndroidResource Include="Resources\drawable\phoneIcon.png" />
+    <AndroidResource Include="Resources\drawable\rightArrow.png" />
+    <AndroidResource Include="Resources\layout\compassionMenu.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\Drawable\fail.png" />
-    <AndroidResource Include="Resources\Drawable\success.png" />
-    <AndroidResource Include="Resources\Drawable\search.png" />
-    <AndroidResource Include="Resources\Drawable\bullhornIcon.png" />
-    <AndroidResource Include="Resources\Drawable\pencilIcon.png" />
-    <AndroidResource Include="Resources\Drawable\ellipsisIcon.png" />
-    <AndroidResource Include="Resources\Drawable\cariagges.png" />
-    <AndroidResource Include="Resources\Drawable\foiegras.png" />
-    <AndroidResource Include="Resources\Drawable\fur.png" />
-    <AndroidResource Include="Resources\Drawable\labs.png" />
-    <AndroidResource Include="Resources\Drawable\more.png" />
-    <AndroidResource Include="Resources\Drawable\performance.png" />
-    <AndroidResource Include="Resources\Drawable\petstores.png" />
-    <AndroidResource Include="Resources\Drawable\races.png" />
-    <AndroidResource Include="Resources\Drawable\rodeo.png" />
-    <AndroidResource Include="Resources\Drawable\shark.png" />
-    <AndroidResource Include="Resources\Drawable\dark_gray_round_border.xml" />
-    <AndroidResource Include="Resources\Drawable\furpin.png" />
-    <AndroidResource Include="Resources\Drawable\button_green.xml" />
-    <AndroidResource Include="Resources\Drawable\button_pink.xml" />
-    <AndroidResource Include="Resources\Drawable\mapbackground.png" />
-    <AndroidResource Include="Resources\Drawable\rounded_rectangle.xml" />
-    <AndroidResource Include="Resources\Drawable\appback.jpg" />
-    <AndroidResource Include="Resources\Drawable\fight.png" />
-    <AndroidResource Include="Resources\Drawable\report.png" />
-    <AndroidResource Include="Resources\Drawable\track.png" />
-    <AndroidResource Include="Resources\Drawable\border_top_bottom.xml" />
-    <AndroidResource Include="Resources\Drawable\cariagges_lg.png" />
-    <AndroidResource Include="Resources\Drawable\foiegras_lg.png" />
-    <AndroidResource Include="Resources\Drawable\fur_lg.png" />
-    <AndroidResource Include="Resources\Drawable\labs_lg.png" />
-    <AndroidResource Include="Resources\Drawable\performance_lg.png" />
-    <AndroidResource Include="Resources\Drawable\petstores_lg.png" />
-    <AndroidResource Include="Resources\Drawable\races_lg.png" />
-    <AndroidResource Include="Resources\Drawable\rodeo_lg.png" />
-    <AndroidResource Include="Resources\Drawable\shark_lg.png" />
-    <AndroidResource Include="Resources\Drawable\cariagges_med.png" />
-    <AndroidResource Include="Resources\Drawable\foiegras_med.png" />
-    <AndroidResource Include="Resources\Drawable\fur_med.png" />
-    <AndroidResource Include="Resources\Drawable\labs_med.png" />
-    <AndroidResource Include="Resources\Drawable\performance_med.png" />
-    <AndroidResource Include="Resources\Drawable\petstores_med.png" />
-    <AndroidResource Include="Resources\Drawable\races_med.png" />
-    <AndroidResource Include="Resources\Drawable\rodeo_med.png" />
-    <AndroidResource Include="Resources\Drawable\shark_med.png" />
+    <AndroidResource Include="Resources\drawable\fail.png" />
+    <AndroidResource Include="Resources\drawable\success.png" />
+    <AndroidResource Include="Resources\drawable\search.png" />
+    <AndroidResource Include="Resources\drawable\bullhornIcon.png" />
+    <AndroidResource Include="Resources\drawable\pencilIcon.png" />
+    <AndroidResource Include="Resources\drawable\ellipsisIcon.png" />
+    <AndroidResource Include="Resources\drawable\cariagges.png" />
+    <AndroidResource Include="Resources\drawable\foiegras.png" />
+    <AndroidResource Include="Resources\drawable\fur.png" />
+    <AndroidResource Include="Resources\drawable\labs.png" />
+    <AndroidResource Include="Resources\drawable\more.png" />
+    <AndroidResource Include="Resources\drawable\performance.png" />
+    <AndroidResource Include="Resources\drawable\petstores.png" />
+    <AndroidResource Include="Resources\drawable\races.png" />
+    <AndroidResource Include="Resources\drawable\rodeo.png" />
+    <AndroidResource Include="Resources\drawable\shark.png" />
+    <AndroidResource Include="Resources\drawable\dark_gray_round_border.xml" />
+    <AndroidResource Include="Resources\drawable\furpin.png" />
+    <AndroidResource Include="Resources\drawable\button_green.xml" />
+    <AndroidResource Include="Resources\drawable\button_pink.xml" />
+    <AndroidResource Include="Resources\drawable\mapbackground.png" />
+    <AndroidResource Include="Resources\drawable\rounded_rectangle.xml" />
+    <AndroidResource Include="Resources\drawable\appback.jpg" />
+    <AndroidResource Include="Resources\drawable\fight.png" />
+    <AndroidResource Include="Resources\drawable\report.png" />
+    <AndroidResource Include="Resources\drawable\track.png" />
+    <AndroidResource Include="Resources\drawable\border_top_bottom.xml" />
+    <AndroidResource Include="Resources\drawable\cariagges_lg.png" />
+    <AndroidResource Include="Resources\drawable\foiegras_lg.png" />
+    <AndroidResource Include="Resources\drawable\fur_lg.png" />
+    <AndroidResource Include="Resources\drawable\labs_lg.png" />
+    <AndroidResource Include="Resources\drawable\performance_lg.png" />
+    <AndroidResource Include="Resources\drawable\petstores_lg.png" />
+    <AndroidResource Include="Resources\drawable\races_lg.png" />
+    <AndroidResource Include="Resources\drawable\rodeo_lg.png" />
+    <AndroidResource Include="Resources\drawable\shark_lg.png" />
+    <AndroidResource Include="Resources\drawable\cariagges_med.png" />
+    <AndroidResource Include="Resources\drawable\foiegras_med.png" />
+    <AndroidResource Include="Resources\drawable\fur_med.png" />
+    <AndroidResource Include="Resources\drawable\labs_med.png" />
+    <AndroidResource Include="Resources\drawable\performance_med.png" />
+    <AndroidResource Include="Resources\drawable\petstores_med.png" />
+    <AndroidResource Include="Resources\drawable\races_med.png" />
+    <AndroidResource Include="Resources\drawable\rodeo_med.png" />
+    <AndroidResource Include="Resources\drawable\shark_med.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
@@ -292,7 +292,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <AndroidAsset Include="Resources\Drawable\contentnew.png" />
+    <AndroidResource Include="Resources\drawable\contentnew.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="parse">

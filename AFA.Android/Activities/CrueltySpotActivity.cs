@@ -56,9 +56,7 @@ namespace AFA.Android.Activities
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.CrueltySpot);
-
-         
+            SetContentView(Resource.Layout.CrueltySpot);        
 
             _loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
 

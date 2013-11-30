@@ -14,6 +14,8 @@ namespace AFA.Android.Helpers
 {
     public static class DialogManager
     {
+        public static string DefaultWaitingText = "Please wait...";
+
         public static void ShowAlertDialog(Context context, string title, string message,
                                     bool isSuccessStatus)
         {
@@ -35,12 +37,17 @@ namespace AFA.Android.Helpers
             alertDialog.Show();
         }
 
-        public static ProgressDialog ShowLoadingDialog(Context context)
+        public static ProgressDialog ShowSubmittingDialog(Context context)
         {
-            return ProgressDialog.Show(context, "Submitting", "Please wait...", true);
+            return ProgressDialog.Show(context, "Submitting", DefaultWaitingText, true);
         }
 
-		public static ProgressDialog ShowLoadingDialog(Context context, string title, string message)
+        public static ProgressDialog ShowLoadingDialog(Context context, string title)
+        {
+            return ShowLoadingDialog(context, title, DefaultWaitingText);
+        }
+
+        public static ProgressDialog ShowLoadingDialog(Context context, string title, string message)
 		{
 			return ProgressDialog.Show (context, title, message, true);
 		}

@@ -54,7 +54,6 @@ namespace AFA.Android.Activities
 
 		class CustomInfoWindowAdapter : Java.Lang.Object, GoogleMap.IInfoWindowAdapter
 		{
-
 			// These a both viewgroups containing an ImageView with id "badge" and two TextViews with id
 			// "title" and "snippet".
 
@@ -118,8 +117,10 @@ namespace AFA.Android.Activities
 				}
 			}
 		}
+
 		protected override void OnCreate (Bundle bundle)
 		{
+		    DebugHelper.WriteDebugEntry("In IntroActivity OnCreate()");
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.Intro);
 			_gpsTracker = ((AfaApplication)ApplicationContext).GetGpsTracker (this);
@@ -198,7 +199,21 @@ namespace AFA.Android.Activities
 			reportItTab.SetTag ("report");
 			SupportActionBar.AddTab (reportItTab);
 
-			SupportActionBar.SelectTab (trackItTab);
+            string initTabTag = Intent.GetStringExtra("tab") ?? "";
+
+		    switch (initTabTag.ToLower())
+		    {
+                case "home":
+                    SupportActionBar.SelectTab(homeTab);
+		            break;
+                case "report":
+                    SupportActionBar.SelectTab(reportItTab);
+		            break;
+                default:
+                    SupportActionBar.SelectTab(trackItTab);
+		            break;
+
+		    }
 		
 		}
 
@@ -236,7 +251,7 @@ namespace AFA.Android.Activities
 
 
 				if (reportFragment == null) {
-					reportFragment = new ReportCrueltyActivity ();
+					reportFragment = new ReportCrueltyFragment ();
 
 					transaction.Add (Resource.Id.fragmentContainer, reportFragment, "report");
 
@@ -333,6 +348,8 @@ namespace AFA.Android.Activities
 
 		protected override void OnResume ()
 		{
+            DebugHelper.WriteDebugEntry("In IntroActivity OnCreate()");
+
 			base.OnResume ();
 			SetupMapIfNeeded ();
 			if (_map != null) {
@@ -342,7 +359,6 @@ namespace AFA.Android.Activities
 				_map.MarkerClick += MapOnMarkerClick;
 			}
 		}
-
 
 		public async void SetupMapIfNeeded ()
 		{
