@@ -24,25 +24,27 @@ using AFA_Android.Helpers;
 using AFA.Android.Service;
 using AFA.Android.Library.ServiceModel;
 using AFA.Android.Utility;
+using ContentPM = Android.Content.PM;
+using SupportV4 = Android.Support.V4.App;
 
 
 namespace AFA.Android.Activities
 {
-	[Activity (Label = "@string/ApplicationName")]
-	public class IntroActivity : AfaBaseActivity, ActionBar.ITabListener, GoogleMap.IOnInfoWindowClickListener
+    [Activity(Label = "@string/ApplicationName", ConfigurationChanges = ContentPM.ConfigChanges.Orientation) ]
+	public class IntroActivity : AfaBaseActivity, SherlockActionBar.ITabListener, GoogleMap.IOnInfoWindowClickListener
 	{
-		Fragment reportFragment;
-		Fragment fightitFragment;
-		Fragment homeFragment;
+		SupportV4.Fragment reportFragment;
+		SupportV4.Fragment fightitFragment;
+		SupportV4.Fragment homeFragment;
 		private GoogleMap _map;
 		private SupportMapFragment _mapFragment;
 		private GPSTracker _gpsTracker;
-		//List<CrueltySpotDto> _crueltySpots;
 		List<CrueltySpot> _crueltySpots;
 		private CrueltySpotsService _crueltySpotsService;
-		//Dictionary<String,CrueltySpotDto> _crueltyLookup = new Dictionary<String,CrueltySpotDto> ();
 		Dictionary<String, CrueltySpot> _crueltyLookup = new Dictionary<String, CrueltySpot>();
 		private String toggleString = "map";
+	    private string _currentTabTag;
+
 		Dictionary<String,float> _pinColorLookup = new Dictionary<String,float> 
 		{
 			{"cariaggespin",128}, {"foiegraspin",56}, {"labspin",198}, {"morepin",327}, 
@@ -189,7 +191,6 @@ namespace AFA.Android.Activities
 			trackItTab.SetText ("Track it");
 			trackItTab.SetTabListener (this);
 			trackItTab.SetTag ("track");
-
 			SupportActionBar.AddTab (trackItTab);
 
 
@@ -199,9 +200,24 @@ namespace AFA.Android.Activities
 			reportItTab.SetTag ("report");
 			SupportActionBar.AddTab (reportItTab);
 
-            string initTabTag = Intent.GetStringExtra("tab") ?? "";
 
-		    switch (initTabTag.ToLower())
+            string tabFromIntent = Intent.GetStringExtra("tab") ?? null;
+            if (tabFromIntent != null)
+            {
+                _currentTabTag = tabFromIntent;
+            }
+		    else if(bundle != null)
+		    {
+                _currentTabTag = bundle.GetString("tab") ?? "";
+		    }
+		    else
+		    {
+		        _currentTabTag = "";
+		    }
+
+
+            DebugHelper.WriteDebugEntry("Selecting Tab");
+            switch (_currentTabTag.ToLower())
 		    {
                 case "home":
                     SupportActionBar.SelectTab(homeTab);
@@ -225,6 +241,9 @@ namespace AFA.Android.Activities
 
 		public void OnTabSelected (SherlockActionBar.Tab tab, FragmentTransaction transaction)
 		{
+            DebugHelper.WriteDebugEntry("In IntroActivity OnTabSelected(): " + tab.Tag);
+		    _currentTabTag = (String)tab.Tag;
+
 			if ((String)tab.Tag == "home") {
 				if (homeFragment == null) {
 					homeFragment = new HomeFragment ();
@@ -270,6 +289,8 @@ namespace AFA.Android.Activities
 
 		public void OnTabUnselected (SherlockActionBar.Tab tab, FragmentTransaction transaction)
 		{
+            DebugHelper.WriteDebugEntry("In IntroActivity OnTabUnselected()");
+
 			if ((String)tab.Tag == "report") {
 				if (reportFragment != null) {
 				
@@ -303,7 +324,14 @@ namespace AFA.Android.Activities
 
 		}
 
-		private void InitMapFragment ()
+	    protected override void OnSaveInstanceState(Bundle outState)
+	    {
+	        base.OnSaveInstanceState(outState);
+
+            outState.PutString("tab", _currentTabTag);
+	    }
+
+	    private void InitMapFragment ()
 		{
 			_mapFragment = SupportFragmentManager.FindFragmentByTag ("map") as SupportMapFragment;
 			if (_mapFragment == null) {
@@ -334,6 +362,7 @@ namespace AFA.Android.Activities
 
 		protected override void OnPause ()
 		{
+            DebugHelper.WriteDebugEntry("In IntroActivity OnPause()");
 			base.OnPause ();
 
 			// Pause the GPS - we won't have to worry about showing the 
@@ -348,7 +377,7 @@ namespace AFA.Android.Activities
 
 		protected override void OnResume ()
 		{
-            DebugHelper.WriteDebugEntry("In IntroActivity OnCreate()");
+            DebugHelper.WriteDebugEntry("In IntroActivity OnResume()");
 
 			base.OnResume ();
 			SetupMapIfNeeded ();
@@ -360,7 +389,7 @@ namespace AFA.Android.Activities
 			}
 		}
 
-		public async void SetupMapIfNeeded ()
+	    public async void SetupMapIfNeeded ()
 		{
 			if (_map == null && _mapFragment != null) {
 				_map = _mapFragment.Map;

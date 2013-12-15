@@ -74,11 +74,11 @@ namespace AFA.Android.Service
                 query = query.WhereEqualTo(StateProvinceAbbreviationField, request.StateProvinceAbbreviation);
             }
 
-			DebugHelper.WriteDebugEntry ("Applying sort to CrueltySpotQuery: " + query.ToString ());
-			DebugHelper.WriteDebugEntry ("Sort Field: " + sortField.ToString());
-			DebugHelper.WriteDebugEntry ("Sort Dir: " + sortDirection.ToString());
+			//DebugHelper.WriteDebugEntry ("Applying sort to CrueltySpotQuery: " + query.ToString ());
+			//DebugHelper.WriteDebugEntry ("Sort Field: " + sortField.ToString());
+			//DebugHelper.WriteDebugEntry ("Sort Dir: " + sortDirection.ToString());
 			//query = ApplySort(query, sortField, sortDirection);
-			DebugHelper.WriteDebugEntry ("Applied sort to query, fetching results");
+			//DebugHelper.WriteDebugEntry ("Applied sort to query, fetching results");
             var results = await query.FindAsync();
 
             return results.ToList();
