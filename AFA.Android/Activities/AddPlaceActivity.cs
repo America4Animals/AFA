@@ -14,10 +14,12 @@ using Android.Views;
 using Android.Widget;
 using Android.Locations;
 using Java.Util;
+using Android.Content.PM; 
+
 
 namespace AFA.Android.Activities
 {
-    [Activity(Label = "Add a New Place")]
+	[Activity(Label = "Add a New Place",ScreenOrientation = ScreenOrientation.Portrait)]
     public class AddPlaceActivity : Activity
     {
         private EditText _placeNameInput;

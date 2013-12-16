@@ -9,10 +9,11 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Content.PM;
 
 namespace AFA.Android
 {
-    [Activity(Label = "My Activity")]
+	[Activity(Label = "My Activity",ScreenOrientation = ScreenOrientation.Portrait)]
     public class UserActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)

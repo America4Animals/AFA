@@ -24,11 +24,12 @@ using AFA_Android.Helpers;
 using AFA.Android.Service;
 using AFA.Android.Library.ServiceModel;
 using AFA.Android.Utility;
+using Android.Content.PM; 
 
 
 namespace AFA.Android.Activities
 {
-	[Activity (Label = "@string/ApplicationName")]
+	[Activity (Label = "@string/ApplicationName",ScreenOrientation = ScreenOrientation.Portrait)]
 	public class IntroActivity : AfaBaseActivity, ActionBar.ITabListener, GoogleMap.IOnInfoWindowClickListener
 	{
 		Fragment reportFragment;
@@ -153,7 +154,7 @@ namespace AFA.Android.Activities
 							ft.Show (fightitFragment);
 
 						}
-
+						listButton.Text ="Map";
 
 					}
 					else{
@@ -166,6 +167,7 @@ namespace AFA.Android.Activities
 
 						ft.Show (_mapFragment);
 						SetupMapIfNeeded ();
+						listButton.Text ="List";
 
 					}
 					ft.Commit();

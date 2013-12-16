@@ -13,11 +13,12 @@ using Android.Views;
 using Android.Widget;
 using Android.Util;
 using AFA.Android.Utility;
+using Android.Content.PM;
 
 
 namespace AFA.Android.Activities
 {
-    [Activity(Label = "Cruelty Spot")]
+	[Activity(Label = "Cruelty Spot",ScreenOrientation = ScreenOrientation.Portrait)]
     public class CrueltySpotActivity : AfaBaseActivity
     {
         private ProgressDialog _loadingDialog;

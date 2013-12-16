@@ -11,11 +11,12 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Android.Content.PM; 
 //using ServiceStack.Text;
 
 namespace AFA.Android.Activities
 {
-    [Activity(Label = "Nearby Places")]
+	[Activity(Label = "Nearby Places",ScreenOrientation = ScreenOrientation.Portrait)]
     public class NearbyPlacesActivity : Activity
     {
         private const string PlaceTypes =

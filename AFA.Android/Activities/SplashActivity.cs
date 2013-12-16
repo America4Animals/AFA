@@ -12,10 +12,11 @@ using Android.Views;
 using Android.Widget;
 using AFA.Android.Helpers;
 using Parse;
+using Android.Content.PM;
 
 namespace AFA.Android
 {
-	[Activity (MainLauncher = true, Theme = "@style/Theme.Splash", NoHistory = true)]		
+	[Activity (MainLauncher = true, Theme = "@style/Theme.Splash", NoHistory = true,ScreenOrientation = ScreenOrientation.Portrait)]		
 	public class SplashActivity : Activity
 	{
 		protected override void OnCreate (Bundle bundle)
