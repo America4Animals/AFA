@@ -17,12 +17,13 @@ using AFA.Android.Helpers;
 using Android.Util;
 using AFA.Android.Utility;
 using Parse;
+using Android.Content.PM; 
 
 [assembly: MetaData("com.facebook.sdk.ApplicationId", Value = "@string/FacebookAppId")]
 
 namespace AFA.Android.Activities
 {
-    [Activity(Label = "Welcome", WindowSoftInputMode = SoftInput.AdjustResize)]
+	[Activity(Label = "Welcome", WindowSoftInputMode = SoftInput.AdjustResize,ScreenOrientation = ScreenOrientation.Portrait)]
     public class LoginActivity : FragmentActivity
 	{
 		//readonly String PENDING_ACTION_BUNDLE_KEY = "com.facebook.samples.hellofacebook:PendingAction";

@@ -13,10 +13,11 @@ using AFA.Android.Activities;
 using Parse;
 using AFA.Android.Helpers;
 using Xamarin.FacebookBinding;
+using Android.Content.PM; 
 
 namespace AFA.Android
 {
-	[Activity (Label = "AfaBaseActivity")]			
+	[Activity (Label = "AfaBaseActivity", ScreenOrientation = ScreenOrientation.Portrait)]			
 	public class AfaBaseActivity : SherlockFragmentActivity
 	{
 		private ActionBar_Sherlock.View.IMenuItem _loginLogoutMenuItem;

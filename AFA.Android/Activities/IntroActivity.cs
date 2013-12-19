@@ -24,18 +24,17 @@ using AFA_Android.Helpers;
 using AFA.Android.Service;
 using AFA.Android.Library.ServiceModel;
 using AFA.Android.Utility;
-using ContentPM = Android.Content.PM;
-using SupportV4 = Android.Support.V4.App;
+using Android.Content.PM; 
 
 
 namespace AFA.Android.Activities
 {
-    [Activity(Label = "@string/ApplicationName", ConfigurationChanges = ContentPM.ConfigChanges.Orientation) ]
-	public class IntroActivity : AfaBaseActivity, SherlockActionBar.ITabListener, GoogleMap.IOnInfoWindowClickListener
+	[Activity (Label = "@string/ApplicationName",ScreenOrientation = ScreenOrientation.Portrait)]
+	public class IntroActivity : AfaBaseActivity, ActionBar.ITabListener, GoogleMap.IOnInfoWindowClickListener
 	{
-		SupportV4.Fragment reportFragment;
-		SupportV4.Fragment fightitFragment;
-		SupportV4.Fragment homeFragment;
+		Fragment reportFragment;
+		Fragment fightitFragment;
+		Fragment homeFragment;
 		private GoogleMap _map;
 		private SupportMapFragment _mapFragment;
 		private GPSTracker _gpsTracker;
@@ -155,7 +154,7 @@ namespace AFA.Android.Activities
 							ft.Show (fightitFragment);
 
 						}
-
+						listButton.Text ="Map";
 
 					}
 					else{
@@ -168,6 +167,7 @@ namespace AFA.Android.Activities
 
 						ft.Show (_mapFragment);
 						SetupMapIfNeeded ();
+						listButton.Text ="List";
 
 					}
 					ft.Commit();

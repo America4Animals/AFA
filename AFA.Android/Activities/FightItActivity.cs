@@ -20,11 +20,12 @@ using ActionBar_Sherlock.View;
 using SherlockActionBar = ActionBar_Sherlock.App.ActionBar;
 using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 using Android.Support.V4.App;
+using Android.Content.PM;
 
 
 namespace AFA.Android.Activities
 {
-	[Activity(Label = "Fight It")]
+	[Activity(Label = "Fight It",ScreenOrientation = ScreenOrientation.Portrait)]
 	public class FightItActivity : Fragment
 	{
 		private ProgressDialog _loadingDialog;

@@ -14,10 +14,11 @@ using Android.Widget;
 using AFA.Android.Library;
 using AFA.Android.Service;
 using Parse;
+using Android.Content.PM;
 
 namespace AFA.Android.Activities
 {
-    [Activity(Label = "Types of Cruelty")]
+	[Activity(Label = "Types of Cruelty",ScreenOrientation = ScreenOrientation.Portrait)]
     public class CrueltyTypesActivity : Activity
     {
         private ListView _crueltySpotCategoriesList;

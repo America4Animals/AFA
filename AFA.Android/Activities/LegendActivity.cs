@@ -15,10 +15,12 @@ using AFA.Android.Library;
 using AFA.Android.Service;
 using Android.Preferences;
 using Android.Graphics;
+using Android.Content.PM; 
+
 
 namespace AFA.Android.Activities
 {
-	[Activity(Label = "Filter/Legend")]
+	[Activity(Label = "Filter/Legend", ScreenOrientation = ScreenOrientation.Portrait)]
 	public class LegendActivity : Activity
 	{
 		private ListView _crueltySpotCategoriesList;
