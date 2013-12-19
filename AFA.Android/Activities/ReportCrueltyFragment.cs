@@ -25,6 +25,7 @@ using ActionBar_Sherlock.App;
 using ActionBar_Sherlock.View;
 using SherlockActionBar = ActionBar_Sherlock.App.ActionBar;
 using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace AFA.Android
 {

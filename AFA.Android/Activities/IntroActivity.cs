@@ -24,13 +24,13 @@ using AFA_Android.Helpers;
 using AFA.Android.Service;
 using AFA.Android.Library.ServiceModel;
 using AFA.Android.Utility;
-using Android.Content.PM; 
-
+using Android.Content.PM;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace AFA.Android.Activities
 {
 	[Activity (Label = "@string/ApplicationName",ScreenOrientation = ScreenOrientation.Portrait)]
-	public class IntroActivity : AfaBaseActivity, ActionBar.ITabListener, GoogleMap.IOnInfoWindowClickListener
+	public class IntroActivity : AfaBaseActivity, SherlockActionBar.ITabListener, GoogleMap.IOnInfoWindowClickListener
 	{
 		Fragment reportFragment;
 		Fragment fightitFragment;
@@ -178,23 +178,21 @@ namespace AFA.Android.Activities
 
 			SupportActionBar.NavigationMode = SherlockActionBar.NavigationModeTabs;
 
-			ActionBar.Tab homeTab = SupportActionBar.NewTab ();
+			SherlockActionBar.Tab homeTab = SupportActionBar.NewTab ();
 			homeTab.SetText ("Home");
 			homeTab.SetTabListener (this);
-			homeTab.SetTag ("home");
-		
+			homeTab.SetTag ("home");	
 			SupportActionBar.AddTab (homeTab);
 
 
-			ActionBar.Tab trackItTab = SupportActionBar.NewTab ();
-
+		    SherlockActionBar.Tab trackItTab = SupportActionBar.NewTab();
 			trackItTab.SetText ("Track it");
 			trackItTab.SetTabListener (this);
 			trackItTab.SetTag ("track");
 			SupportActionBar.AddTab (trackItTab);
 
 
-			ActionBar.Tab reportItTab = SupportActionBar.NewTab ();
+			SherlockActionBar.Tab reportItTab = SupportActionBar.NewTab ();
 			reportItTab.SetText ("Report It");
 			reportItTab.SetTabListener (this);
 			reportItTab.SetTag ("report");
@@ -232,14 +230,14 @@ namespace AFA.Android.Activities
 		    }
 		
 		}
-
-		public void OnTabReselected (SherlockActionBar.Tab tab, FragmentTransaction transaction)
+		
+		public void OnTabReselected(SherlockActionBar.Tab tab, FragmentTransaction transaction)
 		{
 
 
 		}
-
-		public void OnTabSelected (SherlockActionBar.Tab tab, FragmentTransaction transaction)
+		
+		public void OnTabSelected(SherlockActionBar.Tab tab, FragmentTransaction transaction)
 		{
             DebugHelper.WriteDebugEntry("In IntroActivity OnTabSelected(): " + tab.Tag);
 		    _currentTabTag = (String)tab.Tag;
@@ -286,8 +284,8 @@ namespace AFA.Android.Activities
 
 			}
 		}
-
-		public void OnTabUnselected (SherlockActionBar.Tab tab, FragmentTransaction transaction)
+		
+		public void OnTabUnselected(SherlockActionBar.Tab tab, FragmentTransaction transaction)
 		{
             DebugHelper.WriteDebugEntry("In IntroActivity OnTabUnselected()");
 
@@ -327,7 +325,6 @@ namespace AFA.Android.Activities
 	    protected override void OnSaveInstanceState(Bundle outState)
 	    {
 	        base.OnSaveInstanceState(outState);
-
             outState.PutString("tab", _currentTabTag);
 	    }
 
