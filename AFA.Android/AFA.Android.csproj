@@ -58,7 +58,7 @@
     <Compile Include="Activities\CrueltyMapActivity.cs" />
     <Compile Include="Activities\CrueltySpotActivity.cs" />
     <Compile Include="Activities\CrueltyTypesActivity.cs" />
-    <Compile Include="Activities\FightItActivity.cs" />
+    <Compile Include="Activities\FightItFragment.cs" />
     <Compile Include="Activities\IntroActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\NearbyPlacesActivity.cs" />

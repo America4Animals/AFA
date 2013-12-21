@@ -25,13 +25,12 @@ namespace AFA.Android.Activities
         private IList<CrueltySpotCategory> _crueltySpotCategories;
         private ProgressDialog _loadingDialog;
 
-		protected override async  void OnCreate(Bundle bundle)
+		protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.CrueltyTypes);
 
-            //_loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
             _loadingDialog = DialogManager.ShowLoadingDialog(this, "Retrieving Cruelty Types");
 
             _crueltySpotCategoriesList = FindViewById<ListView>(Resource.Id.CrueltyTypes);

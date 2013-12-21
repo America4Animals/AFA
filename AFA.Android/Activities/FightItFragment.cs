@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using AFA.Android.Adapters;
 using AFA.Android.Helpers;
 using AFA.Android.Library.ServiceModel;
@@ -26,20 +27,16 @@ using Fragment = Android.Support.V4.App.Fragment;
 namespace AFA.Android.Activities
 {
 	[Activity(Label = "Fight It",ScreenOrientation = ScreenOrientation.Portrait)]
-	public class FightItActivity : Fragment
+	public class FightItFragment : Fragment
 	{
 		private ProgressDialog _loadingDialog;
 		private ListView _crueltySpotsList;
-		//private CrueltySpotDto _featuredCrueltySpot;
-		//private CrueltySpot _featuredCrueltySpot;
-		//private List<CrueltySpotDto> _otherCrueltySpots;
-		//private List<CrueltySpot> _otherCrueltySpots;
 		private List<CrueltySpot> _crueltySpots;
 		private GPSTracker _gpsTracker;
 		private RelativeLayout ll;
 		private FragmentActivity fa;
 
-		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
 			fa = base.Activity;
 			ll = (RelativeLayout) inflater.Inflate(Resource.Layout.FightIt, container, false);
@@ -47,7 +44,7 @@ namespace AFA.Android.Activities
 
 			_gpsTracker = ((AfaApplication)fa.ApplicationContext).GetGpsTracker(fa);
 		
-			_loadingDialog = LoadingDialogManager.ShowLoadingDialog (fa);
+			//_loadingDialog = LoadingDialogManager.ShowLoadingDialog (fa);
 
 			_crueltySpotsList = ll.FindViewById<ListView>(Resource.Id.CrueltySpots);
 
@@ -56,10 +53,10 @@ namespace AFA.Android.Activities
 				var crueltySpot = _crueltySpots[e.Position];
 				NavigateToCrueltySpotDetails(crueltySpot.ObjectId);
 			};
-			setupSpots ();
-			_loadingDialog.Dismiss();
-			return ll;
 
+            _loadingDialog = DialogManager.ShowLoadingDialog(this.Activity, "Retrieving Cruelty Spots");
+            LoadCrueltySpots();
+			return ll;
 		}
 
 		private void NavigateToCrueltySpotDetails (string crueltySpotId)
@@ -69,9 +66,8 @@ namespace AFA.Android.Activities
 			StartActivity (intent);
 		}
 
-		private async void setupSpots()
+		private async Task LoadCrueltySpots()
 		{
-
 			var crueltySpotsService = new CrueltySpotsService ();
 
 			List<String> categories = UserPreferencesHelper.GetFilterCategories ();
@@ -106,28 +102,26 @@ namespace AFA.Android.Activities
 
 			if (_crueltySpots.Any ()) {
 				fa.RunOnUiThread (() => {
-
 					_crueltySpotsList.Adapter = new CrueltySpotsAdapter (fa, _crueltySpots);
-					//Toast.MakeText (fa, "got into dismiss code", ToastLength.Short).Show ();
 					_loadingDialog.Dismiss();
 
 				});               
 			} else {
+                _loadingDialog.Dismiss();
 				// ToDo: Handle case where there are no cruelty spots
-			}         
-
-
+			}           
 		}
 
-			
 
-		public override void OnResume ()
-		{
-			base.OnResume ();
-			_loadingDialog = LoadingDialogManager.ShowLoadingDialog (fa);
-			setupSpots();
 
-		}
+        //public override void OnResume()
+        //{
+        //    base.OnResume();
+        //    //_loadingDialog = LoadingDialogManager.ShowLoadingDialog (fa);
+        //    _loadingDialog = DialogManager.ShowLoadingDialog(this.Activity, "Retrieving Cruelty Spots");
+        //    LoadCrueltySpots();
+
+        //}
 		
 
 	}
