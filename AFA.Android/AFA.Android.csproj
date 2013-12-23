@@ -183,13 +183,13 @@
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\collectionsview.png" />
     <AndroidResource Include="Resources\drawable\locationplace.png" />
-    <AndroidResource Include="Resources\drawable\animal_ally_logo.jpg" />
     <AndroidResource Include="Resources\layout\Intro.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\HomeFragment.axml" />
     <AndroidResource Include="Resources\drawable\ic_action_about.png" />
     <AndroidResource Include="Resources\drawable\ic_menu_filter.png" />
+    <AndroidResource Include="Resources\drawable\animal_ally_logo.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">

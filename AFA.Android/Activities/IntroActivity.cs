@@ -34,7 +34,6 @@ namespace AFA.Android.Activities
     {
         private Fragment _reportFragment;
         private Fragment _fightitFragment;
-        private Fragment _homeFragment;
         private GoogleMap _map;
         private SupportMapFragment _mapFragment;
         private GPSTracker _gpsTracker;
@@ -134,15 +133,9 @@ namespace AFA.Android.Activities
 
             SupportActionBar.NavigationMode = SherlockActionBar.NavigationModeTabs;
 
-            SherlockActionBar.Tab homeTab = SupportActionBar.NewTab();
-            homeTab.SetText("Home");
-            homeTab.SetTabListener(this);
-            homeTab.SetTag("home");
-            SupportActionBar.AddTab(homeTab);
-
-
+           
             SherlockActionBar.Tab trackItTab = SupportActionBar.NewTab();
-            trackItTab.SetText("Track it");
+			trackItTab.SetText("Fight It");
             trackItTab.SetTabListener(this);
             trackItTab.SetTag("track");
             SupportActionBar.AddTab(trackItTab);
@@ -173,9 +166,7 @@ namespace AFA.Android.Activities
             DebugHelper.WriteDebugEntry("Selecting Tab");
             switch (_currentTabTag.ToLower())
             {
-                case "home":
-                    SupportActionBar.SelectTab(homeTab);
-                    break;
+               
                 case "report":
                     SupportActionBar.SelectTab(reportItTab);
                     break;
@@ -188,59 +179,7 @@ namespace AFA.Android.Activities
             {
                 _isMapView = !_isMapView;
                 SupportActionBar.SelectTab(trackItTab);
-                //if ((String)(SupportActionBar.SelectedTab.Tag) == "track")
-                //{
-                //    FragmentTransaction ft = SupportFragmentManager.BeginTransaction();
-                //    if (toggleString == "map")
-                //    {
-                //        toggleString = "list";
-                //        // first hide the map
-                //        if (_map != null)
-                //        {
-                //            _map.MyLocationEnabled = false;
-                //            _map.Clear();
-
-                //            _map.MarkerClick -= MapOnMarkerClick;
-                //        }
-
-                //        ft.Hide(_mapFragment);
-
-                //        // now create the fight it tab
-                //        if (_fightitFragment == null)
-                //        {
-                //            _fightitFragment = new FightItActivity();
-
-                //            ft.Add(Resource.Id.fragmentContainer, _fightitFragment, "fight");
-
-                //        }
-                //        else
-                //        {
-
-                //            ft.Show(_fightitFragment);
-
-                //        }
-                //        _listToggleButton.Text = "Map";
-
-                //    }
-                //    else
-                //    {
-                //        toggleString = "map";
-                //        if (_fightitFragment != null)
-                //        {
-
-                //            ft.Hide(_fightitFragment);
-                //        }
-                //        InitMapFragment();
-
-                //        ft.Show(_mapFragment);
-                //        SetupMapIfNeeded();
-                //        _listToggleButton.Text = "List";
-
-                //    }
-                //    ft.Commit();
-                //    //	Toast.MakeText (this, toggleString, ToastLength.Short).Show ();
-
-                //}
+        
             };
 
         }
@@ -264,22 +203,7 @@ namespace AFA.Android.Activities
 
             switch (_currentTabTag)
             {
-                case "home":
-                    if (_homeFragment == null)
-                    {
-                        _homeFragment = new HomeFragment ();
-                        transaction.Add(Resource.Id.fragmentContainer, _homeFragment, "home");
-                    }
-                    else
-                    {
-                        transaction.Show(_homeFragment);
-                    }
-
-                    if (_listToggleButton != null)
-                    {
-                        _listToggleButton.Visibility = ViewStates.Gone;
-                    }
-                    break;
+               
 
                 case "track":
                     RenderTrackItTabFragment(transaction);
@@ -304,55 +228,6 @@ namespace AFA.Android.Activities
                     break;
             }
 
-
-            //if ((String)tab.Tag == "home")
-            //{
-            //    if (_homeFragment == null)
-            //    {
-
-            //        _homeFragment = Fragment.Instantiate(this, "HomeFragment");
-            //        transaction.Add(Resource.Id.fragmentContainer, _homeFragment, "home");
-            //    }
-            //    else
-            //    {
-            //        transaction.Show(_homeFragment);
-            //    }
-
-            //    if (listButton != null)
-            //    {
-            //        listButton.Visibility = ViewStates.Invisible;
-            //    }
-
-            //}
-            //else if ((String)tab.Tag == "track")
-            //{
-            //    InitMapFragment();
-
-            //    transaction.Show(_mapFragment);
-            //    SetupMapIfNeeded();
-            //    if (listButton != null)
-            //    {
-            //        listButton.Visibility = ViewStates.Visible;
-            //    }
-            //}
-            //else if ((String)tab.Tag == "report")
-            //{
-
-            //    if (_reportFragment == null)
-            //    {
-            //        _reportFragment = new ReportCrueltyFragment();
-            //        transaction.Add(Resource.Id.fragmentContainer, _reportFragment, "report");
-            //    }
-            //    else
-            //    {
-            //        transaction.Show(_reportFragment);
-            //    }
-
-            //    if (listButton != null)
-            //    {
-            //        listButton.Visibility = ViewStates.Invisible;
-            //    }
-            //}
         }
 
         public void OnTabUnselected(SherlockActionBar.Tab tab, FragmentTransaction transaction)
@@ -384,55 +259,9 @@ namespace AFA.Android.Activities
 
                     break;
 
-                case "home":
-                    if (_homeFragment != null)
-                    {
-                        transaction.Hide(_homeFragment);
-                    }
-
-                    break;
+               
             }
 
-            //if ((String)tab.Tag == "report")
-            //{
-            //    if (_reportFragment != null)
-            //    {
-
-            //        transaction.Hide(_reportFragment);
-
-            //        return;
-            //    }
-
-            //}
-            //else if ((String)tab.Tag == "track")
-            //{
-            //    if (_map != null)
-            //    {
-            //        _map.MyLocationEnabled = false;
-            //        _map.Clear();
-
-            //        _map.MarkerClick -= MapOnMarkerClick;
-            //    }
-
-            //    if (toggleString == "map")
-            //    {
-            //        transaction.Hide(_mapFragment);
-            //    }
-            //    else
-            //    {
-            //        transaction.Hide(_fightitFragment);
-            //    }
-            //}
-            //if ((String)tab.Tag == "home")
-            //{
-            //    if (_homeFragment != null)
-            //    {
-
-            //        transaction.Hide(_homeFragment);
-
-            //        return;
-            //    }
-            //}
 
         }
 

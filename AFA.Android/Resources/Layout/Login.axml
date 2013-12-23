@@ -51,8 +51,9 @@
             android:id="@+id/linearLayoutButtons">
             <com.facebook.widget.LoginButton
                 android:id="@+id/login_button"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 facebook:login_text="Connect with Facebook" />
             <Button
                 android:text="Use without signing in"
