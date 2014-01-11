@@ -50,7 +50,7 @@ namespace AFA.Android.Activities
 			{"cariaggespin",128}, {"foiegraspin",56}, {"labspin",198}, {"morepin",327}, 
 			{"petstorespin",209}, {"racespin",259}, {"rodeopin",33},{"sharkpin",302}, 
 			{"furpin",68} ,{"performancepin",354}
-		};   
+		};
 
         class CustomInfoWindowAdapter : Java.Lang.Object, GoogleMap.IInfoWindowAdapter
         {
@@ -133,9 +133,9 @@ namespace AFA.Android.Activities
 
             SupportActionBar.NavigationMode = SherlockActionBar.NavigationModeTabs;
 
-           
+
             SherlockActionBar.Tab trackItTab = SupportActionBar.NewTab();
-			trackItTab.SetText("Fight It");
+            trackItTab.SetText("Fight It");
             trackItTab.SetTabListener(this);
             trackItTab.SetTag("track");
             SupportActionBar.AddTab(trackItTab);
@@ -166,7 +166,7 @@ namespace AFA.Android.Activities
             DebugHelper.WriteDebugEntry("Selecting Tab");
             switch (_currentTabTag.ToLower())
             {
-               
+
                 case "report":
                     SupportActionBar.SelectTab(reportItTab);
                     break;
@@ -179,7 +179,7 @@ namespace AFA.Android.Activities
             {
                 _isMapView = !_isMapView;
                 SupportActionBar.SelectTab(trackItTab);
-        
+
             };
 
         }
@@ -203,7 +203,7 @@ namespace AFA.Android.Activities
 
             switch (_currentTabTag)
             {
-               
+
 
                 case "track":
                     RenderTrackItTabFragment(transaction);
@@ -233,7 +233,7 @@ namespace AFA.Android.Activities
         public void OnTabUnselected(SherlockActionBar.Tab tab, FragmentTransaction transaction)
         {
             DebugHelper.WriteDebugEntry("In IntroActivity OnTabUnselected()");
-            var unselectedTabTag = (String) tab.Tag;
+            var unselectedTabTag = (String)tab.Tag;
 
             switch (unselectedTabTag)
             {
@@ -259,7 +259,7 @@ namespace AFA.Android.Activities
 
                     break;
 
-               
+
             }
 
 
@@ -434,18 +434,30 @@ namespace AFA.Android.Activities
 
         public override bool OnOptionsItemSelected(ActionBar_Sherlock.View.IMenuItem item)
         {
+            //if (item.TitleFormatted.ToString() == "Settings")
+            //{
+            //    var intent = new Intent(this, typeof(LegendActivity));
+
+            //    StartActivity(intent);
+            //    return true;
+            //}
+
             //This uses the imported MenuItem from ActionBarSherlock
-
-            if (item.TitleFormatted.ToString() == "Settings")
+            Intent intent;
+            switch (item.TitleFormatted.ToString())
             {
-                var intent = new Intent(this, typeof(LegendActivity));
+                case "Settings":
+                    intent = new Intent(this, typeof(LegendActivity));
+                    StartActivity(intent);
+                    return true;
 
-                StartActivity(intent);
-                return true;
+                case "Info":
+                    intent = new Intent(this, typeof(InfoActivity));
+                    StartActivity(intent);
+                    return true;
             }
 
             return base.OnOptionsItemSelected(item);
-
         }
 
         private void RenderTrackItTabFragment(FragmentTransaction transaction)

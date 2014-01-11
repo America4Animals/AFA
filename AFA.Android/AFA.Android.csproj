@@ -60,6 +60,7 @@
     <Compile Include="Activities\CrueltySpotActivity.cs" />
     <Compile Include="Activities\CrueltyTypesActivity.cs" />
     <Compile Include="Activities\FightItFragment.cs" />
+    <Compile Include="Activities\InfoActivity.cs" />
     <Compile Include="Activities\IntroActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\NearbyPlacesActivity.cs" />
@@ -191,6 +192,9 @@
     <AndroidResource Include="Resources\drawable\ic_action_about.png" />
     <AndroidResource Include="Resources\drawable\ic_menu_filter.png" />
     <AndroidResource Include="Resources\drawable\animal_ally_logo.png" />
+    <AndroidResource Include="Resources\layout\Info.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">
