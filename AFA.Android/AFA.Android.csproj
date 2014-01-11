@@ -27,6 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -262,6 +263,7 @@
     <AndroidResource Include="Resources\drawable\races_med.png" />
     <AndroidResource Include="Resources\drawable\rodeo_med.png" />
     <AndroidResource Include="Resources\drawable\shark_med.png" />
+    <AndroidResource Include="Resources\drawable\animal_ally_logo_med.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

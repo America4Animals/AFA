@@ -15,10 +15,9 @@ using Android.Util;
 using AFA.Android.Utility;
 using Android.Content.PM;
 
-
 namespace AFA.Android.Activities
 {
-	[Activity(Label = "Cruelty Spot",ScreenOrientation = ScreenOrientation.Portrait)]
+	[Activity(Label = "Cruelty Spot", ScreenOrientation = ScreenOrientation.Portrait)]
     public class CrueltySpotActivity : AfaBaseActivity
     {
         private ProgressDialog _loadingDialog;
@@ -27,7 +26,6 @@ namespace AFA.Android.Activities
         private Button _takeActionButton;
         private LinearLayout _boycottArea;
         private LinearLayout _theIssueArea;
-
 
         private Button IssueButton
         {
@@ -59,7 +57,8 @@ namespace AFA.Android.Activities
 
             SetContentView(Resource.Layout.CrueltySpot);        
 
-            _loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
+            //_loadingDialog = LoadingDialogManager.ShowLoadingDialog(this);
+            _loadingDialog = DialogManager.ShowLoadingDialog(this, "Retrieving Cruelty Spot Details");
 
             // Event Handlers
             IssueButton.Click += (sender, args) => SetViewState(CrueltySpotViewState.TheIssue);

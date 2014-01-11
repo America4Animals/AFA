@@ -14,7 +14,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/allyLogo"
-            android:src="@drawable/animal_ally_logo"
+            android:src="@drawable/animal_ally_logo_med"
             android:gravity="center"
             android:layout_marginTop="15dip" />
         <TextView
@@ -24,12 +24,12 @@
             android:text="@string/WelcomeMessageHeader"
             android:textColor="@color/pink"
             android:textSize="22sp"
-            android:layout_marginLeft="20dip"
             android:layout_marginRight="20dip"
-            android:layout_marginTop="20dip"
             android:layout_marginBottom="20dip"
             android:gravity="center"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginLeft="20dip"
+            android:layout_marginTop="10dip" />
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
