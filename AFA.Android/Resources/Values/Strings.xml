@@ -8,7 +8,7 @@
   <string name="ContactUsForMoreInfoText">We are looking for partner organizations to help us make this app a success. Contact us for more information.</string>
   <string name="ReportCrueltyHeader">We need your eyes and ears to find out where cruelty is occurring! Fill out this form to let your community know!</string>
   <string name="EmergencyText">If this is an emergency</string>
-  <string name="AddPlaceHeader">Use this form to add a new cruelty spot or edit an existing one.</string>
+  <string name="AddPlaceHeader">Use this form to add a new cruelty spot</string>
   <string name="boycottActionDesctiption">Join a boycott of this business</string>
   <string name="messageActionDesctiption">Send an email requesting them to stop harming animals</string>
   <string name="shareActionDesctiption">Inform others of the cruelty happening here</string>

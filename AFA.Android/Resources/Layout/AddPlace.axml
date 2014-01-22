@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/green"
+    android:background="@color/white"
     android:paddingLeft="5dip"
     android:paddingRight="5dip">
     <TextView
@@ -11,38 +11,39 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/HeaderText"
-        android:textColor="@color/white"
+        android:textColor="@color/pink"
         android:paddingTop="10dip"
         android:paddingBottom="10dip"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:layout_marginTop="10dip"
         android:layout_marginBottom="10dip"
-        android:background="@color/gray"
-        android:gravity="center" />
+        android:background="@color/darkgray"
+        android:gravity="center"
+        android:textSize="18dp" />
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/PlaceName"
         android:hint="Name of Place"
-        android:textColorHint="@color/pink"
-        android:textColor="@color/gray"
+        android:textColorHint="@color/mediumgray"
+        android:textColor="@color/pink"
         android:layout_marginBottom="10dip" />
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/StreetAddress"
         android:hint="Street"
-        android:textColorHint="@color/pink"
-        android:textColor="@color/gray"
+        android:textColorHint="@color/mediumgray"
+        android:textColor="@color/pink"
         android:layout_marginBottom="10dip" />
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/City"
         android:hint="City"
-        android:textColorHint="@color/pink"
-        android:textColor="@color/gray"
+        android:textColorHint="@color/mediumgray"
+        android:textColor="@color/pink"
         android:layout_marginBottom="10dip" />
     <LinearLayout
         android:orientation="horizontal"
@@ -55,26 +56,25 @@
             android:id="@+id/State"
             android:layout_weight="1"
             android:hint="State"
-            android:textColorHint="@color/pink"
-            android:textColor="@color/gray" />
+            android:textColorHint="@color/mediumgray"
+            android:textColor="@color/pink" />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/Zip"
             android:layout_weight="1"
             android:hint="Zip"
-            android:textColorHint="@color/pink"
-            android:textColor="@color/gray" />
+            android:textColorHint="@color/mediumgray"
+            android:textColor="@color/pink" />
     </LinearLayout>
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/Email"
         android:hint="Email"
-        android:textColorHint="@color/pink"
-        android:textColor="@color/gray"
+        android:textColorHint="@color/mediumgray"
+        android:textColor="@color/pink"
         android:layout_marginBottom="10dip" />
-
     <Button
         android:text="Submit"
         android:layout_width="fill_parent"

@@ -224,7 +224,6 @@
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\fail.png" />
     <AndroidResource Include="Resources\drawable\success.png" />
-    <AndroidResource Include="Resources\drawable\search.png" />
     <AndroidResource Include="Resources\drawable\bullhornIcon.png" />
     <AndroidResource Include="Resources\drawable\pencilIcon.png" />
     <AndroidResource Include="Resources\drawable\ellipsisIcon.png" />
@@ -268,6 +267,7 @@
     <AndroidResource Include="Resources\drawable\rodeo_med.png" />
     <AndroidResource Include="Resources\drawable\shark_med.png" />
     <AndroidResource Include="Resources\drawable\animal_ally_logo_med.png" />
+    <AndroidResource Include="Resources\drawable\ic_menu_search.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

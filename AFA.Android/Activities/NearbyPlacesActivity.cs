@@ -10,6 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
+using Android.Views.InputMethods;
 using Android.Widget;
 using Android.Content.PM; 
 //using ServiceStack.Text;
@@ -75,6 +76,9 @@ namespace AFA.Android.Activities
             searchButton.Click += (sender, args) =>
                                       {
                                           _loading.Show();
+                                          var inputManager = (InputMethodManager) GetSystemService(Context.InputMethodService);
+                                          inputManager.HideSoftInputFromWindow(CurrentFocus.WindowToken, HideSoftInputFlags.NotAlways);
+
                                           var placeNameInput = FindViewById<EditText>(Resource.Id.placeNameSearch);
                                           var locationNameInput = FindViewById<EditText>(Resource.Id.locationSearch);
 

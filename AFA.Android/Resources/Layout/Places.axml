@@ -18,8 +18,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/placeNameSearch"
-            android:textColor="@color/gray"
-            android:textColorHint="@color/gray"
+            android:textColor="@color/pink"
+            android:textColorHint="@color/mediumgray"
             android:hint="Business Name"
             android:layout_marginTop="10dip"
             android:layout_marginRight="10dip"
@@ -36,8 +36,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/locationSearch"
-                android:textColor="@color/gray"
-                android:textColorHint="@color/gray"
+                android:textColor="@color/pink"
+                android:textColorHint="@color/mediumgray"
                 android:hint="Current Location"
                 android:layout_weight="1"
                 android:layout_marginRight="5dip"
@@ -47,9 +47,12 @@
                 android:id="@+id/searchButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/search"
+                android:src="@drawable/ic_menu_search"
                 android:layout_marginRight="10dip"
-                android:layout_marginBottom="10dip" />
+                android:layout_marginLeft="10dip"
+                android:background="@color/gray"
+                android:layout_marginBottom="10dip"
+                android:focusable="true" />
         </LinearLayout>
     </LinearLayout>
     <ListView

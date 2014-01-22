@@ -1164,118 +1164,118 @@ namespace AFA.Android
 			public const int ic_menu_filter = 2130837676;
 			
 			// aapt resource value: 0x7f0200ad
-			public const int Icon = 2130837677;
+			public const int ic_menu_search = 2130837677;
 			
 			// aapt resource value: 0x7f0200ae
-			public const int labs = 2130837678;
+			public const int Icon = 2130837678;
 			
 			// aapt resource value: 0x7f0200af
-			public const int labs_lg = 2130837679;
+			public const int labs = 2130837679;
 			
 			// aapt resource value: 0x7f0200b0
-			public const int labs_med = 2130837680;
+			public const int labs_lg = 2130837680;
 			
 			// aapt resource value: 0x7f0200b1
-			public const int labspin = 2130837681;
+			public const int labs_med = 2130837681;
 			
 			// aapt resource value: 0x7f0200b2
-			public const int list_selector = 2130837682;
+			public const int labspin = 2130837682;
 			
 			// aapt resource value: 0x7f0200b3
-			public const int locationplace = 2130837683;
+			public const int list_selector = 2130837683;
 			
 			// aapt resource value: 0x7f0200b4
-			public const int mapbackground = 2130837684;
+			public const int locationplace = 2130837684;
 			
 			// aapt resource value: 0x7f0200b5
-			public const int mapIcon = 2130837685;
+			public const int mapbackground = 2130837685;
 			
 			// aapt resource value: 0x7f0200b6
-			public const int monitorIcon = 2130837686;
+			public const int mapIcon = 2130837686;
 			
 			// aapt resource value: 0x7f0200b7
-			public const int monkey = 2130837687;
+			public const int monitorIcon = 2130837687;
 			
 			// aapt resource value: 0x7f0200b8
-			public const int more = 2130837688;
+			public const int monkey = 2130837688;
 			
 			// aapt resource value: 0x7f0200b9
-			public const int morepin = 2130837689;
+			public const int more = 2130837689;
 			
 			// aapt resource value: 0x7f0200ba
-			public const int newsIcon = 2130837690;
+			public const int morepin = 2130837690;
 			
 			// aapt resource value: 0x7f0200bb
-			public const int pencilIcon = 2130837691;
+			public const int newsIcon = 2130837691;
 			
 			// aapt resource value: 0x7f0200bc
-			public const int peopleIcon = 2130837692;
+			public const int pencilIcon = 2130837692;
 			
 			// aapt resource value: 0x7f0200bd
-			public const int performance = 2130837693;
+			public const int peopleIcon = 2130837693;
 			
 			// aapt resource value: 0x7f0200be
-			public const int performance_lg = 2130837694;
+			public const int performance = 2130837694;
 			
 			// aapt resource value: 0x7f0200bf
-			public const int performance_med = 2130837695;
+			public const int performance_lg = 2130837695;
 			
 			// aapt resource value: 0x7f0200c0
-			public const int performancepin = 2130837696;
+			public const int performance_med = 2130837696;
 			
 			// aapt resource value: 0x7f0200c1
-			public const int petstores = 2130837697;
+			public const int performancepin = 2130837697;
 			
 			// aapt resource value: 0x7f0200c2
-			public const int petstores_lg = 2130837698;
+			public const int petstores = 2130837698;
 			
 			// aapt resource value: 0x7f0200c3
-			public const int petstores_med = 2130837699;
+			public const int petstores_lg = 2130837699;
 			
 			// aapt resource value: 0x7f0200c4
-			public const int petstorespin = 2130837700;
+			public const int petstores_med = 2130837700;
 			
 			// aapt resource value: 0x7f0200c5
-			public const int phoneIcon = 2130837701;
+			public const int petstorespin = 2130837701;
 			
 			// aapt resource value: 0x7f0200c6
-			public const int polarbear = 2130837702;
+			public const int phoneIcon = 2130837702;
 			
 			// aapt resource value: 0x7f0200c7
-			public const int races = 2130837703;
+			public const int polarbear = 2130837703;
 			
 			// aapt resource value: 0x7f0200c8
-			public const int races_lg = 2130837704;
+			public const int races = 2130837704;
 			
 			// aapt resource value: 0x7f0200c9
-			public const int races_med = 2130837705;
+			public const int races_lg = 2130837705;
 			
 			// aapt resource value: 0x7f0200ca
-			public const int racespin = 2130837706;
+			public const int races_med = 2130837706;
 			
 			// aapt resource value: 0x7f0200cb
-			public const int report = 2130837707;
+			public const int racespin = 2130837707;
 			
 			// aapt resource value: 0x7f0200cc
-			public const int rightArrow = 2130837708;
+			public const int report = 2130837708;
 			
 			// aapt resource value: 0x7f0200cd
-			public const int rodeo = 2130837709;
+			public const int rightArrow = 2130837709;
 			
 			// aapt resource value: 0x7f0200ce
-			public const int rodeo_lg = 2130837710;
+			public const int rodeo = 2130837710;
 			
 			// aapt resource value: 0x7f0200cf
-			public const int rodeo_med = 2130837711;
+			public const int rodeo_lg = 2130837711;
 			
 			// aapt resource value: 0x7f0200d0
-			public const int rodeopin = 2130837712;
+			public const int rodeo_med = 2130837712;
 			
 			// aapt resource value: 0x7f0200d1
-			public const int rounded_rectangle = 2130837713;
+			public const int rodeopin = 2130837713;
 			
 			// aapt resource value: 0x7f0200d2
-			public const int search = 2130837714;
+			public const int rounded_rectangle = 2130837714;
 			
 			// aapt resource value: 0x7f0200d3
 			public const int shark = 2130837715;
